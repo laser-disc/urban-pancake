@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+console.log("HELLO!!!")
 var HelloWorld  = React.createClass({
   render: function(){
     return(
