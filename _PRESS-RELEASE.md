@@ -1,9 +1,6 @@
 # Urban Pancake #
  
-## Heading ##
-  > Food Truck Locator
-
-## Sub-Heading ##
+## Food Truck Locator ##
   > Find current locations of food trucks in your area.
 
 ## Summary ##
@@ -22,9 +19,9 @@
   > Access the site to see food truck options near you.
 
 ## Customer Quote ##
-  > "This app saved me so much time."
-  > "I had no idea there were so many food trucks in San Francisco!"
-  > "I loved being able to browse food truck menus."
+  >* "This app saved me so much time."
+  * "I had no idea there were so many food trucks in San Francisco!"
+  * "I loved being able to browse food truck menus."
 
 ## Closing and Call to Action ##
   > "To a food truck!"
