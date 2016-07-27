@@ -8,10 +8,10 @@ app.use(express.static(__dirname + '/../client'));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res){
- res.sendFile(__dirname +'/../client/index.html');
+ res.sendFile(__dirname +'../client/index.html');
  console.log("connected");
 });
 
 http.listen(process.env.PORT || 8000, function(){
-  console.log('App listening on port 8000');
+  console.log('App started. Listening...');
 });
