@@ -4,11 +4,11 @@ var http = require('http').Server(app);
 var request = require('request');
 var bodyParser = require('body-parser');
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/../client'));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res){
- res.sendFile(__dirname +'/index.html');
+ res.sendFile(__dirname +'/../client/index.html');
  console.log("connected");
 });
 
