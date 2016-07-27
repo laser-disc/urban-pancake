@@ -7,12 +7,27 @@
     "type": "git",
     "url": "git+https://github.com/laser-disc/urban-pancake.git"
   },
-  "author": "",
+  "author": "Blake Contreras, Reed Cureton, Matt Long, Bonnie Torre, George Weiler",
+  "license": "ISC",
   "homepage": "https://github.com/laser-disc/urban-pancake#readme",
+  "bugs": "https://github.com/laser-disc/urban-pancake/isses",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "bower": "^1.7.9",
     "express": "^4.14.0",
     "http": "0.0.0",
-    "request": "2.72.0" 
+    "request": "2.72.0"
+  },
+  "devDependencies": {
+    "karma-chai": "^0.1.0",
+    "mocha": "^2.5.3",
+    "nodemon": "^1.10.0",
+    "supertest": "^1.2.0"
+  },
+  "engines": {
+    "node": "5.9.1"
+  },
+  "scripts": {
+    "test": "mocha"
   }
 }
