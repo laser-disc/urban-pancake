@@ -7,10 +7,14 @@ var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
   entry: [
+    'webpack/hot/dev-sever',
+    'webpack-hot-middleware/client',
     './client/index.js'
   ],
   output: {
-    path: __dirname + '/dist',
+    // path: __dirname + '/dist',
+    path: "/",
+    publicPath:'http://localhost:' + process.env.PORT || '8000' +"/dist",
     filename: 'index_bundle.js'
   },
   module: {
@@ -20,5 +24,6 @@ module.exports = {
       }
     ]
   },
-  plugins: [HtmlWebpackPluginConfig]
+  plugins: [HtmlWebpackPluginConfig],
+  target: 'web'
 }
