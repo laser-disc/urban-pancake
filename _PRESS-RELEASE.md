@@ -20,8 +20,8 @@
 
 ## Customer Quote ##
   >* "This app saved me so much time."
-  * "I had no idea there were so many food trucks in San Francisco!"
-  * "I loved being able to browse food truck menus."
+  >* "I had no idea there were so many food trucks in San Francisco!"
+  >* "I loved being able to browse food truck menus."
 
 ## Closing and Call to Action ##
   > "To a food truck!"
