@@ -15,3 +15,8 @@ ReactDOM.render(
     <App />
   </Provider>
   , document.querySelector('#app'));
+
+// If in dev environment, app must accept hot reloading
+if (module.hot) {
+  module.hot.accept();
+}

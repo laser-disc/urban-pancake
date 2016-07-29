@@ -11,7 +11,7 @@ const express = require('express'),
   config = require('./../webpack.dev.config'),
   compiler = webpack(config);
 
-app.use(express.static(__dirname + '/../dist'));
+// app.use(express.static(__dirname + '/../dist'));
 app.use(bodyParser.json());
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath,
@@ -23,7 +23,7 @@ app.use(router);
 app.use(webpackHotMiddleware(compiler, {log: console.log}));
 
 router.get('/',function(req, res){
-  res.sendFile(path.resolve(__dirname + '/../client/index.html'));
+  res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
   console.log("connecting to root...");
 });
 
