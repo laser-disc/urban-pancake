@@ -11,7 +11,10 @@ const express = require('express'),
   config = require('./../webpack.dev.config'),
   compiler = webpack(config);
 
-// app.use(express.static(__dirname + '/../dist'));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(__dirname + '/../dist'));
+}
+
 app.use(bodyParser.json());
 app.use(webpackDevMiddleware(compiler, {
   publicPath: config.output.publicPath,
