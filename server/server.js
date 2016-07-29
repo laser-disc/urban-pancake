@@ -50,7 +50,7 @@ app.use(bodyParser.json());
 app.use(router);
 
 router.get('/',function(req, res){
-  res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
+  res.sendFile(path.resolve(__dirname + '/../client/index.html'));
   console.log("connecting to root...");
 });
 
