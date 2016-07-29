@@ -23,7 +23,7 @@ app.use(router);
 app.use(webpackHotMiddleware(compiler, {log: console.log}));
 
 router.get('/',function(req, res){
-  res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
+  res.sendFile(path.resolve(__dirname + '/../client/index.html'));
   console.log("connecting to root...");
 });
 
