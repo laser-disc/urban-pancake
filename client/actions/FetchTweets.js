@@ -1,9 +1,7 @@
 import axios from 'axios';
+import API_KEY from '../env/config';
 
 
-// twitter Access Token    730559537397141504-Sy7hpkpNbqWySwLbBXNs3kkyVMDbVmh
-// twitter Consumer Key (API Key)
-const API_KEY = 'Cb3njBPIsPYap5c4nucBgc8CD';
 const ROOT_URL = ``;
 
 export const FETCH_TWEETS = 'FETCH_TWEETS';
