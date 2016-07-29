@@ -1,3 +1,8 @@
-let reducers = {}
+import {combineReducers} from 'redux';
+import TweetReducer from './reducer_TweetList';
 
-export default reducers
+const rootReducer = combineReducers({
+  tweet: TweetReducer
+});
+
+export default rootReducer;
