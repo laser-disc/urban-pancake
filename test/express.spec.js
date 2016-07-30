@@ -1,7 +1,8 @@
 const register = require('babel-register'),
   expect = require('chai').expect,
   supertest = require('supertest'),
-  express = require('express');
+  express = require('express'),
+  app = require('../server/server');
 
 register();
 
