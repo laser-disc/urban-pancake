@@ -1,3 +1,4 @@
+
 // App entry point.
 
 import React from 'react';
@@ -20,3 +21,4 @@ ReactDOM.render(
 if (module.hot) {
   module.hot.accept();
 }
+
