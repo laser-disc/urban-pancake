@@ -8,8 +8,7 @@ const express = require('express'),
   twitterInfo = require('../client/env/config'),
   Twitter = require('twitter');
 
-module.exports = {};
- 
+
 let twitterClient = new Twitter(twitterInfo);
 
 let truckTweets = exports.truckTweets = {};
@@ -50,11 +49,13 @@ app.use(bodyParser.json());
 app.use(router);
 
 router.get('/',function(req, res){
-  res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
+  res.sendFile(path.resolve(__dirname + '/../client/index.html'));
   console.log("connecting to root...");
 });
 
 app.listen(process.env.PORT || 8000, function(){
   console.log('App listening on port 8000');
 });
+
+module.exports = app;
 
