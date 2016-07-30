@@ -1,10 +1,15 @@
-'use strict'
-
 require('babel-register')();
+//
+// const jsdom = require('jsdom').jsdom;
+// global.document = jsdom(
+//   '<!doctype html><html><body><div id="app"></div></body></html>');
+// global.window = document.defaultView;
+// global.navigator = global.window.navigator;
 
-const jsdom = require('jsdom').jsdom;
 
-let exposedProperties = ['window', 'navigator', 'document'];
+var jsdom = require('jsdom').jsdom;
+
+var exposedProperties = ['window', 'navigator', 'document'];
 
 global.document = jsdom('');
 global.window = document.defaultView;
@@ -19,4 +24,4 @@ global.navigator = {
   userAgent: 'node.js'
 };
 
-globals.documentRef = document;
+documentRef = document;

@@ -40,7 +40,11 @@
     "babel-preset-react": "^6.11.1",
     "babel-register": "^6.11.6",
     "chai": "^3.5.0",
+<<<<<<< 45e145d19db6fcdad18d0d0fe26487a2580e00a9
     "css-loader": "^0.23.1",
+=======
+    "chai-enzyme": "^0.5.0",
+>>>>>>> test[init] Add helper to set up mock DOM for client tests.
     "enzyme": "^2.4.1",
     "html-webpack-plugin": "^2.22.0",
     "jsdom": "^9.4.1",
