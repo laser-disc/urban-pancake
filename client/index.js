@@ -1,10 +1,10 @@
-import HelloWorld from './components/helloworld';
+// App entry point.
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import ReduxPromise from 'redux-promise';
-
 import App from './components/app';
 import reducers from './reducers';
 
@@ -15,3 +15,8 @@ ReactDOM.render(
     <App />
   </Provider>
   , document.querySelector('#app'));
+
+// The entry point of our app must accept hot reloading in dev environment.
+if (module.hot) {
+  module.hot.accept();
+}

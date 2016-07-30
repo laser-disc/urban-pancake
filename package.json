@@ -4,9 +4,10 @@
   "description": "Food Truck Locator",
   "main": "server.js",
   "scripts": {
-    "dev": "webpack -p && node server/server.js",
+    "dev": "NODE_ENV='development' node server/server.js",
+    "webdev": "webpack-dev-server --watch --progress --hot --inline",
     "test": "mocha test/helpers/browser.js test/**/*.spec.js",
-    "start": "webpack-dev-server --watch --progress --hot --inline"
+    "start": "webpack -p && node server/server.js"
   },
   "repository": {
     "type": "git",
