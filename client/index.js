@@ -1,17 +1,22 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+// App entry point.
 
-var HelloWorld  = React.createClass({
-  render: function(){
-    return(
-      <div> 
-        <h1>Our First React Component :)</h1>
-      </div>  
-    )
-  }
-})
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware} from 'redux';
+import ReduxPromise from 'redux-promise';
+import App from './components/app';
+import reducers from './reducers';
+
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 ReactDOM.render(
-  <HelloWorld/>,
-  document.getElementById('app')
-)
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <App />
+  </Provider>
+  , document.querySelector('#app'));
+
+// The entry point of our app must accept hot reloading in dev environment.
+if (module.hot) {
+  module.hot.accept();
+}
