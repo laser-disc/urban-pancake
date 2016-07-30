@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-export defaults (props) => {
+export default (props) => {
   return (
     <div>
-      
+
     </div>
   );
 }
