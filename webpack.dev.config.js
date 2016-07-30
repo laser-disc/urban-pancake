@@ -1,20 +1,23 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: __dirname + '/client/index.html',
-  filename: 'index.html',
-  inject: 'body'
-})
+// var HtmlWebpackPlugin = require('html-webpack-plugin')
+// var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+//   template: __dirname + '/client/index.html',
+//   filename: 'index.html',
+//   inject: 'body'
+// })
+var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
   entry: [
     'webpack/hot/dev-server',
     'webpack-hot-middleware/client',
-    './client/index.js'
+    path.join(__dirname, 'client/index.js')
   ],
   output: {
     // path: __dirname + '/dist',
-    path: "/",
-    publicPath:'http://localhost:' + process.env.PORT || '8000' +"/dist",
+    path: path.resolve(__dirname + 'dist/'),
+    // publicPath:'http://localhost:' + process.env.PORT || '8000' + '/dist',
+    publicPath: '/',
     filename: 'index_bundle.js'
   },
   module: {
@@ -24,6 +27,13 @@ module.exports = {
       }
     ]
   },
-  plugins: [HtmlWebpackPluginConfig],
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
+  devServer: {
+    contentBase: 'client'
+  },
   target: 'web'
 }

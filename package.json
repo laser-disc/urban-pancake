@@ -4,9 +4,10 @@
   "description": "Food Truck Locator",
   "main": "server.js",
   "scripts": {
-    "dev": "webpack -p && node server/server.js",
+    "dev": "NODE_ENV='development' node server/server.js",
+    "webdev": "webpack-dev-server --watch --progress --hot --inline",
     "test": "mocha test/helpers/browser.js test/**/*.spec.js",
-    "start": "nodemon server/server.js"
+    "start": "webpack -p && node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -15,6 +16,7 @@
   "author": "",
   "homepage": "https://github.com/laser-disc/urban-pancake#readme",
   "dependencies": {
+    "axios": "^0.13.1",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "http": "0.0.0",
@@ -22,6 +24,7 @@
     "react-dom": "^15.2.1",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
+    "redux-promise": "^0.5.3",
     "request": "2.72.0"
   },
   "devDependencies": {
