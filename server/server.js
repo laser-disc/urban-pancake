@@ -8,10 +8,11 @@ const express = require('express'),
   twitterInfo = require('../client/env/config'),
   Twitter = require('twitter');
 
+module.exports = {};
  
 let twitterClient = new Twitter(twitterInfo);
 
-let truckTweets = {};
+let truckTweets = exports.truckTweets = {};
 let trucks = ['senorsisig','curryupnow'];
 
 
@@ -22,7 +23,6 @@ trucks.forEach( truck => {
       truckTweets[truck]=tweets.statuses[0].text;
       console.log(truckTweets);
     } 
-
   });
 });
 
@@ -57,3 +57,4 @@ router.get('/',function(req, res){
 app.listen(process.env.PORT || 8000, function(){
   console.log('App listening on port 8000');
 });
+
