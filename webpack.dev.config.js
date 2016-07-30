@@ -7,7 +7,7 @@ var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
   entry: [
-    'webpack/hot/dev-sever',
+    'webpack/hot/dev-server',
     'webpack-hot-middleware/client',
     './client/index.js'
   ],

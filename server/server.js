@@ -9,7 +9,28 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   path = require('path'),
   config = require('./../webpack.dev.config'),
-  compiler = webpack(config);
+  compiler = webpack(config),
+  twitterInfo = require('../client/env/config'),
+  Twitter = require('twitter');
+
+ 
+let twitterClient = new Twitter(twitterInfo);
+
+let truckTweets = {};
+let trucks = ['senorsisig','curryupnow'];
+
+
+trucks.forEach( truck => {
+  twitterClient.get('search/tweets', {q: truck}, function(error, tweets, response){
+    if(error) { return error;}
+    if (!error) {
+      truckTweets[truck]=tweets.statuses[0].text;
+      console.log(truckTweets);
+    } 
+
+  });
+});
+
 
 app.use(express.static(__dirname + '/../dist'));
 app.use(bodyParser.json());
