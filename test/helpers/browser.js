@@ -6,7 +6,6 @@ require('babel-register')();
 // global.window = document.defaultView;
 // global.navigator = global.window.navigator;
 
-
 var jsdom = require('jsdom').jsdom;
 
 var exposedProperties = ['window', 'navigator', 'document'];
