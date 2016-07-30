@@ -57,3 +57,5 @@ router.get('/',function(req, res){
 app.listen(process.env.PORT || 8000, function(){
   console.log('App listening on port 8000');
 });
+
+module.exports = app;
