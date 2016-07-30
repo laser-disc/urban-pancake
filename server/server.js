@@ -6,13 +6,31 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   path = require('path'),
   secretKeys = require('../env/config'),
-  mongoose = require('mongoose');
+  mongoose = require('mongoose'),
+  Twitter = require('twitter');
+
+let twitterClient = new Twitter(secretKeys.twitterInfo);
+
+let truckTweets = {};
+let trucks = ['senorsisig','curryupnow'];
+
+
+trucks.forEach( truck => {
+  twitterClient.get('search/tweets', {q: truck}, function(error, tweets, response){
+    if(error) { return error;}
+    if (!error) {
+      truckTweets[truck]=tweets.statuses[0].text;
+      console.log(truckTweets);
+    }
+
+  });
+});
 
 if (process.env.NODE_ENV === 'development') {
   const webpackDevMiddleware = require("webpack-dev-middleware"),
     webpackHotMiddleware = require("webpack-hot-middleware"),
     webpack = require("webpack"),
-    config = require('./../webpack.dev.config'),
+    config = require('../webpack.dev.config'),
     compiler = webpack(config);
 
   app.use(webpackDevMiddleware(compiler, {
@@ -26,11 +44,12 @@ if (process.env.NODE_ENV === 'development') {
   app.use(express.static(__dirname + '/../dist'));
 }
 
+
 app.use(bodyParser.json());
 app.use(router);
 
 router.get('/',function(req, res){
-  res.sendFile(path.resolve(__dirname + '/../dist/index.html'));
+  res.sendFile(path.resolve(__dirname + '/../client/index.html'));
   console.log("connecting to root...");
 });
 
@@ -39,3 +58,5 @@ require('./request-handler')(app);
 app.listen(process.env.PORT || 8000, function(){
   console.log('App listening on port 8000');
 });
+
+module.exports = app;

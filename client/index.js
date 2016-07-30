@@ -1,5 +1,4 @@
-// App entry point.
-
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
@@ -11,7 +10,7 @@ import rootReducer from './reducers/reducers';
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={createStoreWithMiddleware(rootReducer)}>
     <App />
   </Provider>
   , document.querySelector('#app'));
@@ -20,3 +19,4 @@ ReactDOM.render(
 if (module.hot) {
   module.hot.accept();
 }
+

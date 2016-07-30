@@ -1,3 +1,5 @@
+'use strict'
+
 require('babel-register')();
 
 const jsdom = require('jsdom').jsdom;
@@ -17,4 +19,4 @@ global.navigator = {
   userAgent: 'node.js'
 };
 
-documentRef = document;
+globals.documentRef = document;

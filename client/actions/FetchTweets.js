@@ -1,5 +1,5 @@
 import axios from 'axios';
-import API_KEY from '../env/config';
+import API_KEY from './../env/config';
 
 
 const ROOT_URL = ``;
