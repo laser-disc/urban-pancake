@@ -5,12 +5,12 @@ const express = require('express'),
   request = require('request'),
   bodyParser = require('body-parser'),
   path = require('path'),
-  twitterInfo = require('../client/env/config'),
+  secretKeys = require('../env/config'),
+  mongoose = require('mongoose'),
   Twitter = require('twitter');
 
 
-let twitterClient = new Twitter(twitterInfo);
-
+let twitterClient = new Twitter(secretKeys.twitterInfo);
 let truckTweets = exports.truckTweets = {};
 let trucks = ['senorsisig','curryupnow'];
 
@@ -21,16 +21,15 @@ trucks.forEach( truck => {
     if (!error) {
       truckTweets[truck]=tweets.statuses[0].text;
       console.log(truckTweets);
-    } 
+    }
   });
 });
-
 
 if (process.env.NODE_ENV === 'development') {
   const webpackDevMiddleware = require("webpack-dev-middleware"),
     webpackHotMiddleware = require("webpack-hot-middleware"),
     webpack = require("webpack"),
-    config = require('./../webpack.dev.config'),
+    config = require('../webpack.dev.config'),
     compiler = webpack(config);
 
   app.use(webpackDevMiddleware(compiler, {
@@ -52,6 +51,8 @@ router.get('/',function(req, res){
   res.sendFile(path.resolve(__dirname + '/../client/index.html'));
   console.log("connecting to root...");
 });
+
+require('./request-handler')(app);
 
 app.listen(process.env.PORT || 8000, function(){
   console.log('App listening on port 8000');
