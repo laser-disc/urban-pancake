@@ -16,4 +16,4 @@ function mapStateToProps(state) {
   return {state};
 }
 
-exports default connect(mapStateToProps)(TweetList);
+export default connect(mapStateToProps)(TweetList);
