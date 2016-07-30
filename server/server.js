@@ -8,7 +8,6 @@ const express = require('express'),
   twitterInfo = require('../client/env/config'),
   Twitter = require('twitter');
 
- 
 let twitterClient = new Twitter(twitterInfo);
 
 let truckTweets = {};
