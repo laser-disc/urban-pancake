@@ -9,22 +9,21 @@ const express = require('express'),
   mongoose = require('mongoose'),
   Twitter = require('twitter');
 
-let twitterClient = new Twitter(secretKeys.twitterInfo);
 
-let truckTweets = {};
-let trucks = ['senorsisig','curryupnow'];
+// let twitterClient = new Twitter(secretKeys.twitterInfo);
+// let truckTweets = exports.truckTweets = {};
+// let trucks = ['senorsisig','curryupnow'];
 
 
-trucks.forEach( truck => {
-  twitterClient.get('search/tweets', {q: truck}, function(error, tweets, response){
-    if(error) { return error;}
-    if (!error) {
-      truckTweets[truck]=tweets.statuses[0].text;
-      console.log(truckTweets);
-    }
-
-  });
-});
+// trucks.forEach( truck => {
+//   twitterClient.get('search/tweets', {q: truck}, function(error, tweets, response){
+//     if(error) { return error;}
+//     if (!error) {
+//       truckTweets[truck]=tweets.statuses[0].text;
+//       console.log(truckTweets);
+//     }
+//   });
+// });
 
 if (process.env.NODE_ENV === 'development') {
   const webpackDevMiddleware = require("webpack-dev-middleware"),
@@ -36,7 +35,8 @@ if (process.env.NODE_ENV === 'development') {
   app.use(webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath,
     stats: {
-      colors: true
+      colors: true,
+      chunks: false
     }
   }))
   app.use(webpackHotMiddleware(compiler, {log: console.log}));
@@ -60,3 +60,4 @@ app.listen(process.env.PORT || 8000, function(){
 });
 
 module.exports = app;
+
