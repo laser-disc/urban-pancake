@@ -3,4 +3,4 @@ dist
 
 
 ## API keys
-client/env/config.js
+env/config.js
