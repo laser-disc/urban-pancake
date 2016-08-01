@@ -1,12 +1,14 @@
 import React from 'react';
-import TrucksList from '../reducers/reducer-trucksList';
 
-
-export default (props) => {
-  return (
-    <div>
-      <div>{}</div>
-      <div>{}</div>
-    </div>
-  );
+export default TweetItem(props) => {
+  render() {
+    return (
+      <div>
+        <div>Your Truck: {this.props.truck.handle}</div>
+        <div>Last Tweet: {this.props.truck.message}</div>
+        <div>Time: {this.props.truck.timeStamp}</div>
+        <img src={this.props.truck.image} />
+      </div>
+    );
+  };
 };
