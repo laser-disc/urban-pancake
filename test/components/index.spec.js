@@ -1,11 +1,11 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
-import HelloWorld from '../../client/components/helloworld';
+import App from '../../client/components/app';
 
-describe('<HelloWorld />', function() {
+describe('<TweetList />', function() {
   it('should exist', function() {
-    const wrapper = shallow(<HelloWorld/>);
+    const wrapper = shallow(<TweetList />);
     expect(wrapper).to.exist;
   })
 })
