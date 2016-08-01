@@ -3,9 +3,10 @@ import { shallow, render, mount } from 'enzyme';
 import { expect } from 'chai';
 import App from '../../client/components/app';
 
-describe('<TweetList />', function() {
+console.log(JSON.stringify(App));
+describe('<App />', function() {
   it('should exist', function() {
-    const wrapper = shallow('<TweetList />');
-    expect(wrapper).to.exist;
+    var wrapper = mount('<App />');
+    expect(App).to.exist;
   })
 })

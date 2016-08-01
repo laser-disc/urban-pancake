@@ -7,7 +7,7 @@
     "dev": "NODE_ENV='development' node server/server.js",
     "webdev": "webpack-dev-server --watch --progress --hot --inline",
     "testserver": "mocha test/express.spec.js",
-    "test": "mocha test/helpers/browser.js test/**/*.spec.js",
+    "test": "mocha --require test/helpers/browser.js test/**/*.spec.js",
     "start": "webpack -p && node server/server.js"
   },
   "repository": {
