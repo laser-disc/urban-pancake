@@ -18,7 +18,8 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: 'client'
+    contentBase: 'client',
+    stats: 'errors-only'
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin()

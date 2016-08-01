@@ -32,8 +32,5 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
-  devServer: {
-    contentBase: 'client'
-  },
   target: 'web'
 }
