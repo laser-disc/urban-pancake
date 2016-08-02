@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Food Truck Locator",
   "main": "server.js",
+  "engines": {
+    "node": "6.2.1"
+  },
   "scripts": {
     "dev": "NODE_ENV='development' node server/server.js",
     "webdev": "webpack-dev-server --watch --progress --hot --inline",
@@ -40,6 +43,7 @@
     "babel-register": "^6.11.6",
     "chai": "^3.5.0",
     "css-loader": "^0.23.1",
+    "chai-enzyme": "^0.5.0",
     "enzyme": "^2.4.1",
     "html-webpack-plugin": "^2.22.0",
     "jsdom": "^9.4.1",
