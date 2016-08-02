@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Food Truck Locator",
   "main": "server.js",
+  "engines": {
+    "node": "6.2.1"
+  },
   "scripts": {
     "dev": "NODE_ENV='development' node server/server.js",
     "webdev": "webpack-dev-server --watch --progress --hot --inline",
