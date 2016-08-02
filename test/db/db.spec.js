@@ -9,7 +9,7 @@ const db = require('../../db/config');
 const Tweet = require('../../db/tweetSchema.js');
  
 describe('Creating a new truck document', function(){
-  it('should create brand-new truck documents', function(){
+  describe('should create brand-new truck documents', function(){
     let timestamp = Date.now();
     let truck = new Tweet(
       {
@@ -20,20 +20,28 @@ describe('Creating a new truck document', function(){
         imageUrl: "http://truckimage.com"
       });
     truck.save();
-    Tweet.findOne({name: "Test Truck"}, function(err, truck){
-      truck.name.should.equal("Test Truck");
-      truck.handle.should.equal('@testTruck');
-      truck.message.should.equal('Test Message Here');
-      truck.timestamp.should.equal(timestamp);
-      truck.imageUrl.should.equal("http://truckimage.com");
+    Tweet.findOne({handle: "@testTruck"}, function(err, truck){
+      if(err){
+        console.error(err)
+      }
+      truck.should.not.equal(null)
+      // console.log("TRUCK: ", truck)
+      // truck.name.should.equal("Test Truck");
+      // truck.handle.should.equal('@testTruck');
+      // truck.message.should.equal('Test Message Here');
+      // truck.timestamp.should.equal(timestamp);
+      // truck.imageUrl.should.equal("http://truckimage.com");
 
     })
+
   });
   it('should update existing truck documents', function(){});
   it('should only have 1 document per truck', function(){});
   it('should only have 1 location tweet per truck', function(){})
-
 })
+
+
+
 describe('Retrieving tweets from DB', function() {
   //  before(function() {
   //   for (var i in mongoose.connection.collections) {
