@@ -1,8 +1,9 @@
+// TruckItem: the individual tweets that will appear on the page
+
 import React, {Component} from 'react';
 
 export default class TruckItem extends Component {
   render() {
-    // console.log('INSIDE TRUCKITEM', this.props)
     return (
       <div>
         <div>Your Truck: {this.props.truck.handle}</div>
