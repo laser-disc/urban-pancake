@@ -1,7 +1,7 @@
-const secretKeys = require('../env/config');
+// const secretKeys = require('../env/config');
 const mongoose = require('mongoose');
 
-mongoose.connect(secretKeys.MONGOOSE_URI);
+mongoose.connect(process.env['MONGOOSE_URI'] || secretKeys.MONGOOSE_URI);
 
 const db = mongoose.connection;
 // db.on('error', console.log('There was an error connecting to mongoose'));

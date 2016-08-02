@@ -2,11 +2,15 @@ const db = require('../db/config');
 const mongoose = require('mongoose');
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
-const secretKeys = require('../env/config');
-
+// const secretKeys = require('../env/config') || null;
+const twitterInfo = {
+  process.env['secretKeys.twitterInfo.bearer_token'],
+  process.env['secretKeys.twitterInfo.consumer_key'],
+  process.env['secretKeys.twitterInfo.consumer_secret']
+} || secretKeys.twitterInfo;
 // PUT ALL THE GET REQUESTS IN HERE FROM SERVER TO TWITTER
 module.exports = function(app) {
-  const twitterClient = new Twitter(secretKeys.twitterInfo);
+  const twitterClient = new Twitter(twitterInfo);
   let foodTrucks = ['senorsisig','curryupnow'];
 
 
