@@ -19,8 +19,8 @@ global.navigator = global.window.navigator;
 //   }
 // });
 //
-global.navigator = {
-  userAgent: 'node.js'
-};
+// global.navigator = {
+//   userAgent: 'node.js'
+// };
 //
 // global.documentRef = document;
