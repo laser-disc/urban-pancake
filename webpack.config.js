@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
+  devtool: 'source-map',
   entry: [
     './client/index.js'
   ],
@@ -33,6 +34,13 @@ module.exports = {
     'react/lib/ReactContext': true
   },
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      compress: {
+        warnings: false
+      }
+    })
   ]
 }
