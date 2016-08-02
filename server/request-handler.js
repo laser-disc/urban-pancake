@@ -1,29 +1,38 @@
+'use strict'
+
 const db = require('../db/config');
 const mongoose = require('mongoose');
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
-const secretKeys = require('../env/config');
-
+let secretKeys = null;
+if(!process.env['TWITTERINFO_CONSUMER_KEY']) {
+  secretKeys = require('../env/config');
+}
+const twitterInfo = secretKeys.twitterInfo || {
+  consumer_key: process.env['TWITTERINFO_CONSUMER_KEY'],
+  consumer_secret: process.env['TWITTERINFO_CONSUMER_SECRET'],
+  bearer_token: process.env['TWITTERINFO_BEARER_TOKEN']
+};
 // PUT ALL THE GET REQUESTS IN HERE FROM SERVER TO TWITTER
 module.exports = function(app) {
-  const twitterClient = new Twitter(secretKeys.twitterInfo);
+
+  const twitterClient = new Twitter(twitterInfo);
   let foodTrucks = ['curryupnow', 'chairmantruck'];
-
-
+ 
 //post tweets to DB
   //perform this function periodically
   
-  foodTrucks.forEach( truck => {
-    // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
-    twitterClient.get('statuses/user_timeline', {screen_name: truck, exclude_replies: true, include_rts: true}, function(error, tweets, response){
-      
-      if(error) { return error;}
-      if (!error) {
-        let tweet = new Truck({ 
-            name: tweets[0].user.name,
-            handle: '@'+truck,
-            description: tweets[0].user.description,
+  foodTrucks.forEach( foodTruck => {
 
+    // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
+    twitterClient.get('statuses/user_timeline', {screen_name: foodTruck, exclude_replies: true, include_rts: true}, function(error, tweets, response){
+      
+      if(error) { console.log("error ", error); return error;}
+      if (!error) {
+        let truck = new Truck({ 
+            name: tweets[0].user.name,
+            handle: '@'+foodTruck,
+            description: tweets[0].user.description,
             message: tweets[0].text,
             timeStamp: tweets[0].created_at,
             imageUrl: tweets[0].user.profile_image_url
@@ -31,22 +40,22 @@ module.exports = function(app) {
 
 
         // Truck.findOneAndUpdate({handle: '@'+truck}, tweet, {upsert: true}, function(err, tweet) {
-        Truck.find({handle: '@'+truck}, function(err, trucks) {
+        Truck.find({handle: '@'+foodTruck}, function(err, trucks) {
           if(trucks.length===0){
-            Truck.findOneAndUpdate({handle: '@'+truck}, tweet, {upsert: true}, function(err, tweet) {
+            Truck.findOneAndUpdate({handle: '@'+foodTruck}, truck, {upsert: true}, function(err, response) {
               if(err){
                 return console.error(err);
               } else {
-                console.log("truck "+truck+" created");
+                console.log("truck "+foodTruck+" created");
               }
             });
           } else {
             trucks[0].remove();
-            tweet.save(function(err, returnedTruck) {
+            truck.save(function(err, returnedTruck) {
               if(err) {
                 return console.error(err);
               } else {
-                console.log("truck "+truck+" updated");
+                console.log("truck "+foodTruck+" updated");
               }
             });
           }
@@ -55,7 +64,21 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/API/fetchAll", function(req,res){ 
+  // foodTrucks.forEach((foodTruck) => {
+  //   twitterClient.get('search/tweets', {q: foodTruck}, function(error, trucks, response){
+  //     if(error) { return error;}
+  //     if (!error) {
+  //       let truck = new Truck({handle: `@${foodTruck}`, message: trucks.statuses[0].text});
+  //       truck.save(function(err, truck) {
+  //         if(err) {
+  //           return console.error(err);
+  //         }
+  //       });
+  //     }
+  //   });
+  // });
+
+  app.get("/API/fetchAll", function(req,res){
     Truck.find(function(err, trucks){
       res.status(200).send(trucks);
     })

@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
+  devtool: 'source-map',
   entry: [
     './client/index.js'
   ],
@@ -13,14 +14,28 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader"
+      },
+      {
+        test: /\.css$/,
+        loader: "style-loader!css-loader"
       }
     ]
   },
   devServer: {
-    contentBase: 'client'
+    contentBase: 'client',
+    stats: 'errors-only'
   },
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      compress: {
+        warnings: false
+      }
+    })
   ]
 }

@@ -1,3 +1,4 @@
+'use strict'
 const express = require('express'),
   app = express(),
   router = express.Router(),
@@ -5,7 +6,7 @@ const express = require('express'),
   request = require('request'),
   bodyParser = require('body-parser'),
   path = require('path'),
-  secretKeys = require('../env/config'),
+  // secretKeys = require('../env/config'),
   mongoose = require('mongoose'),
   Twitter = require('twitter');
 
