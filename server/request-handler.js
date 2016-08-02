@@ -1,6 +1,6 @@
 const db = require('../db/config');
 const mongoose = require('mongoose');
-const Tweet = require('../db/tweetSchema');
+const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
 const secretKeys = require('../env/config');
 
@@ -16,7 +16,7 @@ module.exports = function(app) {
     twitterClient.get('search/tweets', {q: truck}, function(error, tweets, response){
       if(error) { return error;}
       if (!error) {
-        let tweet = new Tweet({handle: '@'+truck, message: tweets.statuses[0].text});
+        let tweet = new Truck({handle: '@'+truck, message: tweets.statuses[0].text});
         tweet.save(function(err, tweet) {
           if(err) {
             return console.error(err);
@@ -27,7 +27,7 @@ module.exports = function(app) {
   });
 
   app.get("/API/fetchAll", function(req,res){ 
-    Tweet.find(function(err, trucks){
+    Truck.find(function(err, trucks){
       res.status(200).send(trucks);
     })
   })
@@ -36,7 +36,7 @@ module.exports = function(app) {
     //handle must be different for test and client
     let handle = req.body.params ? req.body.params.handle : req.query.handle;
 
-    Tweet.findOne({handle: handle}, function(err, truck){
+    Truck.findOne({handle: handle}, function(err, truck){
         res.status(200).send(truck);
     })
   })
