@@ -15,7 +15,7 @@ ReactDOM.render(
   </Provider>
   , document.querySelector('#app'));
 
-// The entry point of our app must accept hot reloading in dev environment.
+// The entry point of our app must accept hot reloading in dev environment
 if (module.hot) {
   module.hot.accept();
 }
