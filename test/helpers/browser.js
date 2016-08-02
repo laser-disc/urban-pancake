@@ -1,12 +1,15 @@
-'use strict'
-
 require('babel-register')();
 
-const jsdom = require('jsdom').jsdom;
+function noop() {
+  return null;
+}
+require.extensions['.css'] = noop;
 
-let exposedProperties = ['window', 'navigator', 'document'];
+var jsdom = require('jsdom').jsdom;
 
-global.document = jsdom('');
+var exposedProperties = ['window', 'navigator', 'document'];
+
+global.document = jsdom('<div id="app"></div>');
 global.window = document.defaultView;
 Object.keys(document.defaultView).forEach((property) => {
   if (typeof global[property] === 'undefined') {
@@ -19,4 +22,4 @@ global.navigator = {
   userAgent: 'node.js'
 };
 
-globals.documentRef = document;
+documentRef = document;

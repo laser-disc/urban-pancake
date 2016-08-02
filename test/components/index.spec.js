@@ -1,11 +1,16 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount, shallow, render } from 'enzyme';
 import { expect } from 'chai';
-import App from '../../client/components/app';
+import Index from '../../client/index';
+import App from '../../client/components/app'
 
-describe('<TruckList />', function() {
+describe('<Index />', function() {
   it('should exist', function() {
-    const wrapper = shallow(<TruckList />);
+    const wrapper = shallow(<Index />);
     expect(wrapper).to.exist;
+  })
+  it('should render App', () => {
+    const wrapper = mount(<Index />);
+    expect(wrapper.find(App)).to.exist;
   })
 })
