@@ -1,12 +1,11 @@
 const db = require('../db/config');
 const mongoose = require('mongoose');
-const Tweet = require('./tweetSchema');
+const Tweet = require('../db/tweetSchema');
 const Twitter = require('twitter');
 const secretKeys = require('../env/config');
 
 // PUT ALL THE GET REQUESTS IN HERE FROM SERVER TO TWITTER
 module.exports = function(app) {
-
   const twitterClient = new Twitter(secretKeys.twitterInfo);
   let trucks = ['senorsisig','curryupnow'];
 
@@ -22,27 +21,22 @@ module.exports = function(app) {
           if(err) {
             return console.error(err);
           }
-          console.dir(tweet);
         });
       }
     });
   });
 
-  app.get("/API/fetchAll", function(req,res){
-    // console.log("app.get req", req);
-    Tweet.find(function(err, tweet){
-      // if(err){
-      //   return res.status(400).send("Error retrieving tweet" + err)
-      // }
-      // else if(tweet === null){
-      //   return res.status(400).send("no tweets by that user")
-      // }
-      // else{
-        // res.status(200).send("app.get 200 success");
-        // console.log(tweet);
-        res.status(200).send(JSON.stringify(tweet));
+  app.get("/API/fetchAll", function(req,res){ 
+    Tweet.find(function(err, trucks){
+      res.status(200).send(JSON.stringify(trucks))
+    })
+  })
 
-      // }
+  app.get("/API/fetch", function(req,res){
+    //handle must be different for test and client
+    let handle = req.body.params ? req.body.params.handle : req.query.handle;
+    Tweet.findOne({handle: handle}, function(err, tweet){
+        res.status(200).send(JSON.stringify(tweet));
     })
   })
 }
