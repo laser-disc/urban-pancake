@@ -4,7 +4,10 @@ const db = require('../db/config');
 const mongoose = require('mongoose');
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
-// const secretKeys = require('../env/config') || null;
+let secretKeys = null;
+if(!process.env['TWITTERINFO_CONSUMER_KEY']) {
+  secretKeys = require('../env/config');
+}
 const twitterInfo = {
   consumer_key: process.env['TWITTERINFO_CONSUMER_KEY'],
   consumer_secret: process.env['TWITTERINFO_CONSUMER_SECRET'],
