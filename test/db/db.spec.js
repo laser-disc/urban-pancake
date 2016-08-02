@@ -6,7 +6,7 @@ const chai = require('chai');
 const expect = chai.expect;
 const should = chai.should();
 const db = require('../../db/config');
-const Tweet = require('../../db/tweetSchema.js');
+const Tweet = require('../../db/truckSchema.js');
  
 describe('Creating a new truck document', function(){
   describe('should create brand-new truck documents', function(){
@@ -15,8 +15,9 @@ describe('Creating a new truck document', function(){
       {
         name: "Test Truck",
         handle: '@testTruck', 
+        description: "Truck Description Here",
         message: "Test Message Here",
-        timestamp:timestamp,
+        timeStamp: timestamp,
         imageUrl: "http://truckimage.com"
       });
     truck.save();
