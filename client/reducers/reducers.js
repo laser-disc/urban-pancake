@@ -1,7 +1,7 @@
+// Combines all of the reducers in order to pass them to the store
+
 import {combineReducers} from 'redux';
 import TruckReducer from './reducer_TruckList';
-// import trucksList from './reducer-trucksList';
-// import activeTruck from './reducer-activeTruck';
 
 const rootReducer = combineReducers({
   trucks: TruckReducer
