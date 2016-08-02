@@ -1,8 +1,4 @@
 import axios from 'axios';
-// import API_KEY from './../env/config';
-
-
-// const ROOT_URL = ``;
 
 export const FETCH_TRUCKS = 'FETCH_TRUCKS';
 
