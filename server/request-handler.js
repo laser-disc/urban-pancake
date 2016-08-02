@@ -28,15 +28,16 @@ module.exports = function(app) {
 
   app.get("/API/fetchAll", function(req,res){ 
     Tweet.find(function(err, trucks){
-      res.status(200).send(JSON.stringify(trucks))
+      res.status(200).send(trucks);
     })
   })
 
   app.get("/API/fetch", function(req,res){
     //handle must be different for test and client
     let handle = req.body.params ? req.body.params.handle : req.query.handle;
-    Tweet.findOne({handle: handle}, function(err, tweet){
-        res.status(200).send(JSON.stringify(tweet));
+
+    Tweet.findOne({handle: handle}, function(err, truck){
+        res.status(200).send(truck);
     })
   })
 }
