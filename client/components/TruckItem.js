@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-export default TweetItem(props) => {
+export default class TruckItem extends Component {
   render() {
+    // console.log('INSIDE TRUCKITEM', this.props)
     return (
       <div>
         <div>Your Truck: {this.props.truck.handle}</div>
