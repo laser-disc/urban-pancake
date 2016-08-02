@@ -16,7 +16,7 @@ module.exports = function(app) {
     twitterClient.get('search/tweets', {q: truck}, function(error, tweets, response){
       if(error) { return error;}
       if (!error) {
-        let tweet = new Tweet({handle: '@'+truck, message: tweets.statuses[0].text});
+        let tweet = new Truck({handle: '@'+truck, message: tweets.statuses[0].text});
         tweet.save(function(err, tweet) {
           if(err) {
             return console.error(err);
