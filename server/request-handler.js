@@ -28,9 +28,9 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/API/fetch", function(req,res){
+  app.get("/API/fetchAll", function(req,res){
     // console.log("app.get req", req);
-    Tweet.findOne({handle: req.query.handle}, function(err, tweet){
+    Tweet.find(function(err, tweet){
       // if(err){
       //   return res.status(400).send("Error retrieving tweet" + err)
       // }
@@ -41,13 +41,8 @@ module.exports = function(app) {
         // res.status(200).send("app.get 200 success");
         // console.log(tweet);
         res.status(200).send(JSON.stringify(tweet));
-        
+
       // }
     })
   })
 }
-
-
-
-
-
