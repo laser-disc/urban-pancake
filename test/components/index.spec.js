@@ -3,9 +3,9 @@ import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
 import App from '../../client/components/app';
 
-describe('<TweetList />', function() {
+describe('<TruckList />', function() {
   it('should exist', function() {
-    const wrapper = shallow(<TweetList />);
+    const wrapper = shallow(<TruckList />);
     expect(wrapper).to.exist;
   })
 })

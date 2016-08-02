@@ -7,17 +7,17 @@ const secretKeys = require('../env/config');
 // PUT ALL THE GET REQUESTS IN HERE FROM SERVER TO TWITTER
 module.exports = function(app) {
   const twitterClient = new Twitter(secretKeys.twitterInfo);
-  let trucks = ['senorsisig','curryupnow'];
+  let foodTrucks = ['senorsisig','curryupnow'];
 
 
 //post tweets to DB
   //perform this function periodically
-  trucks.forEach( truck => {
-    twitterClient.get('search/tweets', {q: truck}, function(error, tweets, response){
+  foodTrucks.forEach((foodTruck) => {
+    twitterClient.get('search/tweets', {q: foodTruck}, function(error, trucks, response){
       if(error) { return error;}
       if (!error) {
-        let tweet = new Tweet({handle: '@'+truck, message: tweets.statuses[0].text});
-        tweet.save(function(err, tweet) {
+        let truck = new Truck({handle: `@${foodTruck}`, message: trucks.statuses[0].text});
+        truck.save(function(err, truck) {
           if(err) {
             return console.error(err);
           }
@@ -26,7 +26,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/API/fetchAll", function(req,res){ 
+  app.get("/API/fetchAll", function(req,res){
     Truck.find(function(err, trucks){
       res.status(200).send(trucks);
     })

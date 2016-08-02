@@ -1,3 +1,6 @@
+import './styles/normalize.css';
+import './styles/skeleton.css';
+import './styles/style.css';
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -6,6 +9,7 @@ import {createStore, applyMiddleware} from 'redux';
 import ReduxPromise from 'redux-promise';
 import App from './components/app';
 import rootReducer from './reducers/reducers';
+
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
@@ -19,4 +23,3 @@ ReactDOM.render(
 if (module.hot) {
   module.hot.accept();
 }
-
