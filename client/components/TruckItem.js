@@ -2,9 +2,8 @@
 
 import React, {Component} from 'react';
 
-// <FIX> ADD NAME AND DESCRIPTION FROM TWITTER
  export default class TruckItem extends Component {
-    
+
     render() {
       return (
       <div className="TruckItem">
@@ -22,4 +21,3 @@ import React, {Component} from 'react';
       );
     };
  };
-
