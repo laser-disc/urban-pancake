@@ -28,7 +28,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/API/fetch", function(req,res){
+  app.get("/API/fetchAll", function(req,res){
     // console.log("app.get req", req);
     Tweet.find(function(err, tweet){
       // if(err){
