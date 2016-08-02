@@ -7,19 +7,48 @@ const secretKeys = require('../env/config');
 // PUT ALL THE GET REQUESTS IN HERE FROM SERVER TO TWITTER
 module.exports = function(app) {
   const twitterClient = new Twitter(secretKeys.twitterInfo);
-  let trucks = ['senorsisig','curryupnow'];
+  let foodTrucks = ['curryupnow', 'chairmantruck'];
 
 
 //post tweets to DB
   //perform this function periodically
-  trucks.forEach( truck => {
-    twitterClient.get('search/tweets', {q: truck}, function(error, tweets, response){
+  
+  foodTrucks.forEach( truck => {
+    // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
+    twitterClient.get('statuses/user_timeline', {screen_name: truck, exclude_replies: true, include_rts: true}, function(error, tweets, response){
+      
       if(error) { return error;}
       if (!error) {
-        let tweet = new Truck({handle: '@'+truck, message: tweets.statuses[0].text});
-        tweet.save(function(err, tweet) {
-          if(err) {
-            return console.error(err);
+        let tweet = new Truck({ 
+            name: tweets[0].user.name,
+            handle: '@'+truck,
+            description: tweets[0].user.description,
+
+            message: tweets[0].text,
+            timeStamp: tweets[0].created_at,
+            imageUrl: tweets[0].user.profile_image_url
+        });
+
+
+        // Truck.findOneAndUpdate({handle: '@'+truck}, tweet, {upsert: true}, function(err, tweet) {
+        Truck.find({handle: '@'+truck}, function(err, trucks) {
+          if(trucks.length===0){
+            Truck.findOneAndUpdate({handle: '@'+truck}, tweet, {upsert: true}, function(err, tweet) {
+              if(err){
+                return console.error(err);
+              } else {
+                console.log("truck "+truck+" created");
+              }
+            });
+          } else {
+            trucks[0].remove();
+            tweet.save(function(err, returnedTruck) {
+              if(err) {
+                return console.error(err);
+              } else {
+                console.log("truck "+truck+" updated");
+              }
+            });
           }
         });
       }
