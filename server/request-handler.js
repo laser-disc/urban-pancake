@@ -1,12 +1,21 @@
+'use strict'
+
 const db = require('../db/config');
 const mongoose = require('mongoose');
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
-const secretKeys = require('../env/config');
-
+let secretKeys = null;
+if(!process.env['TWITTERINFO_CONSUMER_KEY']) {
+  secretKeys = require('../env/config');
+}
+const twitterInfo = {
+  consumer_key: process.env['TWITTERINFO_CONSUMER_KEY'],
+  consumer_secret: process.env['TWITTERINFO_CONSUMER_SECRET'],
+  bearer_token: process.env['TWITTERINFO_BEARER_TOKEN']
+} || secretKeys.twitterInfo;
 // PUT ALL THE GET REQUESTS IN HERE FROM SERVER TO TWITTER
 module.exports = function(app) {
-  const twitterClient = new Twitter(secretKeys.twitterInfo);
+  const twitterClient = new Twitter(twitterInfo);
   let foodTrucks = ['senorsisig','curryupnow'];
 
 
