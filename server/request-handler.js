@@ -4,9 +4,9 @@ const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
 // const secretKeys = require('../env/config') || null;
 const twitterInfo = {
-  process.env['TWITTERINFO_BEARER_TOKEN'],
-  process.env['TWITTERINFO_CONSUMER_SECRET'],
-  process.env['TWITTERINFO_CONSUMER_KEY']
+  consumer_key: process.env['TWITTERINFO_CONSUMER_KEY'],
+  consumer_secret: process.env['TWITTERINFO_CONSUMER_SECRET'],
+  bearer_token: process.env['TWITTERINFO_BEARER_TOKEN']
 } || secretKeys.twitterInfo;
 // PUT ALL THE GET REQUESTS IN HERE FROM SERVER TO TWITTER
 module.exports = function(app) {
