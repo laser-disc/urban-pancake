@@ -1,3 +1,5 @@
+'use strict'
+
 const db = require('../db/config');
 const mongoose = require('mongoose');
 const Truck = require('../db/truckSchema');
