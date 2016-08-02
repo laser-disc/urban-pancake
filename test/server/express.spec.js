@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const supertest = require('supertest');
 const express = require('express');
-const app = require('../server/server');
+const app = require('../../server/server');
 
 
 describe('confirming that the server works properly', function(){
