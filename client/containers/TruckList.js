@@ -5,20 +5,16 @@ import TruckItem from '../components/TruckItem';
 import {FetchTrucks} from '../actions/FetchTrucks';
 
 class TruckList extends Component {
-  // this.renderTrucks.bind(this);
-  // Running once upon refresh; calling fetchTrucks to access DB
+  // Runs FetchTrucks immediately so that the state will be up to date before the content starts to load
   componentWillMount() {
     this.props.FetchTrucks();
   }
-
+  // Iterates over each truck in the database
   renderTrucks(truck) {
-    // console.log('INSIDE renderTrucks IN TRUCKLIST', this.state.trucks)
     return <TruckItem key={truck._id} truck={truck} />
   };
-
-  // Mapping trucks props to truckItems
+  // Maps truck prop to TruckItem
   render() {
-
     return (
       <div>
         {this.props.trucks.map(truck => this.renderTrucks(truck))}

@@ -1,3 +1,5 @@
+// TruckItem: the individual tweets that will appear on the page
+
 import React, {Component} from 'react';
 
 
