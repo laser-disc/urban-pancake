@@ -8,7 +8,7 @@ import React, {Component} from 'react';
     render() {
       return (
       <div className="TruckItem">
-          <div className="tweet col-lg-offset-3 col-sm-6 col-md-6 col-lg-6">
+          <div className="tweet col-lg-offset-2 col-sm-8 col-md-8 col-lg-8">
               <img className="TruckAvatar" src={this.props.truck.imageUrl} alt="Truck Image" />
               <div>
                 <h4 className="TruckName">{this.props.truck.name}</h4>
