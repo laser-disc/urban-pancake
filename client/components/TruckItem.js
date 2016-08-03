@@ -2,7 +2,6 @@
 
 import React, {Component} from 'react';
 
-
  export default class TruckItem extends Component {
 
     render() {
