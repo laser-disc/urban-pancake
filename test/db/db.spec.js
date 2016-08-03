@@ -8,11 +8,13 @@ const chai = require('chai');
 const expect = chai.expect;
 const should = chai.should();
 const secretKeys = require('../../env/config');
+const createTruckWithTwitterInfo = require('../../server/updateTruckInfo').createTruckWithTwitterInfo;
+const createOrUpdateDB = require('../../server/updateTruckInfo').createOrUpdateDB;
 const clearDB = require('mocha-mongoose')(secretKeys.MONGOOSE_URI);
 
 // General DataBase Functionality
 let testDoc = mongoose.model('Test Document', new mongoose.Schema({text: String, number: Number }))
-describe("DB Documents", function() {
+describe("DB Documents", function() { 
   it("can be saved without error", function(done) {
     new testDoc({a: 1}).save();
     done();
@@ -28,7 +30,7 @@ describe("DB Documents", function() {
   });
 });
 
-describe("Truck Collection", function() {
+describe("Truck Collection", function() { 
   it('Should store many different trucks', function(done){
     new Truck({handle: '@foodTruck'}).save(function(){
       new Truck({handle: '@foodTruck2'}).save(function(){
@@ -39,12 +41,16 @@ describe("Truck Collection", function() {
       });
     });
   });
-  xit('Should only store one tweet per truck', function(done){
-    new Truck({handle: '@foodTruck'}).save(function(){
-      new Truck({handle: '@foodTruck'}).save(function(){
-        Truck.find({handle: '@foodTruck'}, function(err, trucks){
-          expect(trucks).to.have.length(1);
-          done();
+  it('Should only store one tweet per truck', function(done){
+    createTruckWithTwitterInfo('kogibbq').then(function(truck){
+      createOrUpdateDB(truck).then(function(trucks){
+        createTruckWithTwitterInfo('kogibbq').then(function(truck){
+          createOrUpdateDB(truck).then(function(truck){
+            Truck.find({handle: '@kogibbq'}, function(err, trucks){
+              expect(trucks).to.have.length(1);
+              done();
+            });
+          });
         });
       });
     });

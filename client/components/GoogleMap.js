@@ -10,7 +10,8 @@ export default function map() {
       googleMapElement={
         <GoogleMap defaultZoom={14} defaultCenter={{lat: 37.7874707, lng: -122.4019886}}>
           <Marker position={{lat: 37.7874707, lng: -122.4019886}}
-            label= 'HELLO WORLD' icon={{url:'https://pbs.twimg.com/profile_images/664169149002874880/z1fmxo00.jpg'}}/>
+            // label= 'HELLO WORLD'
+            icon={{url:'https://media.giphy.com/media/8K1IYSnhUaNH2/giphy_s.gif'}}/>
         </GoogleMap>
       }
     />
