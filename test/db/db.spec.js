@@ -42,7 +42,7 @@ describe("Truck Collection", function() {
   it('Should only store one tweet per truck', function(done){
     new Truck({handle: '@foodTruck'}).save(function(){
       new Truck({handle: '@foodTruck'}).save(function(){
-        Truck.find({}, function(err, trucks){
+        Truck.find({handle: '@foodTruck'}, function(err, trucks){
           expect(trucks).to.have.length(1);
           done();
         });
