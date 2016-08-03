@@ -34,7 +34,7 @@ describe('Retrieving a Truck from DB', function() {
         .expect(200, done);
     });
 
-    xit('should have a name', function(done){
+    it('should have a name', function(done){
        request(app)
         .get(url)
         .send(params)
@@ -45,7 +45,7 @@ describe('Retrieving a Truck from DB', function() {
         .expect(200, done)
     });
 
-    xit('Should have the correct handle', function(done){
+    it('Should have the correct handle', function(done){
       request(app)
         .get(url)
         .send(params)
@@ -56,7 +56,7 @@ describe('Retrieving a Truck from DB', function() {
         .expect(200, done)
     });
 
-    xit('should have a message', function(done){
+    it('should have a message', function(done){
       request(app)
         .get(url)
         .send(params)
@@ -69,7 +69,7 @@ describe('Retrieving a Truck from DB', function() {
         .expect(200, done)
     });
 
-    xit('should have a timestamp', function(done){
+    it('should have a timestamp', function(done){
        request(app)
         .get(url)
         .send(params)
@@ -80,7 +80,7 @@ describe('Retrieving a Truck from DB', function() {
         .expect(200, done)
     });
 
-    xit('should have an image', function(done){
+    it('should have an image', function(done){
          request(app)
         .get(url)
         .send(params)
