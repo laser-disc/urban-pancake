@@ -10,7 +10,6 @@ const should = chai.should();
 const secretKeys = require('../../env/config');
 const clearDB = require('mocha-mongoose')(secretKeys.MONGOOSE_URI);
 
-
 // General DataBase Functionality
 let testDoc = mongoose.model('Test Document', new mongoose.Schema({text: String, number: Number }))
 describe("DB Documents", function() { 
