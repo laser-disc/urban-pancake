@@ -11,7 +11,6 @@ const twitterInfo = secretKeys.twitterInfo || {
 };
 
 const twitterClient = new Twitter(twitterInfo);
-// let foodTrucks = ['curryupnow', 'chairmantruck'];
 
 module.exports = {};
 
