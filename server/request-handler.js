@@ -13,6 +13,7 @@ const twitterInfo = secretKeys.twitterInfo || {
   consumer_secret: process.env['TWITTERINFO_CONSUMER_SECRET'],
   bearer_token: process.env['TWITTERINFO_BEARER_TOKEN']
 };
+const GMAP_API_KEY = secretKeys.GMAP_API_KEY || process.env['GMAP_API_KEY'];
 // PUT ALL THE GET REQUESTS IN HERE FROM SERVER TO TWITTER
 
 
