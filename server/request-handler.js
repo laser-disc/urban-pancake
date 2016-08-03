@@ -17,7 +17,7 @@ const twitterInfo = secretKeys.twitterInfo || {
 module.exports = function(app) {
 
   const twitterClient = new Twitter(twitterInfo);
-  let foodTrucks = ['curryupnow', 'chairmantruck'];
+  let foodTrucks = ['curryupnow', 'chairmantruck', 'senorsisig'];
  
 //post tweets to DB
   //perform this function periodically

@@ -10,22 +10,6 @@ const express = require('express'),
   mongoose = require('mongoose'),
   Twitter = require('twitter');
 
-
-// let twitterClient = new Twitter(secretKeys.twitterInfo);
-// let truckTweets = exports.truckTweets = {};
-// let trucks = ['senorsisig','curryupnow'];
-
-
-// trucks.forEach( truck => {
-//   twitterClient.get('search/tweets', {q: truck}, function(error, tweets, response){
-//     if(error) { return error;}
-//     if (!error) {
-//       truckTweets[truck]=tweets.statuses[0].text;
-//       console.log(truckTweets);
-//     }
-//   });
-// });
-
 if (process.env.NODE_ENV === 'development') {
   const webpackDevMiddleware = require("webpack-dev-middleware"),
     webpackHotMiddleware = require("webpack-hot-middleware"),
