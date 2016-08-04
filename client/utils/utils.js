@@ -1,7 +1,5 @@
-
 const axios = require('axios');
 
-<<<<<<< d8add4079ce6014fa148358437297c81f7de42b9
 module.exports.geocoder = function(intersection){
   return axios.get("/API/geocoder", {
     params: {
@@ -17,7 +15,7 @@ module.exports.geocoder = function(intersection){
     }
   }); 
 };
-=======
+
 module.exports = function(locQuery){
   if(locQuery.poi){
     return axios.get("/API/poi", {
@@ -51,4 +49,3 @@ module.exports = function(locQuery){
     }); 
   }
 };
->>>>>>> refactor[utils] remove console logs
