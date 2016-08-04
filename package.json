@@ -10,7 +10,9 @@
     "dev": "NODE_ENV='development' node server/server.js",
     "webdev": "webpack-dev-server --watch --progress --hot --inline",
     "test": "mocha test/helpers/browser.js test/**/*.spec.js",
-    "start": "webpack -p && node server/server.js"
+    "start": "webpack -p && node server/server.js",
+    "testsubs": "mocha test/utils/locationSubroutines.spec.js",
+    "testalgorithm": "mocha test/server/extractAddress.spec.js"
   },
   "repository": {
     "type": "git",

@@ -97,26 +97,6 @@ describe("the getLocationFromTwitter chosenTweet property", function(){
   });
 });
 
-xdescribe("fullAddressGiven sub-function", function(){
-  it("should return a street address", function(done){
-    let fakeTweet1 = "come by for lunch at 2 Mission st bring your dog";
-    let fakeTweet2 = "come by for lunch at 2 Mission street bring your dog";
-    let fakeTweet3 = "come by for lunch at 2 Mission Ave bring your dog";
-    let fakeTweet4 = "come by for lunch at 2 Mission Avenue bring your dog";
-    let fakeTweet5 = "come by for lunch at 2 Mission Road bring your dog";
-    let fakeTweet6 = "come by for lunch at 2 Mission rd bring your dog";
-    let fakeTweet7 = "come by for lunch at 2 Mission court bring your dog"; 
-    let fakeTweet8 = "come by for lunch at 2 Mission ct bring your dog";
-    let fakeTweet9 = "come by for lunch at 2 Mission aly bring your dog";
-    let fakeTweet10 = "come by for lunch at 2 Mission alley bring your dog"; 
-    let fakeTweet11 = "come by for lunch at 2 Mission ter bring your dog"; 
-    let fakeTweet12 = "come by for lunch at 2 Mission terrace bring your dog"; 
-  });
-
-});
-  // addressGiven
-  // intersectionGiven
-
 
 
 
