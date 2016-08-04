@@ -33,13 +33,22 @@ module.exports = function(app) {
         res.status(200).send(truck);
     })
   })
-  app.get("/API/geocoder", function(req,res){
+  app.get("/API/address", function(req,res){
     var intersection = encodeURIComponent(req.query.intersection)
     let gMapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + intersection +"&key=" + GMAP_API_KEY;
     https.get(gMapUrl, function(response){
       let data = '';
       response.on('data', (chunk)=> data+=chunk)
       response.on('end', ()=> res.send(JSON.parse(data).results[0].geometry.location))
+    })
+  })
+  app.get("/API/poi", function(req,res){
+    var poi = encodeURIComponent(req.query.poi)
+    let gMapUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.7756, -122.4193&radius=5000&name=" + poi + "&key=" + GMAP_API_KEY;
+    https.get(gMapUrl, function(response){
+      let data = '';
+      response.on('data', (chunk)=> data+=chunk)
+      response.on('end', ()=> res.send(JSON.parse(data).results[0])) //.results[0].geometry.location
     })
   })
 }
