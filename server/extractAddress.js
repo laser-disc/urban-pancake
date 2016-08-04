@@ -10,7 +10,7 @@ It returns an object containing a location string (such as "2nd and Mission") an
 
 const extractAddress = function(truckMessagesArray) {
   let finalTweetObj = {loc: undefined, currentTweetIdx: undefined};
-  
+	
 	for (var i = 0; i < truckMessagesArray.length; i++) {
 		let currentTweet = truckMessagesArray[i];
     // Removes the punctuation from the current tweet so that it's easier to parse
