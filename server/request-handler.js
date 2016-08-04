@@ -10,7 +10,6 @@ const GMAP_API_KEY = secretKeys.GMAP_API_KEY || process.env['GMAP_API_KEY']
 const https = require('https')
 const Truck = require('../db/truckSchema');
 const updateTruckInfo = require('./updateTruckInfo');
-const Truck = require('../db/truckSchema');
 
 
 updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
