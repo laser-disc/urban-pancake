@@ -8,6 +8,8 @@ const chai = require('chai');
 const expect = chai.expect;
 const should = chai.should();
 const secretKeys = require('../../env/config');
+const createTruckWithTwitterInfo = require('../../server/updateTruckInfo').createTruckWithTwitterInfo;
+const createOrUpdateDB = require('../../server/updateTruckInfo').createOrUpdateDB;
 const clearDB = require('mocha-mongoose')(secretKeys.MONGOOSE_URI);
 
 // General DataBase Functionality
@@ -40,11 +42,15 @@ xdescribe("Truck Collection", function() {
     });
   });
   it('Should only store one tweet per truck', function(done){
-    new Truck({handle: '@foodTruck'}).save(function(){
-      new Truck({handle: '@foodTruck'}).save(function(){
-        Truck.find({handle: '@foodTruck'}, function(err, trucks){
-          expect(trucks).to.have.length(1);
-          done();
+    createTruckWithTwitterInfo('kogibbq').then(function(truck){
+      createOrUpdateDB(truck).then(function(trucks){
+        createTruckWithTwitterInfo('kogibbq').then(function(truck){
+          createOrUpdateDB(truck).then(function(truck){
+            Truck.find({handle: '@kogibbq'}, function(err, trucks){
+              expect(trucks).to.have.length(1);
+              done();
+            });
+          });
         });
       });
     });

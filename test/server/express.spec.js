@@ -69,7 +69,7 @@ xdescribe('Retrieving a Truck from DB', function() {
         .expect(200, done)
     });
 
-    xit('should have a timestamp', function(done){
+    it('should have a timestamp', function(done){
        request(app)
         .get(url)
         .send(params)
@@ -80,7 +80,7 @@ xdescribe('Retrieving a Truck from DB', function() {
         .expect(200, done)
     });
 
-    xit('should have an image', function(done){
+    it('should have an image', function(done){
          request(app)
         .get(url)
         .send(params)
@@ -90,7 +90,7 @@ xdescribe('Retrieving a Truck from DB', function() {
         })
         .expect(200, done)
     });
-    
+
   })
 
 describe('Retrieving all trucks from DB', function() {
@@ -109,5 +109,3 @@ describe('Retrieving all trucks from DB', function() {
   })
 
 })
-
-
