@@ -42,4 +42,16 @@ module.exports = function(app) {
       response.on('end', ()=> res.send(JSON.parse(data).results[0].geometry.location))
     })
   })
+<<<<<<< d8add4079ce6014fa148358437297c81f7de42b9
+=======
+  app.get("/API/poi", function(req,res){
+    var poi = encodeURIComponent(req.query.poi)
+    let gMapUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.7756, -122.4193&radius=5000&name=" + poi + "&key=" + GMAP_API_KEY;
+    https.get(gMapUrl, function(response){
+      let data = '';
+      response.on('data', (chunk)=> data+=chunk)
+      response.on('end', ()=> res.send(JSON.parse(data).results[0].geometry.location))
+    })
+  })
+>>>>>>> refactor[utils] remove console logs
 }
