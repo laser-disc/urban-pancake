@@ -2,8 +2,7 @@
 
 const db = require('../db/config');
 const mongoose = require('mongoose');
-const secretKeys = null;
-const GMAP_API_KEY = secretKeys.GMAP_API_KEY || process.env['GMAP_API_KEY']
+let secretKeys = null;
 const https = require('https')
 const Truck = require('../db/truckSchema');
 const updateTruckInfo = require('./updateTruckInfo');
