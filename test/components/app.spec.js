@@ -13,4 +13,8 @@ describe('<App />', function() {
     const wrapper = shallow(<App />);
     expect(wrapper.find(<TruckList />)).to.exist;
   })
+  it('should render <GoogleMap />', function() {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find(<GoogleMap />)).to.exist;
+  })
 })
