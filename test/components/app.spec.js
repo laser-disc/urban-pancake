@@ -2,12 +2,19 @@ import React from 'react';
 import { shallow, render, mount } from 'enzyme';
 import { expect } from 'chai';
 import App from '../../client/components/app';
-import Index from '../../client/index';
+import TruckList from '../../client/containers/TruckList';
 
-console.log(JSON.stringify(App));
 describe('<App />', function() {
   it('should exist', function() {
-    var wrapper = shallow(<App />);
+    const wrapper = shallow(<App />);
     expect(wrapper).to.exist;
+  })
+  it('should render <TruckList />', function() {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find(<TruckList />)).to.exist;
+  })
+  it('should render <GoogleMap />', function() {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find(<GoogleMap />)).to.exist;
   })
 })
