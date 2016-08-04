@@ -39,7 +39,15 @@ module.exports = function(app) {
     https.get(gMapUrl, function(response){
       let data = '';
       response.on('data', (chunk)=> data+=chunk)
-      response.on('end', ()=> res.send(JSON.parse(data).results[0].geometry.location))
+      response.on('end', function(){
+        let payload = JSON.parse(data);
+        if(payload.results[0]){
+          res.send(payload.results[0].geometry.location)
+        }
+        else{
+          res.send("null")
+        }
+      })
     })
   })
 <<<<<<< d8add4079ce6014fa148358437297c81f7de42b9
@@ -50,7 +58,15 @@ module.exports = function(app) {
     https.get(gMapUrl, function(response){
       let data = '';
       response.on('data', (chunk)=> data+=chunk)
-      response.on('end', ()=> res.send(JSON.parse(data).results[0].geometry.location))
+      response.on('end', function(){
+        let payload = JSON.parse(data);
+        if(payload.results[0]){
+          res.send(payload.results[0].geometry.location)
+        }
+        else{
+          res.send("null")
+        }
+      })
     })
   })
 >>>>>>> refactor[utils] remove console logs
