@@ -1,4 +1,18 @@
-let geocoder = function(){
-  return [37.754905,-122.459106]
+
+const axios = require('axios');
+
+module.exports.geocoder = function(intersection){
+  return axios.get("/API/geocoder", {
+    params: {
+      intersection: intersection
+    }
+  })
+  .then(function(response){
+    return response.data
+  })
+  .catch(function(error){
+    if(error){
+      console.log(error)
+    }
+  }); 
 };
-module.exports = geocoder
