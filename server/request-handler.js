@@ -3,6 +3,7 @@
 const db = require('../db/config');
 const mongoose = require('mongoose');
 const updateTruckInfo = require('./updateTruckInfo');
+const Truck = require('../db/truckSchema');
 
 
 updateTruckInfo.foodTrucks.forEach( (foodTruck) => {

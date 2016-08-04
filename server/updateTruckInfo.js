@@ -1,3 +1,4 @@
+const getLocationFromTweets = require('./getLocationFromTweets');
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
 let secretKeys = null;
@@ -15,6 +16,8 @@ const twitterClient = new Twitter(twitterInfo);
 module.exports = {};
 
 module.exports.foodTrucks = ['curryupnow', 'chairmantruck'];
+module.exports.foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF'];
+module.exports.allTweets = [ ];
 
 //post tweets to DB
 //perform this function periodically
@@ -31,6 +34,13 @@ module.exports.createTruckWithTwitterInfo = function (foodTruck){
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
     twitterClient.get('statuses/user_timeline', searchParams, function(error, tweets, response){
+      // send all tweets to getLocationFromTweets
+      tweets.forEach( (tweet) => {
+        module.exports.allTweets.push(tweet.text);
+      });
+      let truckLocation = getLocationFromTweets(module.exports.allTweets);
+      console.log("The current location of "+ tweets[0].user.name + " is "+ truckLocation.foundLocation);
+
       if(error) { 
         console.log("error ", error); 
         reject(error); // return error;
