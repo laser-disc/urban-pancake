@@ -37,5 +37,6 @@ module.exports = function(app) {
     Truck.findOne({handle: handle}, function(err, truck){
         res.status(200).send(truck);
     })
-  })
-}
+  });
+};
+
