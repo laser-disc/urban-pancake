@@ -2,7 +2,15 @@
 
 const db = require('../db/config');
 const mongoose = require('mongoose');
+let secretKeys = null;
+if(!process.env['MONGOOSE_URI']) {
+  secretKeys = require('../env/config');
+}
+const GMAP_API_KEY = secretKeys.GMAP_API_KEY || process.env['GMAP_API_KEY']
+const https = require('https')
+const Truck = require('../db/truckSchema');
 const updateTruckInfo = require('./updateTruckInfo');
+
 
 updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
   updateTruckInfo.createTruckWithTwitterInfo(foodTruck)
@@ -23,6 +31,15 @@ module.exports = function(app) {
 
     Truck.findOne({handle: handle}, function(err, truck){
         res.status(200).send(truck);
-    });
-  });
-};
+    })
+  })
+  app.get("/API/geocoder", function(req,res){
+    var intersection = encodeURIComponent(req.query.intersection)
+    let gMapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + intersection +"&key=" + GMAP_API_KEY;
+    https.get(gMapUrl, function(response){
+      let data = '';
+      response.on('data', (chunk)=> data+=chunk)
+      response.on('end', ()=> res.send(JSON.parse(data).results[0].geometry.location))
+    })
+  })
+}

@@ -30,7 +30,7 @@ describe("DB Documents", function() {
   });
 });
 
-describe("Truck Collection", function() { 
+xdescribe("Truck Collection", function() { 
   it('Should store many different trucks', function(done){
     new Truck({handle: '@foodTruck'}).save(function(){
       new Truck({handle: '@foodTruck2'}).save(function(){
