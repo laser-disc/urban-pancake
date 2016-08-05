@@ -8,7 +8,7 @@ const config = require('../webpack.dev.config');
 
 const compiler = webpack(config);
 const app = express();
-const router = express.router();
+const router = express.Router();
 
 if (process.env.NODE_ENV === 'development') {
   app.use(webpackDevMiddleware(compiler, {
@@ -20,14 +20,14 @@ if (process.env.NODE_ENV === 'development') {
   }));
   app.use(webpackHotMiddleware(compiler, { log: console.log }));
 } else {
-  app.use(express.static(path.resolve(__dirname, '/../dist')));
+  app.use(express.static(path.resolve(__dirname, './../dist')));
 }
 
 app.use(bodyParser.json());
 app.use(router);
 
 router.get('/', (req, res) => {
-  res.sendFile(path.resolve(path.resolve(__dirname, '/../client/index.html')));
+  res.sendFile(path.resolve(__dirname, './../client/index.html'));
   console.log('connecting to root...');
 });
 
