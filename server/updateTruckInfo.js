@@ -17,7 +17,7 @@ module.exports = {};
 
 // module.exports.foodTrucks = ['curryupnow', 'chairmantruck'];
 module.exports.foodTrucks = ['japacurry', 'curryupnow'];
-let badFoodTrucks = ['senorsesig'];  // Don't try to get Twitter info from these trucks - you will FAIL
+let badFoodTrucks = ['senorsisig'];  // Don't try to get Twitter info from these trucks - you will FAIL
 
 module.exports.foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF'];
 module.exports.allTweetMessages = [ ];

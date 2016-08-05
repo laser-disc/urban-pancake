@@ -10,7 +10,7 @@ module.exports.getLocation = function (allTweets){
   console.log("inside getLocation, just received "+allTweets.length+" tweets");
   return new Promise((resolve, reject) => {
     let results = {poi: null, address: null};
-    let location, latLong, currentTweet;
+    let location, latLong, currentTweet, noPuncTweet;
     
     for(var i=0; i<allTweets.length; i++){
       currentTweet = (allTweets[i]);
