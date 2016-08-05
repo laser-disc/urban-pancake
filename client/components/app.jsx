@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import ReduxPromise from 'redux-promise';
@@ -8,7 +9,7 @@ import GoogleMap from '../containers/GoogleMap';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
-export default () => {
+const App = () => {
   return (
     <Provider store={createStoreWithMiddleware(rootReducer)}>
       <div className="container theme-light">
@@ -24,3 +25,7 @@ export default () => {
     </Provider>
   );
 }
+
+ReactDOM.render(<App />, document.querySelector('#app'));
+
+export default App;
