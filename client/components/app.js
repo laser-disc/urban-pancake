@@ -10,7 +10,7 @@ export default class App extends Component {
           <h1>Food Trucks Near You</h1>
           <p>...assuming you live in San Francisco </p>
         </div>
-        <div style={{height: '500px', width: '550px'}}>
+        <div>
         <GoogleMap />
         </div>
         <TruckList />
