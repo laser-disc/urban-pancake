@@ -16,7 +16,8 @@ const twitterClient = new Twitter(twitterInfo);
 module.exports = {};
 
 // module.exports.foodTrucks = ['curryupnow', 'chairmantruck'];
-module.exports.foodTrucks = ['japacurry'];
+module.exports.foodTrucks = ['japacurry', 'curryupnow'];
+let badFoodTrucks = ['senorsesig'];  // Don't try to get Twitter info from these trucks - you will FAIL
 
 module.exports.foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF'];
 module.exports.allTweetMessages = [ ];
@@ -37,6 +38,10 @@ module.exports.createTruckWithTwitterInfo = function (foodTruck){
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
     twitterClient.get('statuses/user_timeline', searchParams, function(error, tweets, response){
+      console.log("&&&&&& BEGINNING OF MATTs CONSOLE.LOGS &&&&&&&");
+      console.log("******If the following line throws an error, the Twitter Handle for the truck is not searchable on Twitter ABORT*****");
+      console.log(tweets[0].text);
+
       if(error) { 
         console.log("error ", error); 
         reject(error); // return error;
@@ -54,6 +59,7 @@ module.exports.createTruckWithTwitterInfo = function (foodTruck){
 };
 
 module.exports.createTruckWithGeoInfo = function(geoInfo){
+  console.log("inside createTruckWithGeoInfo, just received ", JSON.stringify(geoInfo));
   return new Promise((resolve, reject) => { 
     // send all tweet messages to getLocationFromTweets
     let index = getLocationFromTweets.chosenIndex;
@@ -77,8 +83,9 @@ module.exports.createTruckWithGeoInfo = function(geoInfo){
 };
 
 module.exports.createOrUpdateDB = function (foodTruck){
-  // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
+  console.log("inside createOrUpdateDB, just received "+ foodTruck.name+" info");
   return new Promise ((resolve,reject) => {
+    // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
     Truck.find({handle: foodTruck.handle}, function(err, trucks) {
       if(trucks.length===0){  //  if no matches are found, it will return an empty array
         // and then we create a new document in the db for that truck

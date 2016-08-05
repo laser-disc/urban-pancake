@@ -17,4 +17,4 @@ module.exports = function(locQuery){
       console.log(error)
     }
   }); 
-}
+};
