@@ -8,7 +8,8 @@ const truckSchema = new mongoose.Schema({
   description: String,
   message: String,
   timeStamp: String,
-  imageUrl: String
+  imageUrl: String,
+  location: {lat: Number, lng: Number}
 });
 
 let Truck = mongoose.model('Truck', truckSchema);

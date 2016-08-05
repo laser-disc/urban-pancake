@@ -2,12 +2,26 @@
 
 const db = require('../db/config');
 const mongoose = require('mongoose');
+const https = require('https')
+const Truck = require('../db/truckSchema');
 const updateTruckInfo = require('./updateTruckInfo');
+const getLocationFromTweets = require('./getLocationFromTweets');
+let geoCoder = require('../client/utils/utils')
 
 updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
   updateTruckInfo.createTruckWithTwitterInfo(foodTruck)
+  .then(function(allTweets){
+    return getLocationFromTweets.getLocation(allTweets);
+  })
+  .then(function(results){
+    return geoCoder(results);
+  })
+  .then(function(geoInfo){
+    return updateTruckInfo.createTruckWithGeoInfo(geoInfo);
+  })
   .then(function(truck) {
-    updateTruckInfo.createOrUpdateDB(truck);
+    console.log("request handler truck", truck);
+    return updateTruckInfo.createOrUpdateDB(truck);
   });
 });
 
@@ -23,6 +37,6 @@ module.exports = function(app) {
 
     Truck.findOne({handle: handle}, function(err, truck){
         res.status(200).send(truck);
-    });
-  });
-};
+    })
+  })
+}
