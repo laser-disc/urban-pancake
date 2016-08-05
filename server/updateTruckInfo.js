@@ -60,18 +60,18 @@ module.exports.createTruckWithGeoInfo = function(geoInfo){
     let tweets = module.exports.allTweetObjects;
     console.log("The current location of "+ tweets[index].user.name + " is lat "+ geoInfo.lat + " lng "+geoInfo.lng);
     
-    // truck = new Truck({ 
+    console.log(tweets[index].text); 
     truck = new Truck({ 
       name: tweets[index].user.name,
-      handle: '@japacurry',  // Hard-coded in need to fix later
+      handle: '@'+tweets[index].user.screen_name,
       description: tweets[index].user.description,
       message: tweets[index].text,
       timeStamp: tweets[index].created_at,
       imageUrl: tweets[index].user.profile_image_url,
       location: geoInfo
     });
-
-    console.log("this is the newly created Truck", truck);
+    module.exports.allTweetObjects.length = 0;  // reset for the next truck
+    module.exports.allTweetMessages.length = 0;  // reset for the next truck
     resolve(truck);
   });
 };

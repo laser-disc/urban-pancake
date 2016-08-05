@@ -17,11 +17,9 @@ updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
     return geoCoder(results);
   })
   .then(function(geoInfo){
-    console.log("request handler geoInfo", geoInfo);
     return updateTruckInfo.createTruckWithGeoInfo(geoInfo);
   })
   .then(function(truck) {
-    console.log("request handler truck", truck);
     return updateTruckInfo.createOrUpdateDB(truck);
   });
 });

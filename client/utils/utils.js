@@ -10,8 +10,7 @@ module.exports = function(locQuery){
   let gMapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + query +"&key=" + GMAP_API_KEY;
   return axios.get(gMapUrl)
   .then(function(response){
-    console.log("is this wehere ", response.data.results[0].geometry.location)
-    return response.data.results[0].geometry.location
+    return response.data.results[0].geometry.location;
   })
   .catch(function(error){
     if(error){
