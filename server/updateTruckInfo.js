@@ -1,4 +1,4 @@
-const getLocationFromTweets = require('./getLocationFromTweets');
+const extractAddress = require('./extractAddress');
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
 let secretKeys = null;
@@ -54,6 +54,7 @@ module.exports.createTruckWithTwitterInfo = function (foodTruck){
 };
 
 module.exports.createTruckWithGeoInfo = function(geoInfo){
+  console.log("createTruckWithGeoInfo geoInfo", geoInfo);
   return new Promise((resolve, reject) => { 
     // send all tweet messages to getLocationFromTweets
     let index = getLocationFromTweets.chosenIndex;

@@ -6,7 +6,7 @@ const https = require('https')
 const Truck = require('../db/truckSchema');
 const updateTruckInfo = require('./updateTruckInfo');
 const getLocationFromTweets = require('./getLocationFromTweets');
-let geoCoder = require('../client/utils/utils')
+let geoCoder = require('../client/utils/utils');
 
 updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
   updateTruckInfo.createTruckWithTwitterInfo(foodTruck)
@@ -17,6 +17,7 @@ updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
     return geoCoder(results);
   })
   .then(function(geoInfo){
+    console.log("request handler geoInfo", geoInfo);
     return updateTruckInfo.createTruckWithGeoInfo(geoInfo);
   })
   .then(function(truck) {
