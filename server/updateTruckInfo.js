@@ -1,4 +1,4 @@
-const extractAddress = require('./extractAddress');
+const getLocationFromTweets = require('./getLocationFromTweets');
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
 let secretKeys = null;
@@ -15,9 +15,12 @@ const twitterClient = new Twitter(twitterInfo);
 
 module.exports = {};
 
-module.exports.foodTrucks = ['curryupnow', 'chairmantruck'];
+// module.exports.foodTrucks = ['curryupnow', 'chairmantruck'];
+module.exports.foodTrucks = ['japacurry'];
+
 module.exports.foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF'];
-module.exports.allTweets = [ ];
+module.exports.allTweetMessages = [ ];
+module.exports.allTweetObjects = [];
 
 //post tweets to DB
 //perform this function periodically
@@ -34,29 +37,42 @@ module.exports.createTruckWithTwitterInfo = function (foodTruck){
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
     twitterClient.get('statuses/user_timeline', searchParams, function(error, tweets, response){
-      // send all tweets to extractAddress
-      tweets.forEach( (tweet) => {
-        module.exports.allTweets.push(tweet.text);
-      });
-      let truckLocation = extractAddress(module.exports.allTweets);
-      console.log("The current location of "+ tweets[0].user.name + " is "+ truckLocation.foundLocation);
-
       if(error) { 
         console.log("error ", error); 
         reject(error); // return error;
       }
-      
-      // truck = new Truck({ 
-      truck = new Truck({ 
-        name: tweets[0].user.name,
-        handle: '@'+foodTruck,
-        description: tweets[0].user.description,
-        message: tweets[0].text,
-        timeStamp: tweets[0].created_at,
-        imageUrl: tweets[0].user.profile_image_url
+      // stash all the tweets in module.exports.allTweetMessages to be consulted later
+      module.exports.allTweetObjects = tweets;
+      // resolve(tweets);
+      tweets.forEach( (tweet) => {
+        module.exports.allTweetMessages.push(tweet.text);
       });
-      resolve(truck);
+      resolve(module.exports.allTweetMessages);
+      // let truckLocation = getLocationFromTweets(module.exports.allTweets);
     });
+  });
+};
+
+module.exports.createTruckWithGeoInfo = function(geoInfo){
+  return new Promise((resolve, reject) => { 
+    // send all tweet messages to getLocationFromTweets
+    let index = getLocationFromTweets.chosenIndex;
+    let tweets = module.exports.allTweetObjects;
+    console.log("The current location of "+ tweets[index].user.name + " is lat "+ geoInfo.lat + " lng "+geoInfo.lng);
+    
+    console.log(tweets[index].text); 
+    truck = new Truck({ 
+      name: tweets[index].user.name,
+      handle: '@'+tweets[index].user.screen_name,
+      description: tweets[index].user.description,
+      message: tweets[index].text,
+      timeStamp: tweets[index].created_at,
+      imageUrl: tweets[index].user.profile_image_url,
+      location: geoInfo
+    });
+    module.exports.allTweetObjects.length = 0;  // reset for the next truck
+    module.exports.allTweetMessages.length = 0;  // reset for the next truck
+    resolve(truck);
   });
 };
 
@@ -91,6 +107,6 @@ module.exports.createOrUpdateDB = function (foodTruck){
       }
     });
   });
-}
+};      
 
 

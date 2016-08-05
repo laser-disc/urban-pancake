@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {GoogleMapLoader, GoogleMap} from 'react-google-maps';
-import Marker from '../components/Marker';
+import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
+// import Marker from '../components/Marker';  // Reed said leave this here
 
 class Map extends Component {
   renderMarkers(truck) {
@@ -13,7 +13,7 @@ class Map extends Component {
         containerElement={ <div style={{height: '100%', width: '100%'}} /> }
         googleMapElement={
           <GoogleMap defaultZoom={14} defaultCenter={{lat: 37.7874707, lng: -122.4019886}}>
-            {/* {this.props.trucks.map(truck => this.renderMarkers(truck))} */}
+            { this.props.trucks.map(truck => this.renderMarkers(truck)) }
           </GoogleMap>
         }
       />
