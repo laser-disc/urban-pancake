@@ -1,0 +1,18 @@
+import React from 'react';
+import TruckList from '../containers/TruckList';
+import GoogleMap from '../containers/GoogleMap';
+
+export default () => {
+  return (
+    <div className="container theme-light">
+      <div className="jumbotron">
+        <h1>Food Trucks Near You</h1>
+        <p>...assuming you live in San Francisco </p>
+      </div>
+      <div style={{ height: '500px', width: '550px' }}>
+        <GoogleMap />
+      </div>
+      <TruckList />
+    </div>
+  );
+}

@@ -1,7 +1,3 @@
-import './styles/normalize.css';
-import './styles/skeleton.css';
-import './styles/style.css';
-import 'babel-polyfill';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
@@ -9,6 +5,10 @@ import {createStore, applyMiddleware} from 'redux';
 import ReduxPromise from 'redux-promise';
 import App from './components/app';
 import rootReducer from './reducers/reducers';
+import './styles/normalize.css';
+import './styles/skeleton.css';
+import './styles/style.css';
+import 'babel-polyfill';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
