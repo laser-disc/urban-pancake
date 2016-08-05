@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
-// import Marker from '../components/Marker';
+import {GoogleMapLoader, GoogleMap} from 'react-google-maps';
+import Marker from '../components/Marker.jsx';
 
 class Map extends Component {
   renderMarkers(truck) {
