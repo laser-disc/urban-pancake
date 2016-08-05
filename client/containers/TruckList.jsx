@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import TruckItem from '../components/TruckItem';
+import TruckItem from '../components/TruckItem.jsx';
 import {FetchTrucks} from '../actions/FetchTrucks';
 
 class TruckList extends Component {
