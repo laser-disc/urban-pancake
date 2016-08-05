@@ -6,21 +6,29 @@ const https = require('https')
 const Truck = require('../db/truckSchema');
 const updateTruckInfo = require('./updateTruckInfo');
 const getLocationFromTweets = require('./getLocationFromTweets');
+const getLocation = require('./getLocationFromTweets').getLocation;
+const createTruckWithGeoInfo = require('./updateTruckInfo').createTruckWithGeoInfo;
+const createOrUpdateDB = require('./updateTruckInfo').createOrUpdateDB;
+
 let geoCoder = require('../client/utils/utils');
 
 updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
   updateTruckInfo.createTruckWithTwitterInfo(foodTruck)
   .then(function(allTweets){
-    return getLocationFromTweets.getLocation(allTweets);
+    console.log("inside request-handler about to send "+ allTweets.length + " tweets to getLocation");
+    return getLocation(allTweets);
   })
   .then(function(results){
+    console.log("inside request-handler about to send "+ JSON.stringify(results) + " to geoCoder");
     return geoCoder(results);
   })
   .then(function(geoInfo){
-    return updateTruckInfo.createTruckWithGeoInfo(geoInfo);
+    console.log("inside request-handler about to send "+ JSON.stringify(geoInfo) + " to createTruckWithGeoInfo");
+    return createTruckWithGeoInfo(geoInfo);
   })
   .then(function(truck) {
-    return updateTruckInfo.createOrUpdateDB(truck);
+    console.log("inside request-handler about to send "+ truck.name + "s info to createOrUpdateDB");
+    return createOrUpdateDB(truck);
   });
 });
 
@@ -37,5 +45,5 @@ module.exports = function(app) {
     Truck.findOne({handle: handle}, function(err, truck){
         res.status(200).send(truck);
     })
-  })
-}
+  });
+};
