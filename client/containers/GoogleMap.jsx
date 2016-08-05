@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {GoogleApiComponent} from 'google-maps-react';
+import {GoogleApiWrapper} from 'google-maps-react';
 let secretKeys = null;
 if(!process.env['MONGOOSE_URI']) {
   secretKeys = require('../../env/config');
@@ -26,7 +26,7 @@ class Container extends Component {
   }
 }
 
-export default GoogleApiComponent({
+export default GoogleApiWrapper({
   apiKey: secretKeys.GMAP_API_KEY
 })(Container)
 
