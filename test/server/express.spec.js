@@ -20,7 +20,7 @@ describe('Server requests', function(){
 });
 
 
-describe('Retrieving a Truck from DB', function() {
+xdescribe('Retrieving a Truck from DB', function() {
     let url = '/API/fetch';
     let params = {
         params: {
