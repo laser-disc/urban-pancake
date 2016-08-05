@@ -9,7 +9,6 @@ if(!process.env['MONGOOSE_URI']) {
 import Map from '../components/Map.jsx'
 class Container extends Component {
   render(){
-    console.log("AHHHHHH REED!" , this.props)
     if(!this.props.loaded){
       return (
         <div> Loading... </div>

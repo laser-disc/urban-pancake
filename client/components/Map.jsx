@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 
 export default class Map extends Component{
   componentDidMount(){
-    console.log("comp did update")
       return this.loadMap();
   }
   loadMap(){
@@ -23,10 +22,7 @@ export default class Map extends Component{
         center: center,
         zoom: zoom
       }
-      console.log('node: ', node)
-      console.log('mapconfig: ',mapConfig)
       this.map = new maps.Map(node, mapConfig);
-      console.log("THE MAP: ", this.map)
     }
   }
   render(){
