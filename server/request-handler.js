@@ -39,7 +39,15 @@ module.exports = function(app) {
     https.get(gMapUrl, function(response){
       let data = '';
       response.on('data', (chunk)=> data+=chunk)
-      response.on('end', ()=> res.send(JSON.parse(data).results[0].geometry.location))
+      response.on('end', function(){
+        let payload = JSON.parse(data);
+        if(payload.results[0]){
+          res.send(payload.results[0].geometry.location)
+        }
+        else{
+          res.send("null")
+        }
+      })
     })
   })
   app.get("/API/poi", function(req,res){
@@ -48,7 +56,15 @@ module.exports = function(app) {
     https.get(gMapUrl, function(response){
       let data = '';
       response.on('data', (chunk)=> data+=chunk)
-      response.on('end', ()=> res.send(JSON.parse(data).results[0])) //.results[0].geometry.location
+      response.on('end', function(){
+        let payload = JSON.parse(data);
+        if(payload.results[0]){
+          res.send(payload.results[0].geometry.location)
+        }
+        else{
+          res.send("null")
+        }
+      })
     })
   })
 }
