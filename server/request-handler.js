@@ -12,7 +12,7 @@ const getTruckTwitterInfo = require('./updateTruckInfo').getTruckTwitterInfo;
 
 const createOrUpdateDB = require('./updateTruckInfo').createOrUpdateDB;
 
-let geoCoder = require('./utils').geoCoder;
+let geoCoder = require('../utils/utils').geoCoder;
 
 updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
   getTruckTwitterInfo(foodTruck)
