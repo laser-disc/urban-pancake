@@ -1,5 +1,7 @@
+const getLocationFromTweets = require('./getLocationFromTweets');
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
+
 let secretKeys = null;
 if(!process.env['TWITTERINFO_CONSUMER_KEY']) {
   secretKeys = require('../env/config');
@@ -14,73 +16,103 @@ const twitterClient = new Twitter(twitterInfo);
 
 module.exports = {};
 
-module.exports.foodTrucks = ['curryupnow', 'chairmantruck'];
+module.exports.foodTrucks = ['JapaCurry','CurryUpNow', 'chairmantruck']; // make sure to add the exact Twitter handle minus the @
+let badFoodTrucks = ['senorsisig'];  // Don't try to get Twitter info from these trucks - you will FAIL
 
-//post tweets to DB
-//perform this function periodically
+module.exports.foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF'];
 
-// Create a new Truck with Twitter's status info
+module.exports.TruckObj = function(){
+  return {
+    name: null,
+    allTweetObjs : [],
+    allTweetMessages : [],
+    chosenIndex : null,
+    getLocationResults : { poi : null, address : null },
+    geoInfo : null,
+    truck : null
+  }
+};
 
-module.exports.createTruckWithTwitterInfo = function (foodTruck){
+module.exports.getTruckTwitterInfo = function (foodTruck){
+  console.log("&&&&&& BEGINNING OF MATTs CONSOLE.LOGS &&&&&&&");
   return new Promise((resolve, reject) => {
-    let truck;
+    let newTruckObj = new module.exports.TruckObj();
+    newTruckObj.name = foodTruck;
     let searchParams = { 
-        screen_name: foodTruck, 
-        exclude_replies: true, 
-        include_rts: true
+      screen_name: foodTruck, 
+      exclude_replies: true, 
+      include_rts: true
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
     twitterClient.get('statuses/user_timeline', searchParams, function(error, tweets, response){
+      console.log("******If the following line throws an error, the Twitter Handle for the truck is not searchable on Twitter ABORT*****");
+      console.log(tweets[0].text)
+
       if(error) { 
         console.log("error ", error); 
-        reject(error); // return error;
+        reject(error); 
       }
-      
-      // truck = new Truck({ 
-      truck = new Truck({ 
-        name: tweets[0].user.name,
-        handle: '@'+foodTruck,
-        description: tweets[0].user.description,
-        message: tweets[0].text,
-        timeStamp: tweets[0].created_at,
-        imageUrl: tweets[0].user.profile_image_url
+      newTruckObj.allTweetObjs = tweets;
+      tweets.forEach( (tweet) => {
+        newTruckObj.allTweetMessages.push(tweet.text);
       });
-      resolve(truck);
+      resolve(newTruckObj);
     });
   });
 };
 
-module.exports.createOrUpdateDB = function (foodTruck){
-  // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
+module.exports.createTruckWithGeoInfo = function(newTruckObj){
+  console.log("inside createTruckWithGeoInfo, just received ", JSON.stringify(newTruckObj.geoInfo));
+  return new Promise((resolve, reject) => { 
+    // send all tweet messages to getLocationFromTweets
+    let index = newTruckObj.chosenIndex;
+    let tweets = newTruckObj.allTweetObjs;
+     
+    newTruckObj.truck = new Truck({ 
+      name: tweets[index].user.name,
+      handle: '@'+tweets[index].user.screen_name,
+      description: tweets[index].user.description,
+      message: tweets[index].text,
+      timeStamp: tweets[index].created_at,
+      imageUrl: tweets[index].user.profile_image_url,
+      location: newTruckObj.geoInfo
+    });
+    resolve(newTruckObj);
+  });
+};
+
+module.exports.createOrUpdateDB = function (newTruckObj){
+  console.log("inside createOrUpdateDB, just received "+ newTruckObj.name+" info");
   return new Promise ((resolve,reject) => {
-    Truck.find({handle: foodTruck.handle}, function(err, trucks) {
+    // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
+    Truck.find({handle: newTruckObj.truck.handle}, function(err, trucks) {
       if(trucks.length===0){  //  if no matches are found, it will return an empty array
         // and then we create a new document in the db for that truck
-        Truck.findOneAndUpdate({handle: foodTruck.handle}, foodTruck, {upsert: true}, function(err, response) {
+        Truck.findOneAndUpdate({handle: newTruckObj.truck.handle}, newTruckObj.truck, {upsert: true}, function(err, response) {
           if(err){
             console.error(err);
             reject(err);
           }
           else {
-            console.log("truck "+foodTruck.name+" created");
+            console.log("truck "+newTruckObj.name+" created");
             resolve(trucks);
           }
         });
       } else {
         trucks[0].remove(); // removes the old truck document
-        foodTruck.save(function(err, returnedTruck) {  // creates a new truck document
+        newTruckObj.truck.save(function(err, returnedTruck) {  // creates a new truck document
           if(err){
             console.error(err);
             reject(err);
           }
           else {
-            console.log("truck "+foodTruck.name+" updated");
+            console.log("truck "+newTruckObj.name+" updated");
             resolve(trucks);
           }
         });
       }
     });
   });
-}
+};      
 
 

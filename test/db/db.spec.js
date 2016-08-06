@@ -10,6 +10,8 @@ const should = chai.should();
 const secretKeys = require('../../env/config');
 const createTruckWithTwitterInfo = require('../../server/updateTruckInfo').createTruckWithTwitterInfo;
 const createOrUpdateDB = require('../../server/updateTruckInfo').createOrUpdateDB;
+const allTweets = require('../../server/updateTruckInfo').allTweets;
+const getLocationFromTweets = require('../../server/getLocationFromTweets');
 const clearDB = require('mocha-mongoose')(secretKeys.MONGOOSE_URI);
 
 // General DataBase Functionality
@@ -56,3 +58,46 @@ xdescribe("Truck Collection", function() {
     });
   });
 });
+
+describe("getLocationFromTwitter", function(){
+  it("should accept an array as the argument", function(done){
+    expect(Array.isArray(allTweets)).to.equal(true);
+    done();
+  });
+  it("should return an object", function(done){
+    let temp = getLocationFromTweets(["foo","bar","baz"]);
+    expect(typeof temp).to.equal("object");
+    done();
+  });
+  it("should return an object with a foundLocation property", function(done){
+    let temp = getLocationFromTweets(["foo","bar","baz"]);
+    let keys = Object.keys(temp);
+    expect(keys.includes('foundLocation')).to.equal(true);
+    done();
+  });
+  it("should return an object with a chosenTweet property", function(done){
+    let temp = getLocationFromTweets(["foo","bar","baz"]);
+    let keys = Object.keys(temp);
+    expect(keys.includes('chosenTweet')).to.equal(true);
+    done();
+  });
+});
+describe("the getLocationFromTwitter foundLocation property", function(){
+  it("should be a string", function(done){
+    let temp = getLocationFromTweets(["foo","bar","baz"]);
+    expect(typeof temp.foundLocation).to.equal('string');
+    done();
+  });
+});
+describe("the getLocationFromTwitter chosenTweet property", function(){
+  it("should be an object", function(done){
+    let temp = getLocationFromTweets(["foo","bar","baz"]);
+    expect(typeof temp.chosenTweet).to.equal('object');
+    done();
+  });
+});
+
+
+
+
+
