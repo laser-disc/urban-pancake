@@ -44,16 +44,12 @@ module.exports.getLocation = function(newTruckObj) {
     
     for(var i=0; i<allTweets.length; i++){
       currentTweet = (allTweets[i]);
-      console.log("currentTweet", currentTweet);
-
       while(location===undefined){
         location = atFromSubroutine(currentTweet);
       }
-
       if(location==="notFound"){
         location = exactAddress(currentTweet);
       }
-
       // if location is notFound and we've gone through the entire array, reject the promise
       if(location ==="notFound" && i===allTweets.length-1){
         console.log("We have gone though all the tweets and could not find the current location.  getLocation rejected for ", newTruckObj.name);
