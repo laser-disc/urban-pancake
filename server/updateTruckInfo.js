@@ -29,7 +29,7 @@ module.exports.TruckObj = function(){
     chosenIndex : null,
     getLocationResults : { poi : null, address : null },
     geoInfo : null,
-    truckSchema : null
+    truck : null
   }
 };
 

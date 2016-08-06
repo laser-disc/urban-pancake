@@ -12,11 +12,8 @@ module.exports.getLocation = function (newTruckObj){
     
     for(var i=0; i<allTweets.length; i++){
       currentTweet = (allTweets[i]);
-      console.log('CurrentTweet', currentTweet);
       noPuncTweet = removePunctuation(currentTweet);
-      console.log("getLocation noPuncTweet", noPuncTweet);
       location = atFromSubroutine(noPuncTweet);
-      console.log("location", location);
       if(location){
         newTruckObj.chosenIndex = i;
         newTruckObj.getLocationResults.address = location;
