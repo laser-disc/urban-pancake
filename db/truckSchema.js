@@ -1,6 +1,4 @@
-const db = require('./config');
 const mongoose = require('mongoose');
-
 
 const truckSchema = new mongoose.Schema({
   name: String,
@@ -12,7 +10,7 @@ const truckSchema = new mongoose.Schema({
   location: {lat: Number, lng: Number}
 });
 
-let Truck = mongoose.model('Truck', truckSchema);
+const Truck = mongoose.model('Truck', truckSchema);
 
 
 module.exports = Truck;

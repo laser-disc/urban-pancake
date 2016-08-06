@@ -8,27 +8,32 @@ const updateTruckInfo = require('./updateTruckInfo');
 const getLocationFromTweets = require('./getLocationFromTweets');
 const getLocation = require('./getLocationFromTweets').getLocation;
 const createTruckWithGeoInfo = require('./updateTruckInfo').createTruckWithGeoInfo;
+const getTruckTwitterInfo = require('./updateTruckInfo').getTruckTwitterInfo;
+
 const createOrUpdateDB = require('./updateTruckInfo').createOrUpdateDB;
 
-let geoCoder = require('../client/utils/utils');
+let geoCoder = require('../utils/utils').geoCoder;
 
 updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
-  updateTruckInfo.createTruckWithTwitterInfo(foodTruck)
-  .then(function(allTweets){
-    console.log("inside request-handler about to send "+ allTweets.length + " tweets to getLocation");
-    return getLocation(allTweets);
+  getTruckTwitterInfo(foodTruck)
+  .then(function(newTruckObj){
+    console.log("inside request-handler about to send "+ newTruckObj.allTweetMessages.length + " tweets to getLocation");
+    return getLocation(newTruckObj);
   })
-  .then(function(results){
-    console.log("inside request-handler about to send "+ JSON.stringify(results) + " to geoCoder");
-    return geoCoder(results);
+  .then(function(newTruckObj){
+    console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.getLocationResults) + " to geoCoder");
+    return geoCoder(newTruckObj);
   })
-  .then(function(geoInfo){
-    console.log("inside request-handler about to send "+ JSON.stringify(geoInfo) + " to createTruckWithGeoInfo");
-    return createTruckWithGeoInfo(geoInfo);
+  .then(function(newTruckObj){
+    console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.geoInfo) + " to createTruckWithGeoInfo");
+    return createTruckWithGeoInfo(newTruckObj);
   })
-  .then(function(truck) {
-    console.log("inside request-handler about to send "+ truck.name + "s info to createOrUpdateDB");
-    return createOrUpdateDB(truck);
+  .then(function(newTruckObj) {
+    console.log("inside request-handler about to send "+ newTruckObj.name + "s info to createOrUpdateDB");
+    return createOrUpdateDB(newTruckObj);
+  })
+  .catch(function(e) {
+    console.log('Truck ', e.name, " could not be located, so new info for this truck was not stored in the database");
   });
 });
 
