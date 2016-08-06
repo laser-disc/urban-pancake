@@ -1,10 +1,8 @@
 let allTweets = require('./updateTruckInfo').allTweets;
 let addressValidator = require('address-validator');
 let Address = addressValidator.Address;
-let geoCoder = require('../client/utils/utils')
 
 module.exports = {};
-// module.exports.chosenIndex = undefined;
 
 module.exports.getLocation = function (newTruckObj){
   let allTweets = newTruckObj.allTweetMessages;
@@ -14,8 +12,11 @@ module.exports.getLocation = function (newTruckObj){
     
     for(var i=0; i<allTweets.length; i++){
       currentTweet = (allTweets[i]);
+      console.log('CurrentTweet', currentTweet);
       noPuncTweet = removePunctuation(currentTweet);
+      console.log("getLocation noPuncTweet", noPuncTweet);
       location = atFromSubroutine(noPuncTweet);
+      console.log("location", location);
       if(location){
         newTruckObj.chosenIndex = i;
         newTruckObj.getLocationResults.address = location;
@@ -24,8 +25,10 @@ module.exports.getLocation = function (newTruckObj){
     }
 
     if (newTruckObj.getLocationResults.poi || newTruckObj.getLocationResults.address) {
+      console.log("getLocation resolved ", newTruckObj.name);
       resolve(newTruckObj)
     } else {
+      console.log("getLocation rejected ", newTruckObj.name);
       reject(newTruckObj);
     }
 
@@ -46,6 +49,6 @@ module.exports.getLocation = function (newTruckObj){
         let location = arrTweet.slice((at+1), frm).join(' ');
         return location;
       };
-    };
-  })
+    }
+  });
 };

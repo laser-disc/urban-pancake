@@ -12,7 +12,7 @@ const getTruckTwitterInfo = require('./updateTruckInfo').getTruckTwitterInfo;
 
 const createOrUpdateDB = require('./updateTruckInfo').createOrUpdateDB;
 
-let geoCoder = require('../client/utils/utils');
+let geoCoder = require('./utils').geoCoder;
 
 updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
   getTruckTwitterInfo(foodTruck)
@@ -33,8 +33,6 @@ updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
     return createOrUpdateDB(newTruckObj);
   })
   .catch(function(e) {
-    let keys = Object.keys(e);
-
     console.log('Truck ', e.name, " could not be located, so new info for this truck was not stored in the database");
   });
 });
