@@ -11,7 +11,7 @@ const twitterInfo = secretKeys.twitterInfo || {
   bearer_token: process.env['TWITTERINFO_BEARER_TOKEN'],
 };
 const twitterClient = new Twitter(twitterInfo);
-let TruckObj = function(){
+let TruckObj = () => {
   return {
     name: null,
     allTweetObjs : [],
@@ -23,7 +23,7 @@ let TruckObj = function(){
   }
 };
 
-module.exports.getTruckTwitterInfo = function (foodTruck){
+module.exports.getTruckTwitterInfo = (foodTruck) => {
   console.log("&&&&&& BEGINNING OF MATTs CONSOLE.LOGS &&&&&&&");
   return new Promise((resolve, reject) => {
     let newTruckObj = new TruckObj();
@@ -34,7 +34,7 @@ module.exports.getTruckTwitterInfo = function (foodTruck){
       include_rts: true,
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
-    twitterClient.get('statuses/user_timeline', searchParams, function(error, tweets, response){
+    twitterClient.get('statuses/user_timeline', searchParams, (error, tweets, response) => {
       console.log("******If the following line throws an error, the Twitter Handle for the truck is not searchable on Twitter ABORT*****");
       console.log(tweets[0].text)
       if(error) {
@@ -48,7 +48,7 @@ module.exports.getTruckTwitterInfo = function (foodTruck){
   });
 };
 
-module.exports.createTruckWithGeoInfo = function(newTruckObj){
+module.exports.createTruckWithGeoInfo = (newTruckObj) => {
   console.log("inside createTruckWithGeoInfo, just received ", JSON.stringify(newTruckObj.geoInfo));
   return new Promise((resolve, reject) => {
     // send all tweet messages to getLocationFromTweets

@@ -19,7 +19,7 @@ const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF'];
 
 let geoCoder = require('../utils/utils').geoCoder;
 
-foodTrucks.forEach( (foodTruck) => {
+foodTrucks.forEach((foodTruck) => {
   getTruckTwitterInfo(foodTruck)
   .then( (newTruckObj) => {
     console.log("inside request-handler about to send "+ newTruckObj.allTweetMessages.length + " tweets to getLocation");

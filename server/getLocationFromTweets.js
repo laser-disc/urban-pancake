@@ -2,14 +2,14 @@ let allTweets = require('./updateTruckInfo').allTweets;
 let addressValidator = require('address-validator');
 let Address = addressValidator.Address;
 
-// function removePunctuation (strTweet) {
+// let removePunctuation = (strTweet) => {
 //   // Removes the punctuation from the current tweet so that it's easier to parse
 //   let removePunc = currentTweet.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
 //   let noPuncTweet = removePunc.replace(/\s{2,}/g," ");
 //   return noPuncTweet;
 // }
 
-function atFromSubroutine (strTweet) {
+let atFromSubroutine = (strTweet) => {
   let arrTweet = strTweet.split(" ");
   let at = arrTweet.indexOf('at');
   let frm = arrTweet.indexOf('from');
@@ -21,7 +21,7 @@ function atFromSubroutine (strTweet) {
   };
 }
 
-module.exports.getLocation = function (newTruckObj){
+module.exports.getLocation = (newTruckObj) => {
   let allTweets = newTruckObj.allTweetMessages;
   console.log("inside getLocation, just received "+allTweets.length+" tweets");
   return new Promise((resolve, reject) => {
