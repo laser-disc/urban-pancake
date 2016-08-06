@@ -19,17 +19,17 @@ const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF'];
 
 let geoCoder = require('../utils/utils').geoCoder;
 
-foodTrucks.forEach(function(foodTruck) {
+foodTrucks.forEach((foodTruck) => {
   getTruckTwitterInfo(foodTruck)
-  .then(function(newTruckObj) {
+  .then((newTruckObj) => {
     console.log("inside request-handler about to send "+ newTruckObj.allTweetMessages.length + " tweets to getLocation");
     return getLocation(newTruckObj);
   })
-  .then(function(newTruckObj) {
+  .then((newTruckObj) => {
     console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.getLocationResults) + " to geoCoder");
     return geoCoder(newTruckObj);
   })
-  .then(function(newTruckObj) {
+  .then((newTruckObj) => {
     console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.geoInfo) + " to createTruckWithGeoInfo");
     return createTruckWithGeoInfo(newTruckObj);
   })
@@ -42,13 +42,13 @@ foodTrucks.forEach(function(foodTruck) {
   });
 });
 
-module.exports = function(app) {
-  app.get("/API/fetchAll", function(req,res) {
+module.exports = (app) => {
+  app.get("/API/fetchAll", (req,res) => {
     Truck.find(function(err, trucks) {
       res.status(200).send(trucks);
     });
   });
-  app.get("/API/fetch", function(req,res) {
+  app.get("/API/fetch", (req,res) => {
     //handle must be different for test and client
     let handle = req.body.params ? req.body.params.handle : req.query.handle;
     Truck.findOne({handle: handle}, (err, truck) => {
