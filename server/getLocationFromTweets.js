@@ -2,14 +2,20 @@ let allTweets = require('./updateTruckInfo').allTweets;
 let addressValidator = require('address-validator');
 let Address = addressValidator.Address;
 
-module.exports = {};
+// let removePunctuation = (strTweet) => {
+//   // Removes the punctuation from the current tweet so that it's easier to parse
+//   let removePunc = currentTweet.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+//   let noPuncTweet = removePunc.replace(/\s{2,}/g," ");
+//   return noPuncTweet;
+// }
 
 // list of street types according to https://data.sfgov.org/Geographic-Locations-and-Boundaries/Street-Names/6d9h-4u5v/data#column-menu
 let streetTypes = ['aly','ave','blvd','blvd north','blvd south','cir',
   'ct','dr','expy','hl','hwy','ln','loop','park','path','pl','plz','ramp',
  'rd','row','st','stps','stwy','ter','tunl','walk','way'];
 
-// sample input: "We are serving Lunch at 1st st and Howard st from 11:15-1:45." output: "1st st and Howard st"  
+
+// sample input: "We are serving Lunch at 1st st and Howard st from 11:15-1:45." output: "1st st and Howard st"
 let atFromSubroutine = function(strTweet) {
   let arrTweet = strTweet.split(" ");
   let at = arrTweet.indexOf('at');
@@ -23,7 +29,6 @@ let atFromSubroutine = function(strTweet) {
     return location;
   };
 };
-
 
 let intersection = function(strTweet) {
   let words = strTweet.split(' and ');
@@ -50,8 +55,7 @@ let intersection = function(strTweet) {
   return firstStreet && secondStreet ? (firstStreet + ' and ' + secondStreet) : 'notFound';
 };
 
-
-// this function looks for an exact address. input: "Our trucks will be at 225 Bush" output: "225 Bush" 
+// this function looks for an exact address. input: "Our trucks will be at 225 Bush" output: "225 Bush"
 let exactAddress = function (strTweet) {
   let wordAfterNum, punc, street, location, num;
   let words = strTweet.split(' ');
@@ -74,7 +78,7 @@ module.exports.getLocation = function(newTruckObj) {
   console.log("inside getLocation, just received "+allTweets.length+" tweets");
   return new Promise(function (resolve, reject) {
     let location, currentTweet, noPuncTweet;
-    
+
     for(var i=0; i<allTweets.length; i++){
       currentTweet = (allTweets[i]);
       while(location===undefined){

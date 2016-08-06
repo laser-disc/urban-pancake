@@ -8,7 +8,6 @@ const GMAP_API_KEY = secretKeys.GMAP_API_KEY || process.env['GMAP_API_KEY'];
 
 module.exports = {};
 module.exports.geoCoder = function(newTruckObj) {
-
   return new Promise(function(resolve, reject) {
     console.log("inside the GeoCoder, just received " + JSON.stringify(newTruckObj.getLocationResults));
     let query = newTruckObj.getLocationResults.address || newTruckObj.getLocationResults.poi;
