@@ -11,7 +11,8 @@ const twitterInfo = secretKeys.twitterInfo || {
   bearer_token: process.env['TWITTERINFO_BEARER_TOKEN'],
 };
 const twitterClient = new Twitter(twitterInfo);
-let TruckObj = () => {
+
+let TruckObj = function() {
   return {
     name: null,
     allTweetObjs : [],
@@ -23,9 +24,9 @@ let TruckObj = () => {
   }
 };
 
-module.exports.getTruckTwitterInfo = (foodTruck) => {
+module.exports.getTruckTwitterInfo = function(foodTruck) {
   console.log("&&&&&& BEGINNING OF MATTs CONSOLE.LOGS &&&&&&&");
-  return new Promise((resolve, reject) => {
+  return new Promise(function(resolve, reject) {
     let newTruckObj = new TruckObj();
     newTruckObj.name = foodTruck;
     let searchParams = {
@@ -34,7 +35,7 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
       include_rts: true,
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
-    twitterClient.get('statuses/user_timeline', searchParams, (error, tweets, response) => {
+    twitterClient.get('statuses/user_timeline', searchParams, function(error, tweets, response) {
       console.log("******If the following line throws an error, the Twitter Handle for the truck is not searchable on Twitter ABORT*****");
       console.log(tweets[0].text)
       if(error) {
@@ -48,9 +49,9 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
   });
 };
 
-module.exports.createTruckWithGeoInfo = (newTruckObj) => {
+module.exports.createTruckWithGeoInfo = function(newTruckObj) {
   console.log("inside createTruckWithGeoInfo, just received ", JSON.stringify(newTruckObj.geoInfo));
-  return new Promise((resolve, reject) => {
+  return new Promise( function (resolve, reject) {
     // send all tweet messages to getLocationFromTweets
     let index = newTruckObj.chosenIndex;
     let tweets = newTruckObj.allTweetObjs;
@@ -68,11 +69,11 @@ module.exports.createTruckWithGeoInfo = (newTruckObj) => {
   });
 };
 
-module.exports.createOrUpdateDB = (newTruckObj) => {
+module.exports.createOrUpdateDB = function(newTruckObj) {
   console.log("inside createOrUpdateDB, just received "+ newTruckObj.name+" info");
-  return new Promise ((resolve,reject) => {
+  return new Promise (function(resolve,reject) {
     // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
-    Truck.find({handle: newTruckObj.truck.handle}, (err, trucks) => {
+    Truck.find({handle: newTruckObj.truck.handle}, function (err, trucks) {
       //  if no matches are found, it will return an empty array
       if(trucks.length === 0) {
         // and then we create a new document in the db for that truck
@@ -81,9 +82,12 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
           newTruckObj.truck, {upsert: true},
           (err, response) => err ? reject(err) : resolve(trucks)
         );
+        console.log(newTruckObj.name + "created");
       } else {
         // removes the old truck document
         trucks[0].remove();
+        console.log(newTruckObj.name + "updated")
+        // saves a new truck document
         newTruckObj.truck.save((err, returnedTruck) => err ? reject(err) : resolve(trucks));
       }
     });
