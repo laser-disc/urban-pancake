@@ -12,19 +12,25 @@ const getTruckTwitterInfo = require('./updateTruckInfo').getTruckTwitterInfo;
 
 const createOrUpdateDB = require('./updateTruckInfo').createOrUpdateDB;
 
+// make sure to add the exact Twitter handle minus the @
+const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck'];
+const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF'];
+// Don't try to get Twitter info from these trucks - you will FAIL
+// badFoodTrucks equalz ['senorsisig'];
+
 let geoCoder = require('../utils/utils').geoCoder;
 
-updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
+foodTrucks.forEach(function(foodTruck) {
   getTruckTwitterInfo(foodTruck)
-  .then(function(newTruckObj){
+  .then(function(newTruckObj) {
     console.log("inside request-handler about to send "+ newTruckObj.allTweetMessages.length + " tweets to getLocation");
     return getLocation(newTruckObj);
   })
-  .then(function(newTruckObj){
+  .then(function(newTruckObj) {
     console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.getLocationResults) + " to geoCoder");
     return geoCoder(newTruckObj);
   })
-  .then(function(newTruckObj){
+  .then(function(newTruckObj) {
     console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.geoInfo) + " to createTruckWithGeoInfo");
     return createTruckWithGeoInfo(newTruckObj);
   })
@@ -38,12 +44,12 @@ updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
 });
 
 module.exports = function(app) {
-  app.get("/API/fetchAll", function(req,res){
-    Truck.find(function(err, trucks){
+  app.get("/API/fetchAll", function(req,res) {
+    Truck.find(function(err, trucks) {
       res.status(200).send(trucks);
     });
   });
-  app.get("/API/fetch", function(req,res){
+  app.get("/API/fetch", function(req,res) {
     //handle must be different for test and client
     let handle = req.body.params ? req.body.params.handle : req.query.handle;
 

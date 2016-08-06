@@ -5,7 +5,6 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpack = require('webpack');
 const config = require('../webpack.dev.config');
-
 const compiler = webpack(config);
 const app = express();
 const router = express.Router();
@@ -26,14 +25,14 @@ if (process.env.NODE_ENV === 'development') {
 app.use(bodyParser.json());
 app.use(router);
 
-router.get('/', (req, res) => {
+router.get('/', function(req, res) {
   res.sendFile(path.resolve(__dirname, './../client/index.html'));
   console.log('connecting to root...');
 });
 
 require('./request-handler')(app);
 
-app.listen(process.env.PORT || 8000, () => {
+app.listen(process.env.PORT || 8000, function() {
   console.log('App listening on port 8000');
 });
 

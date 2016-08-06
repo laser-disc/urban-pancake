@@ -5,7 +5,7 @@ let Address = addressValidator.Address;
 module.exports = {};
 
 // sample input: "We are serving Lunch at 1st st and Howard st from 11:15-1:45." output: "1st st and Howard st"  
-let atFromSubroutine = function (strTweet) {
+let atFromSubroutine = function(strTweet) {
   let arrTweet = strTweet.split(" ");
   let at = arrTweet.indexOf('at');
   let frm = arrTweet.indexOf('from');
@@ -20,7 +20,7 @@ let atFromSubroutine = function (strTweet) {
 };
 
 // this function looks for an exact address. input: "Our trucks will be at 225 Bush" output: "225 Bush" 
-let exactAddress = function (strTweet){
+let exactAddress = function (strTweet) {
   let wordAfterNum, punc, street, location, num;
   let words = strTweet.split(' ');
   for(let i=0; i<words.length; i++){
@@ -36,10 +36,10 @@ let exactAddress = function (strTweet){
   return location ? location : "notFound";
 }
 
-module.exports.getLocation = function (newTruckObj){
+module.exports.getLocation = function(newTruckObj) {
   let allTweets = newTruckObj.allTweetMessages;
   console.log("inside getLocation, just received "+allTweets.length+" tweets");
-  return new Promise((resolve, reject) => {
+  return new Promise(function (resolve, reject) {
     let location, currentTweet, noPuncTweet;
     
     for(var i=0; i<allTweets.length; i++){
