@@ -9,7 +9,6 @@ const getLocationFromTweets = require('./getLocationFromTweets');
 const getLocation = require('./getLocationFromTweets').getLocation;
 const createTruckWithGeoInfo = require('./updateTruckInfo').createTruckWithGeoInfo;
 const getTruckTwitterInfo = require('./updateTruckInfo').getTruckTwitterInfo;
-
 const createOrUpdateDB = require('./updateTruckInfo').createOrUpdateDB;
 
 // make sure to add the exact Twitter handle minus the @
@@ -20,40 +19,39 @@ const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF'];
 
 let geoCoder = require('../utils/utils').geoCoder;
 
-foodTrucks.forEach(function(foodTruck) {
+foodTrucks.forEach((foodTruck) => {
   getTruckTwitterInfo(foodTruck)
-  .then(function(newTruckObj) {
+  .then((newTruckObj) => {
     console.log("inside request-handler about to send "+ newTruckObj.allTweetMessages.length + " tweets to getLocation");
     return getLocation(newTruckObj);
   })
-  .then(function(newTruckObj) {
+  .then((newTruckObj) => {
     console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.getLocationResults) + " to geoCoder");
     return geoCoder(newTruckObj);
   })
-  .then(function(newTruckObj) {
+  .then((newTruckObj) => {
     console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.geoInfo) + " to createTruckWithGeoInfo");
     return createTruckWithGeoInfo(newTruckObj);
   })
-  .then(function(newTruckObj) {
+  .then((newTruckObj) => {
     console.log("inside request-handler about to send "+ newTruckObj.name + "s info to createOrUpdateDB");
     return createOrUpdateDB(newTruckObj);
   })
-  .catch(function(e) {
+  .catch((e) => {
     console.log('Truck ', e.name, " could not be located, so new info for this truck was not stored in the database");
   });
 });
 
-module.exports = function(app) {
-  app.get("/API/fetchAll", function(req,res) {
+module.exports = (app) => {
+  app.get("/API/fetchAll", (req,res) => {
     Truck.find(function(err, trucks) {
       res.status(200).send(trucks);
     });
   });
-  app.get("/API/fetch", function(req,res) {
+  app.get("/API/fetch", (req,res) => {
     //handle must be different for test and client
     let handle = req.body.params ? req.body.params.handle : req.query.handle;
-
-    Truck.findOne({handle: handle}, function(err, truck){
+    Truck.findOne({handle: handle}, (err, truck) => {
         res.status(200).send(truck);
     })
   });

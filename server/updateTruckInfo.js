@@ -11,6 +11,7 @@ const twitterInfo = secretKeys.twitterInfo || {
   bearer_token: process.env['TWITTERINFO_BEARER_TOKEN'],
 };
 const twitterClient = new Twitter(twitterInfo);
+
 let TruckObj = function() {
   return {
     name: null,
