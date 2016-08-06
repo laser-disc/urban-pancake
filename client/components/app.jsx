@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import ReduxPromise from 'redux-promise';
-import rootReducer from '../reducers/reducers.js';
+import rootReducer from '../reducers/reducers';
 import TruckList from '../containers/TruckList.jsx';
 import GoogleMap from '../containers/GoogleMap.jsx';
 

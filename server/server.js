@@ -5,7 +5,6 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpack = require('webpack');
 const config = require('../webpack.dev.config');
-
 const compiler = webpack(config);
 const app = express();
 const router = express.Router();
