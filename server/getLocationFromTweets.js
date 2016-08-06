@@ -2,14 +2,12 @@ let allTweets = require('./updateTruckInfo').allTweets;
 let addressValidator = require('address-validator');
 let Address = addressValidator.Address;
 
-module.exports = {};
-
-function removePunctuation (strTweet) {
-  // Removes the punctuation from the current tweet so that it's easier to parse
-  let removePunc = currentTweet.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
-  let noPuncTweet = removePunc.replace(/\s{2,}/g," ");
-  return noPuncTweet;
-}
+// function removePunctuation (strTweet) {
+//   // Removes the punctuation from the current tweet so that it's easier to parse
+//   let removePunc = currentTweet.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+//   let noPuncTweet = removePunc.replace(/\s{2,}/g," ");
+//   return noPuncTweet;
+// }
 
 function atFromSubroutine (strTweet) {
   let arrTweet = strTweet.split(" ");
@@ -29,8 +27,9 @@ module.exports.getLocation = function (newTruckObj){
   return new Promise((resolve, reject) => {
     let location = null;
 
+    // location = atFromSubroutine(removePunctuation(allTweets[i]));
     for(var i=0; i<allTweets.length; i++){
-      location = atFromSubroutine(removePunctuation(allTweets[i]));
+      location = atFromSubroutine(allTweets[i]);
       if(location){
         newTruckObj.chosenIndex = i;
         newTruckObj.getLocationResults.address = location;

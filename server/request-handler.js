@@ -12,9 +12,15 @@ const getTruckTwitterInfo = require('./updateTruckInfo').getTruckTwitterInfo;
 
 const createOrUpdateDB = require('./updateTruckInfo').createOrUpdateDB;
 
+// make sure to add the exact Twitter handle minus the @
+const foodTrucks = ['JapaCurry'];
+const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF'];
+// Don't try to get Twitter info from these trucks - you will FAIL
+// badFoodTrucks equalz ['senorsisig'];
+
 let geoCoder = require('../utils/utils').geoCoder;
 
-updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
+foodTrucks.forEach( (foodTruck) => {
   getTruckTwitterInfo(foodTruck)
   .then(function(newTruckObj){
     console.log("inside request-handler about to send "+ newTruckObj.allTweetMessages.length + " tweets to getLocation");

@@ -8,16 +8,9 @@ if(!process.env['TWITTERINFO_CONSUMER_KEY']) {
 const twitterInfo = secretKeys.twitterInfo || {
   consumer_key: process.env['TWITTERINFO_CONSUMER_KEY'],
   consumer_secret: process.env['TWITTERINFO_CONSUMER_SECRET'],
-  bearer_token: process.env['TWITTERINFO_BEARER_TOKEN']
+  bearer_token: process.env['TWITTERINFO_BEARER_TOKEN'],
 };
 const twitterClient = new Twitter(twitterInfo);
-
-module.exports = {};
-module.exports.foodTrucks = ['JapaCurry','CurryUpNow', 'chairmantruck']; // make sure to add the exact Twitter handle minus the @
-module.exports.foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF'];
-// Don't try to get Twitter info from these trucks - you will FAIL
-// badFoodTrucks equalz ['senorsisig'];
-
 let TruckObj = function(){
   return {
     name: null,
@@ -38,21 +31,18 @@ module.exports.getTruckTwitterInfo = function (foodTruck){
     let searchParams = {
       screen_name: foodTruck,
       exclude_replies: true,
-      include_rts: true
+      include_rts: true,
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
     twitterClient.get('statuses/user_timeline', searchParams, function(error, tweets, response){
       console.log("******If the following line throws an error, the Twitter Handle for the truck is not searchable on Twitter ABORT*****");
       console.log(tweets[0].text)
-
       if(error) {
-        console.log("error ", error);
+        console.log("error", error);
         reject(error);
       }
       newTruckObj.allTweetObjs = tweets;
-      tweets.forEach( (tweet) => {
-        newTruckObj.allTweetMessages.push(tweet.text);
-      });
+      tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
       resolve(newTruckObj);
     });
   });
@@ -72,7 +62,7 @@ module.exports.createTruckWithGeoInfo = function(newTruckObj){
       message: tweets[index].text,
       timeStamp: tweets[index].created_at,
       imageUrl: tweets[index].user.profile_image_url,
-      location: newTruckObj.geoInfo
+      location: newTruckObj.geoInfo,
     });
     resolve(newTruckObj);
   });
@@ -83,7 +73,8 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
   return new Promise ((resolve,reject) => {
     // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
     Truck.find({handle: newTruckObj.truck.handle}, (err, trucks) => {
-      if(trucks.length === 0) {  //  if no matches are found, it will return an empty array
+      //  if no matches are found, it will return an empty array
+      if(trucks.length === 0) {
         // and then we create a new document in the db for that truck
         Truck.findOneAndUpdate(
           {handle: newTruckObj.truck.handle},
@@ -91,7 +82,8 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
           (err, response) => err ? reject(err) : resolve(trucks)
         );
       } else {
-        trucks[0].remove(); // removes the old truck document
+        // removes the old truck document
+        trucks[0].remove();
         newTruckObj.truck.save((err, returnedTruck) => err ? reject(err) : resolve(trucks));
       }
     });
