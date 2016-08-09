@@ -21,7 +21,6 @@ let atFromSubroutine = function(strTweet) {
   let at = arrTweet.indexOf('at');
   let frm = arrTweet.indexOf('from');
   if ((at === -1) || (frm === -1)) {
-    // return null;
     return "notFound";
   } else {
     let location = arrTweet.slice((at+1), frm).join(' ');
@@ -32,7 +31,9 @@ let atFromSubroutine = function(strTweet) {
 
 let intersection = function(strTweet) {
   let words = strTweet.split(' and ');
-  if(words[0]===strTweet) return 'notFound';
+  if(words[0]===strTweet){
+    return 'notFound';
+  }
   let beforeStr = words[0].trim().split(' ');
   let afterStr = words[1].trim().split(' ');
   let firstStreet = beforeStr[beforeStr.length-1];
@@ -49,9 +50,6 @@ let intersection = function(strTweet) {
       break;
     }
   }
-  // if(firstSteet ==="us" || firstStreet==="enter" || secondStreet==="us" || secondStreet==="enter"){
-  //   return 'notFound';
-  // }
   return firstStreet && secondStreet ? (firstStreet + ' and ' + secondStreet) : 'notFound';
 };
 
