@@ -16,7 +16,7 @@ class Map extends Component {
       <GoogleMapLoader
         containerElement={ <div style={{height: '100%', width: '100%'}} /> }
         googleMapElement={
-          <GoogleMap defaultZoom={14} defaultCenter={{lat: 37.7874707, lng: -122.4019886}}>
+          <GoogleMap defaultZoom={12} defaultCenter={{lat: 37.7678011, lng: -122.4443519}}>
             {this.props.trucks.map(truck => this.renderMarkers(truck))}
           </GoogleMap>
         }

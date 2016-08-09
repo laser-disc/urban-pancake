@@ -11,7 +11,10 @@
     "webdev": "webpack-dev-server --watch --progress --hot --inline",
     "test": "mocha test/helpers/browser.js test/**/*.spec.js",
     "start": "webpack -p && node server/server.js",
+    "testsubs": "mocha test/utils/locationSubroutines.spec.js",
+    "testalgorithm": "mocha test/server/extractAddress.spec.js",
     "lint": "eslint ./client/* ./db/* ./server/*"
+
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,7 @@
   "author": "",
   "homepage": "https://github.com/laser-disc/urban-pancake#readme",
   "dependencies": {
+    "address-validator": "^0.2.2",
     "async": "^2.0.1",
     "axios": "^0.13.1",
     "body-parser": "^1.15.2",
@@ -27,6 +31,7 @@
     "http": "0.0.0",
     "mongodb": "^2.2.5",
     "mongoose": "^4.5.7",
+    "promise": "^7.1.1",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-google-maps": "^4.11.0",

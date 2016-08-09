@@ -2,69 +2,57 @@
 
 const db = require('../db/config');
 const mongoose = require('mongoose');
-let secretKeys = null;
-if(!process.env['MONGOOSE_URI']) {
-  secretKeys = require('../env/config');
-}
-const GMAP_API_KEY = secretKeys.GMAP_API_KEY || process.env['GMAP_API_KEY']
 const https = require('https')
 const Truck = require('../db/truckSchema');
 const updateTruckInfo = require('./updateTruckInfo');
+const getLocationFromTweets = require('./getLocationFromTweets');
+const getLocation = require('./getLocationFromTweets').getLocation;
+const createTruckWithGeoInfo = require('./updateTruckInfo').createTruckWithGeoInfo;
+const getTruckTwitterInfo = require('./updateTruckInfo').getTruckTwitterInfo;
+const createOrUpdateDB = require('./updateTruckInfo').createOrUpdateDB;
 
+// make sure to add the exact Twitter handle minus the @
+const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic','finsonthehoof', 'chowdermobile'];
+const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF'];
+// Don't try to get Twitter info from these trucks - you will FAIL
+// badFoodTrucks equalz ['senorsisig'];
 
-updateTruckInfo.foodTrucks.forEach( (foodTruck) => {
-  updateTruckInfo.createTruckWithTwitterInfo(foodTruck)
-  .then(function(truck) {
-    updateTruckInfo.createOrUpdateDB(truck);
+let geoCoder = require('../utils/utils').geoCoder;
+
+foodTrucks.forEach((foodTruck) => {
+  getTruckTwitterInfo(foodTruck)
+  .then((newTruckObj) => {
+    console.log("inside request-handler about to send "+ newTruckObj.allTweetMessages.length + " tweets to getLocation");
+    return getLocation(newTruckObj);
+  })
+  .then((newTruckObj) => {
+    console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.getLocationResults) + " to geoCoder");
+    return geoCoder(newTruckObj);
+  })
+  .then((newTruckObj) => {
+    console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.geoInfo) + " to createTruckWithGeoInfo");
+    return createTruckWithGeoInfo(newTruckObj);
+  })
+  .then((newTruckObj) => {
+    console.log("inside request-handler about to send "+ newTruckObj.name + "s info to createOrUpdateDB");
+    return createOrUpdateDB(newTruckObj);
+  })
+  .catch((e) => {
+    console.log('Truck ', e.name, " could not be located, so new info for this truck was not stored in the database");
   });
 });
 
-module.exports = function(app) {
-  app.get("/API/fetchAll", function(req,res){
-    Truck.find(function(err, trucks){
+module.exports = (app) => {
+  app.get("/API/fetchAll", (req,res) => {
+    Truck.find(function(err, trucks) {
       res.status(200).send(trucks);
     });
   });
-  app.get("/API/fetch", function(req,res){
+  app.get("/API/fetch", (req,res) => {
     //handle must be different for test and client
     let handle = req.body.params ? req.body.params.handle : req.query.handle;
-
-    Truck.findOne({handle: handle}, function(err, truck){
+    Truck.findOne({handle: handle}, (err, truck) => {
         res.status(200).send(truck);
     })
-  })
-  app.get("/API/address", function(req,res){
-    var intersection = encodeURIComponent(req.query.intersection)
-    let gMapUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + intersection +"&key=" + GMAP_API_KEY;
-    https.get(gMapUrl, function(response){
-      let data = '';
-      response.on('data', (chunk)=> data+=chunk)
-      response.on('end', function(){
-        let payload = JSON.parse(data);
-        if(payload.results[0]){
-          res.send(payload.results[0].geometry.location)
-        }
-        else{
-          res.send("null")
-        }
-      })
-    })
-  })
-  app.get("/API/poi", function(req,res){
-    var poi = encodeURIComponent(req.query.poi)
-    let gMapUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=37.7756, -122.4193&radius=5000&name=" + poi + "&key=" + GMAP_API_KEY;
-    https.get(gMapUrl, function(response){
-      let data = '';
-      response.on('data', (chunk)=> data+=chunk)
-      response.on('end', function(){
-        let payload = JSON.parse(data);
-        if(payload.results[0]){
-          res.send(payload.results[0].geometry.location)
-        }
-        else{
-          res.send("null")
-        }
-      })
-    })
-  })
-}
+  });
+};
