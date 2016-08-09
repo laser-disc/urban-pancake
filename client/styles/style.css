@@ -1,0 +1,28 @@
+.TruckAvatar{
+  height:70px;
+  width: 70px;
+  float: left;
+  padding-right: 10px;
+
+}
+.TruckName{
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+.TruckDescription{
+  font-size: 0.75em;
+  font-style: italic;
+  padding-top: 0px;
+  margin-top: 0px
+}
+.tweet {
+  padding: 25px;
+  margin-bottom: 25px;
+  background-color: #E3E5E7;
+  border-radius: 50%;
+
+}
+
+.TruckTweet{
+  font-family: Helvetica, Arial, sans-serif;
+}

@@ -1,17 +1,16 @@
-# urban-pancake
+# Urban Pancake
 
-Food Truck
-  * location data
-  * Pull food truck info from Twitter
-  * Display locations on map
-  * Directions
+Quick Start:
+  * Find your future meal
+  * View local food trucks
 
-Builders - Gulp/Webpack
-Style Guides - MKS, Karma
-*Front-End - Benji.js
-Server - Node/Express
-Tests - Karma/?  Mocha/Chai
-DB - MySql/neo4J
-APIs - Twitter/Google Maps/Yelp
-Deployment - Heroku
 
+Tech Stack:
+  * Builders - Gulp/Webpack
+  * Style Guides - AirBnB, Karma
+  * Front-End - React/Redux
+  * Server - Node/Express
+  * Tests - Mocha/Chai/Enzyme
+  * DB - MongoDB / Mongoose
+  * APIs - Twitter/Google Maps/Yelp
+  * Deployment - Heroku

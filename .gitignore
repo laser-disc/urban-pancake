@@ -1,1 +1,6 @@
 node_modules
+dist
+npm-debug.log
+
+## API keys
+/env/config.js
