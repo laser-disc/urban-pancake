@@ -10,7 +10,12 @@ class Map extends Component {
   renderMarkers(truck) {
     const date = new Date;
     const index = date.getDay();
-    const position = truck.schedule[index];
+    const dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const tweetDay = truck.timeStamp.slice(0, 4);
+    const tweetIndex = dayOfWeek.indexOf(tweetDay);
+    console.log(dayOfWeek[index] === tweetDay);
+    console.log('OVER HERE',tweetDay, tweetIndex, dayOfWeek[2])
+    const position = truck.schedule[index].closed ? {lat: null, lng: null} : truck.schedule[index];
     console.log('INSIDE GOOGLEMAP.JSX',index, position);
     return <Marker
       key={truck._id} position={{lat: position.lat, lng: position.lng}}

@@ -51,7 +51,6 @@ module.exports.getTruckTwitterInfo = function(foodTruck) {
   });
 };
 
-
 module.exports.createTruckWithGeoInfo = function(newTruckObj) {
   console.log("inside createTruckWithGeoInfo, just received ", JSON.stringify(newTruckObj.geoInfo /*.geoInfo */ ));
   return new Promise( function (resolve, reject) {
@@ -59,8 +58,6 @@ module.exports.createTruckWithGeoInfo = function(newTruckObj) {
     let index = newTruckObj.chosenIndex;
     let tweets = newTruckObj.allTweetObjs;
 
-    console.log('HELLO WORLD', truckSchedules, tweets[0].user.name.length, tweets[0].user.name);
-    console.log('******* fuck off world *********', truckSchedules[tweets[0].user.name]);
     newTruckObj.truck = new Truck({
       name: tweets[0].user.name,
       handle: '@'+tweets[0].user.screen_name,
@@ -89,11 +86,11 @@ module.exports.createOrUpdateDB = function(newTruckObj) {
           newTruckObj.truck, {upsert: true},
           (err, resp) => err ? reject(err) : resolve(resp)
         );
-        console.log(newTruckObj.name + "created");
+        console.log(newTruckObj.name + " created");
       } else {
         // removes the old truck document
         trucks[0].remove();
-        console.log(newTruckObj.name + "updated")
+        console.log(newTruckObj.name + " updated")
         // saves a new truck document
         newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
       }
