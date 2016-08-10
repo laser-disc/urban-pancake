@@ -74,5 +74,5 @@ module.exports.truckSchedules = {
       /*friday:*/ {lat: 37.788556, lng: -122.396031, closed: false},
       /*saturday:*/ {lat: 37., lng: -122., closed: true},
     ],
-  
+
 }
