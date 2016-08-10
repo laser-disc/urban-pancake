@@ -48,48 +48,71 @@ module.exports.getTruckTwitterInfo = function(foodTruck) {
     });
   });
 };
+const schedule = [
+  /*sunday:*/ {lat: 37, lng: -122, closed: true},
+  /*monday:*/ {lat: 37.8, lng: -122.4, closed: false},
+  /*tuesday:*/ {lat: 37.78, lng: -122.38, closed: false},
+  /*wednesday:*/ {lat: 37.76, lng: -122.36, closed: false},
+  /*thursday:*/ {lat: 37.74, lng: -122.34, closed: false},
+  /*friday:*/ {lat: 37.72, lng: -122.32, closed: false},
+  /*saturday:*/ {lat: 37, lng: -122, closed: true},
+];
 
 module.exports.createTruckWithGeoInfo = function(newTruckObj) {
-  console.log("inside createTruckWithGeoInfo, just received ", JSON.stringify(newTruckObj.geoInfo));
+  // console.log("inside createTruckWithGeoInfo, just received ", JSON.stringify(newTruckObj /*.geoInfo */ ));
   return new Promise( function (resolve, reject) {
     // send all tweet messages to getLocationFromTweets
-    let index = newTruckObj.chosenIndex;
+    // let index = newTruckObj.chosenIndex;
     let tweets = newTruckObj.allTweetObjs;
 
     newTruckObj.truck = new Truck({
-      name: tweets[index].user.name,
-      handle: '@'+tweets[index].user.screen_name,
-      description: tweets[index].user.description,
-      message: tweets[index].text,
-      timeStamp: tweets[index].created_at,
-      imageUrl: tweets[index].user.profile_image_url,
-      location: newTruckObj.geoInfo,
+      name: tweets[0].user.name,
+      handle: '@'+tweets[0].user.screen_name,
+      description: tweets[0].user.description,
+      message: tweets[0].text,
+      timeStamp: tweets[0].created_at,
+      imageUrl: tweets[0].user.profile_image_url,
+      yelpId: 'stringy',
+      // location: newTruckObj.geoInfo
+      // schedule: schedule,
     });
     resolve(newTruckObj);
   });
 };
 
 module.exports.createOrUpdateDB = function(newTruckObj) {
-  console.log("inside createOrUpdateDB, just received "+ newTruckObj.name+" info");
+  console.log("inside createOrUpdateDB, just received "+ newTruckObj.truck.handle +" info");
   return new Promise (function(resolve,reject) {
     // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
-    Truck.find({handle: newTruckObj.truck.handle}, function (err, trucks) {
+    // Truck.find({handle: newTruckObj.truck.handle}, function (err, trucks) {
       //  if no matches are found, it will return an empty array
-      if(trucks.length === 0) {
+      // if(trucks.length === 0) {
         // and then we create a new document in the db for that truck
         Truck.findOneAndUpdate(
           {handle: newTruckObj.truck.handle},
-          newTruckObj.truck, {upsert: true},
-          (err, response) => err ? reject(err) : resolve(trucks)
+          { $set: {
+            newTruckObj.truck.message: tweets[0].text,
+            newTruckObj.truck.timeStamp: tweets[0].created_at,
+            // newTruckObj.truck.location: newTruckObj.geoInfo,
+          } }, {upsert: true},
+          // console.log(newTruckObj.name + "updated")
+          (err, resp) => err ? reject(err) : resolve(resp)
         );
-        console.log(newTruckObj.name + "created");
-      } else {
+        // console.log(newTruckObj.name + "created");
+      // } else {
         // removes the old truck document
-        trucks[0].remove();
-        console.log(newTruckObj.name + "updated")
+        // trucks[0].remove();
         // saves a new truck document
-        newTruckObj.truck.save((err, returnedTruck) => err ? reject(err) : resolve(trucks));
-      }
-    });
+        // newTruckObj.truck.save((err, returnedTruck) => err ? reject(err) : resolve(trucks));
+      // }
+    // });
   });
 };
+
+
+
+// Truck.findOneAndUpdate(
+//   {handle: newTruckObj.truck.handle},
+//   { $set: { schedule: schedule } }, {upsert: true},
+//   (err, resp) => err ? reject(err) : resolve(resp)
+// );

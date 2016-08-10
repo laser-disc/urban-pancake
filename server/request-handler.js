@@ -21,16 +21,16 @@ let geoCoder = require('../utils/utils').geoCoder;
 
 foodTrucks.forEach((foodTruck) => {
   getTruckTwitterInfo(foodTruck)
+  // .then((newTruckObj) => {
+  //   console.log("inside request-handler about to send "+ newTruckObj.allTweetMessages.length + " tweets to getLocation");
+  //   return getLocation(newTruckObj);
+  // })
+  // .then((newTruckObj) => {
+  //   console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.getLocationResults) + " to geoCoder");
+  //   return geoCoder(newTruckObj);
+  // })
   .then((newTruckObj) => {
-    console.log("inside request-handler about to send "+ newTruckObj.allTweetMessages.length + " tweets to getLocation");
-    return getLocation(newTruckObj);
-  })
-  .then((newTruckObj) => {
-    console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.getLocationResults) + " to geoCoder");
-    return geoCoder(newTruckObj);
-  })
-  .then((newTruckObj) => {
-    console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.geoInfo) + " to createTruckWithGeoInfo");
+    // console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj) + " to createTruckWithGeoInfo");
     return createTruckWithGeoInfo(newTruckObj);
   })
   .then((newTruckObj) => {
