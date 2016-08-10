@@ -5,7 +5,7 @@ let secretKeys = null;
 if(!process.env['TWITTERINFO_CONSUMER_KEY']) {
   secretKeys = require('../env/config');
 }
-const twitterInfo = secretKeys.twitterInfo || {
+const twitterInfo = secretKeys ? secretKeys.twitterInfo : {
   consumer_key: process.env['TWITTERINFO_CONSUMER_KEY'],
   consumer_secret: process.env['TWITTERINFO_CONSUMER_SECRET'],
   bearer_token: process.env['TWITTERINFO_BEARER_TOKEN'],
