@@ -6,37 +6,25 @@ const https = require('https')
 const Truck = require('../db/truckSchema');
 const updateTruckInfo = require('./updateTruckInfo');
 const getLocationFromTweets = require('./getLocationFromTweets');
-const getLocation = require('./getLocationFromTweets').getLocation;
-const createTruckWithGeoInfo = require('./updateTruckInfo').createTruckWithGeoInfo;
-const getTruckTwitterInfo = require('./updateTruckInfo').getTruckTwitterInfo;
-const createOrUpdateDB = require('./updateTruckInfo').createOrUpdateDB;
+const {getLocation} = require('./getLocationFromTweets');
+const {createTruckWithGeoInfo} = require('./updateTruckInfo');
+const {getTruckTwitterInfo} = require('./updateTruckInfo');
+const {createOrUpdateDB} = require('./updateTruckInfo');
+const {geoCoder} = require('../utils/utils');
 
 // make sure to add the exact Twitter handle minus the @
 const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic','finsonthehoof', 'chowdermobile'];
-const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF']; //TruckStopSF
+const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF', 'mvblfeast', 'somastreatfoodpark', 'truckstopSF'];
 // Don't try to get Twitter info from these trucks - you will FAIL
 // badFoodTrucks equalz ['senorsisig'];
 
-let geoCoder = require('../utils/utils').geoCoder;
 
 foodTrucks.forEach((foodTruck) => {
   getTruckTwitterInfo(foodTruck)
-  .then((newTruckObj) => {
-    console.log("inside request-handler about to send "+ newTruckObj.allTweetMessages.length + " tweets to getLocation");
-    return getLocation(newTruckObj);
-  })
-  .then((newTruckObj) => {
-    console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.getLocationResults) + " to geoCoder");
-    return geoCoder(newTruckObj);
-  })
-  .then((newTruckObj) => {
-    console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.geoInfo) + " to createTruckWithGeoInfo");
-    return createTruckWithGeoInfo(newTruckObj);
-  })
-  .then((newTruckObj) => {
-    console.log("inside request-handler about to send "+ newTruckObj.name + "s info to createOrUpdateDB");
-    return createOrUpdateDB(newTruckObj);
-  })
+  .then(newTruckObj => getLocation(newTruckObj))
+  .then(newTruckObj => geoCoder(newTruckObj))
+  .then(newTruckObj => createTruckWithGeoInfo(newTruckObj))
+  .then(newTruckObj => createOrUpdateDB(newTruckObj))
   .catch((e) => {
     console.log('Truck ', e.name, " could not be located, so new info for this truck was not stored in the database");
   });
@@ -44,9 +32,7 @@ foodTrucks.forEach((foodTruck) => {
 
 module.exports = (app) => {
   app.get("/API/fetchAll", (req,res) => {
-    Truck.find(function(err, trucks) {
-      res.status(200).send(trucks);
-    });
+    Truck.find((err, trucks) => {res.status(200).send(trucks)});
   });
   app.get("/API/fetch", (req,res) => {
     //handle must be different for test and client
