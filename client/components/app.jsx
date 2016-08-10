@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import ReduxPromise from 'redux-promise';
 import rootReducer from '../reducers/reducers';
-import { Link } from "react-router";
+import {Link} from "react-router";
 import {Router, Route, hashHistory} from 'react-router';
 import TruckList from '../containers/TruckList.jsx';
 import GoogleMap from '../containers/GoogleMap.jsx';
