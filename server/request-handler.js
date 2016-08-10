@@ -13,7 +13,7 @@ const createOrUpdateDB = require('./updateTruckInfo').createOrUpdateDB;
 
 // make sure to add the exact Twitter handle minus the @
 const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic','finsonthehoof', 'chowdermobile'];
-const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF'];
+const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF']; //TruckStopSF
 // Don't try to get Twitter info from these trucks - you will FAIL
 // badFoodTrucks equalz ['senorsisig'];
 
@@ -21,16 +21,16 @@ let geoCoder = require('../utils/utils').geoCoder;
 
 foodTrucks.forEach((foodTruck) => {
   getTruckTwitterInfo(foodTruck)
-  // .then((newTruckObj) => {
-  //   console.log("inside request-handler about to send "+ newTruckObj.allTweetMessages.length + " tweets to getLocation");
-  //   return getLocation(newTruckObj);
-  // })
-  // .then((newTruckObj) => {
-  //   console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.getLocationResults) + " to geoCoder");
-  //   return geoCoder(newTruckObj);
-  // })
   .then((newTruckObj) => {
-    // console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj) + " to createTruckWithGeoInfo");
+    console.log("inside request-handler about to send "+ newTruckObj.allTweetMessages.length + " tweets to getLocation");
+    return getLocation(newTruckObj);
+  })
+  .then((newTruckObj) => {
+    console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.getLocationResults) + " to geoCoder");
+    return geoCoder(newTruckObj);
+  })
+  .then((newTruckObj) => {
+    console.log("inside request-handler about to send "+ JSON.stringify(newTruckObj.geoInfo) + " to createTruckWithGeoInfo");
     return createTruckWithGeoInfo(newTruckObj);
   })
   .then((newTruckObj) => {

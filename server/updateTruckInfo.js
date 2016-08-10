@@ -11,6 +11,8 @@ const twitterInfo = secretKeys.twitterInfo || {
   bearer_token: process.env['TWITTERINFO_BEARER_TOKEN'],
 };
 const twitterClient = new Twitter(twitterInfo);
+const truckSchedules = require('./truckSchedules').truckSchedules;
+
 
 let TruckObj = function() {
   return {
@@ -48,23 +50,17 @@ module.exports.getTruckTwitterInfo = function(foodTruck) {
     });
   });
 };
-const schedule = [
-  /*sunday:*/ {lat: 37, lng: -122, closed: true},
-  /*monday:*/ {lat: 37.8, lng: -122.4, closed: false},
-  /*tuesday:*/ {lat: 37.78, lng: -122.38, closed: false},
-  /*wednesday:*/ {lat: 37.76, lng: -122.36, closed: false},
-  /*thursday:*/ {lat: 37.74, lng: -122.34, closed: false},
-  /*friday:*/ {lat: 37.72, lng: -122.32, closed: false},
-  /*saturday:*/ {lat: 37, lng: -122, closed: true},
-];
+
 
 module.exports.createTruckWithGeoInfo = function(newTruckObj) {
-  // console.log("inside createTruckWithGeoInfo, just received ", JSON.stringify(newTruckObj /*.geoInfo */ ));
+  console.log("inside createTruckWithGeoInfo, just received ", JSON.stringify(newTruckObj.geoInfo /*.geoInfo */ ));
   return new Promise( function (resolve, reject) {
     // send all tweet messages to getLocationFromTweets
-    // let index = newTruckObj.chosenIndex;
+    let index = newTruckObj.chosenIndex;
     let tweets = newTruckObj.allTweetObjs;
 
+    console.log('HELLO WORLD', truckSchedules, tweets[0].user.name.length, tweets[0].user.name);
+    console.log('******* fuck off world *********', truckSchedules[tweets[0].user.name]);
     newTruckObj.truck = new Truck({
       name: tweets[0].user.name,
       handle: '@'+tweets[0].user.screen_name,
@@ -73,8 +69,8 @@ module.exports.createTruckWithGeoInfo = function(newTruckObj) {
       timeStamp: tweets[0].created_at,
       imageUrl: tweets[0].user.profile_image_url,
       yelpId: 'stringy',
-      // location: newTruckObj.geoInfo
-      // schedule: schedule,
+      location: newTruckObj.geoInfo,
+      schedule: truckSchedules[tweets[0].user.name],
     });
     resolve(newTruckObj);
   });
@@ -84,32 +80,34 @@ module.exports.createOrUpdateDB = function(newTruckObj) {
   console.log("inside createOrUpdateDB, just received "+ newTruckObj.truck.handle +" info");
   return new Promise (function(resolve,reject) {
     // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
-    // Truck.find({handle: newTruckObj.truck.handle}, function (err, trucks) {
+    Truck.find({handle: newTruckObj.truck.handle}, function (err, trucks) {
       //  if no matches are found, it will return an empty array
-      // if(trucks.length === 0) {
+      if(trucks.length === 0) {
         // and then we create a new document in the db for that truck
         Truck.findOneAndUpdate(
           {handle: newTruckObj.truck.handle},
-          { $set: {
-            message: tweets[0].text,
-            timeStamp: tweets[0].created_at,
-            // newTruckObj.truck.location: newTruckObj.geoInfo,
-          } }, {upsert: true},
-          // console.log(newTruckObj.name + "updated")
+          newTruckObj.truck, {upsert: true},
           (err, resp) => err ? reject(err) : resolve(resp)
         );
-        // console.log(newTruckObj.name + "created");
-      // } else {
+        console.log(newTruckObj.name + "created");
+      } else {
         // removes the old truck document
-        // trucks[0].remove();
+        trucks[0].remove();
+        console.log(newTruckObj.name + "updated")
         // saves a new truck document
-        // newTruckObj.truck.save((err, returnedTruck) => err ? reject(err) : resolve(trucks));
-      // }
-    // });
+        newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
+      }
+    });
   });
 };
 
 
+
+// { $set: {
+//   message: tweets[0].text,
+//   timeStamp: tweets[0].created_at,
+//   // newTruckObj.truck.location: newTruckObj.geoInfo,
+// } }
 
 // Truck.findOneAndUpdate(
 //   {handle: newTruckObj.truck.handle},

@@ -4,10 +4,16 @@ import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
 // import Marker from '../components/Marker.jsx';
 // Marker position needs to be broken up to the individual lat, lng props
 // use new Date.now().getDay() for day of week index
+
+
 class Map extends Component {
   renderMarkers(truck) {
+    const date = new Date;
+    const index = date.getDay();
+    const position = truck.schedule[index];
+    console.log('INSIDE GOOGLEMAP.JSX',index, position);
     return <Marker
-      key={truck._id} position={truck.location}
+      key={truck._id} position={{lat: position.lat, lng: position.lng}}
       // icon={{url:'https://media.giphy.com/media/8K1IYSnhUaNH2/giphy_s.gif'}}
     />
   };
