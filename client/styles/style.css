@@ -82,3 +82,9 @@
 .TruckTweet{
   font-family: Helvetica, Arial, sans-serif;
 }
+.google-map {
+  height: 500px;
+}
+.truck-list {
+  overflow: auto;
+}
