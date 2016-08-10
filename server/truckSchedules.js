@@ -6,9 +6,9 @@ const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF', 'mvblfeast', 'somastr
 module.exports.truckEvents = {
   "G Food Lounge": [
     /*sunday:*/ {closed: true},
-    /*monday:*/ {closed: false, trucks: ['Curry Up Now', 'Red Sauce Meatballs', 'Beyond The Border SF', 'Sunrise Deli', 'LittleRedRidingTruck']},
+    /*monday:*/ {closed: false, trucks: []},
     /*tuesday:*/ {closed: false, trucks: []},
-    /*wednesday:*/ {closed: false, trucks: []},
+    /*wednesday:*/ {closed: false, trucks: ['Curry Up Now', 'Red Sauce Meatballs', 'Beyond The Border SF', 'Sunrise Deli', 'LittleRedRidingTruck']},
     /*thursday:*/ {closed: false, trucks: []},
     /*friday:*/ {closed: false, trucks: []},
     /*saturday:*/ {closed: true},

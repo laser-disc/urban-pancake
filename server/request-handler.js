@@ -32,13 +32,11 @@ foodTrucks.forEach((foodTruck) => {
 
 module.exports = (app) => {
   app.get("/API/fetchAll", (req,res) => {
-    Truck.find((err, trucks) => {res.status(200).send(trucks)});
+    Truck.find((err, trucks) => res.status(200).send(trucks));
   });
   app.get("/API/fetch", (req,res) => {
     //handle must be different for test and client
     let handle = req.body.params ? req.body.params.handle : req.query.handle;
-    Truck.findOne({handle: handle}, (err, truck) => {
-        res.status(200).send(truck);
-    })
+    Truck.findOne({handle: handle}, (err, truck) => res.status(200).send(truck))
   });
 };
