@@ -23,5 +23,4 @@ global.navigator = {
   userAgent: 'node.js'
 };
 
-global.google = require('./google.js');
 documentRef = document;
