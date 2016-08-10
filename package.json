@@ -14,7 +14,6 @@
     "testsubs": "mocha test/utils/locationSubroutines.spec.js",
     "testalgorithm": "mocha test/server/extractAddress.spec.js",
     "lint": "eslint ./client/* ./db/* ./server/*"
-
   },
   "repository": {
     "type": "git",
@@ -36,6 +35,7 @@
     "react-dom": "^15.2.1",
     "react-google-maps": "^4.11.0",
     "react-redux": "^4.4.5",
+    "react-router": "^2.6.1",
     "redux": "^3.5.2",
     "redux-promise": "^0.5.3",
     "request": "2.72.0",
