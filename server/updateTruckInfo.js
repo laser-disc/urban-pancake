@@ -4,6 +4,7 @@
 const getLocationFromTweets = require('./getLocationFromTweets');
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
+const Yelp = require('yelp');
 let secretKeys = null;
 if(!process.env['TWITTERINFO_CONSUMER_KEY']) {
   secretKeys = require('../env/config');
@@ -13,9 +14,56 @@ const twitterInfo = secretKeys ? secretKeys.twitterInfo : {
   consumer_secret: process.env['TWITTERINFO_CONSUMER_SECRET'],
   bearer_token: process.env['TWITTERINFO_BEARER_TOKEN'],
 };
+
+const yelpInfo = secretKeys.yelpInfo || {
+  consumer_key:  process.env['YELPINFO_CONSUMER_KEY'],
+  consumer_secret: process.env['YELPINFO_CONSUMER_SECRET'],
+  token: process.env['YELPINFO_TOKEN'],
+  token_secret: process.env['YELPINFO_TOKEN_SECRET'],
+};
 const twitterClient = new Twitter(twitterInfo);
 const {truckSchedules} = require('./truckSchedules');
 
+let yelpObj = function(yelpBizID) {
+  return {
+    name: null,
+    yelpBizID: yelpBizID,
+    starsRating: null,
+    review_count: null,
+    custReview : null,
+    photo: null,
+    categories: null,  // aka 'cuisine'
+  }
+};
+
+module.exports.getYelpInfo = function(yelpBizID){
+  return new Promise(function(resolve, reject){
+    let yelp = new Yelp({
+      consumer_key: yelpInfo.consumer_key,
+      consumer_secret: yelpInfo.consumer_secret,
+      token: yelpInfo.token,
+      token_secret: yelpInfo.token_secret,
+    });
+    yelp.business(yelpBizID, function(err, data){
+      if(err){
+        console.log("getYelpInfo error", err);
+        reject(err);
+      }
+      else {
+        let truckYelpObj = new yelpObj(yelpBizID);
+        truckYelpObj.name = data.name;
+        // if the image below (data.rating_img_url) is too large, use data.rating_img_url_small instead (or simply data.rating if you just want the number rating 4.5 or 4)
+        truckYelpObj.starsRating = data.rating_img_url;
+        truckYelpObj.review_count = data.review_count;
+        truckYelpObj.custReview = data.snippet_text;
+        truckYelpObj.photo = data.image_url;
+        truckYelpObj.categories = data.categories;
+        console.log("*******getYelpInfo truckYelpObj**********\n", truckYelpObj);
+        resolve(truckYelpObj);
+      }
+    })
+  });
+}
 
 let TruckObj = function() {
   return {
