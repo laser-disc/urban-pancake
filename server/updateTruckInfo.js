@@ -91,8 +91,8 @@ module.exports.createOrUpdateDB = function(newTruckObj) {
         Truck.findOneAndUpdate(
           {handle: newTruckObj.truck.handle},
           { $set: {
-            newTruckObj.truck.message: tweets[0].text,
-            newTruckObj.truck.timeStamp: tweets[0].created_at,
+            message: tweets[0].text,
+            timeStamp: tweets[0].created_at,
             // newTruckObj.truck.location: newTruckObj.geoInfo,
           } }, {upsert: true},
           // console.log(newTruckObj.name + "updated")

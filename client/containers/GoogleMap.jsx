@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
 // import Marker from '../components/Marker.jsx';
-
+// Marker position needs to be broken up to the individual lat, lng props
+// use new Date.now().getDay() for day of week index
 class Map extends Component {
   renderMarkers(truck) {
     return <Marker
