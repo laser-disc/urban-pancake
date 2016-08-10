@@ -9,20 +9,76 @@
   margin-bottom: 0px;
   padding-bottom: 0px;
 }
+.truck-profile-img{
+ width: 500px;
+ height: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.truck-profile{
+  padding: 10px;
+  margin-left: 10px;
+  margin-bottom: 30px;
+  text-align: center;
+  height: 560px;
+  background-color: #16214d;
+}
+
+.test{
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.truck-view{
+  margin-top: 30px
+}
+.truck-view-header{
+  height: 40px;
+  margin-bottom: 20px;
+}
+.twitter-box-header{
+  background-color: #F5F7F9;
+  width: 100%;
+  margin-left: 0px;
+
+}
+.navbar {
+  margin-left: 30px;
+}
 .TruckDescription{
   font-size: 0.75em;
   font-style: italic;
   padding-top: 0px;
   margin-top: 0px
 }
+.food-image{
+  width: 300px;
+  height: 300px;
+  margin: 30px;
+  border-radius: 5px;
+}
+.twitter-box h5{
+  margin-top: 10px;
+  margin-left: 10px;
+}
 .tweet {
-  padding: 25px;
-  margin-bottom: 25px;
-  background-color: #E3E5E7;
-  border-radius: 50%;
+  height: 90px;
+  margin: 10px;
+  /*width: 100%;*/
+ /* margin-left: auto;
+  margin-right: auto;*/
+  background-color: #F5F7F9;
 
 }
-
+.twitter-box{
+  background-color: #16214d;
+  margin-left: 30px;
+  margin-bottom: 30px;
+  height: 560px;
+}
+.tweet-list{
+    height: 450px;
+    overflow: scroll;
+}
 .TruckTweet{
   font-family: Helvetica, Arial, sans-serif;
 }

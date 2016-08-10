@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import geocoder from "../../client/utils/utils"
+import geocoder from "../../utils/utils"
 
 describe('Geocoding function', function(){
   it('should exist', function(){
@@ -9,11 +9,3 @@ describe('Geocoding function', function(){
   xit('should resolve to an object with lat and lng properties', function(){})
   xit('should resolve to a lat/lng position in San Francisco', function(){})
 })
-
-
-
-
-
-
-
-

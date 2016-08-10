@@ -13,7 +13,7 @@ const createOrUpdateDB = require('./updateTruckInfo').createOrUpdateDB;
 
 // make sure to add the exact Twitter handle minus the @
 const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic','finsonthehoof', 'chowdermobile'];
-const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF'];
+const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF']; //TruckStopSF
 // Don't try to get Twitter info from these trucks - you will FAIL
 // badFoodTrucks equalz ['senorsisig'];
 

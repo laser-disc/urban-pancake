@@ -1,6 +1,6 @@
 const chai = require('chai');
 const expect = chai.expect;
-const extractAddress = require('../../server/extractAddress');
+const extractAddress = require('../../server/getLocationFromTweets');
 
 describe('extractAddress', function() {
   it('should be a function', function() {
