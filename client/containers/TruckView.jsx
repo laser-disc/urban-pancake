@@ -5,8 +5,10 @@ import TruckProfile from '../components/TruckItem.jsx';
 class TruckView extends Component {
   render(){
     return (
-      <h1>TRUCK VIEW</h1>
-      <TruckProfile />
+      <div>
+        <h1>TRUCK VIEW</h1>
+        <TruckProfile />
+      </div>
     )
   }
 }
