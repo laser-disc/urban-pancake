@@ -24,7 +24,6 @@ let atFromSubroutine = function(strTweet) {
     return "notFound";
   } else {
     let location = arrTweet.slice((at+1), frm).join(' ');
-    console.log("atFromSubroutine", location);
     return location;
   };
 };
@@ -67,13 +66,11 @@ let exactAddress = function (strTweet) {
     }
   }
   location = num + ' ' + street;
-  console.log("exactAddress", location);
   return num && street ? location : "notFound";
 }
 
 module.exports.getLocation = function(newTruckObj) {
   let allTweets = newTruckObj.allTweetMessages;
-  console.log("inside getLocation, just received "+allTweets.length+" tweets");
   return new Promise(function (resolve, reject) {
     let location, currentTweet, noPuncTweet;
 
@@ -91,7 +88,6 @@ module.exports.getLocation = function(newTruckObj) {
       }
       // if location is notFound and we've gone through the entire array, reject the promise
       if(location ==="notFound" && i===allTweets.length-1){
-        console.log("We have gone though all the tweets and could not find the current location.  getLocation rejected for ", newTruckObj.name);
         reject(newTruckObj);
       }
       // if location is notFound but there are still tweets left in the array, reassign location to undefined then continue on to the next iteration
@@ -103,7 +99,6 @@ module.exports.getLocation = function(newTruckObj) {
       if(location !=="notFound"){
         newTruckObj.chosenIndex = i;
         newTruckObj.getLocationResults.address = location + ", San Francisco, CA";
-        console.log("getLocation resolved ", newTruckObj.name);
         resolve(newTruckObj);
         break;
       }
