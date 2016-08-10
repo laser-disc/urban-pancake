@@ -30,7 +30,7 @@ let TruckObj = function() {
 };
 
 module.exports.getTruckTwitterInfo = function(foodTruck) {
-  console.log("&&&&&& BEGINNING OF MATTs CONSOLE.LOGS &&&&&&&");
+  console.log("&&&&&& NO MORE CONSOLE.LOGS FOR MATT &&&&&&&");
   return new Promise(function(resolve, reject) {
     let newTruckObj = new TruckObj();
     newTruckObj.name = foodTruck;
@@ -41,8 +41,6 @@ module.exports.getTruckTwitterInfo = function(foodTruck) {
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
     twitterClient.get('statuses/user_timeline', searchParams, function(error, tweets, response) {
-      console.log("******If the following line throws an error, the Twitter Handle for the truck is not searchable on Twitter ABORT*****");
-      console.log(tweets[0].text)
       if(error) {
         console.log("error", error);
         reject(error);
@@ -55,7 +53,6 @@ module.exports.getTruckTwitterInfo = function(foodTruck) {
 };
 
 module.exports.createTruckWithGeoInfo = function(newTruckObj) {
-  console.log("inside createTruckWithGeoInfo, just received ", JSON.stringify(newTruckObj.geoInfo /*.geoInfo */ ));
   return new Promise( function (resolve, reject) {
     // send all tweet messages to getLocationFromTweets
     let index = newTruckObj.chosenIndex;
@@ -77,7 +74,6 @@ module.exports.createTruckWithGeoInfo = function(newTruckObj) {
 };
 
 module.exports.createOrUpdateDB = function(newTruckObj) {
-  console.log("inside createOrUpdateDB, just received "+ newTruckObj.truck.handle +" info");
   return new Promise (function(resolve,reject) {
     // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
     Truck.find({handle: newTruckObj.truck.handle}, function (err, trucks) {
