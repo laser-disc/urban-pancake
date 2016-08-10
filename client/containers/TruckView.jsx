@@ -12,6 +12,9 @@ import TruckImageContainer from '../components/TruckImageContainer.jsx';
 import {FetchYelp} from '../actions/FetchYelp';
 
 class TruckView extends Component {
+  componentWillMount() {
+    this.props.FetchYelp();
+  }
   render(){
     return (
       <div className="truck-view">
