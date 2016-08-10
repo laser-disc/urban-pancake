@@ -13,9 +13,8 @@ class Map extends Component {
     const dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const tweetDay = truck.timeStamp.slice(0, 3);
     const tweetIndex = dayOfWeek.indexOf(tweetDay);
-
     const position = tweetIndex === index ? truck.location : truck.schedule[index].closed ? {lat: null, lng: null} : truck.schedule[index];
-    console.log('INSIDE GOOGLEMAP.JSX',truck.name, position);
+
     return <Marker
       key={truck._id} position={{lat: position.lat, lng: position.lng}}
       // icon={{url:'https://media.giphy.com/media/8K1IYSnhUaNH2/giphy_s.gif'}}
