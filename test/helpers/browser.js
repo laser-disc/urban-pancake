@@ -1,3 +1,4 @@
+
 require('babel-register')();
 
 function noop() {
@@ -9,7 +10,7 @@ var jsdom = require('jsdom').jsdom;
 
 var exposedProperties = ['window', 'navigator', 'document'];
 
-global.document = jsdom('<div id="app"></div>');
+global.document = jsdom('<div id="app"></div>', { url: 'http://localhost' });
 global.window = document.defaultView;
 Object.keys(document.defaultView).forEach((property) => {
   if (typeof global[property] === 'undefined') {
@@ -22,4 +23,5 @@ global.navigator = {
   userAgent: 'node.js'
 };
 
+global.google = require('./google.js');
 documentRef = document;
