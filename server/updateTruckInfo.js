@@ -32,7 +32,7 @@ let yelpObj = function(yelpBizID) {
     review_count: null,
     custReview : null,
     photo: null,
-    categories: null  // aka 'cuisine'
+    categories: null,  // aka 'cuisine'
   }
 };
 
