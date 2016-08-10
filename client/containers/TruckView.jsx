@@ -13,7 +13,10 @@ import {FetchYelp} from '../actions/FetchYelp';
 
 class TruckView extends Component {
   componentWillMount() {
-    this.props.FetchYelp();
+    this.props.FetchYelp()
+    .then((response) =>{
+      console.log(response.payload.data);
+    });
   }
   render(){
     return (

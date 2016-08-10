@@ -6,7 +6,7 @@ export function FetchYelp() {
   console.log('FETCHING YELP FETCHING YELP FETCHING YELP FETCHING YELP FETCHING YELP FETCHING YELP FETCHING YELP FETCHING YELP FETCHING YELP FETCHING YELP')
   const url = '/API/yelp';
   const request = axios.get(url,   {params: {
-      truckName: "Curry Up Now"
+      truckName: "CurryUpNow"
     }
   });
   return {
