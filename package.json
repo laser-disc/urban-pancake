@@ -11,8 +11,6 @@
     "webdev": "webpack-dev-server --watch --progress --hot --inline",
     "test": "TEST_ENV='test' mocha test/helpers/browser.js test/**/*.spec.js",
     "start": "webpack -p && node server/server.js",
-    "testsubs": "mocha test/utils/locationSubroutines.spec.js",
-    "testalgorithm": "mocha test/server/extractAddress.spec.js",
     "lint": "eslint ./client/* ./db/* ./server/*"
   },
   "repository": {
