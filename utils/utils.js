@@ -4,7 +4,7 @@ let secretKeys = null;
 if(!process.env['MONGOOSE_URI']) {
   secretKeys = require('../env/config');
 }
-const GMAP_API_KEY = secretKeys.GMAP_API_KEY || process.env['GMAP_API_KEY'];
+const GMAP_API_KEY = secretKeys ? secretKeys.GMAP_API_KEY : process.env['GMAP_API_KEY'];
 
 module.exports = {};
 module.exports.geoCoder = function(newTruckObj) {
