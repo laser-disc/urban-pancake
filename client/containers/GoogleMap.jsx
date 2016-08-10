@@ -8,21 +8,26 @@ import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
 
 class Map extends Component {
   renderMarkers(truck) {
+    // GRAB CURRENT DAY OF WEEK
     const date = new Date;
     const index = date.getDay();
     const dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const tweetDay = truck.timeStamp.slice(0, 3);
+
+    // GRAB DAY OF TWEET TIMESTAMP FROM DB
     const tweetIndex = dayOfWeek.indexOf(tweetDay);
 
+    // IF TWEET IS FROM TODAY, USE LOCATION OBJECT PULLED FROM TWEET,
+    // OTHERWISE USE SCHEDULE FOUND IN DATABASE FOR LOCATION,
+    // UNLESS THE TRUCK IS CLOSED TODAY. THEN PASS NULL TO MARKER SO IT DOESN'T RENDER
     const position = tweetIndex === index ? truck.location : truck.schedule[index].closed ? {lat: null, lng: null} : truck.schedule[index];
-    console.log('INSIDE GOOGLEMAP.JSX',truck.name, position);
+
     return <Marker
       key={truck._id} position={{lat: position.lat, lng: position.lng}}
       // icon={{url:'https://media.giphy.com/media/8K1IYSnhUaNH2/giphy_s.gif'}}
     />
   };
   render() {
-    console.log(this.props.trucks)
     return (
       <GoogleMapLoader
         containerElement={ <div style={{height: '100%', width: '100%'}} /> }
