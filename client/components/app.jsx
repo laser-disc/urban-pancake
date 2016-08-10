@@ -10,7 +10,12 @@ import TruckList from '../containers/TruckList.jsx';
 import GoogleMap from '../containers/GoogleMap.jsx';
 import TruckView from '../containers/TruckView.jsx';
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
-
+let googleMap;
+if (process.env.TEST_ENV === 'test') {
+  googleMap = <div />;
+} else {
+  googleMap = <GoogleMap />;
+}
 const App = () => {
   return (
     <Provider store={createStoreWithMiddleware(rootReducer)}>
@@ -21,7 +26,7 @@ const App = () => {
         </div>
         <Link to="/truckview"><button>TRUCK VIEW</button></Link>
         <div style={{ height: '500px', width: '550px' }}>
-          <GoogleMap />
+          {googleMap}
         </div>
         <TruckList />
       </div>
