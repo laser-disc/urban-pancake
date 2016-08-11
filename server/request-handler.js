@@ -2,6 +2,8 @@
 // TODO NEED TO SCRAPE PARTICIPATING TRUCKS FROM FOODEVENT TWITTER FEEDS
 // LOCATIONS ARE NOTED TRUCKSCHEDULES.JS
 
+// ---------------------- EXTREME CAUTION IF LINTING THIS PAGE. APP WILL BREAK --------------------
+
 const db = require('../db/config');
 const mongoose = require('mongoose');
 const https = require('https')

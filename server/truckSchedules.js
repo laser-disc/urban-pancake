@@ -1,5 +1,5 @@
 // LIST OF FOOD TRUCKS & EVENTS IN REQUEST-HANDLER
-const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF', 'somastreatfoodpark', 'truckstopSF'];
+// const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF', 'somastreatfoodpark', 'truckstopSF'];
 
 module.exports.truckEvents = {
   'G Food Lounge': [
@@ -20,7 +20,7 @@ module.exports.truckEvents = {
     /* friday: */ { lat: 37.779379, lng: -122.418401, closed: false },
     /* saturday: */ { lat: 37.727870, lng: -122.477082, closed: false },
   ],
-  'SPARKsocialSF': [
+  SPARKsocialSF: [
     /* sunday: */ { lat: 37.770798, lng: -122.391602, closed: false },
     /* monday: */ { lat: 37.770798, lng: -122.391602, closed: false },
     /* tuesday: */ { lat: 37.770798, lng: -122.391602, closed: false },
@@ -29,7 +29,7 @@ module.exports.truckEvents = {
     /* friday: */ { lat: 37.770798, lng: -122.391602, closed: false },
     /* saturday: */ { lat: 37.770798, lng: -122.391602, closed: false },
   ],
-  'SoMaStrEatFoodPark': [
+  SoMaStrEatFoodPark: [
     /* sunday: */ { lat: 37.772640, lng: -122.409915, closed: false },
     /* monday: */ { lat: 37.772640, lng: -122.409915, closed: false },
     /* tuesday: */ { lat: 37.772640, lng: -122.409915, closed: false },
@@ -47,20 +47,20 @@ module.exports.truckEvents = {
     /* friday: */ { lat: 37.790135, lng: -122.397464, closed: false },
     /* saturday: */ { closed: true },
   ],
-}
+};
 
 module.exports.truckSchedules = {
   'Curry Up Now': [
-    /* sunday: */ { closed: true},
+    /* sunday: */ { closed: true },
     /* monday: */ { lat: 37.790841, lng: -122.401280, closed: false },
     /* tuesday: */ { lat: 37.790841, lng: -122.401280, closed: false },
     /* wednesday: */ { lat: 37.790841, lng: -122.401280, closed: false },
     /* thursday: */ { lat: 37.790841, lng: -122.401280, closed: false },
     /* friday: */ { lat: 37.790841, lng: -122.401280, closed: false },
-    /* saturday: */ { closed: true},
+    /* saturday: */ { closed: true },
   ],
   'Fins on the Hoof': [
-    /* sunday: */ { closed: true},
+    /* sunday: */ { closed: true },
     /* monday: */ { closed: true },
     /* tuesday: */ { closed: true },
     /* wednesday: */ { closed: true },
@@ -93,9 +93,9 @@ module.exports.truckSchedules = {
     /* wednesday: */ { lat: 37.782314, lng: -122.405963, closed: false },
     /* thursday: */ { lat: 37.770798, lng: -122.391602, closed: false },
     /* friday: */ { lat: 37.767417, lng: -122.390322, closed: false },
-    /* saturday: */ {closed: true },
+    /* saturday: */ { closed: true },
   ],
-  'JapaCurry': [
+  JapaCurry: [
     /* sunday: */ { closed: true },
     /* monday: */ { lat: 37.793079, lng: -122.401164, closed: false },
     /* tuesday: */ { lat: 37.789159, lng: -122.395882, closed: false },
@@ -113,4 +113,4 @@ module.exports.truckSchedules = {
     /* friday: */ { lat: 37.788556, lng: -122.396031, closed: false },
     /* saturday: */ { closed: true },
   ],
-}
+};

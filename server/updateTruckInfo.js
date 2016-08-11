@@ -1,14 +1,14 @@
 // TODO REFACTOR createOrUpdateDB TO ONLY REWRITE CERTAIN PROPERTIES ON EXISTING
 // DOCUMENTS AND NOT RECREATE WHOLE DOCUMENT
 
-const getLocationFromTweets = require('./getLocationFromTweets');
+// const getLocationFromTweets = require('./getLocationFromTweets');
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
 const Yelp = require('yelp');
 
 let secretKeys = null;
 if (!process.env.TWITTERINFO_CONSUMER_KEY) {
-  secretKeys = require('../env/config');
+  secretKeys = require('../env/config');  // DO NOT LINT
 }
 const twitterInfo = secretKeys ? secretKeys.twitterInfo : {
   consumer_key: process.env.TWITTERINFO_CONSUMER_KEY,
@@ -16,7 +16,7 @@ const twitterInfo = secretKeys ? secretKeys.twitterInfo : {
   bearer_token: process.env.TWITTERINFO_BEARER_TOKEN,
 };
 const yelpInfo = secretKeys ? secretKeys.yelpInfo : {
-  consumer_key:  process.env.YELPINFO_CONSUMER_KEY,
+  consumer_key: process.env.YELPINFO_CONSUMER_KEY,
   consumer_secret: process.env.YELPINFO_CONSUMER_SECRET,
   token: process.env.YELPINFO_TOKEN,
   token_secret: process.env.YELPINFO_TOKEN_SECRET,
@@ -24,35 +24,29 @@ const yelpInfo = secretKeys ? secretKeys.yelpInfo : {
 const twitterClient = new Twitter(twitterInfo);
 const { truckSchedules } = require('./truckSchedules');
 
-const yelpObj = function(yelpBizID) {
+const yelpObj = (yelpBizID) => {
   return {
     name: null,
-    yelpBizID: yelpBizID,
+    yelpBizID,
     starsRating: null,
     review_count: null,
-    custReview : null,
+    custReview: null,
     photo: null,
     categories: null,  // aka 'cuisine'
-  }
+  };
 };
 
-module.exports.getYelpInfo = function(truck){
-  console.log("getYelpInfo just received ", truck);
-  return new Promise(function(resolve, reject){
-    let yelp = new Yelp({
-      consumer_key: yelpInfo.consumer_key,
-      consumer_secret: yelpInfo.consumer_secret,
-      token: yelpInfo.token,
-      token_secret: yelpInfo.token_secret,
-    });
-    yelp.business(truck.yelpBizID, function(err, data){
-      if(err){
-        console.log("getYelpInfo error", err);
+
+module.exports.getYelpInfo = function (truck) {
+  return new Promise((resolve, reject) => {
+    let yelp = new Yelp(yelpInfo);
+    yelp.business(truck.yelpBizID, (err, data) => {
+      if (err) {
+        console.log('getYelpInfo error', err);
         reject(err);
-      }
-      else {
-        let truckYelpObj = new yelpObj(truck.yelpBizID);
-        truckYelpObj.yelpname = data.name;
+      } else {
+        const truckYelpObj = yelpObj(truck.yelpBizID);
+        truckYelpObj.name = data.name;
         // if the image below (data.rating_img_url) is too large, use data.rating_img_url_small instead (or simply data.rating if you just want the number rating 4.5 or 4)
         truckYelpObj.starsRating = data.rating_img_url;
         truckYelpObj.review_count = data.review_count;
@@ -68,6 +62,7 @@ module.exports.getYelpInfo = function(truck){
 };
 
 module.exports.getFiveTweets = function (truckInfo) {
+  
   return new Promise ((resolve, reject) => {
     const searchParams = {
       // screen_name: truckInfo.twitterHandle,
@@ -108,7 +103,7 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
       include_rts: true,
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
-    twitterClient.get('statuses/user_timeline', searchParams, (error, tweets, response) => {
+    twitterClient.get('statuses/user_timeline', searchParams, (error, tweets) => {
       if (error) {
         console.log('error', error);
         reject(error);
@@ -160,7 +155,7 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
             location: newTruckObj.truck.location,
           } }, { upsert: true },
           (err, resp) => err ? reject(err) : resolve(resp)
-        )
+        );
         console.log(`${newTruckObj.name} updated`);
       }
     });
