@@ -47,15 +47,19 @@ module.exports = (app) => {
     const handle = req.body.params ? req.body.params.handle : req.query.handle;
     Truck.findOne({ handle }, (err, truck) => res.status(200).send(truck));
   });
-  app.get("/API/yelp", (req,res) =>{
-    let truckName = req.query.truckName;
-    getYelpInfo(foodTrucksObj[truckName].yelpBizID)
-    .then((truckInfo) => {
+  app.get('/API/yelp', (req, res) => {
+    const truckName = req.query.truckName;
+    getYelpInfo(foodTrucksObj.truckName.yelpBizID)
+    .then(truckInfo => {
       console.log("request-handler API/yelp truckInfo", truckInfo);
       res.status(200).send(truckInfo);
     })
+<<<<<<< HEAD
     .catch((err) =>{
       res.status(400).send(err)
+=======
+    .catch(e => {
+>>>>>>> a1795f4eee770a2b8042c00bba42a77269a7bbca
       console.log('yelp info could not be updated');
     });
   });
