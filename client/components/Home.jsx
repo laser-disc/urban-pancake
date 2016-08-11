@@ -3,6 +3,8 @@ import TruckList from '../containers/TruckList.jsx';
 import GoogleMap from '../containers/GoogleMap.jsx';
 import {Link} from "react-router";
 import {Router, Route, hashHistory} from 'react-router';
+import Header from './Header.jsx'
+
 
 let googleMap;
 if (process.env.TEST_ENV === 'test') {
@@ -13,20 +15,18 @@ if (process.env.TEST_ENV === 'test') {
 
 export default () => {
 return (
-  <div className="container">
-    <div className="row jumbotron">
-      <h1>Food Trucks Near You</h1>
-      <p>...assuming you live in San Francisco </p>
-    </div>
-    <div className="row">
-      <div className="eight columns google-map">
-        {googleMap}
-      </div>
-      <div className="four columns truck-list">
-        <TruckList />
-      </div>
-      <Link to="/truckview"><button>TRUCK VIEW</button></Link>
-    </div>
+  <div>
+    <Header />
+     <section className='jumbotron'>
+          <h1>SF City Food Trucks</h1>
+          <p>Find a food truck for lunch in San Francisco</p>
+      </section>
+      
+        <div className="col-md-5 col-md-offset-1 google-map"> {googleMap} </div>
+        <div className="col-md-6 truck-list">
+          <TruckList />
+        </div>
+    
   </div>
 )
 }
