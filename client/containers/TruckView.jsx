@@ -7,7 +7,6 @@ import ReduxPromise from 'redux-promise';
 import rootReducer from '../reducers/reducers';
 import TruckViewHeader from '../components/TruckViewHeader.jsx';
 import TruckProfile from '../components/TruckProfile.jsx';
-import TwitterBox from '../components/TwitterBox.jsx'
 import TruckImageContainer from '../components/TruckImageContainer.jsx';
 import {FetchYelp} from '../actions/FetchYelp';
 
@@ -15,13 +14,16 @@ class TruckView extends Component {
   componentWillMount() {
     this.props.FetchYelp();
   }
+        // <TruckViewHeader />
+        // <TruckProfile />
+        // <TwitterBox />
+        // <TruckImageContainer />
   render(){
     return (
-      <div className="truck-view">
+      <div>
+        <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
         <TruckViewHeader />
         <TruckProfile />
-        <TwitterBox />
-        <TruckImageContainer />
       </div>
     )
   }

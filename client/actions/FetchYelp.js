@@ -8,7 +8,7 @@ export function FetchYelp() {
   const request = axios.get(url,   {params: {
       truckName: "Curry Up Now"
     }
-  });
+  } );
   return {
     type: FETCH_YELP,
     payload: request,
