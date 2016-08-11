@@ -36,7 +36,8 @@ let yelpObj = function(yelpBizID) {
   }
 };
 
-module.exports.getYelpInfo = function(yelpBizID){
+module.exports.getYelpInfo = function(truck){
+  console.log("getYelpInfo just received ", truck);
   return new Promise(function(resolve, reject){
     let yelp = new Yelp({
       consumer_key: yelpInfo.consumer_key,
@@ -44,23 +45,43 @@ module.exports.getYelpInfo = function(yelpBizID){
       token: yelpInfo.token,
       token_secret: yelpInfo.token_secret,
     });
-    yelp.business(yelpBizID, function(err, data){
+    yelp.business(truck.yelpBizID, function(err, data){
       if(err){
         console.log("getYelpInfo error", err);
         reject(err);
       }
       else {
-        let truckYelpObj = new yelpObj(yelpBizID);
-        truckYelpObj.name = data.name;
+        let truckYelpObj = new yelpObj(truck.yelpBizID);
+        truckYelpObj.yelpname = data.name;
         // if the image below (data.rating_img_url) is too large, use data.rating_img_url_small instead (or simply data.rating if you just want the number rating 4.5 or 4)
         truckYelpObj.starsRating = data.rating_img_url;
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
         truckYelpObj.photo = data.image_url;
         truckYelpObj.categories = data.categories;
+        truckYelpObj.twitterHandle = truck.truckName;
         console.log("*******getYelpInfo truckYelpObj**********\n", truckYelpObj);
         resolve(truckYelpObj);
       }
+    });
+  });
+};
+
+module.exports.getFiveTweets = function (truckInfo) {
+  return new Promise ((resolve, reject) => {
+    const searchParams = {
+      // screen_name: truckInfo.twitterHandle,
+      url: 'https://twitter.com/CurryUpNow/status/763789672170590208',
+    };
+    // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/oembed
+    twitterClient.get('statuses/oembed', searchParams, (error, tweets, response) => {
+      if (error) {
+        console.log('getFiveTweets error', error);
+        reject(error);
+      }
+      console.log('getFiveTweets tweets', tweets);
+      truckInfo.fiveTweets = tweets;
+      resolve(truckInfo);
     });
   });
 };
@@ -94,6 +115,7 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
         console.log('error', error);
         reject(error);
       }
+      console.log("getTruckTwitter Info tweets", tweets);
       newTruckObj.allTweetObjs = tweets;
       tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
       resolve(newTruckObj);

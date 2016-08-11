@@ -12,6 +12,7 @@ const { getTruckTwitterInfo } = require('./updateTruckInfo');
 const { createOrUpdateDB } = require('./updateTruckInfo');
 const { geoCoder } = require('../utils/utils');
 const { getYelpInfo } = require('./updateTruckInfo');
+const { getFiveTweets } = require('./updateTruckInfo');
 
 // make sure to add the exact Twitter handle minus the @
 const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic', 'finsonthehoof', 'chowdermobile'];
@@ -56,15 +57,23 @@ module.exports = (app) => {
     const handle = req.body.params ? req.body.params.handle : req.query.handle;
     Truck.findOne({ handle }, (err, truck) => res.status(200).send(truck));
   });
-  app.get("/API/yelp", (req,res) =>{
-    let truckName = req.query.truckName;
-    getYelpInfo(foodTrucksObj[truckName].yelpBizID)
+  app.get("/API/yelp", (req,res) => {
+    let truck = {};
+    truck.truckName = req.query.truckName;
+    truck.yelpBizID = foodTrucksObj[truck.truckName].yelpBizID;
+    console.log("request-handler API/yelp truck", truck)
+    getYelpInfo(truck)
+    .then((truckInfo) => {
+      console.log("request-handler API/yelp truckInfo about to send truckInfo to getFiveTweets", truckInfo);
+      return getFiveTweets(truckInfo);
+    })
     .then((truckInfo) => {
       console.log("request-handler API/yelp truckInfo", truckInfo);
       res.status(200).send(truckInfo);
     })
-    .catch((e) =>{
-      console.log('yelp info could not be updated');
+    .catch((e) => {
+      res.status(400).send(e);
+      console.log('yelp info and getFiveTweets could not be updated');
     });
   });
 };

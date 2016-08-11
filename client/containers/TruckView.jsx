@@ -15,6 +15,7 @@ class TruckView extends Component {
     this.props.FetchYelp()
     .then((response) =>{
       console.log(response.payload.data);
+      console.log("Find out what to do with this html for the Twitter Widget", response.payload.data.fiveTweets.html);
     });
   }
         // <TruckViewHeader />
