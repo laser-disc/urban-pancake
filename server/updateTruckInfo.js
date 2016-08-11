@@ -144,29 +144,3 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
     });
   });
 };
-
-
-//former
-// module.exports.createOrUpdateDB = (newTruckObj) => {
-//   return new Promise((resolve, reject) => {
-//     // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
-//     Truck.find({ handle: newTruckObj.truck.handle }, (err, trucks) => {
-//       //  if no matches are found, it will return an empty array
-//       if (trucks.length === 0) {
-//         // and then we create a new document in the db for that truck
-//         Truck.findOneAndUpdate(
-//           { handle: newTruckObj.truck.handle },
-//           newTruckObj.truck, { upsert: true },
-//           (err, resp) => err ? reject(err) : resolve(resp)
-//         );
-//         console.log(`${newTruckObj.name} created`);
-//       } else {
-//         // removes the old truck document
-//         trucks[0].remove();
-//         console.log(`${newTruckObj.name} updated`)
-//         // saves a new truck document
-//         newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
-//       }
-//     });
-//   });
-// };
