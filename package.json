@@ -11,8 +11,6 @@
     "webdev": "webpack-dev-server --watch --progress --hot --inline",
     "test": "TEST_ENV='test' mocha test/helpers/browser.js test/**/*.spec.js",
     "start": "webpack -p && node server/server.js",
-    "testsubs": "mocha test/utils/locationSubroutines.spec.js",
-    "testalgorithm": "mocha test/server/extractAddress.spec.js",
     "lint": "eslint ./client/* ./db/* ./server/*"
   },
   "repository": {
@@ -43,7 +41,8 @@
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",
-    "webpack-hot-middleware": "^2.12.2"
+    "webpack-hot-middleware": "^2.12.2",
+    "yelp": "^1.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.11.4",
