@@ -1,9 +1,8 @@
 // LIST OF FOOD TRUCKS & EVENTS IN REQUEST-HANDLER
-// TODO need to accomodate truckEvents...
 const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF', 'somastreatfoodpark', 'truckstopSF'];
 
 module.exports.truckEvents = {
-  'G Food Lounge'; [
+  'G Food Lounge': [
     /* sunday: */ { closed: true },
     /* monday: */ { lat: 37.7837031, lng: -122.394377, closed: false },
     /* tuesday: */ { lat: 37.7837031, lng: -122.394377, closed: false },
@@ -12,7 +11,7 @@ module.exports.truckEvents = {
     /* friday: */ { lat: 37.7837031, lng: -122.394377, closed: false },
     /* saturday: */ { closed: true },
   ],
-  'Off the Grid'; [
+  'Off the Grid': [
     /* sunday: */ { lat: 37.800739, lng: -122.458237, closed: false },
     /* monday: */ { lat: 37.775640, lng: -122.39756, closed: false },
     /* tuesday: */ { lat: 37.779869, lng: -122.413745, closed: false },
@@ -21,7 +20,7 @@ module.exports.truckEvents = {
     /* friday: */ { lat: 37.779379, lng: -122.418401, closed: false },
     /* saturday: */ { lat: 37.727870, lng: -122.477082, closed: false },
   ],
-  'SPARKsocialSF'; [
+  'SPARKsocialSF': [
     /* sunday: */ { lat: 37.770798, lng: -122.391602, closed: false },
     /* monday: */ { lat: 37.770798, lng: -122.391602, closed: false },
     /* tuesday: */ { lat: 37.770798, lng: -122.391602, closed: false },
@@ -30,7 +29,7 @@ module.exports.truckEvents = {
     /* friday: */ { lat: 37.770798, lng: -122.391602, closed: false },
     /* saturday: */ { lat: 37.770798, lng: -122.391602, closed: false },
   ],
-  'SoMaStrEatFoodPark'; [
+  'SoMaStrEatFoodPark': [
     /* sunday: */ { lat: 37.772640, lng: -122.409915, closed: false },
     /* monday: */ { lat: 37.772640, lng: -122.409915, closed: false },
     /* tuesday: */ { lat: 37.772640, lng: -122.409915, closed: false },
@@ -39,7 +38,7 @@ module.exports.truckEvents = {
     /* friday: */ { lat: 37.772640, lng: -122.409915, closed: false },
     /* saturday: */ { lat: 37.772640, lng: -122.409915, closed: false },
   ],
-  'Truck Stop SF'; [
+  'Truck Stop SF': [
     /* sunday: */ { closed: true },
     /* monday: */ { lat: 37.790135, lng: -122.397464, closed: false },
     /* tuesday: */ { lat: 37.790135, lng: -122.397464, closed: false },

@@ -32,7 +32,9 @@ const TruckObj = () => {
 
 module.exports.getTruckTwitterInfo = (foodTruck) => {
   return new Promise((resolve, reject) => {
-    const newTruckObj = new TruckObj();
+    console.log(0.5);
+    const newTruckObj = TruckObj();
+    console.log(0.75, newTruckObj);
     newTruckObj.name = foodTruck;
     const searchParams = {
       screen_name: foodTruck,
@@ -40,7 +42,7 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
       include_rts: true,
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
-    twitterClient.get('statuses/user_timeline', searchParams, (error, tweets) => {
+    twitterClient.get('statuses/user_timeline', searchParams, (error, tweets, response) => {
       if (error) {
         console.log('error', error);
         reject(error);
