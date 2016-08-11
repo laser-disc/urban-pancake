@@ -15,16 +15,16 @@ const twitterInfo = secretKeys ? secretKeys.twitterInfo : {
   consumer_secret: process.env.TWITTERINFO_CONSUMER_SECRET,
   bearer_token: process.env.TWITTERINFO_BEARER_TOKEN,
 };
-const yelpInfo = secretKeys.yelpInfo || {
-  consumer_key:  process.env['YELPINFO_CONSUMER_KEY'],
-  consumer_secret: process.env['YELPINFO_CONSUMER_SECRET'],
-  token: process.env['YELPINFO_TOKEN'],
-  token_secret: process.env['YELPINFO_TOKEN_SECRET'],
+const yelpInfo = secretKeys ? secretKeys.yelpInfo : {
+  consumer_key:  process.env.YELPINFO_CONSUMER_KEY,
+  consumer_secret: process.env.YELPINFO_CONSUMER_SECRET,
+  token: process.env.YELPINFO_TOKEN,
+  token_secret: process.env.YELPINFO_TOKEN_SECRET,
 };
 const twitterClient = new Twitter(twitterInfo);
 const { truckSchedules } = require('./truckSchedules');
 
-let yelpObj = function(yelpBizID) {
+const yelpObj = function(yelpBizID) {
   return {
     name: null,
     yelpBizID: yelpBizID,
@@ -126,33 +126,21 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
       //  if no matches are found, it will return an empty array
       if (trucks.length === 0) {
         // and then we create a new document in the db for that truck
-        Truck.findOneAndUpdate(
-          { handle: newTruckObj.truck.handle },
-          newTruckObj.truck, { upsert: true },
-          (err, resp) => err ? reject(err) : resolve(resp)
-        );
+        newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
         console.log(`${newTruckObj.name} created`);
       } else {
-        // removes the old truck document
-        trucks[0].remove();
-        console.log(`${newTruckObj.name} updated`)
-        // saves a new truck document
-        newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
+        // otherwise update existing document
+        Truck.findOneAndUpdate(
+          { handle: newTruckObj.truck.handle },
+          { $set: {
+            message: newTruckObj.truck.message,
+            timeStamp: newTruckObj.truck.timeStamp,
+            location: newTruckObj.truck.location,
+          } }, { upsert: true },
+          (err, resp) => err ? reject(err) : resolve(resp)
+        )
+        console.log(`${newTruckObj.name} updated`);
       }
     });
   });
 };
-
-
-
-// { $set: {
-//   message: tweets[0].text,
-//   timeStamp: tweets[0].created_at,
-//   // newTruckObj.truck.location: newTruckObj.geoInfo,
-// } }
-
-// Truck.findOneAndUpdate(
-//   {handle: newTruckObj.truck.handle},
-//   { $set: { schedule: schedule } }, {upsert: true},
-//   (err, resp) => err ? reject(err) : resolve(resp)
-// );

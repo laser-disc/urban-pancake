@@ -21,11 +21,12 @@ class Map extends Component {
     // OTHERWISE USE SCHEDULE FOUND IN DATABASE FOR LOCATION,
     // UNLESS THE TRUCK IS CLOSED TODAY. THEN PASS NULL TO MARKER SO IT DOESN'T RENDER
     const position = tweetIndex === index ? truck.location : truck.schedule[index].closed ? {lat: null, lng: null} : truck.schedule[index];
-
-    return <Marker
-      key={truck._id} position={{lat: position.lat, lng: position.lng}}
-      // icon={{url:'https://media.giphy.com/media/8K1IYSnhUaNH2/giphy_s.gif'}}
-    />
+    if (position.lat) {
+      return <Marker
+        key={truck._id} position={{lat: position.lat, lng: position.lng}}
+        // icon={{url:'https://media.giphy.com/media/8K1IYSnhUaNH2/giphy_s.gif'}}
+      />
+    };
   };
   render() {
     return (
