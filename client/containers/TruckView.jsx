@@ -14,9 +14,10 @@ class TruckView extends Component {
   
   componentWillMount() {
     this.props.FetchYelp()
-    // .then((response) =>{
-    //   console.log(response.payload.data);
-    // });
+    .then((response) =>{
+      console.log(response.payload.data);
+      console.log("Find out what to do with this html for the Twitter Widget", response.payload.data.fiveTweets.html);
+    });
   }
   
   renderTruckView(truck){
