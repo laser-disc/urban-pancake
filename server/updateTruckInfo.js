@@ -15,16 +15,16 @@ const twitterInfo = secretKeys ? secretKeys.twitterInfo : {
   consumer_secret: process.env.TWITTERINFO_CONSUMER_SECRET,
   bearer_token: process.env.TWITTERINFO_BEARER_TOKEN,
 };
-const yelpInfo = secretKeys.yelpInfo || {
-  consumer_key:  process.env['YELPINFO_CONSUMER_KEY'],
-  consumer_secret: process.env['YELPINFO_CONSUMER_SECRET'],
-  token: process.env['YELPINFO_TOKEN'],
-  token_secret: process.env['YELPINFO_TOKEN_SECRET'],
+const yelpInfo = secretKeys ? secretKeys.yelpInfo : {
+  consumer_key:  process.env.YELPINFO_CONSUMER_KEY,
+  consumer_secret: process.env.YELPINFO_CONSUMER_SECRET,
+  token: process.env.YELPINFO_TOKEN,
+  token_secret: process.env.YELPINFO_TOKEN_SECRET,
 };
 const twitterClient = new Twitter(twitterInfo);
 const { truckSchedules } = require('./truckSchedules');
 
-let yelpObj = function(yelpBizID) {
+const yelpObj = function(yelpBizID) {
   return {
     name: null,
     yelpBizID: yelpBizID,
