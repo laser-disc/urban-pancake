@@ -8,7 +8,7 @@ const config = require('../webpack.dev.config');
 
 const compiler = webpack(config);
 const app = express();
-const router = express.router();
+const router = express.Router();
 
 if (process.env.NODE_ENV === 'development') {
   app.use(webpackDevMiddleware(compiler, {
