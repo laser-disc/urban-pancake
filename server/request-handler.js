@@ -64,9 +64,6 @@ module.exports = (app) => {
       console.log("request-handler API/yelp truckInfo", truckInfo);
       res.status(200).send(truckInfo);
     })
-    .catch((e) => {
-      res.status(400).send(e);
-      console.log('yelp info and getFiveTweets could not be updated');
-    });
+    .catch( err => res.status(400).send(err));
   });
 };

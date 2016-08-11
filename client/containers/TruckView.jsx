@@ -21,7 +21,7 @@ class TruckView extends Component {
   }
   
   renderTruckView(truck){
-    return <TruckProfile yelpInfo ={truck} />
+    return <TruckProfile key={truck.yelpBizID} yelpInfo ={truck} />
   }
 
 

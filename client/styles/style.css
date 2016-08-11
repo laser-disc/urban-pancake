@@ -5,7 +5,7 @@ body {
   height: 100%;
 }
 .mega-container {
-  height: 100%;
+  padding-bottom: 0px !important;
 }
 
 /**************************FROM TWITTER**************************/
@@ -45,7 +45,9 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   border-radius: 5px;
 }
 .google-map {
-  height: 500px;
+  height: 670px;
+  margin-bottom: 30px;
+  margin-left: 30px;
 }
 .home-logo {
   height: 35px;
@@ -53,13 +55,18 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   float: left;
   margin-top: 10px;
 }
-.jumbotron-logo {
-  height: 80px;
-  width: 80px;
-}
 
 .nav-bar {
   margin-left: 30px;
+}
+.jumbotron {
+  height: 70px !important;
+  align-items: center !important;
+  padding-bottom: 0px !important;
+  padding-top: 5px !important;
+}
+.site-header {
+  height: 70px !important;
 }
 .truck-avatar{
   height:70px;
@@ -77,7 +84,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   padding-bottom: 0px;
 }
 .truck-profile-img{
-  background: url("http://static1.squarespace.com/static/54090308e4b0ba22079ce4dd/54c16585e4b0688a8813debe/54e7cf61e4b0feaa476a8a44/1424478051249/BH9A8392.jpg")  50% 50% no-repeat;
+  /*background: url("http://static1.squarespace.com/static/54090308e4b0ba22079ce4dd/54c16585e4b0688a8813debe/54e7cf61e4b0feaa476a8a44/1424478051249/BH9A8392.jpg")  50% 50% no-repeat;*/
   width: 90%;
   height: 90%;
   margin-left: 25px;
@@ -114,11 +121,9 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   font-family: Helvetica, Arial, sans-serif;
 }
 .truck-list {
-  height: 500px;
-  overflow: auto;
-}
-.truck-list{
-  height: 500px;
+  overflow: scroll;
+  height: 670px;
+  margin-left: -30px;
 }
 .TruckDescription{
   font-size: 0.75em;
@@ -145,10 +150,6 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 .tweet > p {
   margin-left: 15px;
 }
-.tweet-list{
-    height: 450px;
-    overflow: scroll;
-}
 .twitter-box-header{
   background-color: #F5F7F9;
   width: 100%;
@@ -166,20 +167,17 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   padding-bottom: 150px;
   }  /* must be same height as the footer */
 
-#footer {
-  position: relative;
-  margin-top: -150px; /* negative value of footer height */
-  height: 150px;
-  clear:both;
+.footer {
+  padding-top: 15px;
+  padding-left: 25px;
+  background-color: #222228;
+  color: white;
 } 
 
-/*.footer{
-  clear: both;
-  position: relative;
-  height: 100px;
-  background-color: grey
+.footer >h4 {
+  color: white;
+  text-decoration: underline;
 }
-*/
 
 
 
