@@ -16,7 +16,6 @@ const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF', 'mvblfeast', 'somastr
 // Don't try to get Twitter info from these trucks - you will FAIL
 // badFoodTrucks equalz ['senorsisig'];
 
-
 foodTrucks.forEach((foodTruck) => {
   getTruckTwitterInfo(foodTruck)
   .then(newTruckObj => getLocation(newTruckObj))
