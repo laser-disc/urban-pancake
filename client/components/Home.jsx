@@ -13,16 +13,20 @@ if (process.env.TEST_ENV === 'test') {
 
 export default () => {
 return (
-  <div className="container theme-light">
-    <div className="jumbotron">
+  <div className="container">
+    <div className="row jumbotron">
       <h1>Food Trucks Near You</h1>
       <p>...assuming you live in San Francisco </p>
     </div>
-    <Link to="/truckview"><button>TRUCK VIEW</button></Link>
-    <div style={{ height: '500px', width: '550px' }}>
-      {googleMap}
+    <div className="row">
+      <div className="eight columns google-map">
+        {googleMap}
+      </div>
+      <div className="four columns truck-list">
+        <TruckList />
+      </div>
+      <Link to="/truckview"><button>TRUCK VIEW</button></Link>
     </div>
-    <TruckList />
   </div>
 )
-} 
+}
