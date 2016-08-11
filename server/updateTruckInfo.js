@@ -126,33 +126,47 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
       //  if no matches are found, it will return an empty array
       if (trucks.length === 0) {
         // and then we create a new document in the db for that truck
-        Truck.findOneAndUpdate(
-          { handle: newTruckObj.truck.handle },
-          newTruckObj.truck, { upsert: true },
-          (err, resp) => err ? reject(err) : resolve(resp)
-        );
+        newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
         console.log(`${newTruckObj.name} created`);
       } else {
-        // removes the old truck document
-        trucks[0].remove();
-        console.log(`${newTruckObj.name} updated`)
-        // saves a new truck document
-        newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
+        // otherwise update existing document
+        Truck.findOneAndUpdate(
+          { handle: newTruckObj.truck.handle },
+          { $set: {
+            message: newTruckObj.truck.message,
+            timeStamp: newTruckObj.truck.timeStamp,
+            location: newTruckObj.truck.location,
+          } }, { upsert: true },
+          (err, resp) => err ? reject(err) : resolve(resp)
+        )
+        console.log(`${newTruckObj.name} updated`);
       }
     });
   });
 };
 
 
-
-// { $set: {
-//   message: tweets[0].text,
-//   timeStamp: tweets[0].created_at,
-//   // newTruckObj.truck.location: newTruckObj.geoInfo,
-// } }
-
-// Truck.findOneAndUpdate(
-//   {handle: newTruckObj.truck.handle},
-//   { $set: { schedule: schedule } }, {upsert: true},
-//   (err, resp) => err ? reject(err) : resolve(resp)
-// );
+//former
+// module.exports.createOrUpdateDB = (newTruckObj) => {
+//   return new Promise((resolve, reject) => {
+//     // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
+//     Truck.find({ handle: newTruckObj.truck.handle }, (err, trucks) => {
+//       //  if no matches are found, it will return an empty array
+//       if (trucks.length === 0) {
+//         // and then we create a new document in the db for that truck
+//         Truck.findOneAndUpdate(
+//           { handle: newTruckObj.truck.handle },
+//           newTruckObj.truck, { upsert: true },
+//           (err, resp) => err ? reject(err) : resolve(resp)
+//         );
+//         console.log(`${newTruckObj.name} created`);
+//       } else {
+//         // removes the old truck document
+//         trucks[0].remove();
+//         console.log(`${newTruckObj.name} updated`)
+//         // saves a new truck document
+//         newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
+//       }
+//     });
+//   });
+// };
