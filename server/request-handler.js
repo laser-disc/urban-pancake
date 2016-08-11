@@ -1,4 +1,6 @@
 'use strict'
+// TODO NEED TO SCRAPE PARTICIPATING TRUCKS FROM FOODEVENT TWITTER FEEDS
+// LOCATIONS ARE NOTED TRUCKSCHEDULES.JS
 
 const db = require('../db/config');
 const mongoose = require('mongoose');
@@ -16,13 +18,21 @@ const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF', 'mvblfeast', 'somastr
 // Don't try to get Twitter info from these trucks - you will FAIL
 // badFoodTrucks equalz ['senorsisig'];
 
-
 foodTrucks.forEach((foodTruck) => {
-  getTruckTwitterInfo(foodTruck)
-  .then(newTruckObj => getLocation(newTruckObj))
-  .then(newTruckObj => geoCoder(newTruckObj))
-  .then(newTruckObj => createTruckWithGeoInfo(newTruckObj))
-  .then(newTruckObj => createOrUpdateDB(newTruckObj))
+  console.log(0);
+  return getTruckTwitterInfo(foodTruck)
+  .then(newTruckObj => {
+    console.log(1);
+    return getLocation(newTruckObj); })
+  .then(newTruckObj => {
+    console.log(2);
+    return geoCoder(newTruckObj); })
+  .then(newTruckObj => {
+    console.log(3);
+    return createTruckWithGeoInfo(newTruckObj); })
+  .then(newTruckObj => {
+    console.log(4);
+    return createOrUpdateDB(newTruckObj); })
   .catch((e) => {
     console.log('Truck ', e.name, ' could not be located, so new info for this truck was not stored in the database');
   });
