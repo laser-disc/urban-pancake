@@ -79,9 +79,7 @@ const TruckObj = () => {
 
 module.exports.getTruckTwitterInfo = (foodTruck) => {
   return new Promise((resolve, reject) => {
-    console.log(0.5);
     const newTruckObj = TruckObj();
-    console.log(0.75, newTruckObj);
     newTruckObj.name = foodTruck;
     const searchParams = {
       screen_name: foodTruck,
