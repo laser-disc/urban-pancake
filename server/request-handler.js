@@ -28,22 +28,13 @@ const foodTrucksObj = {
   KokioRepublic: { twitterHandle: 'KokioRepublic', yelpBizID: 'kokio-republic-san-francisco'},
 };
 
-foodTrucks.forEach((foodTruck) => {
-  console.log(0);
+foodTrucks.forEach(foodTruck => {
   return getTruckTwitterInfo(foodTruck)
-  .then(newTruckObj => {
-    console.log(1);
-    return getLocation(newTruckObj); })
-  .then(newTruckObj => {
-    console.log(2);
-    return geoCoder(newTruckObj); })
-  .then(newTruckObj => {
-    console.log(3);
-    return createTruckWithGeoInfo(newTruckObj); })
-  .then(newTruckObj => {
-    console.log(4);
-    return createOrUpdateDB(newTruckObj); })
-  .catch((e) => {
+  .then(newTruckObj => getLocation(newTruckObj))
+  .then(newTruckObj => geoCoder(newTruckObj))
+  .then(newTruckObj => createTruckWithGeoInfo(newTruckObj))
+  .then(newTruckObj => createOrUpdateDB(newTruckObj))
+  .catch(e => {
     console.log('Truck ', e.name, ' could not be located, so new info for this truck was not stored in the database');
   });
 });

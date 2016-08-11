@@ -12,7 +12,7 @@ const streetTypes = ['aly', 'ave', 'blvd', 'blvd north', 'blvd south', 'cir',
  'rd', 'row', 'st', 'stps', 'stwy', 'ter', 'tunl', 'walk', 'way'];
 
 
-/* sample input: "We are serving Lunch at 1st st and Howard st from 11:15-1:45." output: "1st st and Howard st" */
+// sample output: "1st st and Howard st"
 const atFromSubroutine = (strTweet) => {
   const arrTweet = strTweet.split(' ');
   const at = arrTweet.indexOf('at');
