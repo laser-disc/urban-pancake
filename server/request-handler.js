@@ -2,6 +2,8 @@
 // TODO NEED TO SCRAPE PARTICIPATING TRUCKS FROM FOODEVENT TWITTER FEEDS
 // LOCATIONS ARE NOTED TRUCKSCHEDULES.JS
 
+// ---------------------- EXTREME CAUTION IF LINTING THIS PAGE. APP WILL BREAK --------------------
+
 const db = require('../db/config');
 const mongoose = require('mongoose');
 const https = require('https')
@@ -48,15 +50,14 @@ module.exports = (app) => {
     Truck.findOne({ handle }, (err, truck) => res.status(200).send(truck));
   });
   app.get('/API/yelp', (req, res) => {
-    const truckName = req.query.truckName;
-    getYelpInfo(foodTrucksObj.truckName.yelpBizID)
-    .then(truckInfo => {
-      console.log("request-handler API/yelp truckInfo", truckInfo);
+    let truckName = req.query.truckName;
+    getYelpInfo(foodTrucksObj[truckName].yelpBizID)
+    .then((truckInfo) => {
+      console.log('request-handler API/yelp truckInfo', truckInfo);
       res.status(200).send(truckInfo);
     })
-
-    .catch((err) =>{
-      res.status(400).send(err)
+    .catch((e) => {
+      console.log('yelp info could not be updated');
     });
   });
 };
