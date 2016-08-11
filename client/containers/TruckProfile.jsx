@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import TwitterBox from '../components/TwitterBox.jsx';
-
+import TruckCategories from '../components/TruckCategories.jsx'
 export default class TruckProfile extends Component {
+
   render(){
     return (
       <div className="container">
@@ -10,14 +11,12 @@ export default class TruckProfile extends Component {
             <div className="truck-profile-img-container well">
               <div className="truck-profile-img">
               </div>
-                <ul className="list-inline">
-                   <li>Vegetarian</li>
-                   <li>Indian</li>
-                   <li>Gluten-Free</li>
-                 </ul> 
+              <TruckCategories/>
             </div>
           </div>
           <div className="col-md-6">
+            <h1>{this.props.yelpInfo.name}</h1>
+            <img src={this.props.yelpInfo.photo} alt={this.props.yelpInfo.name}/>
             <TwitterBox />
           </div>
         </div>
