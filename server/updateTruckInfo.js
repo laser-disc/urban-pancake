@@ -92,7 +92,6 @@ module.exports.getFiveTweets = (newTruckObj, tweetID) => {
   });    
 };
 
-
 module.exports.getTruckTwitterInfo = (foodTruck) => {
   return new Promise((resolve, reject) => {
     const newTruckObj = TruckObj();
