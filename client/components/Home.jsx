@@ -14,17 +14,12 @@ if (process.env.TEST_ENV === 'test') {
   googleMap = <GoogleMap />;
 }
 
-      
 export default () => {
 return (
   <div className='mega-container'>
 
     <div className='wrap row'>
     <Header />
-    <div className="jumbotron">
-      <h1>What's for Lunch Today?</h1>
-    </div>
-     
       <div className="col-md-6 google-map">
        {googleMap} 
       </div>

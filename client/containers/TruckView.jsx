@@ -21,7 +21,7 @@ class TruckView extends Component {
   }
   
   renderTruckView(truck){
-    return <TruckProfile key={truck.yelpBizID} yelpInfo ={truck} />
+    return  <TruckProfile key={truck.yelpBizID} yelpInfo ={truck} />
   }
 
 
@@ -30,7 +30,7 @@ class TruckView extends Component {
       <div>
         <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
         <TruckViewHeader />
-        {this.props.truckView.map(truck => this.renderTruckView(truck))}
+        {this.props.yelpInfo.map(truck => this.renderTruckView(truck))}
       </div>
     )
   }
@@ -38,7 +38,7 @@ class TruckView extends Component {
 function mapStateToProps(state) {
   console.log('state:' , state.truckView)
   return {
-    truckView: state.truckView
+    yelpInfo: state.yelpInfo
   };
 };
 

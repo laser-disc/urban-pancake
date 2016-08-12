@@ -55,9 +55,20 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   float: left;
   margin-top: 10px;
 }
-
-.nav-bar {
+.home-text {
+  margin-top: 15px;
   margin-left: 30px;
+  position: absolute;
+}
+.github {
+  margin-top: 15px;
+  float: right;
+  margin-right: 30px;
+  position: relative;
+}
+.nav-bar {
+  margin-left: 50px;
+  margin-right: 50px;
 }
 .jumbotron {
   height: 70px !important;
@@ -67,6 +78,10 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 }
 .site-header {
   height: 70px !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  background-color: #E3E5E7 !important;
+  margin-bottom: 30px !important;
 }
 .truck-avatar{
   height:70px;
@@ -78,6 +93,9 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 .truck-item {
   margin-bottom: 15px;
   vertical-align: middle;
+}
+.truck-item:hover {
+  background-color: #44c7f4;
 }
 .truck-name{
   margin-bottom: 0px;
@@ -92,6 +110,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   margin-bottom: 15px;
   border-radius: 5px;
   float: left;
+  background-repeat: no-repeat; 
 }
 .truck-profile-img-container {
   height: 500px;
