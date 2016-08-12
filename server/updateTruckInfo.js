@@ -75,7 +75,6 @@ module.exports.getFiveTweets = (truckInfo) => {
     });
   });
 };
-
 const TruckObj = () => {
   return {
     name: null,
