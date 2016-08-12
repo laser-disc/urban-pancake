@@ -1,19 +1,98 @@
-.TruckAvatar{
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+}
+.mega-container {
+  height: 100%;
+}
+
+/**************************FROM TWITTER**************************/
+blockquote.twitter-tweet {
+  display: inline-block;
+  padding: 16px;
+  margin-top: 10px 0;
+  border: #ddd 1px solid;
+  border-top-color: #eee;
+  border-bottom-color: #bbb;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  font: bold 14px/18px Helvetica, Arial, sans-serif;
+  color: #000;
+}
+blockquote.twitter-tweet p {
+  font: normal 18px/24px Georgia, "Times New Roman", Palatino, serif;
+  margin: 0 5px 10px 0;
+}
+blockquote.twitter-tweet a[href^="https://twitter.com"] {
+  font-weight: normal;
+  color: #666;
+  font-size: 12px;
+}
+/**************************FROM TWITTER**************************/
+.container {
+  width: 80% !important;
+  max-width: 100% !important;
+}
+.cuisine {
+  margin-bottom: 0px;
+}
+.food-image{
+  width: 300px;
+  height: 300px;
+  margin: 30px;
+  border-radius: 5px;
+}
+.google-map {
+  height: 500px;
+}
+.home-logo {
+  height: 35px;
+  width: 35px;
+  float: left;
+  margin-top: 10px;
+}
+.jumbotron-logo {
+  height: 80px;
+  width: 80px;
+}
+
+.nav-bar {
+  margin-left: 30px;
+}
+.truck-avatar{
   height:70px;
   width: 70px;
   float: left;
   padding-right: 10px;
-
+  margin-right: 10px;
 }
-.TruckName{
+.truck-item {
+  margin-bottom: 15px;
+  vertical-align: middle;
+}
+.truck-name{
   margin-bottom: 0px;
   padding-bottom: 0px;
 }
 .truck-profile-img{
- width: 500px;
- height: 500px;
-  margin-left: auto;
+  background: url("http://static1.squarespace.com/static/54090308e4b0ba22079ce4dd/54c16585e4b0688a8813debe/54e7cf61e4b0feaa476a8a44/1424478051249/BH9A8392.jpg")  50% 50% no-repeat;
+  width: 90%;
+  height: 90%;
+  margin-left: 25px;
   margin-right: auto;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  float: left;
+}
+.truck-profile-img-container {
+  height: 500px;
+  background-color: #F5F7F9;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
 }
 .truck-profile{
   padding: 10px;
@@ -31,18 +110,15 @@
 .truck-view{
   margin-top: 30px
 }
-.truck-view-header{
-  height: 40px;
-  margin-bottom: 20px;
+.TruckTweet{
+  font-family: Helvetica, Arial, sans-serif;
 }
-.twitter-box-header{
-  background-color: #F5F7F9;
-  width: 100%;
-  margin-left: 0px;
-
+.truck-list {
+  height: 500px;
+  overflow: auto;
 }
-.navbar {
-  margin-left: 30px;
+.truck-list{
+  height: 500px;
 }
 .TruckDescription{
   font-size: 0.75em;
@@ -50,35 +126,62 @@
   padding-top: 0px;
   margin-top: 0px
 }
-.food-image{
-  width: 300px;
-  height: 300px;
-  margin: 30px;
-  border-radius: 5px;
+.twitter-box {
+  float: right;
+  height: 500px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: scroll;
 }
-.twitter-box h5{
-  margin-top: 10px;
-  margin-left: 10px;
+.twitter-box-header > h5 {
+  margin-left: 15px;
 }
 .tweet {
   height: 90px;
   margin: 10px;
-  /*width: 100%;*/
- /* margin-left: auto;
-  margin-right: auto;*/
   background-color: #F5F7F9;
-
 }
-.twitter-box{
-  background-color: #16214d;
-  margin-left: 30px;
-  margin-bottom: 30px;
-  height: 560px;
+.tweet > p {
+  margin-left: 15px;
 }
 .tweet-list{
     height: 450px;
     overflow: scroll;
 }
-.TruckTweet{
-  font-family: Helvetica, Arial, sans-serif;
+.twitter-box-header{
+  background-color: #F5F7F9;
+  width: 100%;
+  margin-left: 0px;
 }
+.yelp-score{
+  height: 30px;
+  width: auto;
+}
+
+.wrap {min-height: 100%;}
+
+.mega-container {
+  overflow:auto;
+  padding-bottom: 150px;
+  }  /* must be same height as the footer */
+
+#footer {
+  position: relative;
+  margin-top: -150px; /* negative value of footer height */
+  height: 150px;
+  clear:both;
+} 
+
+/*.footer{
+  clear: both;
+  position: relative;
+  height: 100px;
+  background-color: grey
+}
+*/
+
+
+
+
+

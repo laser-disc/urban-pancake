@@ -5,16 +5,15 @@ import React, {Component} from 'react';
 export default class TruckItem extends Component {
   render() {
     return (
-      <div className="TruckItem">
-        <div className="tweet col-lg-offset-3 col-sm-6 col-md-6 col-lg-6">
-          <img className="TruckAvatar" src={this.props.truck.imageUrl} alt="Truck Image" />
-          <div>
-            <h4 className="TruckName">{this.props.truck.name}</h4>
-            <h6 className="TruckHandle">{this.props.truck.handle}</h6>
-          </div>
-          <p className="TruckDescription">{this.props.truck.description}</p>
-          <h5 className="TruckTweet"> {this.props.truck.message}</h5>
-          <div className="TruckTimeStamp">{this.props.truck.timeStamp}</div>
+      <div className="truck-item container well">
+        <div className="truck-item">
+          <img className="truck-avatar" src={this.props.truck.imageUrl} alt="Truck Image" />
+         
+         <div className="truck-item-data">
+          <h4 className="truck-name">{this.props.truck.name}</h4> 
+          <p>[Truck Description Truck Description Truck Description Truck Description Truck Description]</p>
+          <img className = "yelp-score" src="http://sfchiro.org/wp-content/uploads/2015/10/yelp-stars.png" alt=""/>
+         </div> 
         </div>
       </div>
     );
