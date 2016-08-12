@@ -4,14 +4,14 @@ import { bindActionCreators } from 'redux';
 import TruckViewHeader from '../components/TruckViewHeader.jsx';
 import TruckProfile from '../containers/TruckProfile.jsx';
 import TruckImageContainer from '../components/TruckImageContainer.jsx';
-import { FetchYelp } from '../actions/FetchYelp';
-import { FetchFiveTweets } from '../actions/FetchFiveTweets';
+import { fetchYelp } from '../actions/FetchYelp';
+import { fetchFiveTweets } from '../actions/FetchFiveTweets';
 
 class TruckView extends Component {
 
   componentWillMount() {
-    this.props.FetchFiveTweets(this.props.params.truckName);
-    this.props.FetchYelp(this.props.params.truckName)
+    this.props.fetchFiveTweets(this.props.params.truckName);
+    this.props.fetchYelp(this.props.params.truckName)
   }
 
   renderTruckView(truck, fiveTweets){
@@ -35,7 +35,7 @@ function mapStateToProps(state) {
 };
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ FetchYelp, FetchFiveTweets }, dispatch);
+  return bindActionCreators({ fetchYelp, fetchFiveTweets }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TruckView);

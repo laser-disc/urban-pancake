@@ -2,10 +2,10 @@ import React from 'react';
 import TruckList from '../containers/TruckList.jsx';
 import GoogleMap from '../containers/GoogleMap.jsx';
 import {Link} from "react-router";
-import {Router, Route, hashHistory} from 'react-router';
+import {Router, Route} from 'react-router';
 import Header from './Header.jsx'
 
-      
+
 
 let googleMap;
 if (process.env.TEST_ENV === 'test') {
@@ -21,9 +21,9 @@ return (
     <div className='wrap row'>
     <Header />
       <div className="col-md-6 google-map">
-       {googleMap} 
+       {googleMap}
       </div>
-    
+
       <div className="col-md-5 truck-list">
       <TruckList />
       </div>
