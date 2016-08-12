@@ -37,12 +37,11 @@ const yelpObj = (yelpBizID) => {
 };
 
 
-module.exports.getYelpInfo = function (truck) {
+module.exports.getYelpInfo = (truck) => {
   return new Promise((resolve, reject) => {
     let yelp = new Yelp(yelpInfo);
     yelp.business(truck.yelpBizID, (err, data) => {
       if (err) {
-        console.log('getYelpInfo error', err);
         reject(err);
       } else {
         const truckYelpObj = yelpObj(truck.yelpBizID);
@@ -61,8 +60,8 @@ module.exports.getYelpInfo = function (truck) {
   });
 };
 
-module.exports.getFiveTweets = function (truckInfo) {
-  
+module.exports.getFiveTweets = (truckInfo) => {
+
   return new Promise ((resolve, reject) => {
     const searchParams = {
       // screen_name: truckInfo.twitterHandle,
@@ -71,7 +70,6 @@ module.exports.getFiveTweets = function (truckInfo) {
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/oembed
     twitterClient.get('statuses/oembed', searchParams, (error, tweets, response) => {
       if (error) {
-        console.log('getFiveTweets error', error);
         reject(error);
       }
       truckInfo.fiveTweets = tweets;
@@ -163,26 +161,4 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
   });
 };
 
-// module.exports.updateDBwithYelpInfo = (truckYelpObj) => {
-//   return new Promise((resolve, reject) => {
-//     // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
-//     Truck.find({ handle: truckYelpObj.truckName }, (err, trucks) => {
-//       //  if no matches are found, it will return an empty array
-//       if (trucks.length === 0) {
-//         // and then we create a new document in the db for that truck
-//         // truckYelpObj.save((err, resp) => err ? reject(err) : resolve(resp));
-//         console.log(`${truckYelpObj.truckName} created`);
-//       } else {
-//         // otherwise update existing document
-//         Truck.findOneAndUpdate(
-//           { handle: truckYelpObj.truckName },
-//           { $set: {
-//             yelpInfo: truckYelpObj,
-//           } }, { upsert: true },
-//           (err, resp) => err ? reject(err) : resolve(resp)
-//         );
-//         console.log(`${truckYelpObj.truckName} updated`);
-//       }
-//     });
-//   });
-// };
+

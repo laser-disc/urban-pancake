@@ -1,29 +1,20 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
-import ReduxPromise from 'redux-promise';
-import rootReducer from '../reducers/reducers';
 import TruckViewHeader from '../components/TruckViewHeader.jsx';
 import TruckProfile from '../containers/TruckProfile.jsx';
 import TruckImageContainer from '../components/TruckImageContainer.jsx';
 import {FetchYelp} from '../actions/FetchYelp';
 
 class TruckView extends Component {
-  
+
   componentWillMount() {
     this.props.FetchYelp()
-    .then((response) =>{
-      console.log(response.payload.data);
-      console.log("Find out what to do with this html for the Twitter Widget", response.payload.data.fiveTweets.html);
-    });
-  }
-  
-  renderTruckView(truck){
-    return <TruckProfile yelpInfo ={truck} />
   }
 
+  renderTruckView(truck){
+    return <TruckProfile key={truck.yelpBizID} yelpInfo ={truck} />
+  }
 
   render(){
     return (
@@ -36,7 +27,6 @@ class TruckView extends Component {
   }
 }
 function mapStateToProps(state) {
-  console.log('state:' , state.truckView)
   return {
     truckView: state.truckView
   };

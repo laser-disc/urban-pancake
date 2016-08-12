@@ -41,11 +41,8 @@ foodTrucks.forEach(foodTruck => {
     newTruckObj.yelpBizID = foodTrucksObj[foodTruck].yelpBizID;
     return getYelpInfo(newTruckObj);
   })
-  .then(newTruckObj => createOrUpdateDB(newTruckObj)
-  )
-  .catch(e => {
-    console.log('Truck ', e.name, ' could not be located, so new info for this truck was not stored in the database');
-  });
+  .then(newTruckObj => createOrUpdateDB(newTruckObj))
+  .catch(err => res.status(400).send(err));
 });
 
 
@@ -62,19 +59,9 @@ module.exports = (app) => {
     let truck = {};
     truck.truckName = req.query.truckName;
     truck.yelpBizID = foodTrucksObj[truck.truckName].yelpBizID;
-    console.log("request-handler API/yelp truck", truck)
     getYelpInfo(truck)
-    .then((truckInfo) => {
-      console.log("request-handler API/yelp truckInfo about to send truckInfo to getFiveTweets", truckInfo);
-      return getFiveTweets(truckInfo);
-    })
-    .then((truckInfo) => {
-      console.log("request-handler API/yelp truckInfo", truckInfo);
-      res.status(200).send(truckInfo);
-    })
-    .catch((e) => {
-      res.status(400).send(e);
-      console.log('yelp info and getFiveTweets could not be updated');
-    });
+    .then(truckInfo => getFiveTweets(truckInfo))
+    .then(truckInfo => res.status(200).send(truckInfo))
+    .catch(err => res.status(400).send(err));
   });
 };
