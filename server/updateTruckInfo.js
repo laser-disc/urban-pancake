@@ -61,10 +61,8 @@ module.exports.getYelpInfo = (truck) => {
 };
 
 module.exports.getFiveTweets = (truckInfo) => {
-
   return new Promise ((resolve, reject) => {
     const searchParams = {
-      // screen_name: truckInfo.twitterHandle,
       url: 'https://twitter.com/CurryUpNow/status/763789672170590208',
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/oembed
@@ -141,7 +139,7 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
       if (trucks.length === 0) {
         // and then we create a new document in the db for that truck
         // newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
-        newTruckObj.save((err, resp) => err ? reject(err) : resolve(resp));
+        newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
         console.log(`${newTruckObj.name} created`);
       } else {
         // otherwise update existing document

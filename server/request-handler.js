@@ -56,12 +56,17 @@ module.exports = (app) => {
     Truck.findOne({ handle }, (err, truck) => res.status(200).send(truck));
   });
   app.get("/API/yelp", (req,res) => {
+    let handle = '@' + req.query.truckName;
+    Truck.findOne({ handle }, (err, truck) => res.status(200).send(truck))
+    .catch( err => res.status(400).send(err))
+  });
+  app.get("/API/fiveTweets", (req,res) => {
     let truck = {};
     truck.truckName = req.query.truckName;
-    truck.yelpBizID = foodTrucksObj[truck.truckName].yelpBizID;
-    getYelpInfo(truck)
-    .then(truckInfo => getFiveTweets(truckInfo))
-    .then(truckInfo => res.status(200).send(truckInfo))
-    .catch(err => res.status(400).send(err));
+    return getFiveTweets(truck)
+    .then(truckInfo => {
+      res.status(200).send(truckInfo)
+     })
+     .catch(err => res.status(400).send(err));
   });
 };
