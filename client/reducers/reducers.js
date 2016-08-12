@@ -6,7 +6,7 @@ import TruckViewReducer from './reducer_TruckView';
 
 const rootReducer = combineReducers({
   trucks: TruckReducer,
-  truckView: TruckViewReducer,
+  yelpInfo: TruckViewReducer,
 });
 
 export default rootReducer;

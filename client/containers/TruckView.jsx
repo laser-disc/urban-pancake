@@ -9,7 +9,7 @@ import { FetchYelp } from '../actions/FetchYelp';
 class TruckView extends Component {
 
   componentWillMount() {
-    this.props.FetchYelp()
+    this.props.FetchYelp();
   }
 
   renderTruckView(truck){
@@ -21,14 +21,14 @@ class TruckView extends Component {
       <div>
         <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
         <TruckViewHeader />
-        { this.props.truckView.map(truck => this.renderTruckView(truck)) }
+        { this.props.yelpInfo.map(truck => this.renderTruckView(truck)) }
       </div>
     )
   }
 }
 function mapStateToProps(state) {
   return {
-    truckView: state.truckView
+    yelpInfo: state.yelpInfo
   };
 };
 
