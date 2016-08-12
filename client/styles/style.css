@@ -59,7 +59,11 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   color: #16214d;
   margin-top: 10px;
 }
-
+.page-title{
+  width: 400px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
 .truck-item {
   margin-bottom: 15px;
   width: 97% !important;
@@ -73,19 +77,15 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   margin-top: 10px;
 }
 .home-text {
-  margin-top: 15px;
-  margin-left: 30px;
-  position: absolute;
+  margin-top: 25px;
 }
 .github {
-  margin-top: 15px;
-  float: right;
-  margin-right: 30px;
-  position: relative;
+  margin-top: 25px !important;
 }
 .nav-bar {
   margin-left: 50px;
   margin-right: 50px;
+  max-height: 110px !important;
 }
 .jumbotron {
   height: 70px !important;
