@@ -13,7 +13,9 @@ class TruckList extends Component {
   }
   // Iterates over each truck in the database
   renderTrucks(truck) {
-    return  <Link to="/truckview" key={truck._id} > <TruckItem truck={truck} /></Link>
+    // this.props.FetchYelp(truck.name)
+    var handle = truck.handle.slice(1, truck.handle.length);
+    return  <Link to={"/truckview/" + handle} key={truck._id} > <TruckItem truck={truck} /></Link>
   };
   // Maps truck prop to TruckItem
   render() {
