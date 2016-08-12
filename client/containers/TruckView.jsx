@@ -15,8 +15,8 @@ class TruckView extends Component {
   componentWillMount() {
     this.props.FetchYelp()
     .then((response) =>{
-      console.log(response.payload.data);
-      console.log("Find out what to do with this html for the Twitter Widget", response.payload.data.fiveTweets.html);
+      // console.log(response.payload.data);
+      // console.log("Find out what to do with this html for the Twitter Widget", response.payload.data.fiveTweets.html);
     });
   }
   
@@ -36,7 +36,7 @@ class TruckView extends Component {
   }
 }
 function mapStateToProps(state) {
-  console.log('state:' , state.truckView)
+  // console.log('state:' , state.truckView)
   return {
     yelpInfo: state.yelpInfo
   };

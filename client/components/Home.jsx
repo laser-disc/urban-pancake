@@ -24,7 +24,7 @@ return (
        {googleMap} 
       </div>
     
-      <div className="col-md-6 truck-list">
+      <div className="col-md-5 truck-list">
       <TruckList />
       </div>
     </div>

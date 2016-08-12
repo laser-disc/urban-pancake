@@ -19,7 +19,7 @@ class TruckList extends Component {
   // Maps truck prop to TruckItem
   render() {
     return (
-      <div className="truck-list">
+      <div className="truck-list well">
         {this.props.trucks.map(truck => this.renderTrucks(truck))}
       </div>
     );
@@ -27,7 +27,6 @@ class TruckList extends Component {
 };
 
 function mapStateToProps(state) {
- console.log('truck state', state)
   return {
     trucks: state.trucks,
     yelpInfo: state.yelpInfo
