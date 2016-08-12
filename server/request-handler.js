@@ -66,7 +66,7 @@ module.exports = (app) => {
     return getFiveTweets(truck)
     .then(truckInfo => {
       res.status(200).send(truckInfo)
-     })
-     .catch(err => res.status(400).send(err));
+    })
+    .catch(err => res.status(400).send(err));
   });
 };
