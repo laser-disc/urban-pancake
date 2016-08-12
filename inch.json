@@ -1,13 +1,16 @@
 {
   "files": {
     "included": [
-      "client/**/*.js",
-      "client/**/*.jsx",
-      "server/**/*.js",
-      "utils/**/*.js"
+      "client/*"
+      "server/*",
+      "utils/*"
     ],
     "excluded": [
-
+      "client/index.html",
+      "client/styles/*",
+      "client/assets/*",
+      "client/npm-debug.log",
+      "server/.DS_Store"
     ]
   }
 }
