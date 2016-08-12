@@ -16,8 +16,6 @@ const { geoCoder } = require('../utils/utils');
 const { getYelpInfo } = require('./updateTruckInfo');
 const { getFiveTweets } = require('./updateTruckInfo');
 const { updateDBwithYelpInfo } = require('./updateTruckInfo');
-// const { getFiveTweetIDs } = require('./updateTruckInfo');
-
 
 // make sure to add the exact Twitter handle minus the @
 const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic'];
@@ -63,35 +61,19 @@ module.exports = (app) => {
     .catch( err => res.status(400).send(err))
   });
   app.get("/API/fiveTweets", (req,res) => {
-    return getTruckTwitterInfo(req.query.truckName)
+    getTruckTwitterInfo(req.query.truckName)
     .then( newTruckObj => {
       newTruckObj.fiveTweetObjs = [];
       return getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[0].id_str)
     })
-    .then( newTruckObj => {
-      return getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[1].id_str)
-    })
-    .then( newTruckObj => {
-      return getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[2].id_str)
-    })
-    .then( newTruckObj => {
-      return getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[3].id_str)
-    })
-    .then( newTruckObj => {
-      return getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[4].id_str)
-    })
-
-    // .then( fiveTweetIDs => {
-    //   console.log("request handler just got fiveTweetIDs for ", fiveTweetIDs.name);
-    //   return getFiveTweets(fiveTweetIDs);
-    // })
-    .then(truckInfo => {
-      console.log("*****inside request-handler about to send response");
-      res.status(200).send(truckInfo)
-    })
+    .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[1].id_str))
+    .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[2].id_str))
+    .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[3].id_str))
+    .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[4].id_str))
+    .then(truckInfo => res.status(200).send(truckInfo))
     .catch(err => {
       console.log("request-handler API/fiveTweets unsuccessful");
       res.status(400).send(err);
-    });
+    })
   });
 };

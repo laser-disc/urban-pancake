@@ -99,9 +99,11 @@ module.exports.getFiveTweets = (newTruckObj, tweetID) => {
         console.log("getFive Tweets error", error);
         reject(error);
       }
-      console.log("before we push", newTruckObj.fiveTweetObjs);
-      newTruckObj.fiveTweetObjs.push(tweet);
-      console.log("after we push", newTruckObj);
+      // console.log("before we push", newTruckObj.fiveTweetObjs);
+      let addClassName = '<blockquote className' + tweet.html.split('<blockquote class')[1];
+      let noCharSet = addClassName.split(' charset="utf-8"').join('');
+      newTruckObj.fiveTweetObjs.push(noCharSet);
+      // console.log("after we push", newTruckObj);
       resolve(newTruckObj);
     });
   });    
