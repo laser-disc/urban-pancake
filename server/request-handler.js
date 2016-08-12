@@ -47,6 +47,7 @@ foodTrucks.forEach(foodTruck => {
 
 
 module.exports = (app) => {
+  
   app.get('/API/fetchAll', (req, res) => {
     Truck.find((err, trucks) => res.status(200).send(trucks));
   });

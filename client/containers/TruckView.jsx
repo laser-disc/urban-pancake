@@ -10,17 +10,17 @@ import { FetchFiveTweets } from '../actions/FetchFiveTweets';
 class TruckView extends Component {
 
   componentWillMount() {
-    this.props.FetchYelp()
-    .then( response => {
-      console.log("truckView FetchYelp response", response)
-    });
     this.props.FetchFiveTweets()
     .then( response => {
       console.log("truckView fetchFiveTweets response", response);
     })
+    this.props.FetchYelp()
+    .then( response => {
+      console.log("truckView FetchYelp response", response)
+    });
   }
 
-  renderTruckView(truck){
+  renderTruckView(truck, fiveTweets){
     return <TruckProfile key={ truck.yelpBizID } yelpInfo ={ truck } />
   }
 
@@ -29,14 +29,15 @@ class TruckView extends Component {
       <div>
         <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
         <TruckViewHeader />
-        { this.props.yelpInfo.map(truck => this.renderTruckView(truck)) }
+        { this.props.yelpInfo.yelpInfo ? <TruckProfile key={this.props.yelpInfo.yelpBizID} yelpInfo={this.props.yelpInfo.yelpInfo} /> : <div>oi mate</div> }
       </div>
     )
   }
 }
 function mapStateToProps(state) {
+  console.log("STATE!!!", state)
   return {
-    yelpInfo: state.yelpInfo
+    yelpInfo: state.yelpInfo,
   };
 };
 
