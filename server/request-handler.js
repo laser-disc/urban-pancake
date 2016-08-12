@@ -15,9 +15,11 @@ const { createOrUpdateDB } = require('./updateTruckInfo');
 const { geoCoder } = require('../utils/utils');
 const { getYelpInfo } = require('./updateTruckInfo');
 const { getFiveTweets } = require('./updateTruckInfo');
+const { updateDBwithYelpInfo } = require('./updateTruckInfo');
+
 
 // make sure to add the exact Twitter handle minus the @
-const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic', 'finsonthehoof', 'chowdermobile'];
+const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic'];
 const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF', 'mvblfeast', 'somastreatfoodpark', 'truckstopSF'];
 // Don't try to get Twitter info from these trucks - you will FAIL
 // badFoodTrucks equalz ['senorsisig'];
@@ -35,11 +37,17 @@ foodTrucks.forEach(foodTruck => {
   .then(newTruckObj => getLocation(newTruckObj))
   .then(newTruckObj => geoCoder(newTruckObj))
   .then(newTruckObj => createTruckWithGeoInfo(newTruckObj))
-  .then(newTruckObj => createOrUpdateDB(newTruckObj))
+  .then(newTruckObj => {
+    newTruckObj.yelpBizID = foodTrucksObj[foodTruck].yelpBizID;
+    return getYelpInfo(newTruckObj);
+  })
+  .then(newTruckObj => createOrUpdateDB(newTruckObj)
+  )
   .catch(e => {
     console.log('Truck ', e.name, ' could not be located, so new info for this truck was not stored in the database');
   });
 });
+
 
 module.exports = (app) => {
   app.get('/API/fetchAll', (req, res) => {

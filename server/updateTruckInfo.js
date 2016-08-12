@@ -51,11 +51,11 @@ module.exports.getYelpInfo = function (truck) {
         truckYelpObj.starsRating = data.rating_img_url;
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
-        truckYelpObj.photo = data.image_url;
-        truckYelpObj.categories = data.categories;
+        truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
+        // truckYelpObj.categories = data.categories;  // TODO: turn this array into a string
         truckYelpObj.twitterHandle = truck.truckName;
-        console.log("*******getYelpInfo truckYelpObj**********\n", truckYelpObj);
-        resolve(truckYelpObj);
+        truck.truck.yelpInfo = truckYelpObj;
+        resolve(truck);
       }
     });
   });
@@ -74,7 +74,6 @@ module.exports.getFiveTweets = function (truckInfo) {
         console.log('getFiveTweets error', error);
         reject(error);
       }
-      console.log('getFiveTweets tweets', tweets);
       truckInfo.fiveTweets = tweets;
       resolve(truckInfo);
     });
@@ -108,7 +107,6 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
         console.log('error', error);
         reject(error);
       }
-      // console.log("getTruckTwitter Info tweets", tweets);
       newTruckObj.allTweetObjs = tweets;
       tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
       resolve(newTruckObj);
@@ -128,9 +126,10 @@ module.exports.createTruckWithGeoInfo = (newTruckObj) => {
       message: tweets[0].text,
       timeStamp: tweets[0].created_at,
       imageUrl: tweets[0].user.profile_image_url,
-      yelpId: 'stringy',
       location: newTruckObj.geoInfo,
       schedule: truckSchedules[tweets[0].user.name],
+      yelpId: null,
+      yelpInfo: null,
     });
     resolve(newTruckObj);
   });
@@ -143,7 +142,8 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
       //  if no matches are found, it will return an empty array
       if (trucks.length === 0) {
         // and then we create a new document in the db for that truck
-        newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
+        // newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
+        newTruckObj.save((err, resp) => err ? reject(err) : resolve(resp));
         console.log(`${newTruckObj.name} created`);
       } else {
         // otherwise update existing document
@@ -153,6 +153,7 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
             message: newTruckObj.truck.message,
             timeStamp: newTruckObj.truck.timeStamp,
             location: newTruckObj.truck.location,
+            yelpInfo: newTruckObj.truck.yelpInfo,
           } }, { upsert: true },
           (err, resp) => err ? reject(err) : resolve(resp)
         );
@@ -161,3 +162,27 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
     });
   });
 };
+
+// module.exports.updateDBwithYelpInfo = (truckYelpObj) => {
+//   return new Promise((resolve, reject) => {
+//     // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
+//     Truck.find({ handle: truckYelpObj.truckName }, (err, trucks) => {
+//       //  if no matches are found, it will return an empty array
+//       if (trucks.length === 0) {
+//         // and then we create a new document in the db for that truck
+//         // truckYelpObj.save((err, resp) => err ? reject(err) : resolve(resp));
+//         console.log(`${truckYelpObj.truckName} created`);
+//       } else {
+//         // otherwise update existing document
+//         Truck.findOneAndUpdate(
+//           { handle: truckYelpObj.truckName },
+//           { $set: {
+//             yelpInfo: truckYelpObj,
+//           } }, { upsert: true },
+//           (err, resp) => err ? reject(err) : resolve(resp)
+//         );
+//         console.log(`${truckYelpObj.truckName} updated`);
+//       }
+//     });
+//   });
+// };
