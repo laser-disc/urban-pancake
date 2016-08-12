@@ -6,7 +6,7 @@
 
 const db = require('../db/config');
 const mongoose = require('mongoose');
-const https = require('https')
+const https = require('https');
 const Truck = require('../db/truckSchema');
 const { getLocation } = require('./getLocationFromTweets');
 const { createTruckWithGeoInfo } = require('./updateTruckInfo');
@@ -47,7 +47,7 @@ foodTrucks.forEach(foodTruck => {
 
 
 module.exports = (app) => {
-  
+
   app.get('/API/fetchAll', (req, res) => {
     Truck.find((err, trucks) => res.status(200).send(trucks));
   });
@@ -56,7 +56,7 @@ module.exports = (app) => {
     const handle = req.body.params ? req.body.params.handle : req.query.handle;
     Truck.findOne({ handle }, (err, truck) => res.status(200).send(truck));
   });
-  app.get("/API/yelp", (req,res) => {
+  app.get('/API/yelp', (req,res) => {
     let handle = '@' + req.query.truckName;
     Truck.findOne({ handle }, (err, truck) => res.status(200).send(truck))
     .catch( err => res.status(400).send(err))
