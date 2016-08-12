@@ -50,7 +50,7 @@ module.exports.getYelpInfo = (truck) => {
         truckYelpObj.starsRating = data.rating_img_url;
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
-        truckYelpObj.photo = data.image_url;
+        truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
         truckYelpObj.categories = data.categories;
         truckYelpObj.twitterHandle = truck.truckName;
         resolve(truckYelpObj);
