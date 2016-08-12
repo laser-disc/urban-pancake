@@ -36,6 +36,18 @@ const yelpObj = (yelpBizID) => {
   };
 };
 
+const TruckObj = () => {
+  return {
+    name: null,
+    allTweetObjs: [],
+    allTweetMessages: [],
+    chosenIndex: null,
+    getLocationResults: { poi: null, address: null },
+    geoInfo: null,
+    truck: null,
+  };
+};
+
 
 module.exports.getYelpInfo = (truck) => {
   return new Promise((resolve, reject) => {
@@ -60,35 +72,45 @@ module.exports.getYelpInfo = (truck) => {
   });
 };
 
-module.exports.getFiveTweets = (truckInfo) => {
+// module.exports.getFiveTweetIDs = (newTruckObj) => {
+//   return new Promise ((resolve, reject) => {
+//     let fiveTweetIDs = {};
+//     fiveTweetIDs.name = newTruckObj.name
+//     let fiveTweetStrings = [];
+//     fiveTweetStrings.push(newTruckObj.allTweetObjs[0].id_str);
+//     fiveTweetStrings.push(newTruckObj.allTweetObjs[1].id_str);
+//     fiveTweetStrings.push(newTruckObj.allTweetObjs[2].id_str);
+//     fiveTweetStrings.push(newTruckObj.allTweetObjs[3].id_str);
+//     fiveTweetStrings.push(newTruckObj.allTweetObjs[4].id_str);
+//     fiveTweetIDs.fiveTweetStrings = fiveTweetStrings;
+//     resolve(fiveTweetIDs);
+//   });
+// };
+
+module.exports.getFiveTweets = (newTruckObj, tweetID) => {
+  console.log("getFiveTweets just recieved ", newTruckObj.name, tweetID);
   return new Promise ((resolve, reject) => {
-    const searchParams = {
-      url: 'https://twitter.com/CurryUpNow/status/763789672170590208',
+    let searchParams = {
+      url: 'https://twitter.com/' + newTruckObj.name + '/status/' + tweetID,
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/oembed
-    twitterClient.get('statuses/oembed', searchParams, (error, tweets, response) => {
+    twitterClient.get('statuses/oembed', searchParams, (error, tweet, response) => {
       if (error) {
+        console.log("getFive Tweets error", error);
         reject(error);
       }
-      truckInfo.fiveTweets = tweets;
-      resolve(truckInfo);
+      console.log("before we push", newTruckObj.fiveTweetObjs);
+      newTruckObj.fiveTweetObjs.push(tweet);
+      console.log("after we push", newTruckObj);
+      resolve(newTruckObj);
     });
-  });
+  });    
 };
 
-const TruckObj = () => {
-  return {
-    name: null,
-    allTweetObjs: [],
-    allTweetMessages: [],
-    chosenIndex: null,
-    getLocationResults: { poi: null, address: null },
-    geoInfo: null,
-    truck: null,
-  };
-};
 
 module.exports.getTruckTwitterInfo = (foodTruck) => {
+  // let truckName = foodTruck.truckName ? foodTruck.truckName : foodTruck;
+  console.log("getTruckTwitterInfo truckName", foodTruck);
   return new Promise((resolve, reject) => {
     const newTruckObj = TruckObj();
     newTruckObj.name = foodTruck;
