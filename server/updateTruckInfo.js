@@ -36,6 +36,18 @@ const yelpObj = (yelpBizID) => {
   };
 };
 
+const TruckObj = () => {
+  return {
+    name: null,
+    allTweetObjs: [],
+    allTweetMessages: [],
+    chosenIndex: null,
+    getLocationResults: { poi: null, address: null },
+    geoInfo: null,
+    truck: null,
+  };
+};
+
 
 module.exports.getYelpInfo = (truck) => {
   return new Promise((resolve, reject) => {
@@ -60,31 +72,24 @@ module.exports.getYelpInfo = (truck) => {
   });
 };
 
-module.exports.getFiveTweets = (truckInfo) => {
+module.exports.getFiveTweets = (newTruckObj, tweetID) => {
+  console.log("getFiveTweets just recieved ", newTruckObj.name, tweetID);
   return new Promise ((resolve, reject) => {
-    const searchParams = {
-      url: 'https://twitter.com/CurryUpNow/status/763789672170590208',
+    let searchParams = {
+      url: 'https://twitter.com/' + newTruckObj.name + '/status/' + tweetID,
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/oembed
-    twitterClient.get('statuses/oembed', searchParams, (error, tweets, response) => {
+    twitterClient.get('statuses/oembed', searchParams, (error, tweet, response) => {
       if (error) {
+        console.log("getFive Tweets error", error);
         reject(error);
       }
-      truckInfo.fiveTweets = tweets;
-      resolve(truckInfo);
+      let addClassName = '<blockquote className' + tweet.html.split('<blockquote class')[1];
+      let noCharSet = addClassName.split(' charset="utf-8"').join('');
+      newTruckObj.fiveTweetObjs.push(noCharSet);
+      resolve(newTruckObj);
     });
-  });
-};
-const TruckObj = () => {
-  return {
-    name: null,
-    allTweetObjs: [],
-    allTweetMessages: [],
-    chosenIndex: null,
-    getLocationResults: { poi: null, address: null },
-    geoInfo: null,
-    truck: null,
-  };
+  });    
 };
 
 module.exports.getTruckTwitterInfo = (foodTruck) => {

@@ -17,7 +17,6 @@ const { getYelpInfo } = require('./updateTruckInfo');
 const { getFiveTweets } = require('./updateTruckInfo');
 const { updateDBwithYelpInfo } = require('./updateTruckInfo');
 
-
 // make sure to add the exact Twitter handle minus the @
 const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic'];
 const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF', 'mvblfeast', 'somastreatfoodpark', 'truckstopSF'];
@@ -62,12 +61,19 @@ module.exports = (app) => {
     .catch( err => res.status(400).send(err))
   });
   app.get("/API/fiveTweets", (req,res) => {
-    let truck = {};
-    truck.truckName = req.query.truckName;
-    return getFiveTweets(truck)
-    .then(truckInfo => {
-      res.status(200).send(truckInfo)
+    getTruckTwitterInfo(req.query.truckName)
+    .then( newTruckObj => {
+      newTruckObj.fiveTweetObjs = [];
+      return getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[0].id_str)
     })
-    .catch(err => res.status(400).send(err));
+    .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[1].id_str))
+    .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[2].id_str))
+    .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[3].id_str))
+    .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[4].id_str))
+    .then(truckInfo => res.status(200).send(truckInfo))
+    .catch(err => {
+      console.log("request-handler API/fiveTweets unsuccessful");
+      res.status(400).send(err);
+    })
   });
 };
