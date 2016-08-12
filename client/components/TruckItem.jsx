@@ -4,10 +4,7 @@ import React, {Component} from 'react';
 
 export default class TruckItem extends Component {
   render() {
-    
-      console.log("PROPS: ", this.props.truck)
-    
-    
+      console.log("Truck item this.props.truck: ", this.props.truck)
     return (
       <div className="truck-item container well">
         <img className="truck-avatar" src={this.props.truck.yelpInfo.photo} alt="Truck Image" /> 
