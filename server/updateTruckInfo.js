@@ -37,12 +37,11 @@ const yelpObj = (yelpBizID) => {
 };
 
 
-module.exports.getYelpInfo = function (truck) {
+module.exports.getYelpInfo = (truck) => {
   return new Promise((resolve, reject) => {
     let yelp = new Yelp(yelpInfo);
     yelp.business(truck.yelpBizID, (err, data) => {
       if (err) {
-        console.log('getYelpInfo error', err);
         reject(err);
       } else {
         const truckYelpObj = yelpObj(truck.yelpBizID);
@@ -54,15 +53,14 @@ module.exports.getYelpInfo = function (truck) {
         truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
         truckYelpObj.categories = data.categories;
         truckYelpObj.twitterHandle = truck.truckName;
-        console.log("*******getYelpInfo truckYelpObj**********\n", truckYelpObj);
         resolve(truckYelpObj);
       }
     });
   });
 };
 
-module.exports.getFiveTweets = function (truckInfo) {
-  
+module.exports.getFiveTweets = (truckInfo) => {
+
   return new Promise ((resolve, reject) => {
     const searchParams = {
       // screen_name: truckInfo.twitterHandle,
@@ -71,10 +69,8 @@ module.exports.getFiveTweets = function (truckInfo) {
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/oembed
     twitterClient.get('statuses/oembed', searchParams, (error, tweets, response) => {
       if (error) {
-        console.log('getFiveTweets error', error);
         reject(error);
       }
-      console.log('getFiveTweets tweets', tweets);
       truckInfo.fiveTweets = tweets;
       resolve(truckInfo);
     });

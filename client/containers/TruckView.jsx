@@ -1,49 +1,39 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
-import ReduxPromise from 'redux-promise';
-import rootReducer from '../reducers/reducers';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import TruckViewHeader from '../components/TruckViewHeader.jsx';
 import TruckProfile from '../containers/TruckProfile.jsx';
 import TruckImageContainer from '../components/TruckImageContainer.jsx';
-import {FetchYelp} from '../actions/FetchYelp';
+import { FetchYelp } from '../actions/FetchYelp';
 
 class TruckView extends Component {
-  
+
   componentWillMount() {
-    this.props.FetchYelp()
-    .then((response) =>{
-      // console.log(response.payload.data);
-      // console.log("Find out what to do with this html for the Twitter Widget", response.payload.data.fiveTweets.html);
-    });
-  }
-  
-  renderTruckView(truck){
-    return  <TruckProfile key={truck.yelpBizID} yelpInfo ={truck} />
+    this.props.FetchYelp();
   }
 
+  renderTruckView(truck){
+    return <TruckProfile key={ truck.yelpBizID } yelpInfo ={ truck } />
+  }
 
   render(){
     return (
       <div>
         <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
         <TruckViewHeader />
-        {this.props.yelpInfo.map(truck => this.renderTruckView(truck))}
+        { this.props.yelpInfo.map(truck => this.renderTruckView(truck)) }
       </div>
     )
   }
 }
 function mapStateToProps(state) {
-  // console.log('state:' , state.truckView)
   return {
     yelpInfo: state.yelpInfo
   };
 };
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({FetchYelp}, dispatch);
+  return bindActionCreators({ FetchYelp }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TruckView);

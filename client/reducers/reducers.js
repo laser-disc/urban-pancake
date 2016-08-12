@@ -2,7 +2,7 @@
 
 import { combineReducers } from 'redux';
 import TruckReducer from './reducer_TruckList';
-import TruckViewReducer from './reducer_TruckViewReducer';
+import TruckViewReducer from './reducer_TruckView';
 
 const rootReducer = combineReducers({
   trucks: TruckReducer,
