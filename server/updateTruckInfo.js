@@ -72,21 +72,6 @@ module.exports.getYelpInfo = (truck) => {
   });
 };
 
-// module.exports.getFiveTweetIDs = (newTruckObj) => {
-//   return new Promise ((resolve, reject) => {
-//     let fiveTweetIDs = {};
-//     fiveTweetIDs.name = newTruckObj.name
-//     let fiveTweetStrings = [];
-//     fiveTweetStrings.push(newTruckObj.allTweetObjs[0].id_str);
-//     fiveTweetStrings.push(newTruckObj.allTweetObjs[1].id_str);
-//     fiveTweetStrings.push(newTruckObj.allTweetObjs[2].id_str);
-//     fiveTweetStrings.push(newTruckObj.allTweetObjs[3].id_str);
-//     fiveTweetStrings.push(newTruckObj.allTweetObjs[4].id_str);
-//     fiveTweetIDs.fiveTweetStrings = fiveTweetStrings;
-//     resolve(fiveTweetIDs);
-//   });
-// };
-
 module.exports.getFiveTweets = (newTruckObj, tweetID) => {
   console.log("getFiveTweets just recieved ", newTruckObj.name, tweetID);
   return new Promise ((resolve, reject) => {
@@ -99,11 +84,9 @@ module.exports.getFiveTweets = (newTruckObj, tweetID) => {
         console.log("getFive Tweets error", error);
         reject(error);
       }
-      // console.log("before we push", newTruckObj.fiveTweetObjs);
       let addClassName = '<blockquote className' + tweet.html.split('<blockquote class')[1];
       let noCharSet = addClassName.split(' charset="utf-8"').join('');
       newTruckObj.fiveTweetObjs.push(noCharSet);
-      // console.log("after we push", newTruckObj);
       resolve(newTruckObj);
     });
   });    
@@ -111,8 +94,6 @@ module.exports.getFiveTweets = (newTruckObj, tweetID) => {
 
 
 module.exports.getTruckTwitterInfo = (foodTruck) => {
-  // let truckName = foodTruck.truckName ? foodTruck.truckName : foodTruck;
-  console.log("getTruckTwitterInfo truckName", foodTruck);
   return new Promise((resolve, reject) => {
     const newTruckObj = TruckObj();
     newTruckObj.name = foodTruck;
