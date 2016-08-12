@@ -4,19 +4,21 @@ import TruckCategories from '../components/TruckCategories.jsx'
 export default class TruckProfile extends Component {
 
   render(){
+    console.log("TRUCK PROFILE: THIS.PROPS" , this.props)
+    var truckProfileImgStyle = {
+      backgroundImage : "url(" + this.props.yelpInfo.photo +")",
+    }
     return (
       <div className="container">
         <div className="row">
           <div className="col-md-6">
             <div className="truck-profile-img-container well">
-              <div className="truck-profile-img">
+              <div className="truck-profile-img" style={truckProfileImgStyle}>
               </div>
               <TruckCategories/>
             </div>
           </div>
           <div className="col-md-6">
-            <h1>{this.props.yelpInfo.name}</h1>
-            <img src={this.props.yelpInfo.photo} alt={this.props.yelpInfo.name}/>
             <TwitterBox />
           </div>
         </div>

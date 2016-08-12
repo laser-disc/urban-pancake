@@ -50,20 +50,19 @@ module.exports.getYelpInfo = (truck) => {
         truckYelpObj.starsRating = data.rating_img_url;
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
-        truckYelpObj.photo = data.image_url;
-        truckYelpObj.categories = data.categories;
+        truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
+        // truckYelpObj.categories = data.categories;  // TODO: turn this array into a string
         truckYelpObj.twitterHandle = truck.truckName;
-        resolve(truckYelpObj);
+        truck.truck.yelpInfo = truckYelpObj;
+        resolve(truck);
       }
     });
   });
 };
 
 module.exports.getFiveTweets = (truckInfo) => {
-
   return new Promise ((resolve, reject) => {
     const searchParams = {
-      // screen_name: truckInfo.twitterHandle,
       url: 'https://twitter.com/CurryUpNow/status/763789672170590208',
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/oembed
@@ -104,7 +103,6 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
         console.log('error', error);
         reject(error);
       }
-      // console.log("getTruckTwitter Info tweets", tweets);
       newTruckObj.allTweetObjs = tweets;
       tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
       resolve(newTruckObj);
@@ -124,9 +122,10 @@ module.exports.createTruckWithGeoInfo = (newTruckObj) => {
       message: tweets[0].text,
       timeStamp: tweets[0].created_at,
       imageUrl: tweets[0].user.profile_image_url,
-      yelpId: 'stringy',
       location: newTruckObj.geoInfo,
       schedule: truckSchedules[tweets[0].user.name],
+      yelpId: null,
+      yelpInfo: null,
     });
     resolve(newTruckObj);
   });
@@ -139,6 +138,7 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
       //  if no matches are found, it will return an empty array
       if (trucks.length === 0) {
         // and then we create a new document in the db for that truck
+        // newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
         newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
         console.log(`${newTruckObj.name} created`);
       } else {
@@ -149,6 +149,7 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
             message: newTruckObj.truck.message,
             timeStamp: newTruckObj.truck.timeStamp,
             location: newTruckObj.truck.location,
+            yelpInfo: newTruckObj.truck.yelpInfo,
           } }, { upsert: true },
           (err, resp) => err ? reject(err) : resolve(resp)
         );
@@ -157,3 +158,5 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
     });
   });
 };
+
+
