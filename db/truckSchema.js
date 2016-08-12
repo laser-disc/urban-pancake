@@ -7,7 +7,6 @@ const truckSchema = new mongoose.Schema({
   message: String,
   timeStamp: String,
   imageUrl: String,
-  yelpId: String,
   location: { lat: Number, lng: Number },
   schedule: [
     /* sunday:*/ { lat: Number, lng: Number, closed: Boolean },
@@ -18,6 +17,16 @@ const truckSchema = new mongoose.Schema({
     /* friday:*/ { lat: Number, lng: Number, closed: Boolean },
     /* saturday:*/ { lat: Number, lng: Number, closed: Boolean },
   ],
+  yelpId: String,
+  yelpInfo: {
+    name: String,
+    yelpBizID: String,
+    starsRating: String,
+    review_count: Number,
+    custReview: String,
+    photo: String,
+    categories: String,  // aka 'cuisine'
+  }
 });
 
 const Truck = mongoose.model('Truck', truckSchema);
