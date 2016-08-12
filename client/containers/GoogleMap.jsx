@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 // import Marker from '../components/Marker.jsx';
 // Marker position needs to be broken up to the individual lat, lng props
 // use new Date.now().getDay() for day of week index
@@ -23,7 +23,7 @@ class Map extends Component {
     const position = tweetIndex === index ? truck.location : truck.schedule[index].closed ? {lat: null, lng: null} : truck.schedule[index];
     if (position.lat) {
       return <Marker
-        key={truck._id} position={{lat: position.lat, lng: position.lng}}
+        key={ truck._id } position={{ lat: position.lat, lng: position.lng }}
         // icon={{url:'https://media.giphy.com/media/8K1IYSnhUaNH2/giphy_s.gif'}}
       />
     };
@@ -33,8 +33,8 @@ class Map extends Component {
       <GoogleMapLoader
         containerElement={ <div style={{height: '100%', width: '100%'}} /> }
         googleMapElement={
-          <GoogleMap defaultZoom={12} defaultCenter={{lat: 37.7678011, lng: -122.4443519}}>
-            {this.props.trucks.map(truck => this.renderMarkers(truck))}
+          <GoogleMap defaultZoom={ 12 } defaultCenter={{ lat: 37.7678011, lng: -122.4443519 }}>
+            { this.props.trucks.map(truck => this.renderMarkers(truck)) }
           </GoogleMap>
         }
       />

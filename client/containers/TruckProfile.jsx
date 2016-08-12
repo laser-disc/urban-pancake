@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import TwitterBox from '../components/TwitterBox.jsx';
 import TruckCategories from '../components/TruckCategories.jsx'
 export default class TruckProfile extends Component {
