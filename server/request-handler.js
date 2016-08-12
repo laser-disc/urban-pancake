@@ -15,6 +15,8 @@ const { createOrUpdateDB } = require('./updateTruckInfo');
 const { geoCoder } = require('../utils/utils');
 const { getYelpInfo } = require('./updateTruckInfo');
 const { getFiveTweets } = require('./updateTruckInfo');
+const { updateDBwithYelpInfo } = require('./updateTruckInfo');
+
 
 // make sure to add the exact Twitter handle minus the @
 const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic'];
@@ -35,9 +37,14 @@ foodTrucks.forEach(foodTruck => {
   .then(newTruckObj => getLocation(newTruckObj))
   .then(newTruckObj => geoCoder(newTruckObj))
   .then(newTruckObj => createTruckWithGeoInfo(newTruckObj))
+  .then(newTruckObj => {
+    newTruckObj.yelpBizID = foodTrucksObj[foodTruck].yelpBizID;
+    return getYelpInfo(newTruckObj);
+  })
   .then(newTruckObj => createOrUpdateDB(newTruckObj))
   .catch(err => res.status(400).send(err));
 });
+
 
 module.exports = (app) => {
   app.get('/API/fetchAll', (req, res) => {
@@ -49,12 +56,17 @@ module.exports = (app) => {
     Truck.findOne({ handle }, (err, truck) => res.status(200).send(truck));
   });
   app.get("/API/yelp", (req,res) => {
+    let handle = '@' + req.query.truckName;
+    Truck.findOne({ handle }, (err, truck) => res.status(200).send(truck))
+    .catch( err => res.status(400).send(err))
+  });
+  app.get("/API/fiveTweets", (req,res) => {
     let truck = {};
     truck.truckName = req.query.truckName;
-    truck.yelpBizID = foodTrucksObj[truck.truckName].yelpBizID;
-    getYelpInfo(truck)
-    .then(truckInfo => getFiveTweets(truckInfo))
-    .then(truckInfo => res.status(200).send(truckInfo))
+    return getFiveTweets(truck)
+    .then(truckInfo => {
+      res.status(200).send(truckInfo)
+    })
     .catch(err => res.status(400).send(err));
   });
 };
