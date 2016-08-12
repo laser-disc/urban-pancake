@@ -4,6 +4,7 @@ import TruckCategories from '../components/TruckCategories.jsx'
 export default class TruckProfile extends Component {
 
   render(){
+    console.log("TRUCK PROFILE: THIS.PROPS" , this.props)
     var truckProfileImgStyle = {
       backgroundImage : "url(" + this.props.yelpInfo.photo +")",
     }

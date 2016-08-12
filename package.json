@@ -67,6 +67,7 @@
     "mocha": "^2.5.3",
     "mocha-mongoose": "^1.2.0",
     "react-addons-test-utils": "^15.2.1",
+    "redux-logger": "^2.6.1",
     "should": "^10.0.0"
   }
 }
