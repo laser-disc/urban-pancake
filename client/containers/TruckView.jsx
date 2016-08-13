@@ -7,21 +7,17 @@ import TruckImageContainer from '../components/TruckImageContainer.jsx';
 import { FetchYelp } from '../actions/FetchYelp';
 import { FetchFiveTweets } from '../actions/FetchFiveTweets';
 
+        // { this.props.yelpInfo.yelpInfo ? <TruckProfile key={this.props.yelpInfo.yelpBizID} yelpInfo={this.props.yelpInfo.yelpInfo} fiveTweets={this.props.yelpInfo.fiveTweetObjs} /> : <div><h1>Whoops! Something went wrong...</h1></div> }
+    
 class TruckView extends Component {
 
-  componentWillMount() {
-    this.props.FetchYelp()
-    .then( response => {
-      console.log("truckView FetchYelp response", response)
-    });
-    this.props.FetchFiveTweets()
-    .then( response => {
-      console.log("truckView fetchFiveTweets response", response);
-    })
+  componentWillMount(){
+    this.props.FetchFiveTweets(this.props.params.truckName);
+    this.props.FetchYelp(this.props.params.truckName)
   }
 
-  renderTruckView(truck){
-    return <TruckProfile key={ truck.yelpBizID } yelpInfo ={ truck } />
+  renderTruckView(truck, fiveTweets){
+    return <TruckProfile key={ truck.yelpBizID } yelpInfo ={ truck } fiveTweets = { fiveTweets } />
   }
 
   render(){
@@ -29,14 +25,14 @@ class TruckView extends Component {
       <div>
         <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
         <TruckViewHeader />
-        { this.props.yelpInfo.map(truck => this.renderTruckView(truck)) }
+        {this.renderTruckView(this.props.yelpInfo, this.props.yelpInfo.fiveTweetObjs)}
       </div>
     )
   }
 }
 function mapStateToProps(state) {
   return {
-    yelpInfo: state.yelpInfo
+    yelpInfo: state.yelpInfo,
   };
 };
 

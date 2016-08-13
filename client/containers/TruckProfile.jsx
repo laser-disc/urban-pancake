@@ -4,21 +4,28 @@ import TruckCategories from '../components/TruckCategories.jsx'
 export default class TruckProfile extends Component {
 
   render(){
-    var truckProfileImgStyle = {
-      backgroundImage : "url(" + this.props.yelpInfo.photo +")",
+    console.log("[Truck Profile] this.props", this.props)
+    if(this.props.yelpInfo.yelpInfo){
+      var truckProfileImgStyle = {
+        backgroundImage : "url(" + this.props.yelpInfo.yelpInfo.photo+")",
+      }
+      var truckName = this.props.yelpInfo.yelpInfo.name
     }
+
     return (
       <div className="container">
+        <div className="row container">
+        <h1>{truckName}</h1>
+        </div>
         <div className="row">
           <div className="col-md-6">
             <div className="truck-profile-img-container well">
               <div className="truck-profile-img" style={truckProfileImgStyle}>
               </div>
-              <TruckCategories/>
             </div>
           </div>
           <div className="col-md-6">
-            <TwitterBox />
+            <TwitterBox fiveTweets = {this.props.fiveTweets} />
           </div>
         </div>
         <div className="row">
@@ -27,8 +34,3 @@ export default class TruckProfile extends Component {
     )
   }
 }
-      // <div className='truck-profile col-md-7 test'>
-      //   <div className="truck-profile-title">
-      //   </div>
-      //   <img className='truck-profile-img test' src="https://pbs.twimg.com/profile_images/336415645/P1010033.JPG" alt="png"/>
-      // </div>

@@ -36,6 +36,18 @@ const yelpObj = (yelpBizID) => {
   };
 };
 
+const TruckObj = () => {
+  return {
+    name: null,
+    allTweetObjs: [],
+    allTweetMessages: [],
+    chosenIndex: null,
+    getLocationResults: { poi: null, address: null },
+    geoInfo: null,
+    truck: null,
+  };
+};
+
 
 module.exports.getYelpInfo = (truck) => {
   return new Promise((resolve, reject) => {
@@ -47,7 +59,7 @@ module.exports.getYelpInfo = (truck) => {
         const truckYelpObj = yelpObj(truck.yelpBizID);
         truckYelpObj.name = data.name;
         // if the image below (data.rating_img_url) is too large, use data.rating_img_url_small instead (or simply data.rating if you just want the number rating 4.5 or 4)
-        truckYelpObj.starsRating = data.rating_img_url;
+        truckYelpObj.starsRating = data.rating_img_url_large;
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
         truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
@@ -60,32 +72,24 @@ module.exports.getYelpInfo = (truck) => {
   });
 };
 
-module.exports.getFiveTweets = (truckInfo) => {
+module.exports.getFiveTweets = (newTruckObj, tweetID) => {
+  console.log("getFiveTweets just recieved ", newTruckObj.name, tweetID);
   return new Promise ((resolve, reject) => {
-    const searchParams = {
-      url: 'https://twitter.com/CurryUpNow/status/763789672170590208',
+    let searchParams = {
+      url: 'https://twitter.com/' + newTruckObj.name + '/status/' + tweetID,
     };
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/oembed
-    twitterClient.get('statuses/oembed', searchParams, (error, tweets, response) => {
+    twitterClient.get('statuses/oembed', searchParams, (error, tweet, response) => {
       if (error) {
+        console.log("getFive Tweets error", error);
         reject(error);
       }
-      truckInfo.fiveTweets = tweets;
-      resolve(truckInfo);
+      let addClassName = '<blockquote className' + tweet.html.split('<blockquote class')[1];
+      let noCharSet = addClassName.split(' charset="utf-8"').join('');
+      newTruckObj.fiveTweetObjs.push(noCharSet);
+      resolve(newTruckObj);
     });
-  });
-};
-
-const TruckObj = () => {
-  return {
-    name: null,
-    allTweetObjs: [],
-    allTweetMessages: [],
-    chosenIndex: null,
-    getLocationResults: { poi: null, address: null },
-    geoInfo: null,
-    truck: null,
-  };
+  });    
 };
 
 module.exports.getTruckTwitterInfo = (foodTruck) => {
