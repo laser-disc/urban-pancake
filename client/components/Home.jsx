@@ -29,10 +29,16 @@ return (
       </div>
     </div>
 
-    <div className="footer row">
-      <h4>Contact</h4>
-      <p> Created by MKS Students </p>
-    </div>
+
+   
+    <link href=" https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+
+     <footer className="footer">
+      <div className="container">
+        <p className="text-muted">FOOTER</p>
+      </div>
+    </footer>
+
 
   </div>
 )
