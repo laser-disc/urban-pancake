@@ -118,11 +118,14 @@ module.exports.createTruckWithGeoInfo = (newTruckObj) => {
   return new Promise((resolve) => {
     // send all tweet messages to getLocationFromTweets
     const tweets = newTruckObj.allTweetObjs;
+    let description = tweets[0].user.description
+    description = description.length <= 120 ? description : description.substring(0, 117) + '...';
+
 
     newTruckObj.truck = new Truck({
       name: tweets[0].user.name,
       handle: `@${tweets[0].user.screen_name}`,
-      description: tweets[0].user.description,
+      description: description,
       message: tweets[0].text,
       timeStamp: tweets[0].created_at,
       imageUrl: tweets[0].user.profile_image_url.split('_normal').join(''),
