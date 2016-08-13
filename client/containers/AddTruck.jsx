@@ -21,9 +21,9 @@ class AddTruck extends Component {
     // server says OK, create action to update state
     // post success message
 
-  handleSubmit(event => {
-    console.log('event: ', event, ' target: ', event.target)
-  })
+  handleSubmit(event) {
+    console.log('event: ', event, ' target: ', event.target, ' this: ', this)
+  }
 
     // TODO: Add help option to describe Yelp ID
   render() {
@@ -69,8 +69,11 @@ class AddTruck extends Component {
           Saturday<input
             type="text"
             />
+          <button type="button" onClick={this.handleSubmit.bind(this)}>Submit</button>
         </form>
       </div>
     )
   }
 }
+
+export default AddTruck;
