@@ -22,7 +22,7 @@ const { updateDBwithYelpInfo } = require('./updateTruckInfo');
 
 // make sure to add the exact Twitter handle minus the @
 const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic'];
-const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF', 'mvblfeast', 'somastreatfoodpark', 'truckstopSF'];
+const foodEvents = ['gloungesf', 'SPARKsocialSF', 'SoMaStrEatFood'];
 // Don't try to get Twitter info from these trucks - you will FAIL
 // badFoodTrucks equalz ['senorsisig'];
 
@@ -34,33 +34,15 @@ const foodTrucksObj = {
   KokioRepublic: { twitterHandle: 'KokioRepublic', yelpBizID: 'kokio-republic-san-francisco'},
 };
 
-
-
-
-
-
-
 // iterates over an array of food truck event Twitter handles
 foodEvents.forEach(event => {
-  return getEventTwitterInfo
+  getEventTwitterInfo(event)
   // from the most recent tweet, we compile the info for our DB record
-  .then(newEvent => createEventRecord(newEvent))
+  .then(eventObj => createEventRecord(eventObj))
   // either adds the info from createEventRecord to the DB or updates this existing info
-  .then(newEvent => createOrUpdateEvent(newEvent))
-  .catch(err => res.status(400).send(err));  
+  .then(eventObj => createOrUpdateEvent(eventObj))
+  .catch(err => console.log("ERRRR", err));  
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 foodTrucks.forEach(foodTruck => {
   return getTruckTwitterInfo(foodTruck)
