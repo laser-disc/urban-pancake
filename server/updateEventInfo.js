@@ -94,22 +94,22 @@ module.exports.createEventRecord = (eventObj) => {
 module.exports.createOrUpdateEvent = (eventObj) => {
   return new Promise((resolve, reject) => {
     //searches for an event record in the database with a matching Twitter handle
-    const twitterHandle = eventObj.info.handle;
-    const found = Event.find({ handle: twitterHandle });
-    if (found.length === 0) {
-      eventObj.info.save((err, resp) => err ? reject(err) : resolve(resp));
-      console.log(`${eventObj.info.name} created`);
-    } else {
-      Event.findOneAndUpdate(
-        { handle: eventObj.twitterHandle },
-        { $set: {
-          message: eventObj.info.message,
-          timeStamp: eventObj.info.timeStamp,
-        }}, { upsert: true },
-        (err, resp) => err ? reject(err) : resolve(resp)
-      );
-      console.log(`${eventObj.info.name} updated`);
-    };
+    Event.find({ handle: eventObj.info.handle }, (err, result) => {
+      if (result.length === 0) {
+        eventObj.info.save((err, resp) => err ? reject(err) : resolve(resp));
+        console.log(`${eventObj.info.name} created`);
+      } else {
+        Event.findOneAndUpdate(
+          { handle: eventObj.info.handle },
+          { $set: {
+            message: eventObj.info.message,
+            timeStamp: eventObj.info.timeStamp,
+          }}, { upsert: true },
+          (err, resp) => err ? reject(err) : resolve(resp)
+        );
+        console.log(`${eventObj.info.name} updated`);
+      };
+    });
   });
 };
 
