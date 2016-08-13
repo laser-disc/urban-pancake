@@ -128,7 +128,7 @@ module.exports.createTruckWithGeoInfo = (newTruckObj) => {
       description: tweets[0].user.description,
       message: tweets[0].text,
       timeStamp: tweets[0].created_at,
-      imageUrl: tweets[0].user.profile_image_url,
+      imageUrl: tweets[0].user.profile_image_url.split('_normal').join(''),
       location: newTruckObj.geoInfo,
       schedule: truckSchedules[tweets[0].user.name],
       yelpId: null,
