@@ -39,6 +39,7 @@ const yelpObj = (yelpBizID) => {
 const TruckObj = () => {
   return {
     name: null,
+    website: null,
     allTweetObjs: [],
     allTweetMessages: [],
     chosenIndex: null,
@@ -107,6 +108,7 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
         console.log('error', error);
         reject(error);
       }
+      newTruckObj.website = tweets[0].user.url;
       newTruckObj.allTweetObjs = tweets;
       tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
       resolve(newTruckObj);
@@ -125,6 +127,7 @@ module.exports.createTruckWithGeoInfo = (newTruckObj) => {
     newTruckObj.truck = new Truck({
       name: tweets[0].user.name,
       handle: `@${tweets[0].user.screen_name}`,
+      website: newTruckObj.website,
       description: description,
       message: tweets[0].text,
       timeStamp: tweets[0].created_at,

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const truckSchema = new mongoose.Schema({
   name: String,
   handle: String,
+  website: String,
   description: String,
   message: String,
   timeStamp: String,
