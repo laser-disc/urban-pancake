@@ -1,12 +1,21 @@
+
+/**************************STICKY FOOTER**************************/
 html {
-  height: 100%;
+  position: relative !important;
+  min-height: 100% !important;
 }
 body {
-  height: 100%;
+  /* Margin bottom by footer height */
+  margin-bottom: 60px !important;
 }
-.mega-container {
-  padding-bottom: 0px !important;
+.footer {
+  position: absolute !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 60px !important;
+  background-color: #f5f5f5 !important;
 }
+
 
 /**************************FROM TWITTER**************************/
 blockquote.twitter-tweet {
@@ -110,7 +119,9 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   float: left;
   padding-right: 10px;
   margin-right: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
+  background-size: contain;
+
 }
 .truck-item:hover {
   background-color: #44c7f4;
@@ -120,15 +131,14 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   padding-bottom: 0px;
 }
 .truck-profile-img{
-  /*background: url("http://static1.squarespace.com/static/54090308e4b0ba22079ce4dd/54c16585e4b0688a8813debe/54e7cf61e4b0feaa476a8a44/1424478051249/BH9A8392.jpg")  50% 50% no-repeat;*/
-  width: 90%;
+  width: 100%;
   height: 90%;
-  margin-left: 25px;
+  margin-left: auto;
   margin-right: auto;
   margin-bottom: 15px;
   border-radius: 5px;
-  float: left;
   background-repeat: no-repeat; 
+  background-size: cover;
 }
 .truck-profile-img-container {
   height: 500px;
@@ -196,18 +206,18 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   padding-bottom: 150px;
   }  /* must be same height as the footer */
 
-.footer {
+/*.footer {
   padding-top: 15px;
   padding-left: 25px;
   background-color: #222228;
   color: white;
-} 
-
+} */
+/*
 .footer >h4 {
   color: white;
   text-decoration: underline;
 }
-
+*/
 
 
 

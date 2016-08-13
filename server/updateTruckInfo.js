@@ -59,7 +59,7 @@ module.exports.getYelpInfo = (truck) => {
         const truckYelpObj = yelpObj(truck.yelpBizID);
         truckYelpObj.name = data.name;
         // if the image below (data.rating_img_url) is too large, use data.rating_img_url_small instead (or simply data.rating if you just want the number rating 4.5 or 4)
-        truckYelpObj.starsRating = data.rating_img_url;
+        truckYelpObj.starsRating = data.rating_img_url_large;
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
         truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
