@@ -31,7 +31,7 @@ return (
 
     <div className="footer row">
       <h4>Contact</h4>
-      <p> Created by MKS Students </p>
+      <p> Created by Unemployed MKS Students </p>
     </div>
 
   </div>

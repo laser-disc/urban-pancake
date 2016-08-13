@@ -1,6 +1,3 @@
-// TODO REFACTOR createOrUpdateDB TO ONLY REWRITE CERTAIN PROPERTIES ON EXISTING
-// DOCUMENTS AND NOT RECREATE WHOLE DOCUMENT
-
 // const getLocationFromTweets = require('./getLocationFromTweets');
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
@@ -63,7 +60,8 @@ module.exports.getYelpInfo = (truck) => {
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
         truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
-        // truckYelpObj.categories = data.categories;  // TODO: turn this array into a string
+        // truckYelpObj.categories = data.categories;
+        // TODO: turn this array into a string
         truckYelpObj.twitterHandle = truck.truckName;
         truck.truck.yelpInfo = truckYelpObj;
         resolve(truck);
@@ -72,24 +70,28 @@ module.exports.getYelpInfo = (truck) => {
   });
 };
 
-module.exports.getFiveTweets = (newTruckObj, tweetID) => {
-  console.log("getFiveTweets just recieved ", newTruckObj.name, tweetID);
-  return new Promise ((resolve, reject) => {
-    let searchParams = {
-      url: 'https://twitter.com/' + newTruckObj.name + '/status/' + tweetID,
-    };
-    // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/oembed
-    twitterClient.get('statuses/oembed', searchParams, (error, tweet, response) => {
-      if (error) {
-        console.log("getFive Tweets error", error);
-        reject(error);
-      }
-      let addClassName = '<blockquote className' + tweet.html.split('<blockquote class')[1];
-      let noCharSet = addClassName.split(' charset="utf-8"').join('');
-      newTruckObj.fiveTweetObjs.push(noCharSet);
-      resolve(newTruckObj);
+module.exports.getFiveTweets = (newTruckObj, tweetIDs) => {
+  newTruckObj.fiveTweetObjs = [];
+  tweetIDs.forEach(tweetID => {
+    console.log("getFiveTweets just received ", newTruckObj.name, tweetID.id_str);
+    return new Promise ((resolve, reject) => {
+      let searchParams = {
+        url: 'https://twitter.com/' + newTruckObj.name + '/status/' + tweetID.id_str,
+      };
+
+      // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/oembed
+      twitterClient.get('statuses/oembed', searchParams, (error, tweet, response) => {
+        if (error) {
+          console.log("getFive Tweets error", error);
+          reject(error);
+        }
+        let addClassName = '<blockquote className' + tweet.html.split('<blockquote class')[1];
+        let noCharSet = addClassName.split(' charset="utf-8"').join('');
+        newTruckObj.fiveTweetObjs.push(noCharSet);
+        resolve(newTruckObj);
+      });
     });
-  });    
+  });
 };
 
 module.exports.getTruckTwitterInfo = (foodTruck) => {
@@ -101,6 +103,7 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
       exclude_replies: true,
       include_rts: true,
     };
+    
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
     twitterClient.get('statuses/user_timeline', searchParams, (error, tweets) => {
       if (error) {
@@ -162,5 +165,3 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
     });
   });
 };
-
-
