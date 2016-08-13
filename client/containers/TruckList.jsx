@@ -4,7 +4,6 @@ import { Link } from 'react-router'
 import { bindActionCreators } from 'redux';
 import TruckItem from '../components/TruckItem.jsx';
 import { FetchTrucks } from '../actions/FetchTrucks';
-import { FetchYelp } from '../actions/FetchYelp';
 
 class TruckList extends Component {
   // Runs FetchTrucks immediately so that the state will be up to date before the content starts to load
@@ -13,7 +12,6 @@ class TruckList extends Component {
   }
   // Iterates over each truck in the database
   renderTrucks(truck) {
-    // this.props.FetchYelp(truck.name)
     var handle = truck.handle.slice(1, truck.handle.length);
     return  <Link to={"/truckview/" + handle} key={truck._id} > <TruckItem truck={truck} /></Link>
   };
@@ -36,7 +34,7 @@ function mapStateToProps(state) {
 };
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ FetchTrucks, FetchYelp }, dispatch);
+  return bindActionCreators({ FetchTrucks }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TruckList);
