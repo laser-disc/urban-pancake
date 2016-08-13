@@ -13,6 +13,7 @@ class TruckList extends Component {
   // Iterates over each truck in the database
   renderTrucks(truck) {
     var handle = truck.handle.slice(1, truck.handle.length);
+      //handle is correct
     return  <Link to={"/truckview/" + handle} key={truck._id} > <TruckItem truck={truck} /></Link>
   };
   // Maps truck prop to TruckItem
