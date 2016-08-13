@@ -246,9 +246,6 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   overflow: scroll;
 }
 
-
-
-
 .twitter-box-header > h5 {
   margin-left: 15px;
 }
@@ -265,7 +262,6 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   width: 100%;
   margin-left: 0px;
 }
-
 
 .mega-container {
   overflow: auto;
@@ -290,14 +286,9 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
     width: 96%;
   }
 }
-
-
-
-
 .footer {
   padding-top: 15px;
   padding-left: 25px;
   background-color: #222228 !important;
   color: white;
 } 
-

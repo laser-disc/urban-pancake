@@ -7,6 +7,7 @@ import createLogger from 'redux-logger';
 import rootReducer from '../reducers/reducers';
 import {Link} from "react-router";
 import Router from '../components/Router.jsx';
+
 window.twttr = (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0],  t = window.twttr || {};
       if (d.getElementById(id)) return t;

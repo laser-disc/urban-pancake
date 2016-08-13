@@ -44,7 +44,6 @@ foodTrucks.forEach(foodTruck => {
   .catch(err => res.status(400).send(err));
 });
 
-
 module.exports = (app) => {
 
   app.get('/API/fetchAll', (req, res) => {
