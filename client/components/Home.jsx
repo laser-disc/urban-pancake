@@ -16,27 +16,26 @@ if (process.env.TEST_ENV === 'test') {
 
 export default () => {
 return (
-  <div className='mega-container'>
-
+<div>
+  <Header />
+  <div className='mega-container container-fluid'>
     <div className='wrap row'>
-    <Header />
-      <div className="col-md-6 google-map">
-       {googleMap}
+      <div className="col-md-4 google-map-container">
+        <div className="google-map">
+          {googleMap}
+        </div>
       </div>
-
-      <div className="col-md-5 truck-list">
-      <TruckList />
+      <div className="col-md-offset-1 col-md-7 truck-list">
+        <TruckList />
       </div>
     </div>
-
-    <link href=" https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-
-     <footer className="footer">
-      <div className="container">
-        <p className="text-muted">FOOTER</p>
-      </div>
-    </footer>
-
   </div>
-)
-}
+  <link href=" https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+
+  <footer className="footer">
+    <div className="container">
+      <p className="text-muted">FOOTER</p>
+    </div>
+  </footer>
+</div>
+)}
