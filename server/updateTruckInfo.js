@@ -22,7 +22,7 @@ const yelpInfo = secretKeys ? secretKeys.yelpInfo : {
   token_secret: process.env.YELPINFO_TOKEN_SECRET,
 };
 const twitterClient = new Twitter(twitterInfo);
-const { truckSchedules } = require('./truckSchedules');
+const { truckSchedules } = require('../utils/truckSchedules');
 
 const yelpObj = (yelpBizID) => {
   return {
