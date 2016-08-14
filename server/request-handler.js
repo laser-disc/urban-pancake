@@ -77,19 +77,19 @@ module.exports = (app) => {
     .catch( err => res.status(400).send(err))
   });
   app.get("/API/fiveTweets", (req,res) => {
-     getTruckTwitterInfo(req.query.truckName)
-     .then( newTruckObj => {
-       newTruckObj.fiveTweetObjs = [];
-       return getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[0].id_str)
-     })
-     .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[1].id_str))
-     .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[2].id_str))
-     .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[3].id_str))
-     .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[4].id_str))
-     .then(truckInfo => res.status(200).send(truckInfo))
-     .catch(err => {
-       console.log("request-handler API/fiveTweets unsuccessful");
-       res.status(400).send(err);
-     })
-   });
+   getTruckTwitterInfo(req.query.truckName)
+   .then( newTruckObj => {
+     newTruckObj.fiveTweetObjs = [];
+     return getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[0].id_str)
+   })
+   .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[1].id_str))
+   .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[2].id_str))
+   .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[3].id_str))
+   .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[4].id_str))
+   .then(truckInfo => res.status(200).send(truckInfo))
+   .catch(err => {
+     console.log("request-handler API/fiveTweets unsuccessful");
+     res.status(400).send(err);
+   })
+ });
 };
