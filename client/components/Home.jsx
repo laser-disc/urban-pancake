@@ -17,7 +17,9 @@ if (process.env.TEST_ENV === 'test') {
 export default () => {
 return (
 <div>
+<div className="header">
   <Header />
+</div>
   <div className='mega-container container-fluid'>
     <div className='wrap row'>
       <div className="col-md-4 google-map-container">
@@ -25,12 +27,13 @@ return (
           {googleMap}
         </div>
       </div>
-      <div className="col-md-offset-1 col-md-7 truck-list">
+      <div className="col-md-offset-1 col-md-7">
         <TruckList />
       </div>
     </div>
   </div>
   <link href=" https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
 
   <footer className="footer">
     <div className="container">
