@@ -5,6 +5,7 @@
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
 const Yelp = require('yelp');
+const getImages = require('get-images')
 
 let secretKeys = null;
 if (!process.env.TWITTERINFO_CONSUMER_KEY) {
@@ -166,6 +167,20 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
         console.log(`${newTruckObj.name} updated`);
       }
     });
+  });
+};
+
+module.exports.scrapeWebsite = (newTruckObj) => {
+  return new Promise((resolve, reject) => {
+    getImages('http://www.slidershacksf.com/', function(err, images) {
+      // => images is an array of image urls like ["http://substack.net/images/1up.png"] 
+      if(err){
+        console.log("scrapeWebsite error", err);
+        reject(err);
+      }
+      console.log("*******************scrapeWebsite this is what is being passed back", images);
+      resolve(newTruckObj);
+    })
   });
 };
 

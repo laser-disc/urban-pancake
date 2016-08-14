@@ -18,6 +18,7 @@ const { geoCoder } = require('../utils/utils');
 const { getYelpInfo } = require('./updateTruckInfo');
 const { getFiveTweets } = require('./updateTruckInfo');
 const { updateDBwithYelpInfo } = require('./updateTruckInfo');
+const { scrapeWebsite } = require('./updateTruckInfo');
 
 
 // make sure to add the exact Twitter handle minus the @
@@ -53,8 +54,15 @@ foodTrucks.forEach(foodTruck => {
     newTruckObj.yelpBizID = foodTrucksObj[foodTruck].yelpBizID;
     return getYelpInfo(newTruckObj);
   })
+  .then(newTruckObj => {
+
+    return scrapeWebsite(newTruckObj);
+  })
   .then(newTruckObj => createOrUpdateDB(newTruckObj))
-  .catch(err => res.status(400).send(err));
+  .catch(err => {
+    console.log("Promise chain error", err);
+    res.status(400).send(err)
+  });
 });
 
 
