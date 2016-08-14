@@ -2,7 +2,7 @@ import React from 'react';
 import TruckList from '../containers/TruckList.jsx';
 import GoogleMap from '../containers/GoogleMap.jsx';
 import {Link} from "react-router";
-import {Router, Route} from 'react-router';
+import {Router, Route, hashHistory} from 'react-router';
 import Header from './Header.jsx'
 
 
