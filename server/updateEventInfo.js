@@ -111,7 +111,6 @@ const grabTodaysTrucks = (event) => {
   };
 };
 
-//TODO: grabTodaysTrucks is silently failing
 // creates a DB record for the given event
 module.exports.createEventRecord = (eventObj) => {
   return new Promise ((resolve, reject) => {
