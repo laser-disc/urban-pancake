@@ -18,6 +18,9 @@ class TruckList extends Component {
       //handle is correct
     return  <Link to={"/truckview/" + handle} key={truck._id} > <TruckItem truck={truck} /></Link>
   };
+
+  //TODO: renderEvents(events) and return in the render
+
   // Maps truck prop to TruckItem
   render() {
     return (
