@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   trucks: TruckReducer,
   events: EventsReducer,
   yelpInfo: TruckViewReducer,
-  currentTruck: TruckItemReducer
+  currentTruck: TruckItemReducer,
 });
 
 export default rootReducer;
