@@ -22,7 +22,7 @@
 
 1. Uphold the current code standard:
     - Keep your code **DRY**.
-    - Follow [the Style Guide](_STYLE-GUIDE.md)
+    - Follow [the Style Guide](STYLE-GUIDE.md)
 1. Run **npm test** before submitting a pull request.
 1. Tests are very, very important. Submit tests if your pull request contains
    new, testable behavior.
