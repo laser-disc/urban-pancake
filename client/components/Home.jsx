@@ -4,13 +4,7 @@ import GoogleMap from '../containers/GoogleMap.jsx';
 import {Link} from "react-router";
 import {Router, Route, hashHistory} from 'react-router';
 import Header from './Header.jsx'
-<<<<<<< HEAD
-
-
-=======
 import Footer from './Footer.jsx'
-
->>>>>>> f6ee286e750ec33f0384841a338fd32f7e6acd20
 
 let googleMap;
 if (process.env.TEST_ENV === 'test') {
