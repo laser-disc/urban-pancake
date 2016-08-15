@@ -67,7 +67,7 @@ module.exports = (app) => {
   app.get('/API/fetchAll', (req, res) => {
     Truck.find((err, trucks) => res.status(200).send(trucks));
   });
-  app.get('/API/fetchAll', (req, res) => {
+  app.get('/API/fetchEvents', (req, res) => {
     Event.find((err, allEvents) => res.status(200).send(allEvents));
   });
 

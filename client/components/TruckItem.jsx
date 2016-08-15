@@ -1,13 +1,22 @@
 // TruckItem: the individual tweets that will appear on the page
 
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+var cssProps = "truck-item test  hvr-grow well";
+
+
 export default class TruckItem extends Component {
+  componentWillUpdate(){
+    cssProps = this.props.truck.name === this.props.currentTruck.currentTruck ? 'truck-item-current-truck test hvr-grow well"' : "truck-item test hvr-grow well";
+  };
+
   render() {
     var truckItemThumbNailStyle = {
-        backgroundImage : "url(" + this.props.truck.imageUrl +")",
-      }
+      backgroundImage : "url(" + this.props.truck.imageUrl +")",
+    };
+
     return (
-      <div className="truck-item test  hvr-grow well">
+      <div className={cssProps}>
         <div className="row">
           <div className="truck-item-avatar col-xs-4 col-lg-3 col-xl-2" style={truckItemThumbNailStyle}>
           </div>
@@ -32,3 +41,16 @@ export default class TruckItem extends Component {
     );
   };
 };
+
+function mapStateToProps(state) {
+  return {
+    currentTruck: state.currentTruck
+  };
+};
+
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ FetchTrucks }, dispatch);
+// };
+
+export default connect(mapStateToProps)(TruckItem);
+
