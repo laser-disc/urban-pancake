@@ -2,31 +2,29 @@ import React, { Component } from 'react';
 import TwitterBox from '../components/TwitterBox.jsx';
 import TruckCategories from '../components/TruckCategories.jsx'
 export default class TruckProfile extends Component {
+// ? {this.props.yelpInfo.photosFromGoogle.map(function(image){return <img src={image} alt="googlePhoto" />})} : <h1>loading...</h1>
+  renderImages(){
+    console.log("RENDERING IMAGES")
+    if(this.props.yelpInfo.photosFromGoogle){
+      return this.props.yelpInfo.photosFromGoogle.map(photo => <img className="goolge-image" src={photo} alt="google photo" />)
+    }
+  }
 
   render(){
-    console.log("[Truck Profile] this.props", this.props)
     if(this.props.yelpInfo.yelpInfo){
       var truckProfileImgStyle = {
         backgroundImage : "url(" + this.props.yelpInfo.yelpInfo.photo+")",
       }
       var truckName = this.props.yelpInfo.yelpInfo.name
     }
-
+    // console.log('[truck profile] props.yelpInfo.photos: ', this.props.yelpInfo.photosFromGoogle) 
     return (
       <div className="container">
-        <div className="row container">
-        <h1>{truckName}</h1>
-        </div>
         <div className="row">
-          <div className="col-md-6">
-            <div className="truck-profile-img-container well">
-              <div className="truck-profile-img" style={truckProfileImgStyle}>
-              </div>
-            </div>
+          <div className="truck-profile-img-container container-well well">
+               {this.renderImages()}
           </div>
-          <div className="col-md-6">
-            <TwitterBox fiveTweets = {this.props.fiveTweets} />
-          </div>
+          <TwitterBox fiveTweets = {this.props.fiveTweets} />
         </div>
         <div className="row">
         </div>

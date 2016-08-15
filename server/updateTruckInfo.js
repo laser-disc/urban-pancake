@@ -175,7 +175,7 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
 module.exports.getTenImages = (newTruckObj) => {
   return new Promise((resolve, reject) => {
     google.list({
-      keyword: newTruckObj.name + " sf truck menu items",
+      keyword: newTruckObj.name + " sf menu items",
       num: 10,
       detail: true,
       nightmare: {
