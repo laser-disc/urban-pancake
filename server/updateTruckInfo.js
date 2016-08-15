@@ -5,7 +5,9 @@
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
 const Yelp = require('yelp');
-const getImages = require('get-images')
+const getImages = require('get-images');
+let Scraper = require ('images-scraper');
+let google = new Scraper.Google();
 
 let secretKeys = null;
 if (!process.env.TWITTERINFO_CONSUMER_KEY) {
@@ -124,7 +126,6 @@ module.exports.createTruckWithGeoInfo = (newTruckObj) => {
     let description = tweets[0].user.description
     description = description.length <= 120 ? description : description.substring(0, 117) + '...';
 
-
     newTruckObj.truck = new Truck({
       name: tweets[0].user.name,
       handle: `@${tweets[0].user.screen_name}`,
@@ -135,6 +136,7 @@ module.exports.createTruckWithGeoInfo = (newTruckObj) => {
       imageUrl: tweets[0].user.profile_image_url.split('_normal').join(''),
       location: newTruckObj.geoInfo,
       schedule: truckSchedules[tweets[0].user.name],
+      photosFromGoogle: [],
       yelpId: null,
       yelpInfo: null,
     });
@@ -161,6 +163,7 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
             timeStamp: newTruckObj.truck.timeStamp,
             location: newTruckObj.truck.location,
             yelpInfo: newTruckObj.truck.yelpInfo,
+            photosFromGoogle: newTruckObj.truck.photosFromGoogle,
           } }, { upsert: true },
           (err, resp) => err ? reject(err) : resolve(resp)
         );
@@ -170,17 +173,25 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
   });
 };
 
-module.exports.scrapeWebsite = (newTruckObj) => {
+module.exports.getTenImages = (newTruckObj) => {
   return new Promise((resolve, reject) => {
-    getImages('http://www.slidershacksf.com/', function(err, images) {
-      // => images is an array of image urls like ["http://substack.net/images/1up.png"] 
-      if(err){
-        console.log("scrapeWebsite error", err);
-        reject(err);
+    google.list({
+      keyword: newTruckObj.name + " sf truck menu items",
+      num: 10,
+      detail: true,
+      nightmare: {
+        show: true
       }
-      console.log("*******************scrapeWebsite this is what is being passed back", images);
-      resolve(newTruckObj);
     })
+    .then(function (res) {
+      res.forEach( pic => {
+        newTruckObj.truck.photosFromGoogle.push(pic.url);
+      });
+      resolve(newTruckObj);
+    }).catch(function(err) {
+      console.log('scrapeWebsite error', err);
+      reject(err);
+    });
   });
 };
 

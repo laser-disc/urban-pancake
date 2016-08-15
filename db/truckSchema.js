@@ -18,8 +18,8 @@ const truckSchema = new mongoose.Schema({
     /* friday:*/ { lat: Number, lng: Number, closed: Boolean },
     /* saturday:*/ { lat: Number, lng: Number, closed: Boolean },
   ],
-  photosFromWebsite: [
-    String
+  photosFromGoogle: [
+    String, String, String, String, String, String, String, String, String, String
   ],
   yelpId: String,
   yelpInfo: {
