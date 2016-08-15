@@ -74,6 +74,44 @@ module.exports.getEventTwitterInfo = (event) => {
   });
 };
 
+// this function is designed to grab the truck handles from a tweet containing a list of handles
+const grabHandles = (tweet) => {
+  let handlesList = [];
+  // split the string into an array
+  let tweetArr = tweet.split(" ");
+    // take any element that begins with @ and remove the @
+  for (word of tweetArr) {
+    if (word[0] === '@') {
+      let minusAt = word.substr(1);
+      if (minusAt[minusAt.length-1] === '.') {
+        minusAt = minusAt.substr(0, minusAt.length-1);
+      };
+      handlesList.push(minusAt);
+    };
+  };
+    return handlesList;
+};
+
+// takes eventObj as an argument and returns an array with today's trucks only
+const grabTodaysTrucks = (event) => {
+  const metaInfo = event.fullTweets[0];
+  const today = new Date;
+  const idx = today.getDay();
+  const lastTweetDay = metaInfo.created_at.slice(0, 3);
+  const daysArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  
+  // checks to see if the date of the last tweet is the same as today's date
+  if (daysArray[idx] === lastTweetDay) {
+    // gloungesf or anything without #lunch and #dinner hashtags
+    if (event.twitterHandle === 'gloungesf' || event.allMessages[0].split(" ").indexOf('#dinner') === -1) {
+      return grabHandles(event.allMessages[0]);
+    };
+  } else {
+    return [];
+  };
+};
+
+//TODO: grabTodaysTrucks is silently failing
 // creates a DB record for the given event
 module.exports.createEventRecord = (eventObj) => {
   return new Promise ((resolve, reject) => {
@@ -87,90 +125,32 @@ module.exports.createEventRecord = (eventObj) => {
       imageUrl: tweet.user.profile_image_url,
       location: loc[tweet.user.screen_name],
       schedule: sched[tweet.user.screen_name],
+      todaysTrucks: grabTodaysTrucks(eventObj),
     });
     resolve(eventObj);
   });
 };
 
 module.exports.createOrUpdateEvent = (eventObj) => {
+  const eventName = eventObj.info.name;
   return new Promise((resolve, reject) => {
     //searches for an event record in the database with a matching Twitter handle
-    Event.find({ handle: eventObj.info.handle }, (err, result) => {
+    Event.find({ name: eventName }, (err, result) => {
       if (result.length === 0) {
         eventObj.info.save((err, resp) => err ? reject(err) : resolve(resp));
-        console.log(`${eventObj.info.name} created`);
+        console.log(`${eventName} created`);
       } else {
         Event.findOneAndUpdate(
-          { handle: eventObj.info.handle },
+          { name: eventName },
           { $set: {
             message: eventObj.info.message,
             timeStamp: eventObj.info.timeStamp,
+            todaysTrucks: grabTodaysTrucks(eventObj),
           }}, { upsert: true },
           (err, resp) => err ? reject(err) : resolve(resp)
         );
-        console.log(`${eventObj.info.name} updated`);
+        console.log(`${eventName} updated`);
       };
     });
   });
 };
-
-
-
-
-
-
-
-
-// this function is designed to grab the truck handles from a tweet containing
-const grabHandles = function(tweet) {
-  let handles = [];
-  // split the string into an array
-  let tweetArr = tweet.split(" ");
-    // take any element that begins with @ and remove the @
-    for (word of tweetArr) {
-      if (word[0] === '@') {
-        let minusAt = word.substr(1);
-        if (minusAt[minusAt.length-1] === '.') {
-          minusAt = minusAt.substr(0, minusAt.length-1);
-        }
-        //TODO: remove punctuation
-        // push the element to the trucks array
-        handles.push(minusAt);
-      };
-    };
-    console.log(handles);
-};
-
-
-//this function is the same as grabHandles but also looks for a #lunch marker in the tweet
-const grabWithHashtag = function(tweet) {
-  let tester = tweet.split(" ");
-  if (tester.indexOf('#lunch') !== -1) {
-    grabHandles(tweet)
-  };
-};
-
-
-// returns an object that will indicate which trucks are present TODAY
-const grabTodaysTrucks = (newEvent) => {
-  // we want to return an object {today: 5, trucks: ['senor sesig, etc']}
-  //first we check if the date on hte obj in the dtabase is the same as today's date'
-    // if it's the same, we're done
-    // if it's not, we update the obj
-};
-
-
-//   //gives us the latest tweet object from the twitter acct
-//   const lastTweet = newEvent.allTweetObjs[0];
-//   let truckInfo = {};
-
-//   today is a time stamp for the current date and time, eg "Fri Aug 12 2016 17:19:57 GMT-0700 (PDT)"
-//   const today = (new Date).toString();
-//  we need to check in the DB to see if 
-//   truckInfo.today = today;
-
-//  now we need to get all the trucks from this particular day only
-
-//   we want return an object that contains today: 0, 1, 2, etc and an array of trucks from that tweet
-
-// craeted_at = "Fri Aug 12 17:45:13 +0000 2016

@@ -17,10 +17,7 @@ const eventsSchema = new mongoose.Schema({
     /* friday: */ { closed: Boolean },
     /* saturday: */ { closed: Boolean },
   ],
-  // currentTrucks: {
-  //   today: Number,
-  //   trucksArray: Array,
-  // },
+  todaysTrucks: Array,
   // yelpId: String,
   // yelpInfo: {
   //   name: String,
