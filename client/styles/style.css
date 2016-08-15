@@ -79,6 +79,16 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 .truck-item:hover {
   background-color: #85b4e3 !important;
 }
+.truck-item-current-truck {
+  background-color: #85b4e3 !important;
+  margin-left: 5%;
+  width: 90% !important;
+  vertical-align: middle;
+  max-height: 190px;
+  overflow: hidden !important;
+  box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.75) !important;
+  border: 1px solid black !important;
+}
 .truck-item-data {
   padding-left: 15px;
 }
