@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
+import { PassCurrTruck } from '../actions/PassCurrTruck';
+import { bindActionCreators } from 'redux';
+
 // import Marker from '../components/Marker.jsx';
 // Marker position needs to be broken up to the individual lat, lng props
 // use new Date.now().getDay() for day of week index
 class Map extends Component {
+
+  handleClick(truck){
+    console.log("you've selected ", truck.name);
+    // this.setState({currentTruck: truck.name});
+    this.props.PassCurrTruck(truck);
+  }
+
   renderMarkers(truck) {
     // GRAB CURRENT DAY OF WEEK
     const date = new Date;
@@ -21,7 +31,7 @@ class Map extends Component {
     const position = tweetIndex === index ? truck.location : truck.schedule[index].closed ? {lat: null, lng: null} : truck.schedule[index];
     if (position.lat) {
       return <Marker
-        key={ truck._id } position={{ lat: position.lat, lng: position.lng }}
+        key={ truck._id } position={{ lat: position.lat, lng: position.lng }} onClick={ this.handleClick.bind(this, truck) }
         // icon={{url:'https://media.giphy.com/media/8K1IYSnhUaNH2/giphy_s.gif'}}
       />
     };
@@ -42,8 +52,13 @@ class Map extends Component {
 
 function mapStateToProps(state) {
   return {
-    trucks: state.trucks
+    trucks: state.trucks,
+    // currentTruck: state.currentTruck
   };
 };
 
-export default connect(mapStateToProps)(Map);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ PassCurrTruck }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);
