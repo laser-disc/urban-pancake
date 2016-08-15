@@ -18,6 +18,7 @@ const { geoCoder } = require('../utils/utils');
 const { getYelpInfo } = require('./updateTruckInfo');
 const { getFiveTweets } = require('./updateTruckInfo');
 const { updateDBwithYelpInfo } = require('./updateTruckInfo');
+const { getTenImages } = require('./updateTruckInfo');
 
 
 // make sure to add the exact Twitter handle minus the @
@@ -53,9 +54,14 @@ foodTrucks.forEach(foodTruck => {
     newTruckObj.yelpBizID = foodTrucksObj[foodTruck].yelpBizID;
     return getYelpInfo(newTruckObj);
   })
+  .then(newTruckObj => getTenImages(newTruckObj))
   .then(newTruckObj => createOrUpdateDB(newTruckObj))
-  .catch(err => res.status(400).send(err));
+  .catch(err => {
+    console.log("Food truck promise chain error", err);
+    res.status(400).send(err)
+  });
 });
+
 
 module.exports = (app) => {
   app.get('/API/fetchAll', (req, res) => {

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const truckSchema = new mongoose.Schema({
   name: String,
   handle: String,
+  website: String,
   description: String,
   message: String,
   timeStamp: String,
@@ -16,6 +17,9 @@ const truckSchema = new mongoose.Schema({
     /* thursday:*/ { lat: Number, lng: Number, closed: Boolean },
     /* friday:*/ { lat: Number, lng: Number, closed: Boolean },
     /* saturday:*/ { lat: Number, lng: Number, closed: Boolean },
+  ],
+  photosFromGoogle: [
+    String, String, String, String, String, String, String, String, String, String
   ],
   yelpId: String,
   yelpInfo: {
