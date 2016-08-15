@@ -50,7 +50,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   font-size: 12px;
 }
 /************************** TRUCK ITEM **************************/
-.truck-item {
+.truck-item, .event-item {
   background-color: #e7e9eb !important;
   margin-left: 5%;
   width: 90% !important;
@@ -68,7 +68,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   margin-right: px !important;
   color: black;
 }
-.truck-item-avatar{
+.truck-item-avatar, .event-item-avatar {
   height: 135px !important;
   width: 135px !important;
   margin-left: 0px;
@@ -83,7 +83,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 .truck-item:hover {
   background-color: #85b4e3 !important;
 }
-.truck-item-data {
+.truck-item-data, .event-item-data {
   padding-left: 15px;
 }
 .truck-item-yelp-score {
@@ -91,11 +91,11 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   height: auto;
   float: right ;
 }
-.truck-item-title {
+.truck-item-title, .event-item-title {
   margin-top: 0px !important;
   font-size: 1.8em !important;
 }
-.truck-item-description{
+.truck-item-description, .event-item-description {
   margin-left: 60px !important;
   margin-bottom: 15px;
   font-size: 1.15em;
@@ -154,7 +154,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   margin-right: auto;
 }
 
-.truck-list {
+.truck-list, .event-list {
   overflow: scroll;
   padding: 0px !important;
   padding-top: 25px !important;
