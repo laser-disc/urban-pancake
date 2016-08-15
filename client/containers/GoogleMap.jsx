@@ -41,16 +41,14 @@ class Map extends Component {
       const position = (event.schedule[idx].closed ? { lat: null, lng: null } : event.location);
 
     if (position.lat !== null) {
-      console.log('I run at', position);
       return <Marker
         key={ event._id } position={ position }
-        // icon={{url:'https://media.giphy.com/media/8K1IYSnhUaNH2/giphy_s.gif'}}
+        icon= 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
       />
     };
   };
 
   render() {
-    console.log("I'm inside the render function in the map", this.props);
     return (
       // TODO: map and render the event markers too
       <GoogleMapLoader
