@@ -5,7 +5,6 @@
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
 const Yelp = require('yelp');
-const getImages = require('get-images');
 let Scraper = require ('images-scraper');
 let google = new Scraper.Google();
 
