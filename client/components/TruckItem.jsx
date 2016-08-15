@@ -11,9 +11,6 @@ export default class TruckItem extends Component {
   };
 
   render() {
-    console.log("truckItem this.props", this.props.currentTruck.currentTruck);
-    console.log("truckItem this.props", this.props.truck.name);
-
     var truckItemThumbNailStyle = {
       backgroundImage : "url(" + this.props.truck.imageUrl +")",
     };
@@ -46,7 +43,6 @@ export default class TruckItem extends Component {
 };
 
 function mapStateToProps(state) {
-  console.log("truckItem mapStateToProps state", state)
   return {
     currentTruck: state.currentTruck
   };

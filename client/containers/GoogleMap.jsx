@@ -53,7 +53,6 @@ class Map extends Component {
 function mapStateToProps(state) {
   return {
     trucks: state.trucks,
-    // currentTruck: state.currentTruck
   };
 };
 

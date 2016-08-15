@@ -9,7 +9,8 @@ class TruckList extends Component {
   // Runs FetchTrucks immediately so that the state will be up to date before the content starts to load
   componentWillMount() {
     this.props.FetchTrucks();
-  }
+  };
+
   // Iterates over each truck in the database
   renderTrucks(truck) {
     var handle = truck.handle.slice(1, truck.handle.length);
@@ -18,6 +19,7 @@ class TruckList extends Component {
   };
   // Maps truck prop to TruckItem
   render() {
+
     return (
 
       <div className="truck-list well">
@@ -30,7 +32,8 @@ class TruckList extends Component {
 function mapStateToProps(state) {
   return {
     trucks: state.trucks,
-    yelpInfo: state.yelpInfo
+    yelpInfo: state.yelpInfo,
+    currentTruck: state.currentTruck
   };
 };
 
