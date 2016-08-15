@@ -16,7 +16,7 @@ if (process.env.TEST_ENV === 'test') {
 
 export default () => {
 return (
-<div>
+<div className="body-home">
   <Header />
   <div className='mega-container container-fluid'>
     <div className='wrap row'>

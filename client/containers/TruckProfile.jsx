@@ -4,7 +4,6 @@ import TruckCategories from '../components/TruckCategories.jsx'
 export default class TruckProfile extends Component {
 // ? {this.props.yelpInfo.photosFromGoogle.map(function(image){return <img src={image} alt="googlePhoto" />})} : <h1>loading...</h1>
   renderImages(){
-    console.log("RENDERING IMAGES")
     if(this.props.yelpInfo.photosFromGoogle){
       return this.props.yelpInfo.photosFromGoogle.map(photo => <img className="goolge-image" src={photo} alt="google photo" />)
     }

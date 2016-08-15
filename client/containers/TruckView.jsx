@@ -23,7 +23,7 @@ class TruckView extends Component {
   render(){
     // console.log('[truck profile] props: ', this.props) 
     return (
-      <div>
+      <div className="body-truck-view">
         <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
         <Header />
         {this.renderTruckView(this.props.yelpInfo, this.props.yelpInfo.fiveTweetObjs)}

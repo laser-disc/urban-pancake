@@ -12,21 +12,17 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px !important;
+}
+.body-home{
   background-image: url('http://i.imgur.com/EY8RiRC.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
-.footer {
-  position: absolute !important;
-  bottom: 0 !important;
-  width: 100% !important;
-  height: 60px !important;
-  background-color: #f5f5f5 !important;
+.body-truck-view{
+   background-image:url('http://imgur.com/2nSvMTP.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-
-  
-
-
 /************************** FROM TWITTER **************************/
 blockquote.twitter-tweet {
   display: inline-block;
@@ -99,6 +95,8 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   margin-left: 60px !important;
   margin-bottom: 15px;
   font-size: 1.15em;
+  color: black;
+  font-style: italic;
 }
 
 
@@ -130,9 +128,8 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   border-right: 1px solid black;
   border-bottom: 1px solid black;
   border-radius: 5px;
-  background-color: #a0a1a2 !important;
+  background-color: rgba(231,233,235,0.50) !important;
 }
-
 .container {
   width: 80% !important;
   max-width: 100% !important;
@@ -191,7 +188,17 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   margin-top: 10px;
 }
 .home-text {
-  margin-top: 25px;
+  margin-top: 5px;
+  color: white;
+}
+.truck-logo{
+  margin-left: 20px;
+}
+
+.link-logo{
+  height: 35px;
+  width: 35px;
+  margin-top: 11px;
 }
 .github {
   margin-top: 25px !important;
@@ -202,32 +209,33 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   max-height: 110px !important;
 }
 .header {
-    background-color: rgba(255,255,255,0.5) !important;
+    background-color: rgba(0,0,0, 0.5) !important;
     margin-bottom: 20px;
     height: 80px;
+    color: white;
 }
-
-.burrito {
-  height: 40px;
-  width: 40px;
+.register-button{
+  margin-top: 15px;
+}
+.register-button-text{
+  color: white !important;
 }
 
 .title {
-  padding-left: 110px !important;
+  padding-left: 10% !important;
+  color: white;
 }
+
+.link-logo {
+  height: 35px;
+  width: 35px;
+}
+
 .jumbotron {
   height: 70px !important;
   align-items: center !important;
   padding-bottom: 0px !important;
   padding-top: 5px !important;
-}
-.site-header {
-  height: 70px !important;
-  padding-left: 40px !important;
-  padding-right: 40px !important;
-  background-color: #222228 !important;
-  margin-bottom: 30px !important;
-  color: white;
 }
 
 .truck-name{
@@ -329,7 +337,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   .mega-container {
     width: 95vw;
   }
-  .google-map-container{
+  .google-map-container {
       width: 40vw;
     }
     .truck-list{
@@ -364,6 +372,10 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 .footer {
   padding-top: 15px;
   padding-left: 25px;
-  background-color: #222228 !important;
+  background-color: rgba(0,0,0, 0.5) !important;
   color: white;
+  position: absolute !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 60px !important;
 } 
