@@ -11,24 +11,6 @@ module.exports.truckSchedules = {
     /* friday: */ { lat: 37.790841, lng: -122.401280, closed: false },
     /* saturday: */ { closed: true },
   ],
-  'Fins on the Hoof': [
-    /* sunday: */ { closed: true },
-    /* monday: */ { closed: true },
-    /* tuesday: */ { closed: true },
-    /* wednesday: */ { closed: true },
-    /* thursday: */ { closed: true },
-    /* friday: */ { closed: true },
-    /* saturday: */ { closed: true },
-  ],
-  'Sam\'s ChowderMobile': [
-    /* sunday: */ { closed: true },
-    /* monday: */ { closed: true },
-    /* tuesday: */ { closed: true },
-    /* wednesday: */ { closed: true },
-    /* thursday: */ { closed: true },
-    /* friday: */ { closed: true },
-    /* saturday: */ { closed: true },
-  ],
   'Kokio Republic': [
     /* sunday: */ { closed: true },
     /* monday: */ { lat: 37.799696, lng: -122.400083, closed: false },
@@ -36,7 +18,7 @@ module.exports.truckSchedules = {
     /* wednesday: */ { closed: true },
     /* thursday: */ { lat: 37.769769, lng: -122.412049, closed: false },
     /* friday: */ { lat: 37.782314, lng: -122.405963, closed: false },
-    /* saturday: */ { closed: true },
+    /* saturday: */ { lat: 37.782314, lng: -122.405963, closed: false },
   ],
   'The Chairman Truck': [
     /* sunday: */ { closed: true },
@@ -45,7 +27,7 @@ module.exports.truckSchedules = {
     /* wednesday: */ { lat: 37.782314, lng: -122.405963, closed: false },
     /* thursday: */ { lat: 37.770798, lng: -122.391602, closed: false },
     /* friday: */ { lat: 37.767417, lng: -122.390322, closed: false },
-    /* saturday: */ { closed: true },
+    /* saturday: */ { lat: 37.767417, lng: -122.390322, closed: false },
   ],
   JapaCurry: [
     /* sunday: */ { closed: true },
@@ -54,7 +36,7 @@ module.exports.truckSchedules = {
     /* wednesday: */ { lat: 37.789159, lng: -122.395882, closed: false },
     /* thursday: */ { lat: 37.787447, lng: -122.400520, closed: false },
     /* friday: */ { lat: 37.793079, lng: -122.401164, closed: false },
-    /* saturday: */ { closed: true },
+    /* saturday: */ { lat: 37.793079, lng: -122.401164, closed: false },
   ],
   'The Slider Shack': [
     /* sunday: */ { closed: true },
@@ -63,6 +45,6 @@ module.exports.truckSchedules = {
     /* wednesday: */ { closed: true },
     /* thursday: */ { lat: 37.788556, lng: -122.396031, closed: false },
     /* friday: */ { lat: 37.788556, lng: -122.396031, closed: false },
-    /* saturday: */ { closed: true },
+    /* saturday: */ { lat: 37.788556, lng: -122.396031, closed: false },
   ],
 };
