@@ -20,7 +20,7 @@ class TruckList extends Component {
   render() {
     return (
 
-      <div className="truck-list well">
+      <div className="truck-list well container-well">
         {this.props.trucks.map(truck => this.renderTrucks(truck))}
       </div>
     );
