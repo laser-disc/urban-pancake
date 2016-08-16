@@ -65,7 +65,7 @@ foodTrucks.forEach(foodTruck => {
     newTruckObj.yelpBizID = foodTrucksObj[foodTruck].yelpBizID;
     return getYelpInfo(newTruckObj);
   })
-  // .then(newTruckObj => getTenImages(newTruckObj))
+  .then(newTruckObj => getTenImages(newTruckObj))
   .then(newTruckObj => createOrUpdateDB(newTruckObj))
   .catch(err => {
     console.log("Food truck promise chain error", err);
