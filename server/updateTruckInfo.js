@@ -51,6 +51,7 @@ const TruckObj = () => {
 
 module.exports.getYelpInfo = (truck) => {
   return new Promise((resolve, reject) => {
+    console.log('INSIDE GETYELPINFO', truck.name)
     let yelp = new Yelp(yelpInfo);
     yelp.business(truck.yelpBizID, (err, data) => {
       if (err) {
@@ -96,6 +97,7 @@ module.exports.getFiveTweets = (newTruckObj, tweetID) => {
 module.exports.getTruckTwitterInfo = (foodTruck) => {
   return new Promise((resolve, reject) => {
     const newTruckObj = TruckObj();
+    console.log('****** INSIDE TWITTER GET REQUEST *****', foodTruck);
     newTruckObj.name = foodTruck;
     const searchParams = {
       screen_name: foodTruck,
@@ -109,9 +111,14 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
         console.log('error', error);
         reject(error);
       }
-      newTruckObj.website = tweets[0].user.url;
-      newTruckObj.allTweetObjs = tweets;
-      tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
+      // console.log('INSIDE TWITTER GET REQUEST', searchParams.screen_name)
+
+      // console.log('INSIDE TWITTER GET REQUEST', tweets[0])
+      if(tweets[0]) {
+        newTruckObj.website = tweets[0].user.url;
+        newTruckObj.allTweetObjs = tweets;
+        tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
+      };
       resolve(newTruckObj);
     });
   });
@@ -144,14 +151,14 @@ module.exports.createTruckWithGeoInfo = (newTruckObj) => {
 
 module.exports.createOrUpdateDB = (newTruckObj) => {
   return new Promise((resolve, reject) => {
+    console.log('INSIDE CREATEORUPDATEDB', newTruckObj.truck.handle);
     // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
     Truck.find({ handle: newTruckObj.truck.handle }, (err, trucks) => {
       //  if no matches are found, it will return an empty array
       if (trucks.length === 0) {
         // and then we create a new document in the db for that truck
-        // newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
         newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
-        console.log(`${newTruckObj.name} created`);
+        console.log(`${newTruckObj.name} truck created`);
       } else {
         // otherwise update existing document
         Truck.findOneAndUpdate(
@@ -165,7 +172,7 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
           } }, { upsert: true },
           (err, resp) => err ? reject(err) : resolve(resp)
         );
-        console.log(`${newTruckObj.name} updated`);
+        console.log(`${newTruckObj.name} truck updated`);
       }
     });
   });
@@ -173,6 +180,7 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
 
 module.exports.getTenImages = (newTruckObj) => {
   return new Promise((resolve, reject) => {
+    console.log('INSIDE GETTENIMAGES', newTruckObj.name);
     google.list({
       keyword: newTruckObj.name + " sf menu items",
       num: 10,

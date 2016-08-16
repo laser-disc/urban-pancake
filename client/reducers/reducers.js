@@ -2,6 +2,7 @@
 
 import { combineReducers } from 'redux';
 import TruckReducer from './reducer_TruckList';
+import TruckItemReducer from './reducer_TruckItem';
 import TruckViewReducer from './reducer_TruckView';
 import EventsReducer from './reducer_EventsList';
 
