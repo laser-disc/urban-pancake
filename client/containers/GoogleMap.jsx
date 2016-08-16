@@ -36,12 +36,33 @@ class Map extends Component {
       />
     };
   };
+    renderEventMarkers(event) {
+      //we need the current weekday in order to iterate over the schedules array and determine if the event is open today
+      const today = new Date;
+      // idx is the index of the array, in which 0 corresponds to Sunday, and so on
+      const idx = today.getDay();
+
+      //TODO: when we render the trucks list for the event, we need to make sure idx is the same as the date of the last tweet's timestamp
+
+      // if the event is open today, we render it to the map
+      // if it's closed, it's lat and lng are set to null so that the marker does not render
+      const position = (event.schedule[idx].closed ? { lat: null, lng: null } : event.location);
+
+    if (position.lat !== null) {
+      return <Marker
+        key={ event._id } position={ position }
+        icon= 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+      />
+    };
+  };
+
   render() {
     return (
       <GoogleMapLoader
         containerElement={ <div style={{height: '100%', width: '100%'}} /> }
         googleMapElement={
           <GoogleMap defaultZoom={ 12 } defaultCenter={{ lat: 37.7678011, lng: -122.4443519 }}>
+            { this.props.events.map(event => this.renderEventMarkers(event)) }
             { this.props.trucks.map(truck => this.renderMarkers(truck)) }
           </GoogleMap>
         }
@@ -53,6 +74,7 @@ class Map extends Component {
 function mapStateToProps(state) {
   return {
     trucks: state.trucks,
+    events: state.events,
   };
 };
 
