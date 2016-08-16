@@ -44,7 +44,6 @@ class Map extends Component {
         var crd = pos.coords;
         userLat = crd.latitude;
         userLng = crd.longitude;
-        console.log("SUCCESS!  Here are the coords ", userLat, userLng);
         resolve(pos);
       };
 

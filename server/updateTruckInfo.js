@@ -63,7 +63,12 @@ module.exports.getYelpInfo = (truck) => {
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
         truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
-        // truckYelpObj.categories = data.categories;
+
+        // the following three lines update the database with the corrent information, but somehow this breaks the truckView so that the images no longer render to the screen, will come back to it
+        // truckYelpObj.categories = data.categories.reduce((prev, curr) =>{
+        //   return prev + curr.join(',') + ',';
+        // }, '');
+
         // TODO: turn this array into a string
         truckYelpObj.twitterHandle = truck.truckName;
         truck.truck.yelpInfo = truckYelpObj;
