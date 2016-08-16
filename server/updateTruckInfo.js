@@ -52,6 +52,7 @@ const TruckObj = () => {
 module.exports.getYelpInfo = (truck) => {
   return new Promise((resolve, reject) => {
     let yelp = new Yelp(yelpInfo);
+    let categories = [];
     yelp.business(truck.yelpBizID, (err, data) => {
       if (err) {
         reject(err);
@@ -64,11 +65,14 @@ module.exports.getYelpInfo = (truck) => {
         truckYelpObj.custReview = data.snippet_text;
         truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
 
-        // the following three lines update the database with the corrent information, but somehow this breaks the truckView so that the images no longer render to the screen, will come back to it
-        // truckYelpObj.categories = data.categories.reduce((prev, curr) =>{
-        //   return prev + curr.join(',') + ',';
-        // }, '');
-
+        // the following six lines update the database with the corrent information, but somehow this breaks the truckView so that the images no longer render to the screen, will come back to it
+        // data.categories.forEach( category => {
+        //   category.forEach(subCategory => {
+        //     categories.push(subCategory);
+        //   }) 
+        // });
+        // truckYelpObj.categories = categories;
+      
         // TODO: turn this array into a string
         truckYelpObj.twitterHandle = truck.truckName;
         truck.truck.yelpInfo = truckYelpObj;

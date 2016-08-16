@@ -91,7 +91,10 @@ module.exports = (app) => {
     Truck.find((err, trucks) => res.status(200).send(trucks));
   });
   app.get('/API/fetchEvents', (req, res) => {
-    Event.find((err, allEvents) => res.status(200).send(allEvents));
+    Event.find((err, allEvents) => {
+      // console.log("**********Inside the request-handler, just received", allEvents);
+      res.status(200).send(allEvents);
+    });
   });
 
   app.get('/API/fetch', (req, res) => {
