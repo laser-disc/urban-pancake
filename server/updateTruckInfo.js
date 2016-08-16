@@ -51,7 +51,6 @@ const TruckObj = () => {
 
 module.exports.getYelpInfo = (truck) => {
   return new Promise((resolve, reject) => {
-    console.log('INSIDE GETYELPINFO', truck.name)
     let yelp = new Yelp(yelpInfo);
     yelp.business(truck.yelpBizID, (err, data) => {
       if (err) {
@@ -97,7 +96,6 @@ module.exports.getFiveTweets = (newTruckObj, tweetID) => {
 module.exports.getTruckTwitterInfo = (foodTruck) => {
   return new Promise((resolve, reject) => {
     const newTruckObj = TruckObj();
-    console.log('****** INSIDE TWITTER GET REQUEST *****', foodTruck);
     newTruckObj.name = foodTruck;
     const searchParams = {
       screen_name: foodTruck,
@@ -151,7 +149,6 @@ module.exports.createTruckWithGeoInfo = (newTruckObj) => {
 
 module.exports.createOrUpdateDB = (newTruckObj) => {
   return new Promise((resolve, reject) => {
-    console.log('INSIDE CREATEORUPDATEDB', newTruckObj.truck.handle);
     // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
     Truck.find({ handle: newTruckObj.truck.handle }, (err, trucks) => {
       //  if no matches are found, it will return an empty array
@@ -180,7 +177,6 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
 
 module.exports.getTenImages = (newTruckObj) => {
   return new Promise((resolve, reject) => {
-    console.log('INSIDE GETTENIMAGES', newTruckObj.name);
     google.list({
       keyword: newTruckObj.name + " sf menu items",
       num: 10,
