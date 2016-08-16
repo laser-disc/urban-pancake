@@ -91,9 +91,6 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   border: 1px solid black !important;
 }
 .truck-item-data {
-=======
-.truck-item-data, .event-item-data {
->>>>>>> feat[client] Add food truck event pins to map
   padding-left: 15px;
 }
 .truck-item-yelp-score {
