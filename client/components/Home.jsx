@@ -1,5 +1,6 @@
 import React from 'react';
 import TruckList from '../containers/TruckList.jsx';
+import EventsList from '../containers/EventsList.jsx';
 import GoogleMap from '../containers/GoogleMap.jsx';
 import {Link} from "react-router";
 import {Router, Route, hashHistory} from 'react-router';
