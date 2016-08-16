@@ -41,13 +41,16 @@ class AddTruck extends Component {
     console.log('event: ', event, ' target: ', event.target, ' this: ', this)
   }
   handleChange(event) {
+    const target = event.target;
     const newState = this.state;
-    newState.truck[event.target.name] = event.target.value;
-    this.setState(newState, this.validateInput);
+    newState.truck[target.name] = target.value;
+    this.setState(newState, () => {
+      this.validateInput(target);
+    });
     console.log(this.getValue());
   }
-  validateInput() {
-    return;
+  validateInput(target) {
+    console.log("Validate input called on ", target);
   }
   getValue() {
     return this.state.truck;
