@@ -3,11 +3,13 @@
 import { combineReducers } from 'redux';
 import TruckReducer from './reducer_TruckList';
 import TruckViewReducer from './reducer_TruckView';
+import EventsReducer from './reducer_EventsList';
 import TruckItemReducer from './reducer_TruckItem';
 
 
 const rootReducer = combineReducers({
   trucks: TruckReducer,
+  events: EventsReducer,
   yelpInfo: TruckViewReducer,
   currentTruck: TruckItemReducer
 });
