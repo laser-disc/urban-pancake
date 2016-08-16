@@ -22,7 +22,9 @@ const { getTenImages } = require('./updateTruckInfo');
 
 
 // make sure to add the exact Twitter handle minus the @
-const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic'];
+const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic',
+  'WannaESF', 'eatmobowl', 'lcfoodtruck', /* 'redsauceballs', */ 'TacosElTuca', 'donpablotruck',
+  'FiretrailPizza', 'torrakuramen', 'GyrosonWheels1'];
 const foodEvents = ['gloungesf', 'SPARKsocialSF', 'SoMaStrEatFood'];
 // Don't try to get Twitter info from these trucks - you will FAIL
 // badFoodTrucks equalz ['senorsisig'];
@@ -33,6 +35,15 @@ const foodTrucksObj = {
   chairmantruck: { twitterHandle: 'chairmantruck', yelpBizID: 'the-chairman-truck-san-francisco' },
   slidershacksf: { twitterHandle: 'slidershacksf', yelpBizID: 'slider-shack-san-francisco' },
   KokioRepublic: { twitterHandle: 'KokioRepublic', yelpBizID: 'kokio-republic-san-francisco' },
+  WannaESF: { twitterHandle: 'WannaESF', yelpBizID: 'wanna-e-san-francisco' },
+  eatmobowl: { twitterHandle: 'eatmobowl', yelpBizID: 'mobowl-mountain-view' },
+  lcfoodtruck: { twitterHandle: 'lcfoodtruck', yelpBizID: 'liberty-cheesesteak-san-francisco' },
+  // redsauceballs: { twitterHandle: 'redsauceballs', yelpBizID: 'red-sauce-meatballs-san-francisco-2' },
+  TacosElTuca: { twitterHandle: 'TacosElTuca', yelpBizID: 'tacos-el-tuca-san-francisco' },
+  donpablotruck: { twitterHandle: 'donpablotruck', yelpBizID: 'don-pablo-san-carlos' },
+  FiretrailPizza: { twitterHandle: 'FiretrailPizza', yelpBizID: 'firetrail-pizza-san-francisco' },
+  torrakuramen: { twitterHandle: 'torrakuramen', yelpBizID: 'torraku-ramen-san-francisco-2' },
+  GyrosonWheels1: { twitterHandle: 'GyrosonWheels1', yelpBizID: 'gyros-on-wheels-san-francisco' }
 };
 
 // iterates over an array of food truck event Twitter handles
@@ -64,7 +75,6 @@ foodTrucks.forEach(foodTruck => {
 
 
 module.exports = (app) => {
-  
   app.get('/API/fetchAll', (req, res) => {
     Truck.find((err, trucks) => res.status(200).send(trucks));
   });

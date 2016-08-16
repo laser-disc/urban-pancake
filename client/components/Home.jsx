@@ -6,7 +6,6 @@ import {Link} from "react-router";
 import {Router, Route, hashHistory} from 'react-router';
 import Header from './Header.jsx'
 import Footer from './Footer.jsx'
-      
 
 let googleMap;
 if (process.env.TEST_ENV === 'test') {

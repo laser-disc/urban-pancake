@@ -1,6 +1,3 @@
-// TODO REFACTOR createOrUpdateDB TO ONLY REWRITE CERTAIN PROPERTIES ON EXISTING
-// DOCUMENTS AND NOT RECREATE WHOLE DOCUMENT
-
 // const getLocationFromTweets = require('./getLocationFromTweets');
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
@@ -66,7 +63,8 @@ module.exports.getYelpInfo = (truck) => {
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
         truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
-        // truckYelpObj.categories = data.categories;  // TODO: turn this array into a string
+        // truckYelpObj.categories = data.categories;
+        // TODO: turn this array into a string
         truckYelpObj.twitterHandle = truck.truckName;
         truck.truck.yelpInfo = truckYelpObj;
         resolve(truck);
@@ -76,7 +74,7 @@ module.exports.getYelpInfo = (truck) => {
 };
 
 module.exports.getFiveTweets = (newTruckObj, tweetID) => {
-  console.log("getFiveTweets just recieved ", newTruckObj.name, tweetID);
+  console.log("getFiveTweets just received ", newTruckObj.name, tweetID);
   return new Promise ((resolve, reject) => {
     let searchParams = {
       url: 'https://twitter.com/' + newTruckObj.name + '/status/' + tweetID,
@@ -92,7 +90,7 @@ module.exports.getFiveTweets = (newTruckObj, tweetID) => {
       newTruckObj.fiveTweetObjs.push(noCharSet);
       resolve(newTruckObj);
     });
-  });    
+  });
 };
 
 module.exports.getTruckTwitterInfo = (foodTruck) => {
@@ -104,15 +102,21 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
       exclude_replies: true,
       include_rts: true,
     };
+
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
     twitterClient.get('statuses/user_timeline', searchParams, (error, tweets) => {
       if (error) {
         console.log('error', error);
         reject(error);
       }
-      newTruckObj.website = tweets[0].user.url;
-      newTruckObj.allTweetObjs = tweets;
-      tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
+      // console.log('INSIDE TWITTER GET REQUEST', searchParams.screen_name)
+
+      // console.log('INSIDE TWITTER GET REQUEST', tweets[0])
+      if(tweets[0]) {
+        newTruckObj.website = tweets[0].user.url;
+        newTruckObj.allTweetObjs = tweets;
+        tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
+      };
       resolve(newTruckObj);
     });
   });
@@ -150,9 +154,8 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
       //  if no matches are found, it will return an empty array
       if (trucks.length === 0) {
         // and then we create a new document in the db for that truck
-        // newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
         newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
-        console.log(`${newTruckObj.name} created`);
+        console.log(`${newTruckObj.name} truck created`);
       } else {
         // otherwise update existing document
         Truck.findOneAndUpdate(
@@ -166,7 +169,7 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
           } }, { upsert: true },
           (err, resp) => err ? reject(err) : resolve(resp)
         );
-        console.log(`${newTruckObj.name} updated`);
+        console.log(`${newTruckObj.name} truck updated`);
       }
     });
   });
@@ -193,5 +196,3 @@ module.exports.getTenImages = (newTruckObj) => {
     });
   });
 };
-
-
