@@ -184,17 +184,6 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   margin-right: auto;
 }
 
-.truck-list {
-  overflow: scroll;
-  padding: 0px !important;
-  padding-top: 25px !important;
-  box-shadow: inset 4px 4px 1px 0px rgba(0,0,0,0.75)!important;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
-  border-radius: 5px;
-  height: 770px;
-  background-color: #a0a1a2 !important;
-}
 
 .page-title{
   width: 400px;
