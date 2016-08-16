@@ -27,12 +27,15 @@ class AddTruck extends Component {
     this.state = {
       truck: {
         name: '',
-        handle: ''
+        handle: '',
+        description: '',
+        yelpId: '',
       }
     };
     this.getValue = this.getValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.validateInput = this.validateInput.bind(this);
   }
   handleSubmit(event) {
     console.log('event: ', event, ' target: ', event.target, ' this: ', this)
@@ -40,8 +43,11 @@ class AddTruck extends Component {
   handleChange(event) {
     const newState = this.state;
     newState.truck[event.target.name] = event.target.value;
-    this.setState(newState);
+    this.setState(newState, this.validateInput);
     console.log(this.getValue());
+  }
+  validateInput() {
+    return;
   }
   getValue() {
     return this.state.truck;
@@ -49,48 +55,82 @@ class AddTruck extends Component {
     // TODO: Add help option to describe Yelp ID
   render() {
     return (
-      <div>
+      <div style={{"color": "white"}}>
         <form
           className="add-truck"
-          onChange={this.handleChange}>
-          <label>Name</label>
-          <input
-            type="text"
-            placeholder="name"
-            name="name"
-            />
-          <label>Twitter Handle</label>
-          @<input
+          onChange={this.handleChange}
+          >
+          <div>
+            <label>Name</label>
+            <input
+              type="text"
+              placeholder="name"
+              name="name"
+              />
+          </div>
+          <div>
+            <label>Twitter Handle</label>
+            @<input
             type="text"
             placeholder="T. Handle"
+            name="handle"
             />
-          <label>Yelp ID</label>
-          <input
-            type="text"
-            placeholder="Yelp ID"
-            />
-          <label>Locations</label>
-          Sunday<input
-            type="text"
-            />
-          Monday<input
-            type="text"
-            />
-          Tuesday<input
-            type="text"
-            />
-          Wednesday<input
-            type="text"
-            />
-          Thursday<input
-            type="text"
-            />
-          Friday<input
-            type="text"
-            />
-          Saturday<input
-            type="text"
-            />
+          </div>
+          <div>
+            <label>Yelp ID</label>
+            <input
+              type="text"
+              placeholder="Yelp ID"
+              name="yelpId"
+              />
+          </div>
+          <div>
+            <label>Locations</label>
+            <ul>
+              <li>
+                Sunday<input
+                  type="text"
+                  name="sunday"
+                />
+              </li>
+              <li>
+                Monday<input
+                  type="text"
+                  name="monday"
+                />
+              </li>
+              <li>
+                Tuesday<input
+                  type="text"
+                  name="tuesday"
+                />
+              </li>
+              <li>
+                Wednesday<input
+                  type="text"
+                  name="wednesday"
+                />
+              </li>
+              <li>
+                Thursday<input
+                  type="text"
+                  name="thursday"
+                />
+              </li>
+              <li>
+                Friday<input
+                  type="text"
+                  name="friday"
+                />
+              </li>
+              <li>
+                Saturday<input
+                  type="text"
+                  name="saturday"
+                />
+              </li>
+            </ul>
+          </div>
           <button type="button" onClick={this.handleSubmit.bind(this)}>Submit</button>
         </form>
       </div>
