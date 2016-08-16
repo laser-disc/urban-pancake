@@ -5,6 +5,8 @@ import { PassCurrTruck } from '../actions/PassCurrTruck';
 import { bindActionCreators } from 'redux';
 var userLat;
 var userLng;
+let center = {lat: 37.7678011, lng: -122.4443519};  // default
+let zoom = 12;  // default
 
 // import Marker from '../components/Marker.jsx';
 // Marker position needs to be broken up to the individual lat, lng props
@@ -16,18 +18,15 @@ class Map extends Component {
   };
 
   handleClick(truck){
-
-    console.log("you've selected ", truck.name);
-    // this.setState({currentTruck: truck.name});
-    this.props.PassCurrTruck(truck);
-  };
-
-  handleClickUser(){
-    console.log("That ain't no truck.  That's YOU breh...");
+    if(truck._id==="user"){
+      console.log("That ain't no truck.  That's YOU breh...");
+    } else {
+      console.log("you've selected ", truck.name);
+      this.props.PassCurrTruck(truck);
+    }
   };
 
   renderUserLocation(){
-    console.log("GoogleMap.jsx renderUserLocation");
 
     return new Promise((resolve, reject) => {
       var options = {
@@ -57,7 +56,7 @@ class Map extends Component {
         user.timeStamp = JSON.stringify(new Date);
         user.location = {lat: userPosition.coords.latitude, lng: userPosition.coords.longitude};
         this.props.trucks.push(user);
-        this.setState({userLocationFound: true});
+        this.setState({userLocationFound: true, userLocation: user.location});
       };
     })
     .catch( err => {
@@ -89,18 +88,21 @@ class Map extends Component {
       return (
         <Marker
           key={ truck._id } position={{ lat: position.lat, lng: position.lng }} onClick={ this.handleClick.bind(this, truck) }
-          // icon={{url:'https://media.giphy.com/media/8K1IYSnhUaNH2/giphy_s.gif'}}
         />
       );
     };
   };
   render() {
-    console.log("GoogleMap rendered");
+    console.log("GoogleMap rendered this.state", this.state);
+    if(this.state){
+      zoom = 15;
+      center = { lat: this.state.userLocation.lat, lng: this.state.userLocation.lng };
+    }
     return (
       <GoogleMapLoader
         containerElement={ <div style={{height: '100%', width: '100%'}} /> }
         googleMapElement={
-          <GoogleMap defaultZoom={ 12 } defaultCenter={{ lat: 37.7678011, lng: -122.4443519 }}>
+          <GoogleMap zoom={ zoom } center={{ lat: center.lat, lng: center.lng }}>
             { this.props.trucks.map(truck => this.renderMarkers(truck)) }
           </GoogleMap>
         }
