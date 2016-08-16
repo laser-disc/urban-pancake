@@ -24,7 +24,14 @@ class TruckList extends Component {
 
   // Iterates over each truck in the database
   renderTrucks(truck) {
-    var handle = truck.handle.slice(1, truck.handle.length);
+    var handle;
+    if(truck._id==="user"){
+      handle = '';
+    }
+    else{
+      handle = truck.handle.slice(1, truck.handle.length); 
+    }
+   
     if(selectedTruck == truck.name){
       return  <div className="selected"><Link to={"/truckview/" + handle} key={truck._id} > <TruckItem truck={truck} /></Link></div>
     } else {
