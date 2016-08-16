@@ -2,13 +2,10 @@
 
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-var cssProps = "truck-item test  hvr-grow well";
 
 
 export default class TruckItem extends Component {
-  componentWillUpdate(){
-    cssProps = this.props.truck.name === this.props.currentTruck.currentTruck ? 'truck-item-current-truck test hvr-grow well"' : "truck-item test hvr-grow well";
-  };
+
 
   render() {
     var truckItemThumbNailStyle = {
@@ -16,7 +13,7 @@ export default class TruckItem extends Component {
     };
 
     return (
-      <div className={cssProps}>
+      <div className="truck-item hrv-grow well">
         <div className="row">
           <div className="truck-item-avatar col-xs-4 col-lg-3 col-xl-2" style={truckItemThumbNailStyle}>
           </div>
