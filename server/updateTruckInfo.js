@@ -63,7 +63,12 @@ module.exports.getYelpInfo = (truck) => {
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
         truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
-        // truckYelpObj.categories = data.categories;
+
+        // the following three lines update the database with the corrent information, but somehow this breaks the truckView so that the images no longer render to the screen, will come back to it
+        // truckYelpObj.categories = data.categories.reduce((prev, curr) =>{
+        //   return prev + curr.join(',') + ',';
+        // }, '');
+
         // TODO: turn this array into a string
         truckYelpObj.twitterHandle = truck.truckName;
         truck.truck.yelpInfo = truckYelpObj;
@@ -109,9 +114,6 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
         console.log('error', error);
         reject(error);
       }
-      // console.log('INSIDE TWITTER GET REQUEST', searchParams.screen_name)
-
-      // console.log('INSIDE TWITTER GET REQUEST', tweets[0])
       if(tweets[0]) {
         newTruckObj.website = tweets[0].user.url;
         newTruckObj.allTweetObjs = tweets;
@@ -154,8 +156,14 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
       //  if no matches are found, it will return an empty array
       if (trucks.length === 0) {
         // and then we create a new document in the db for that truck
-        newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
-        console.log(`${newTruckObj.name} truck created`);
+        module.exports.getTenImages(newTruckObj)
+        .then(newTruckObj => {
+          newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
+          console.log(`${newTruckObj.name} truck created`);
+        })
+        .catch( error => {
+          console.log("createOrUpdateDB promise chain error", error);
+        })
       } else {
         // otherwise update existing document
         Truck.findOneAndUpdate(
@@ -191,8 +199,9 @@ module.exports.getTenImages = (newTruckObj) => {
       });
       resolve(newTruckObj);
     }).catch(function(err) {
-      console.log('scrapeWebsite error', err);
+      console.log('getTenImages error', err);
       reject(err);
     });
   });
 };
+
