@@ -114,9 +114,6 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
         console.log('error', error);
         reject(error);
       }
-      // console.log('INSIDE TWITTER GET REQUEST', searchParams.screen_name)
-
-      // console.log('INSIDE TWITTER GET REQUEST', tweets[0])
       if(tweets[0]) {
         newTruckObj.website = tweets[0].user.url;
         newTruckObj.allTweetObjs = tweets;
@@ -159,8 +156,14 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
       //  if no matches are found, it will return an empty array
       if (trucks.length === 0) {
         // and then we create a new document in the db for that truck
-        newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
-        console.log(`${newTruckObj.name} truck created`);
+        module.exports.getTenImages(newTruckObj)
+        .then(newTruckObj => {
+          newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
+          console.log(`${newTruckObj.name} truck created`);
+        })
+        .catch( error => {
+          console.log("createOrUpdateDB promise chain error", error);
+        })
       } else {
         // otherwise update existing document
         Truck.findOneAndUpdate(
@@ -196,8 +199,9 @@ module.exports.getTenImages = (newTruckObj) => {
       });
       resolve(newTruckObj);
     }).catch(function(err) {
-      console.log('scrapeWebsite error', err);
+      console.log('getTenImages error', err);
       reject(err);
     });
   });
 };
+
