@@ -64,11 +64,9 @@ class Map extends Component {
         user.timeStamp = JSON.stringify(new Date);
         user.location = {lat: userPosition.coords.latitude, lng: userPosition.coords.longitude};
         user.schedule = [{ closed: false },{ closed: false },{ closed: false },{ closed: false },{ closed: false },{ closed: false },{ closed: false }];
-        // push the user truck to this.props.trucks
-        console.log('this.props.trucks.length before ', this.props.trucks.length);
+        user.yelpInfo = {name: null, yelpBizID: null, starsRating: null, review_count: null, custReview: null, photo: null,categories: null};
+        // push the user truck to this.props.trucks  
         this.props.trucks.push(user);
-        console.log('this.props.trucks.length after ', this.props.trucks.length)
-
         // and force a re-render by changing the state
         this.setState({userLocationFound: true, userLocation: user.location});
       };
@@ -79,7 +77,6 @@ class Map extends Component {
   };
 
   renderMarkers(truck) {
-    console.log("renderMarkers truck.schedule", truck._id, truck.schedule);
     // this.renderUserLocation(); 
     // GRAB CURRENT DAY OF WEEK
     const date = new Date;
