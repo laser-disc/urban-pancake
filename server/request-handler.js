@@ -24,7 +24,8 @@ const { getTenImages } = require('./updateTruckInfo');
 // make sure to add the exact Twitter handle minus the @
 const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic',
   'WannaESF', 'eatmobowl', 'lcfoodtruck', /* 'redsauceballs', */ 'TacosElTuca', 'donpablotruck',
-  'FiretrailPizza', 'torrakuramen', 'GyrosonWheels1'];
+  'FiretrailPizza', 'torrakuramen', 'GyrosonWheels1', 'HongryKong', 'PhatThaiSF', 'KabobTrolley',
+  'adamsgrubtruck', 'bowldacai', /* 'seoulonwheels',*/ 'RedRidingTruck', 'odangudon', 'nonoburger'];
 const foodEvents = ['gloungesf', 'SPARKsocialSF', 'SoMaStrEatFood'];
 // Don't try to get Twitter info from these trucks - you will FAIL
 // badFoodTrucks equalz ['senorsisig'];
@@ -43,7 +44,18 @@ const foodTrucksObj = {
   donpablotruck: { twitterHandle: 'donpablotruck', yelpBizID: 'don-pablo-san-carlos' },
   FiretrailPizza: { twitterHandle: 'FiretrailPizza', yelpBizID: 'firetrail-pizza-san-francisco' },
   torrakuramen: { twitterHandle: 'torrakuramen', yelpBizID: 'torraku-ramen-san-francisco-2' },
-  GyrosonWheels1: { twitterHandle: 'GyrosonWheels1', yelpBizID: 'gyros-on-wheels-san-francisco' }
+  GyrosonWheels1: { twitterHandle: 'GyrosonWheels1', yelpBizID: 'gyros-on-wheels-san-francisco' },
+  HongryKong: { twitterHandle: 'HongryKong', yelpBizID: 'hongry-kong-san-ramon-2' },
+  PhatThaiSF: { twitterHandle: 'PhatThaiSF', yelpBizID: 'phat-thai-san-francisco-2' },
+  KabobTrolley: { twitterHandle: 'KabobTrolley', yelpBizID: 'kaböb-trölley-san-francisco-4' },
+  adamsgrubtruck: { twitterHandle: 'adamsgrubtruck', yelpBizID: 'adams-grub-truck-san-francisco-2' },
+  bowldacai: { twitterHandle: 'bowldacai', yelpBizID: 'bowld-acai-san-francisco-2' },
+  // seoulonwheels: { twitterHandle: 'seoulonwheels', yelpBizID: 'seoul-on-wheels-san-francisco-4' },
+  RedRidingTruck: { twitterHandle: 'RedRidingTruck', yelpBizID: 'little-red-riding-truck-san-francisco' },
+  odangudon: { twitterHandle: 'odangudon', yelpBizID: 'odang-udon-san-francisco-3' },
+  nonoburger: { twitterHandle: 'nonoburger', yelpBizID: 'no-no-burger-san-francisco' }
+
+  // thetwitterHandleAgainForSomeReason: { twitterHandle: '', yelpBizID: '' },
 };
 
 // iterates over an array of food truck event Twitter handles
