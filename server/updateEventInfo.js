@@ -150,3 +150,64 @@ module.exports.createOrUpdateEvent = (eventObj) => {
     });
   });
 };
+
+
+
+
+
+
+
+
+// this function is designed to grab the truck handles from a tweet containing
+const grabHandles = function(tweet) {
+  let handles = [];
+  // split the string into an array
+  let tweetArr = tweet.split(" ");
+    // take any element that begins with @ and remove the @
+    for (word of tweetArr) {
+      if (word[0] === '@') {
+        let minusAt = word.substr(1);
+        if (minusAt[minusAt.length-1] === '.') {
+          minusAt = minusAt.substr(0, minusAt.length-1);
+        }
+        //TODO: remove punctuation
+        // push the element to the trucks array
+        handles.push(minusAt);
+      };
+    };
+    console.log(handles);
+};
+
+
+//this function is the same as grabHandles but also looks for a #lunch marker in the tweet
+const grabWithHashtag = function(tweet) {
+  let tester = tweet.split(" ");
+  if (tester.indexOf('#lunch') !== -1) {
+    grabHandles(tweet)
+  };
+};
+
+
+// returns an object that will indicate which trucks are present TODAY
+const grabTodaysTrucks = (newEvent) => {
+  // we want to return an object {today: 5, trucks: ['senor sesig, etc']}
+  //first we check if the date on hte obj in the dtabase is the same as today's date'
+    // if it's the same, we're done
+    // if it's not, we update the obj
+};
+
+
+//   //gives us the latest tweet object from the twitter acct
+//   const lastTweet = newEvent.allTweetObjs[0];
+//   let truckInfo = {};
+
+//   today is a time stamp for the current date and time, eg "Fri Aug 12 2016 17:19:57 GMT-0700 (PDT)"
+//   const today = (new Date).toString();
+//  we need to check in the DB to see if 
+//   truckInfo.today = today;
+
+//  now we need to get all the trucks from this particular day only
+
+//   we want return an object that contains today: 0, 1, 2, etc and an array of trucks from that tweet
+
+// craeted_at = "Fri Aug 12 17:45:13 +0000 2016

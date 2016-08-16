@@ -9,4 +9,5 @@ export function FetchEvents() {
     type: FETCH_EVENTS,
     payload: request,
   };
-}
+};
+
