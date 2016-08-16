@@ -5,7 +5,7 @@ const Twitter = require('twitter');
 let secretKeys = null;
 if (!process.env.TWITTERINFO_CONSUMER_KEY) {
   secretKeys = require('../env/config');  // DO NOT LINT
-};
+}
 const twitterInfo = secretKeys ? secretKeys.twitterInfo : {
   consumer_key: process.env.TWITTERINFO_CONSUMER_KEY,
   consumer_secret: process.env.TWITTERINFO_CONSUMER_SECRET,
@@ -20,7 +20,8 @@ const twitterInfo = secretKeys ? secretKeys.twitterInfo : {
 const twitterClient = new Twitter(twitterInfo);
 const { sched, loc } = require('../utils/eventsSchedules');
 
-//this yelp obj is the same as the one in updateTruckInfo, so we don't need this or getYelpInfo here
+// This yelp obj is the same as the one in updateTruckInfo, so we don't need this here;
+// we can just import it or figure out some adjustment when we merge the files
 const yelpObj = (yelpBizID) => {
   return {
     name: null,
@@ -33,7 +34,7 @@ const yelpObj = (yelpBizID) => {
   };
 };
 
-//constructs the equivalent of TruckObj, which contains all of the info for event
+// Constructs the equivalent of TruckObj, which contains all of the Twitter info for an event
 const EventInfo = () => {
   return {
     twitterHandle: null,
@@ -45,7 +46,7 @@ const EventInfo = () => {
 };
 
 
-// calls the Twitter API to retrieve the last 20 tweets based on the event name
+// Calls the Twitter API to retrieve the last 20 tweets based on the event name
 module.exports.getEventTwitterInfo = (event) => {
   return new Promise((resolve, reject) => {
     // creates a new event that is an instance of EventInfo
@@ -62,11 +63,11 @@ module.exports.getEventTwitterInfo = (event) => {
       if (error) {
         console.log('Error retrieving tweets', error);
         reject(error);
-      };
-      // we set the property of fullTweets to the data returned from the server, which is an array containing the tweet objects
+      }
+      // set the property of fullTweets to the data returned from the server
       newEvent.fullTweets = tweets;
-      //allTweetMessages should only contain message strings
-      (newEvent.fullTweets).forEach(function(tweet){
+      // allTweetMessages should only contain message strings
+      (newEvent.fullTweets).forEach((tweet) => {
         newEvent.allMessages.push(tweet.text);
       });
       resolve(newEvent);
@@ -74,9 +75,42 @@ module.exports.getEventTwitterInfo = (event) => {
   });
 };
 
-// creates a DB record for the given event
+// this function is designed to grab the truck handles from a tweet containing a list of handles
+const grabHandles = (tweet) => {
+  const handlesList = [];
+  // split the string into an array
+  const tweetArr = tweet.split(' ');
+    // take any element that begins with @ and remove the @
+  for (word of tweetArr) {
+    if (word[0] === '@') {
+      let minusAt = word.substr(1);
+      if (minusAt[minusAt.length - 1] === '.') {
+        minusAt = minusAt.substr(0, minusAt.length - 1);
+      }
+      handlesList.push(minusAt);
+    }
+  }
+  return handlesList;
+};
+
+// takes eventObj as an argument and returns an array with today's trucks only
+const grabTodaysTrucks = (event) => {
+  const metaInfo = event.fullTweets[0];
+  const today = (new Date()).toString().slice(0, 3);
+  const lastTweetDay = metaInfo.created_at.slice(0, 3);
+  // checks to see if the date of the last tweet is the same as today's date
+  if (today === lastTweetDay) {
+    // anything without #lunch and #dinner hashtags
+    if (event.twitterHandle === 'gloungesf' || event.allMessages[0].split(' ').indexOf('#dinner') === -1) {
+      return grabHandles(event.allMessages[0]);
+    }
+  } else {
+    return [];
+  }
+};
+
 module.exports.createEventRecord = (eventObj) => {
-  return new Promise ((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const tweet = eventObj.fullTweets[0];
     eventObj.info = new Event({
       name: tweet.user.name,
@@ -87,29 +121,32 @@ module.exports.createEventRecord = (eventObj) => {
       imageUrl: tweet.user.profile_image_url,
       location: loc[tweet.user.screen_name],
       schedule: sched[tweet.user.screen_name],
+      todaysTrucks: grabTodaysTrucks(eventObj),
     });
     resolve(eventObj);
   });
 };
 
 module.exports.createOrUpdateEvent = (eventObj) => {
+  const eventName = eventObj.info.name;
   return new Promise((resolve, reject) => {
-    //searches for an event record in the database with a matching Twitter handle
-    Event.find({ handle: eventObj.info.handle }, (err, result) => {
+    // searches for an event record in the database with a matching Twitter handle
+    Event.find({ name: eventName }, (err, result) => {
       if (result.length === 0) {
         eventObj.info.save((err, resp) => err ? reject(err) : resolve(resp));
-        console.log(`${eventObj.info.name} created`);
+        console.log(`${eventName} created`);
       } else {
         Event.findOneAndUpdate(
-          { handle: eventObj.info.handle },
+          { name: eventName },
           { $set: {
             message: eventObj.info.message,
             timeStamp: eventObj.info.timeStamp,
-          }}, { upsert: true },
+            todaysTrucks: grabTodaysTrucks(eventObj),
+          } }, { upsert: true },
           (err, resp) => err ? reject(err) : resolve(resp)
         );
-        console.log(`${eventObj.info.name} updated`);
-      };
+        console.log(`${eventName} updated`);
+      }
     });
   });
 };

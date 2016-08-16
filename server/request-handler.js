@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 // TODO NEED TO SCRAPE PARTICIPATING TRUCKS FROM FOODEVENT TWITTER FEEDS
 // LOCATIONS ARE NOTED TRUCKSCHEDULES.JS IN UTILS
 
@@ -6,7 +6,7 @@
 
 const db = require('../db/config');
 const mongoose = require('mongoose');
-const https = require('https')
+const https = require('https');
 const Truck = require('../db/truckSchema');
 const Event = require('../db/eventsSchema');
 const { getLocation } = require('./getLocationFromTweets');
@@ -28,11 +28,11 @@ const foodEvents = ['gloungesf', 'SPARKsocialSF', 'SoMaStrEatFood'];
 // badFoodTrucks equalz ['senorsisig'];
 
 const foodTrucksObj = {
-  JapaCurry: { twitterHandle: 'JapaCurry', yelpBizID: 'japacurry-truck-san-francisco'},
-  CurryUpNow: { twitterHandle: 'CurryUpNow', yelpBizID: 'curry-up-now-san-francisco'},
-  chairmantruck: { twitterHandle: 'chairmantruck', yelpBizID: 'the-chairman-truck-san-francisco'},
-  slidershacksf: { twitterHandle: 'slidershacksf', yelpBizID: 'slider-shack-san-francisco'},
-  KokioRepublic: { twitterHandle: 'KokioRepublic', yelpBizID: 'kokio-republic-san-francisco'},
+  JapaCurry: { twitterHandle: 'JapaCurry', yelpBizID: 'japacurry-truck-san-francisco' },
+  CurryUpNow: { twitterHandle: 'CurryUpNow', yelpBizID: 'curry-up-now-san-francisco' },
+  chairmantruck: { twitterHandle: 'chairmantruck', yelpBizID: 'the-chairman-truck-san-francisco' },
+  slidershacksf: { twitterHandle: 'slidershacksf', yelpBizID: 'slider-shack-san-francisco' },
+  KokioRepublic: { twitterHandle: 'KokioRepublic', yelpBizID: 'kokio-republic-san-francisco' },
 };
 
 // iterates over an array of food truck event Twitter handles
@@ -42,7 +42,7 @@ foodEvents.forEach(event => {
   .then(eventObj => createEventRecord(eventObj))
   // either adds the info from createEventRecord to the DB or updates this existing info
   .then(eventObj => createOrUpdateEvent(eventObj))
-  .catch(err => console.log("ERRRR", err));  
+  .catch(err => console.log('ERRRR', err));
 });
 
 foodTrucks.forEach(foodTruck => {
