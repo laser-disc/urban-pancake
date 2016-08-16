@@ -5,7 +5,6 @@ import TruckReducer from './reducer_TruckList';
 import TruckViewReducer from './reducer_TruckView';
 import EventsReducer from './reducer_EventsList';
 import TruckItemReducer from './reducer_TruckItem';
-import EventsReducer from './reducer_EventsList';
 
 
 const rootReducer = combineReducers({
