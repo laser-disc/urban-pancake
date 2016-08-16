@@ -1,6 +1,15 @@
 const Event = require('../db/eventsSchema');
 const Twitter = require('twitter');
 // const Yelp = require('yelp');
+const { getTruckTwitterInfo } = require('./updateTruckInfo');
+// const { getLocation } = require('./getLocationFromTweets');
+// const { geoCoder } = require('../utils/utils');
+const { createTruckWithGeoInfo } = require('./updateTruckInfo');
+const { getTenImages } = require('./updateTruckInfo');
+const { createOrUpdateDB } = require('./updateTruckInfo');
+const { getYelpInfo } = require('./updateTruckInfo');
+const { getFiveTweets } = require('./updateTruckInfo');
+// const { updateDBwithYelpInfo } = require('./updateTruckInfo');
 
 let secretKeys = null;
 if (!process.env.TWITTERINFO_CONSUMER_KEY) {
@@ -134,7 +143,7 @@ module.exports.createOrUpdateEvent = (eventObj) => {
     Event.find({ name: eventName }, (err, result) => {
       if (result.length === 0) {
         eventObj.info.save((err, resp) => err ? reject(err) : resolve(resp));
-        console.log(`${eventName} created`);
+        console.log(`${eventName} event created`);
       } else {
         Event.findOneAndUpdate(
           { name: eventName },
@@ -145,7 +154,7 @@ module.exports.createOrUpdateEvent = (eventObj) => {
           } }, { upsert: true },
           (err, resp) => err ? reject(err) : resolve(resp)
         );
-        console.log(`${eventName} updated`);
+        console.log(`${eventName} event updated`);
       }
     });
   });

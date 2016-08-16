@@ -7,6 +7,10 @@ import { bindActionCreators } from 'redux';
 // import Marker from '../components/Marker.jsx';
 // Marker position needs to be broken up to the individual lat, lng props
 // use new Date.now().getDay() for day of week index
+// GRAB CURRENT DAY OF WEEK
+const today = new Date;
+const index = today.getDay();
+
 class Map extends Component {
 
   handleClick(truck){
@@ -16,19 +20,20 @@ class Map extends Component {
   }
 
   renderMarkers(truck) {
-    // GRAB CURRENT DAY OF WEEK
-    const date = new Date;
-    const index = date.getDay();
     const dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const tweetDay = truck.timeStamp.slice(0, 3);
-
+    let position = null;
     // GRAB DAY OF TWEET TIMESTAMP FROM DB
     const tweetIndex = dayOfWeek.indexOf(tweetDay);
+    if(truck.schedule.length === 0) {
+      position = {lat: null, lng: null};
+    } else {
+      // IF TWEET IS FROM TODAY, USE LOCATION OBJECT PULLED FROM TWEET,
+      // OTHERWISE USE SCHEDULE FOUND IN DATABASE FOR LOCATION,
+      // UNLESS THE TRUCK IS CLOSED TODAY. THEN PASS NULL TO MARKER SO IT DOESN'T RENDER
+      position = tweetIndex === index ? truck.location : truck.schedule[index].closed ? {lat: null, lng: null} : truck.schedule[index];
+    }
 
-    // IF TWEET IS FROM TODAY, USE LOCATION OBJECT PULLED FROM TWEET,
-    // OTHERWISE USE SCHEDULE FOUND IN DATABASE FOR LOCATION,
-    // UNLESS THE TRUCK IS CLOSED TODAY. THEN PASS NULL TO MARKER SO IT DOESN'T RENDER
-    const position = tweetIndex === index ? truck.location : truck.schedule[index].closed ? {lat: null, lng: null} : truck.schedule[index];
     if (position.lat) {
       return <Marker
         key={ truck._id } position={{ lat: position.lat, lng: position.lng }} onClick={ this.handleClick.bind(this, truck) }
@@ -37,16 +42,12 @@ class Map extends Component {
     };
   };
     renderEventMarkers(event) {
-      //we need the current weekday in order to iterate over the schedules array and determine if the event is open today
-      const today = new Date;
-      // idx is the index of the array, in which 0 corresponds to Sunday, and so on
-      const idx = today.getDay();
 
       //TODO: when we render the trucks list for the event, we need to make sure idx is the same as the date of the last tweet's timestamp
 
       // if the event is open today, we render it to the map
       // if it's closed, it's lat and lng are set to null so that the marker does not render
-      const position = (event.schedule[idx].closed ? { lat: null, lng: null } : event.location);
+      const position = (event.schedule[index].closed ? { lat: null, lng: null } : event.location);
 
     if (position.lat !== null) {
       return <Marker
