@@ -11,21 +11,21 @@ class TruckList extends Component {
   componentWillMount() {
     this.props.FetchTrucks();
     this.props.FetchEvents();
-  }
+  };
+
   // Iterates over each truck in the database
   renderTrucks(truck) {
     var handle = truck.handle.slice(1, truck.handle.length);
       //handle is correct
     return  <Link to={"/truckview/" + handle} key={truck._id} > <TruckItem truck={truck} /></Link>
   };
-
-  //TODO: renderEvents(events) and return in the render
-
   // Maps truck prop to TruckItem
   render() {
+
     return (
 
       <div className="truck-list well container-well">
+
         {this.props.trucks.map(truck => this.renderTrucks(truck))}
       </div>
     );
@@ -37,7 +37,7 @@ function mapStateToProps(state) {
     trucks: state.trucks,
     events: state.events,
     yelpInfo: state.yelpInfo,
-    currentTruck: state.currentTruck,
+    currentTruck: state.currentTruck
   };
 };
 
