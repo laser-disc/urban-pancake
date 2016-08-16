@@ -135,7 +135,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 /************************** Left and Right Wells   **************************/
 
 .container-well {
-  height: 77vh;
+  height: 77vh !important;
   display: inline-block;
   box-shadow: inset 4px 4px 1px 0px rgba(0,0,0,0.75) !important;
   border-top: 3px solid black;
@@ -166,11 +166,13 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 }
 
 .truck-list {
-  overflow: scroll;
+  overflow: scroll !important;
   padding: 0px !important;
   padding-top: 25px !important;
   margin-bottom: 0px !important; 
   display: table;
+  height: 30vh !important;
+  table-layout: fixed;
 }
 
 .google-map{
