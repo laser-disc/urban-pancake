@@ -38,13 +38,27 @@ class TruckList extends Component {
       return  <div className="not-selected"><Link to={"/truckview/" + handle} key={truck._id} > <TruckItem truck={truck} /></Link></div>
     }
   };
+
+  // Iterates over each event in the database
+  renderEvents(event) {
+    var handle = event.handle.slice(1, event.handle.length); 
+    event.yelpInfo = {name: null, yelpBizID: null, starsRating: null, review_count: null, custReview: null, photo: null,categories: null};
+
+    if(selectedTruck == event.name){
+      return  <div className="selected"><Link to={"/truckview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+    } else {
+      return  <div className="not-selected"><Link to={"/truckview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+    }
+  };
+
   // Maps truck prop to TruckItem
   render() {
+    console.log("render TruckList this.props", this.props);
 
     return (
       <div className="truck-list well container-well">
-
         {this.props.trucks.map(truck => this.renderTrucks(truck))}
+        {this.props.events.map(event => this.renderEvents(event))}
       </div>
     );
   }
