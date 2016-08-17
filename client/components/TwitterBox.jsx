@@ -14,16 +14,11 @@ export default class TwitterBox extends Component {
     if(this.props.fiveTweets) {
       var counter = 0;
       return (
-        <div className="twitter-box container-well well">
+        <div className="twitter-box well">
           { this.props.fiveTweets.map( function(tweet){
               return  (
-                <a href="https://twitter.com/your-twitter-page"
-              className="twitter-follow-button"
-              data-show-count="false"
-              data-show-screen-name="false"
-            >
-            <div key={counter = counter+1} dangerouslySetInnerHTML={{__html : tweet}}></div>
-            </a>)
+                <div className='tweet' key={counter = counter+1} dangerouslySetInnerHTML={{__html : tweet}}></div>
+              )
             })
           }
         </div>

@@ -13,6 +13,9 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px !important;
 }
+#app{
+  height: 100%;
+}
 .body-home{
   background-image: url('http://i.imgur.com/EY8RiRC.jpg');
   background-repeat: no-repeat;
@@ -45,6 +48,17 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   color: #666;
   font-size: 12px;
 }
+
+.tweet {
+  /*height: 100px !important;*/
+  /*width: 80% !important;*/
+  /*margin-left: 20px;*/
+  /*margin-bottom: 30px;*/
+  /*display: inline-block;*/
+  background-color: white;
+  /*border-radius: 5px*/
+}
+
 /************************** TRUCK ITEM **************************/
 .truck-item {
   background-color: #e7e9eb !important;
@@ -59,6 +73,28 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   /*display: table-row-group !important;*/
 }
 
+.cuisine-list {
+  list-style-type: none;
+}
+li {
+    display:inline;
+    margin-left: 10px;
+}
+.address-box { 
+  border: 1px solid black;
+  height: 200px;
+  width: 200px;
+  background-color: grey;
+}
+.truck-view-title {
+  color: white;
+  margin-top: 0px;
+}
+.truck-view-profile-img{
+  height: 200px;
+  width: 200px;
+  background-color: grey;
+}
 .selected {
   display: table-header-group;
   
@@ -175,21 +211,21 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   table-layout: fixed;
 }
 
+.truck-view-info {
+  margin-bottom: 25px;
+}
+
 .google-map{
   height: 100%;
   width: 100%
 }
 .goolge-image {
-  height: 150px;
-  width: 150px;
+  height: 100%;
+  width: 100%;
   margin-left: auto !important;
   margin-right: auto !important;
   margin-bottom: 10px;
   border-radius: 5px;
-}
-.tweet {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 
@@ -282,12 +318,29 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   padding: 10 10 0 10;
   overflow: scroll;
   align-content: center;
+  box-shadow: inset 4px 4px 1px 0px rgba(0,0,0,0.75) !important;
+  border-top: 3px solid black;
+  border-left: 3px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-radius: 5px;
+  background-color: rgba(231,233,235,0.50) !important;
+  float: left;
+  height: 59vh !important;
+
 }
 .twitter-box {
   float: right;
-  margin-right: auto;
-  margin-left: auto;
   overflow: scroll;
+  width: 46vw !important;
+  height: 59vh !important;
+  box-shadow: inset 4px 4px 1px 0px rgba(0,0,0,0.75) !important;
+  border-top: 3px solid black;
+  border-left: 3px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-radius: 5px;
+  background-color: rgba(231,233,235,0.50) !important;
 }
 
 .test{
@@ -310,14 +363,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 .twitter-box-header > h5 {
   margin-left: 15px;
 }
-.tweet {
-  height: 90px;
-  margin: 10px;
-  background-color: #F5F7F9;
-}
-.tweet > p {
-  margin-left: 15px;
-}
+
 .twitter-box-header{
   background-color: #F5F7F9;
   width: 100%;
@@ -387,6 +433,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
     float: right;
   }
 }
+
 .footer {
   padding-top: 15px;
   padding-left: 25px;
