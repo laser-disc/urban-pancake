@@ -69,10 +69,10 @@ module.exports.getYelpInfo = (truck) => {
         // data.categories.forEach( category => {
         //   category.forEach(subCategory => {
         //     categories.push(subCategory);
-        //   }) 
+        //   })
         // });
         // truckYelpObj.categories = categories;
-      
+
         // TODO: turn this array into a string
         truckYelpObj.twitterHandle = truck.truckName;
         truck.truck.yelpInfo = truckYelpObj;
@@ -176,7 +176,7 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
             message: newTruckObj.truck.message,
             timeStamp: newTruckObj.truck.timeStamp,
             location: newTruckObj.truck.location,
-            yelpInfo: newTruckObj.truck.yelpInfo,
+            // yelpInfo: newTruckObj.truck.yelpInfo,
           } }, { upsert: true },
           (err, resp) => err ? reject(err) : resolve(resp)
         );
