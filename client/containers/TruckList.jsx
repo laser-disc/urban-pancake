@@ -5,8 +5,11 @@ import { bindActionCreators } from 'redux';
 import TruckItem from '../components/TruckItem.jsx';
 import { FetchTrucks } from '../actions/FetchTrucks';
 import { FetchEvents } from '../actions/FetchEvents';
+import {modal} from 'react-redux-modal'; // The modal emitter
+import myModalComopnent from "../components/TruckItemModal.jsx";
 
 let selectedTruck = "";
+let modalTruck = null;
 class TruckList extends Component {
   // Runs FetchTrucks immediately so that the state will be up to date before the content starts to load
   componentWillReceiveProps(nextProps){
@@ -21,6 +24,18 @@ class TruckList extends Component {
     this.props.FetchTrucks();
     this.props.FetchEvents();
   };
+  
+  addModal(truck) {
+    // console.log('ADD MODAL PROPS', this.props)
+    console.log("ADD MODAL TRUCK ", truck)
+    modal.add(myModalComopnent, {
+      size: 'large', // large, medium or small,
+      closeOnOutsideClick: true, // (optional) Switch to true if you want to close the modal by clicking outside of it,
+      hideCloseButton: true, // (optional) if you don't wanna show the top right close button
+      //.. all what you put in here you will get access in the modal props ;)
+      truck: truck,
+      })
+    }
 
   // Iterates over each truck in the database
   renderTrucks(truck) {
@@ -33,17 +48,20 @@ class TruckList extends Component {
     }
    
     if(selectedTruck == truck.name){
-      return  <div className="selected"><Link to={"/truckview/" + handle} key={truck._id} > <TruckItem truck={truck} /></Link></div>
+      return  <div onClick={ this.addModal.bind(this, handle) } className="selected"><TruckItem truck={truck} /></div>
     } else {
-      return  <div className="not-selected"><Link to={"/truckview/" + handle} key={truck._id} > <TruckItem truck={truck} /></Link></div>
+      return  <div onClick={ this.addModal.bind(this, handle) } className="not-selected"><TruckItem truck={truck} /></div>
     }
   };
+
+
   // Maps truck prop to TruckItem
   render() {
 
     return (
-      <div className="truck-list well container-well">
 
+      <div className="truck-list well container-well">
+        
         {this.props.trucks.map(truck => this.renderTrucks(truck))}
       </div>
     );

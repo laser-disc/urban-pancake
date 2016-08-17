@@ -7,6 +7,8 @@ import createLogger from 'redux-logger';
 import rootReducer from '../reducers/reducers';
 import {Link} from "react-router";
 import Router from '../components/Router.jsx';
+import ReduxModal from 'react-redux-modal'
+
 
 window.twttr = (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0],  t = window.twttr || {};
@@ -26,7 +28,10 @@ const createStoreWithMiddleware = applyMiddleware(ReduxPromise, logger)(createSt
 const App = () => {
   return (
     <Provider store={createStoreWithMiddleware(rootReducer)}>
-      <Router />
+      <div>
+        <Router />
+        <ReduxModal />
+      </div>
     </Provider>
   );
 }

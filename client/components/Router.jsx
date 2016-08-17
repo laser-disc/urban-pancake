@@ -5,12 +5,11 @@ import TruckView from '../containers/TruckView.jsx';
 import Home from '../components/Home.jsx'
 import React, {Component} from 'react';
 
+      //Router path ="/truckview/:truckName" component={TruckView} />
 export default () => {
   return (
     <Router history={hashHistory} >
       <Route path = "/" component={Home} />
-      <Router path ="/truckview/:truckName" component={TruckView} />
     </Router>
   )
-
 }

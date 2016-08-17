@@ -87,8 +87,7 @@ module.exports.getFiveTweets = (newTruckObj, tweetID) => {
       }
       let addClassName = '<blockquote className' + tweet.html.split('<blockquote class')[1];
       let noCharSet = addClassName.split(' charset="utf-8"').join('');
-      console.log(tweet.url)
-      newTruckObj.fiveTweetObjs.push(noCharSet);
+      newTruckObj.fiveTweetObjs.push(tweet.url);
       resolve(newTruckObj);
     });
   });
