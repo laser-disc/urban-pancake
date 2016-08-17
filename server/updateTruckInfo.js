@@ -162,6 +162,9 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
         // and then we create a new document in the db for that truck
         module.exports.getTenImages(newTruckObj)
         .then(newTruckObj => {
+          return module.exports.getYelpInfo(newTruckObj)
+        })
+        .then(newTruckObj => {
           newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
           console.log(`${newTruckObj.name} truck created`);
         })
@@ -176,7 +179,6 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
             message: newTruckObj.truck.message,
             timeStamp: newTruckObj.truck.timeStamp,
             location: newTruckObj.truck.location,
-            // yelpInfo: newTruckObj.truck.yelpInfo,
           } }, { upsert: true },
           (err, resp) => err ? reject(err) : resolve(resp)
         );
