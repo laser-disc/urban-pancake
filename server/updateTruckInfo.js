@@ -173,7 +173,6 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
             timeStamp: newTruckObj.truck.timeStamp,
             location: newTruckObj.truck.location,
             yelpInfo: newTruckObj.truck.yelpInfo,
-            photosFromGoogle: newTruckObj.truck.photosFromGoogle,
           } }, { upsert: true },
           (err, resp) => err ? reject(err) : resolve(resp)
         );
@@ -204,4 +203,3 @@ module.exports.getTenImages = (newTruckObj) => {
     });
   });
 };
-
