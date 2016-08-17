@@ -9,18 +9,14 @@ import { FetchFiveTweets } from '../actions/FetchFiveTweets';
 import {modal} from 'react-redux-modal'; // The modal emitter
 
 class TruckView extends Component {
-
   componentWillMount(){
     this.props.FetchFiveTweets(this.props.truckName);
     this.props.FetchYelp(this.props.truckName)
   }
-
   renderTruckView(truck, fiveTweets){
     return <TruckProfile key={ truck.yelpBizID } yelpInfo ={ truck } fiveTweets = { fiveTweets } />
   }
-
   render(){
-    // console.log('[truck profile] props: ', this.props) 
     return (
       <div className="body-truck-view">
         <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
@@ -29,6 +25,7 @@ class TruckView extends Component {
     )
   }
 }
+
 function mapStateToProps(state) {
   return {
     yelpInfo: state.yelpInfo,

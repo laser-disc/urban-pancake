@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import YelpReview from '../components/YelpReview.jsx';
 import TruckCategories from '../components/TruckCategories.jsx'
 import Slider from 'react-slick'
 import GoogleMap from '../containers/GoogleMap.jsx';
@@ -11,10 +10,7 @@ if (process.env.TEST_ENV === 'test') {
   googleMap = <GoogleMap />;
 }
 
-
-
 export default class TruckProfile extends Component {
-// ? {this.props.yelpInfo.photosFromGoogle.map(function(image){return <img src={image} alt="googlePhoto" />})} : <h1>loading...</h1>
   renderImages(){
     if(this.props.yelpInfo.photosFromGoogle){
       return this.props.yelpInfo.photosFromGoogle.map(photo => <div><img className="google-image" src={photo} alt="google photo" /></div>)
@@ -28,7 +24,7 @@ export default class TruckProfile extends Component {
       }
       var truckName = this.props.yelpInfo.yelpInfo.name
     }
-    // console.log('[truck profile] props.yelpInfo.photos: ', this.props.yelpInfo.photosFromGoogle) 
+
     var sliderSettings = {
             adaptiveHeight : false,
             arrows: false, 
@@ -80,7 +76,6 @@ export default class TruckProfile extends Component {
             </Slider>
           </div>
         </div>
-
         <div className="truck-profile-yelp-review">{yelpInfo.custReview}</div>
       </div>
     )
