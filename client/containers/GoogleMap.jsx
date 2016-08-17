@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 import { PassCurrTruck } from '../actions/PassCurrTruck';
 import { bindActionCreators } from 'redux';
-import GeolocationMarker from 'geolocation-marker';
 
 var userLat;
 var userLng;
@@ -27,7 +26,7 @@ class Map extends Component {
     if(truck._id==="user"){
       console.log("That ain't no truck.  That's YOU breh...");
     } else {
-      console.log("you've selected ", truck.name);
+      // console.log("you've selected ", truck.name);
       this.props.PassCurrTruck(truck);
     }
   };
@@ -44,7 +43,6 @@ class Map extends Component {
         var crd = pos.coords;
         userLat = crd.latitude;
         userLng = crd.longitude;
-        console.log("SUCCESS!  Here are the coords ", userLat, userLng);
         resolve(pos);
       };
 
@@ -65,7 +63,7 @@ class Map extends Component {
         user.location = {lat: userPosition.coords.latitude, lng: userPosition.coords.longitude};
         user.schedule = [{ closed: false },{ closed: false },{ closed: false },{ closed: false },{ closed: false },{ closed: false },{ closed: false }];
         user.yelpInfo = {name: null, yelpBizID: null, starsRating: null, review_count: null, custReview: null, photo: null,categories: null};
-        // push the user truck to this.props.trucks  
+        // push the user truck to this.props.trucks
         this.props.trucks.push(user);
         // and force a re-render by changing the state
         this.setState({userLocationFound: true, userLocation: user.location});
@@ -77,7 +75,7 @@ class Map extends Component {
   };
 
   renderMarkers(truck) {
-    // this.renderUserLocation(); 
+    // this.renderUserLocation();
     // GRAB CURRENT DAY OF WEEK
     const date = new Date;
     let index = date.getDay();
@@ -86,7 +84,8 @@ class Map extends Component {
     let position = null;
     // GRAB DAY OF TWEET TIMESTAMP FROM DB
     let tweetIndex = dayOfWeek.indexOf(tweetDay);
-    icon = 'http://maps.google.com/mapfiles/ms/micons/red-dot.png';
+    // icon = 'http://maps.google.com/mapfiles/ms/micons/red-dot.png';
+    icon = 'https://offthegrid.com/wp-content/themes/offthegrid/images/mapmark-red-sm.png';
 
     if(truck._id==="user"){
       tweetIndex = 1;
@@ -105,7 +104,7 @@ class Map extends Component {
     if (position.lat) {
       return (
         <Marker
-          key={ truck._id } position={{ lat: position.lat, lng: position.lng }} 
+          key={ truck._id } position={{ lat: position.lat, lng: position.lng }}
           onClick={ this.handleClick.bind(this, truck) }
           icon= { icon }
         />
@@ -119,8 +118,10 @@ class Map extends Component {
 
     // if the event is open today, we render it to the map
     // if it's closed, it's lat and lng are set to null so that the marker does not render
+
+    let position;
     if(!event.schedule.length) {
-      var position = {lat: null, lng: null};
+      position = {lat: null, lng: null};
     } else {
       position = (event.schedule[index].closed ? { lat: null, lng: null } : event.location);
     }
@@ -128,15 +129,15 @@ class Map extends Component {
     if (position.lat !== null) {
       return (
         <Marker
-          key={ event._id } position={ position }
-          icon= 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+          key={ event._id } position={ position } onClick={ this.handleClick.bind(this, event) }
+          icon= 'https://offthegrid.com/wp-content/themes/offthegrid/images/mapmark-blue-sm.png'
         />
       );
     };
   };
 
   render() {
-    console.log("GoogleMap rendered this.state", this.state);
+    // console.log("GoogleMap rendered this.state", this.state);
     if(this.state){
       zoom = 15;
       center = { lat: this.state.userLocation.lat, lng: this.state.userLocation.lng };

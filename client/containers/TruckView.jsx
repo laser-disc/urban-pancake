@@ -6,9 +6,8 @@ import TruckProfile from '../containers/TruckProfile.jsx';
 import TruckImageContainer from '../components/TruckImageContainer.jsx';
 import { FetchYelp } from '../actions/FetchYelp';
 import { FetchFiveTweets } from '../actions/FetchFiveTweets';
-import Footer from '../components/Footer.jsx';
 import {modal} from 'react-redux-modal'; // The modal emitter
-  
+
 class TruckView extends Component {
 
   componentWillMount(){

@@ -1,9 +1,7 @@
 const Event = require('../db/eventsSchema');
 const Twitter = require('twitter');
-// const Yelp = require('yelp');
+const Yelp = require('yelp');
 const { getTruckTwitterInfo } = require('./updateTruckInfo');
-// const { getLocation } = require('./getLocationFromTweets');
-// const { geoCoder } = require('../utils/utils');
 const { createTruckWithGeoInfo } = require('./updateTruckInfo');
 const { getTenImages } = require('./updateTruckInfo');
 const { createOrUpdateDB } = require('./updateTruckInfo');
@@ -20,12 +18,12 @@ const twitterInfo = secretKeys ? secretKeys.twitterInfo : {
   consumer_secret: process.env.TWITTERINFO_CONSUMER_SECRET,
   bearer_token: process.env.TWITTERINFO_BEARER_TOKEN,
 };
-// const yelpInfo = secretKeys ? secretKeys.yelpInfo : {
-//   consumer_key: process.env.YELPINFO_CONSUMER_KEY,
-//   consumer_secret: process.env.YELPINFO_CONSUMER_SECRET,
-//   token: process.env.YELPINFO_TOKEN,
-//   token_secret: process.env.YELPINFO_TOKEN_SECRET,
-// };
+const yelpInfo = secretKeys ? secretKeys.yelpInfo : {
+  consumer_key: process.env.YELPINFO_CONSUMER_KEY,
+  consumer_secret: process.env.YELPINFO_CONSUMER_SECRET,
+  token: process.env.YELPINFO_TOKEN,
+  token_secret: process.env.YELPINFO_TOKEN_SECRET,
+};
 const twitterClient = new Twitter(twitterInfo);
 const { sched, loc } = require('../utils/eventsSchedules');
 

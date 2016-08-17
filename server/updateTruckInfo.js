@@ -52,6 +52,7 @@ const TruckObj = () => {
 module.exports.getYelpInfo = (truck) => {
   return new Promise((resolve, reject) => {
     let yelp = new Yelp(yelpInfo);
+    let categories = [];
     yelp.business(truck.yelpBizID, (err, data) => {
       if (err) {
         reject(err);
@@ -63,7 +64,15 @@ module.exports.getYelpInfo = (truck) => {
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
         truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
-        // truckYelpObj.categories = data.categories;
+
+        // the following six lines update the database with the corrent information, but somehow this breaks the truckView so that the images no longer render to the screen, will come back to it
+        // data.categories.forEach( category => {
+        //   category.forEach(subCategory => {
+        //     categories.push(subCategory);
+        //   })
+        // });
+        // truckYelpObj.categories = categories;
+
         // TODO: turn this array into a string
         truckYelpObj.twitterHandle = truck.truckName;
         truck.truck.yelpInfo = truckYelpObj;
@@ -109,9 +118,6 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
         console.log('error', error);
         reject(error);
       }
-      // console.log('INSIDE TWITTER GET REQUEST', searchParams.screen_name)
-
-      // console.log('INSIDE TWITTER GET REQUEST', tweets[0])
       if(tweets[0]) {
         newTruckObj.website = tweets[0].user.url;
         newTruckObj.allTweetObjs = tweets;
@@ -154,8 +160,17 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
       //  if no matches are found, it will return an empty array
       if (trucks.length === 0) {
         // and then we create a new document in the db for that truck
-        newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
-        console.log(`${newTruckObj.name} truck created`);
+        module.exports.getTenImages(newTruckObj)
+        .then(newTruckObj => {
+          return module.exports.getYelpInfo(newTruckObj)
+        })
+        .then(newTruckObj => {
+          newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
+          console.log(`${newTruckObj.name} truck created`);
+        })
+        .catch( error => {
+          console.log("createOrUpdateDB promise chain error", error);
+        })
       } else {
         // otherwise update existing document
         Truck.findOneAndUpdate(
@@ -164,8 +179,6 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
             message: newTruckObj.truck.message,
             timeStamp: newTruckObj.truck.timeStamp,
             location: newTruckObj.truck.location,
-            yelpInfo: newTruckObj.truck.yelpInfo,
-            photosFromGoogle: newTruckObj.truck.photosFromGoogle,
           } }, { upsert: true },
           (err, resp) => err ? reject(err) : resolve(resp)
         );
@@ -191,7 +204,7 @@ module.exports.getTenImages = (newTruckObj) => {
       });
       resolve(newTruckObj);
     }).catch(function(err) {
-      console.log('scrapeWebsite error', err);
+      console.log('getTenImages error', err);
       reject(err);
     });
   });
