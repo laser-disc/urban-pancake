@@ -107,6 +107,9 @@ module.exports = (app) => {
     Truck.findOne({ handle }, (err, truck) => res.status(200).send(truck))
     .catch( err => res.status(400).send(err))
   });
+  app.get("/API/addTruck", (req,res) => {
+    createOrUpdateDB(req.query.newTruck);
+  });
   app.get("/API/fiveTweets", (req,res) => {
    getTruckTwitterInfo(req.query.truckName)
    .then( newTruckObj => {

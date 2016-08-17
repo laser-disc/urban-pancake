@@ -31,6 +31,7 @@ const truckSchema = new mongoose.Schema({
     custReview: String,
     photo: String,
     categories: [String, String, String, String, String, String, String, String, String, String], // aka 'cuisine'
+    // phone: String,
   }
 });
 
