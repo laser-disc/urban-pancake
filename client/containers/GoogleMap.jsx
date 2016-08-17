@@ -63,7 +63,7 @@ class Map extends Component {
         user.location = {lat: userPosition.coords.latitude, lng: userPosition.coords.longitude};
         user.schedule = [{ closed: false },{ closed: false },{ closed: false },{ closed: false },{ closed: false },{ closed: false },{ closed: false }];
         user.yelpInfo = {name: null, yelpBizID: null, starsRating: null, review_count: null, custReview: null, photo: null,categories: null};
-        // push the user truck to this.props.trucks  
+        // push the user truck to this.props.trucks
         this.props.trucks.push(user);
         // and force a re-render by changing the state
         this.setState({userLocationFound: true, userLocation: user.location});
@@ -75,7 +75,7 @@ class Map extends Component {
   };
 
   renderMarkers(truck) {
-    // this.renderUserLocation(); 
+    // this.renderUserLocation();
     // GRAB CURRENT DAY OF WEEK
     const date = new Date;
     let index = date.getDay();
@@ -104,7 +104,7 @@ class Map extends Component {
     if (position.lat) {
       return (
         <Marker
-          key={ truck._id } position={{ lat: position.lat, lng: position.lng }} 
+          key={ truck._id } position={{ lat: position.lat, lng: position.lng }}
           onClick={ this.handleClick.bind(this, truck) }
           icon= { icon }
         />
