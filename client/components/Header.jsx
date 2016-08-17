@@ -4,17 +4,15 @@ import {Link} from "react-router";
 export default class HomeHeader extends Component {
   render() {
     return ( 
-      <header className="row">
-        <nav className="navbar navbar-default site-header">
-          <div className="home-text col-xs-offset-1 col-md-1"><Link to="/"><button className="btn btn-success"> Home </button></Link></div>
-          <div className ="col-xs-offset-1 col-md-offset-2 col-md-5">
-            <h1 >SF CITY FOOD TRUCKS</h1>
+        <div className="header">
+          <div className="col-xs-offset-1 col-xs-1"><Link to="/"><img className="link-logo burrito"src="http://image.flaticon.com/icons/svg/184/184534.svg" alt="Home"/><p className="home-text ">Home</p></Link></div>
+          <div className="col-xs-2"><Link to="/"><img className="link-logo truck-logo" src="http://imgur.com/rKaONN6.png" alt="Truck"/><p className="home-text">Add a truck</p></Link></div>
+          <div className ="col-xs-7">
+            <div className="title">
+              <h1 className='title' >SF CITY FOOD TRUCKS</h1>
+            </div>
           </div>
-          <div className="col-xs-offset-1 col-md-offset-1 col-md-1 github">
-            <a href="https://github.com/laser-disc/urban-pancake"><button className="btn btn-success">Check out the code</button></a>
-          </div>
-         </nav>
-       </header>
+        </div>
     )
   }
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 import TruckList from '../containers/TruckList.jsx';
+import EventsList from '../containers/EventsList.jsx';
 import GoogleMap from '../containers/GoogleMap.jsx';
 import {Link} from "react-router";
 import {Router, Route, hashHistory} from 'react-router';
 import Header from './Header.jsx'
-
-      
+import Footer from './Footer.jsx'
 
 let googleMap;
 if (process.env.TEST_ENV === 'test') {
@@ -16,27 +16,20 @@ if (process.env.TEST_ENV === 'test') {
 
 export default () => {
 return (
-<div>
+<div className="body-home">
   <Header />
   <div className='mega-container container-fluid'>
     <div className='wrap row'>
-      <div className="col-md-4 google-map-container">
+      <div className="google-map-container container-well">
         <div className="google-map">
           {googleMap}
         </div>
       </div>
-      <div className="col-md-offset-1 col-md-7 truck-list">
         <TruckList />
-      </div>
     </div>
   </div>
-  
+  <Footer />
   <link href=" https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-  
-  <footer className="footer">
-    <div className="container">
-      <p className="text-muted">FOOTER</p>
-    </div>
-  </footer>
+  <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
 </div>
 )}

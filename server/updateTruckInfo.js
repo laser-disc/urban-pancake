@@ -1,10 +1,9 @@
-// TODO REFACTOR createOrUpdateDB TO ONLY REWRITE CERTAIN PROPERTIES ON EXISTING
-// DOCUMENTS AND NOT RECREATE WHOLE DOCUMENT
-
 // const getLocationFromTweets = require('./getLocationFromTweets');
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
 const Yelp = require('yelp');
+let Scraper = require ('images-scraper');
+let google = new Scraper.Google();
 
 let secretKeys = null;
 if (!process.env.TWITTERINFO_CONSUMER_KEY) {
@@ -39,6 +38,7 @@ const yelpObj = (yelpBizID) => {
 const TruckObj = () => {
   return {
     name: null,
+    website: null,
     allTweetObjs: [],
     allTweetMessages: [],
     chosenIndex: null,
@@ -63,7 +63,13 @@ module.exports.getYelpInfo = (truck) => {
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
         truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
-        // truckYelpObj.categories = data.categories;  // TODO: turn this array into a string
+
+        // the following three lines update the database with the corrent information, but somehow this breaks the truckView so that the images no longer render to the screen, will come back to it
+        // truckYelpObj.categories = data.categories.reduce((prev, curr) =>{
+        //   return prev + curr.join(',') + ',';
+        // }, '');
+
+        // TODO: turn this array into a string
         truckYelpObj.twitterHandle = truck.truckName;
         truck.truck.yelpInfo = truckYelpObj;
         resolve(truck);
@@ -73,7 +79,7 @@ module.exports.getYelpInfo = (truck) => {
 };
 
 module.exports.getFiveTweets = (newTruckObj, tweetID) => {
-  console.log("getFiveTweets just recieved ", newTruckObj.name, tweetID);
+  console.log("getFiveTweets just received ", newTruckObj.name, tweetID);
   return new Promise ((resolve, reject) => {
     let searchParams = {
       url: 'https://twitter.com/' + newTruckObj.name + '/status/' + tweetID,
@@ -89,7 +95,7 @@ module.exports.getFiveTweets = (newTruckObj, tweetID) => {
       newTruckObj.fiveTweetObjs.push(noCharSet);
       resolve(newTruckObj);
     });
-  });    
+  });
 };
 
 module.exports.getTruckTwitterInfo = (foodTruck) => {
@@ -101,14 +107,18 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
       exclude_replies: true,
       include_rts: true,
     };
+
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
     twitterClient.get('statuses/user_timeline', searchParams, (error, tweets) => {
       if (error) {
         console.log('error', error);
         reject(error);
       }
-      newTruckObj.allTweetObjs = tweets;
-      tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
+      if(tweets[0]) {
+        newTruckObj.website = tweets[0].user.url;
+        newTruckObj.allTweetObjs = tweets;
+        tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
+      };
       resolve(newTruckObj);
     });
   });
@@ -118,16 +128,20 @@ module.exports.createTruckWithGeoInfo = (newTruckObj) => {
   return new Promise((resolve) => {
     // send all tweet messages to getLocationFromTweets
     const tweets = newTruckObj.allTweetObjs;
+    let description = tweets[0].user.description
+    description = description.length <= 120 ? description : description.substring(0, 117) + '...';
 
     newTruckObj.truck = new Truck({
       name: tweets[0].user.name,
       handle: `@${tweets[0].user.screen_name}`,
-      description: tweets[0].user.description,
+      website: newTruckObj.website,
+      description: description,
       message: tweets[0].text,
       timeStamp: tweets[0].created_at,
       imageUrl: tweets[0].user.profile_image_url.split('_normal').join(''),
       location: newTruckObj.geoInfo,
       schedule: truckSchedules[tweets[0].user.name],
+      photosFromGoogle: [],
       yelpId: null,
       yelpInfo: null,
     });
@@ -142,9 +156,14 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
       //  if no matches are found, it will return an empty array
       if (trucks.length === 0) {
         // and then we create a new document in the db for that truck
-        // newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
-        newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
-        console.log(`${newTruckObj.name} created`);
+        module.exports.getTenImages(newTruckObj)
+        .then(newTruckObj => {
+          newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
+          console.log(`${newTruckObj.name} truck created`);
+        })
+        .catch( error => {
+          console.log("createOrUpdateDB promise chain error", error);
+        })
       } else {
         // otherwise update existing document
         Truck.findOneAndUpdate(
@@ -154,13 +173,35 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
             timeStamp: newTruckObj.truck.timeStamp,
             location: newTruckObj.truck.location,
             yelpInfo: newTruckObj.truck.yelpInfo,
+            photosFromGoogle: newTruckObj.truck.photosFromGoogle,
           } }, { upsert: true },
           (err, resp) => err ? reject(err) : resolve(resp)
         );
-        console.log(`${newTruckObj.name} updated`);
+        console.log(`${newTruckObj.name} truck updated`);
       }
     });
   });
 };
 
+module.exports.getTenImages = (newTruckObj) => {
+  return new Promise((resolve, reject) => {
+    google.list({
+      keyword: newTruckObj.name + " sf menu items",
+      num: 10,
+      detail: true,
+      nightmare: {
+        show: true
+      }
+    })
+    .then(function (res) {
+      res.forEach( pic => {
+        newTruckObj.truck.photosFromGoogle.push(pic.url);
+      });
+      resolve(newTruckObj);
+    }).catch(function(err) {
+      console.log('getTenImages error', err);
+      reject(err);
+    });
+  });
+};
 
