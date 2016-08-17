@@ -45,7 +45,7 @@ const foodTrucksObj = {
  FiretrailPizza: { twitterHandle: 'FiretrailPizza', yelpBizID: 'firetrail-pizza-san-francisco' },
  torrakuramen: { twitterHandle: 'torrakuramen', yelpBizID: 'torraku-ramen-san-francisco-2' },
  GyrosonWheels1: { twitterHandle: 'GyrosonWheels1', yelpBizID: 'gyros-on-wheels-san-francisco' },
- HongryKong: { twitterHandle: 'HongryKong', yelpBizID: 'hongry-kong-san-ramon-2' },
+//  HongryKong: { twitterHandle: 'HongryKong', yelpBizID: 'hongry-kong-san-ramon-2' },
  PhatThaiSF: { twitterHandle: 'PhatThaiSF', yelpBizID: 'phat-thai-san-francisco-2' },
  KabobTrolley: { twitterHandle: 'KabobTrolley', yelpBizID: 'kaböb-trölley-san-francisco-4' },
  adamsgrubtruck: { twitterHandle: 'adamsgrubtruck', yelpBizID: 'adams-grub-truck-san-francisco-2' },
