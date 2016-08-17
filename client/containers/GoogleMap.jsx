@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 import { PassCurrTruck } from '../actions/PassCurrTruck';
 import { bindActionCreators } from 'redux';
-import GeolocationMarker from 'geolocation-marker';
 
 var userLat;
 var userLng;
@@ -27,7 +26,7 @@ class Map extends Component {
     if(truck._id==="user"){
       console.log("That ain't no truck.  That's YOU breh...");
     } else {
-      console.log("you've selected ", truck.name);
+      // console.log("you've selected ", truck.name);
       this.props.PassCurrTruck(truck);
     }
   };
@@ -85,7 +84,8 @@ class Map extends Component {
     let position = null;
     // GRAB DAY OF TWEET TIMESTAMP FROM DB
     let tweetIndex = dayOfWeek.indexOf(tweetDay);
-    icon = 'http://maps.google.com/mapfiles/ms/micons/red-dot.png';
+    // icon = 'http://maps.google.com/mapfiles/ms/micons/red-dot.png';
+    icon = 'https://offthegrid.com/wp-content/themes/offthegrid/images/mapmark-red-sm.png';
 
     if(truck._id==="user"){
       tweetIndex = 1;
@@ -118,20 +118,24 @@ class Map extends Component {
 
     // if the event is open today, we render it to the map
     // if it's closed, it's lat and lng are set to null so that the marker does not render
-    const position = (event.schedule[index].closed ? { lat: null, lng: null } : event.location);
-
+    let position;
+    if(!event.schedule.length) {
+      position = {lat: null, lng: null};
+    } else {
+      position = (event.schedule[index].closed ? { lat: null, lng: null } : event.location);
+    }
     if (position.lat !== null) {
       return (
         <Marker
-          key={ event._id } position={ position }
-          icon= 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+          key={ event._id } position={ position } onClick={ this.handleClick.bind(this, event) }
+          icon= 'https://offthegrid.com/wp-content/themes/offthegrid/images/mapmark-blue-sm.png'
         />
       );
     };
   };
 
   render() {
-    console.log("GoogleMap rendered this.state", this.state);
+    // console.log("GoogleMap rendered this.state", this.state);
     if(this.state){
       zoom = 15;
       center = { lat: this.state.userLocation.lat, lng: this.state.userLocation.lng };

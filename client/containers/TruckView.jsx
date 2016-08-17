@@ -7,7 +7,7 @@ import TruckImageContainer from '../components/TruckImageContainer.jsx';
 import { FetchYelp } from '../actions/FetchYelp';
 import { FetchFiveTweets } from '../actions/FetchFiveTweets';
 import Footer from '../components/Footer.jsx'
-        // { this.props.yelpInfo.yelpInfo ? <TruckProfile key={this.props.yelpInfo.yelpBizID} yelpInfo={this.props.yelpInfo.yelpInfo} fiveTweets={this.props.yelpInfo.fiveTweetObjs} /> : <div><h1>Whoops! Something went wrong...</h1></div> }
+// { this.props.yelpInfo.yelpInfo ? <TruckProfile key={this.props.yelpInfo.yelpBizID} yelpInfo={this.props.yelpInfo.yelpInfo} fiveTweets={this.props.yelpInfo.fiveTweetObjs} /> : <div><h1>Whoops! Something went wrong...</h1></div> }
     
 class TruckView extends Component {
 
