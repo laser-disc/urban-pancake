@@ -69,10 +69,10 @@ module.exports.getYelpInfo = (truck) => {
         // data.categories.forEach( category => {
         //   category.forEach(subCategory => {
         //     categories.push(subCategory);
-        //   }) 
+        //   })
         // });
         // truckYelpObj.categories = categories;
-      
+
         // TODO: turn this array into a string
         truckYelpObj.twitterHandle = truck.truckName;
         truck.truck.yelpInfo = truckYelpObj;
@@ -209,4 +209,3 @@ module.exports.getTenImages = (newTruckObj) => {
     });
   });
 };
-

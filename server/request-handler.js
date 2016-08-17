@@ -23,9 +23,10 @@ const { getTenImages } = require('./updateTruckInfo');
 
 // make sure to add the exact Twitter handle minus the @
 const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic',
- 'WannaESF', 'eatmobowl', 'lcfoodtruck', /* 'redsauceballs', */ 'TacosElTuca', 'donpablotruck',
- 'FiretrailPizza', 'torrakuramen', 'GyrosonWheels1', 'HongryKong', 'PhatThaiSF', 'KabobTrolley',
- 'adamsgrubtruck', 'bowldacai', /*'seoulonwheels' ,*/ 'RedRidingTruck', 'odangudon', 'nonoburger'];
+  'WannaESF', 'eatmobowl', 'lcfoodtruck', /* 'redsauceballs', */ 'TacosElTuca', 'donpablotruck',
+  'FiretrailPizza', 'torrakuramen', 'GyrosonWheels1', /* 'HongryKong', */ 'PhatThaiSF', 'KabobTrolley',
+  'adamsgrubtruck', 'bowldacai', /* 'seoulonwheels',*/ 'RedRidingTruck', 'odangudon', 'nonoburger'];
+
 const foodEvents = ['gloungesf', 'SPARKsocialSF', 'SoMaStrEatFood'];
 // Don't try to get Twitter info from these trucks - you will FAIL
 // badFoodTrucks equalz ['senorsisig'];
