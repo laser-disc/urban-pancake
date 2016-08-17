@@ -118,12 +118,14 @@ class Map extends Component {
 
     // if the event is open today, we render it to the map
     // if it's closed, it's lat and lng are set to null so that the marker does not render
+
     let position;
     if(!event.schedule.length) {
       position = {lat: null, lng: null};
     } else {
       position = (event.schedule[index].closed ? { lat: null, lng: null } : event.location);
     }
+
     if (position.lat !== null) {
       return (
         <Marker

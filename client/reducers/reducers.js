@@ -6,7 +6,7 @@ import TruckViewReducer from './reducer_TruckView';
 import TruckItemReducer from './reducer_TruckItem';
 import EventsReducer from './reducer_EventsList';
 import AddTruckReducer from './reducer_AddTruck';
-
+import {reducer as modalReducer} from 'react-redux-modal'
 
 const rootReducer = combineReducers({
   trucks: TruckReducer,
@@ -14,6 +14,7 @@ const rootReducer = combineReducers({
   yelpInfo: TruckViewReducer,
   currentTruck: TruckItemReducer,
   newTruck: AddTruckReducer,
+  modals: modalReducer,
 });
 
 export default rootReducer;
