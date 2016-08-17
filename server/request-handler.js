@@ -75,9 +75,8 @@ foodTrucks.forEach(foodTruck => {
   .then(newTruckObj => createTruckWithGeoInfo(newTruckObj))
   .then(newTruckObj => {
     newTruckObj.yelpBizID = foodTrucksObj[foodTruck].yelpBizID;
-    return getYelpInfo(newTruckObj);
+    return createOrUpdateDB(newTruckObj);
   })
-  .then(newTruckObj => createOrUpdateDB(newTruckObj))
   .catch(err => {
     console.log("Food truck promise chain error", err);
     res.status(400).send(err)
