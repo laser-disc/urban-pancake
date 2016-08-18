@@ -26,7 +26,7 @@ class Map extends Component {
     if(truck._id==="user"){
       console.log("That ain't no truck.  That's YOU breh...");
     } else {
-      // console.log("you've selected ", truck.name);
+      console.log("you've selected ", truck.name);
       this.props.PassCurrTruck(truck);
     }
   };
@@ -67,6 +67,12 @@ class Map extends Component {
         this.props.trucks.push(user);
         // and force a re-render by changing the state
         this.setState({userLocationFound: true, userLocation: user.location});
+        // return (
+        //   <Marker
+        //     key={ user._id } position={ user.location }
+        //     icon = 'http://www.google.com/mapfiles/arrow.png'
+        //   />
+        // );
       };
     })
     .catch( err => {
@@ -84,8 +90,7 @@ class Map extends Component {
     let position = null;
     // GRAB DAY OF TWEET TIMESTAMP FROM DB
     let tweetIndex = dayOfWeek.indexOf(tweetDay);
-    // icon = 'http://maps.google.com/mapfiles/ms/micons/red-dot.png';
-    icon = 'https://offthegrid.com/wp-content/themes/offthegrid/images/mapmark-red-sm.png';
+    icon = 'http://maps.google.com/mapfiles/ms/micons/red-dot.png';
 
     if(truck._id==="user"){
       tweetIndex = 1;
@@ -118,26 +123,20 @@ class Map extends Component {
 
     // if the event is open today, we render it to the map
     // if it's closed, it's lat and lng are set to null so that the marker does not render
-
-    let position;
-    if(!event.schedule.length) {
-      position = {lat: null, lng: null};
-    } else {
-      position = (event.schedule[index].closed ? { lat: null, lng: null } : event.location);
-    }
+    const position = (event.schedule[index].closed ? { lat: null, lng: null } : event.location);
 
     if (position.lat !== null) {
       return (
         <Marker
-          key={ event._id } position={ position } onClick={ this.handleClick.bind(this, event) }
-          icon= 'https://offthegrid.com/wp-content/themes/offthegrid/images/mapmark-blue-sm.png'
+          key={ event._id } position={ position }
+          icon= 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
         />
       );
     };
   };
 
   render() {
-    // console.log("GoogleMap rendered this.state", this.state);
+    console.log("GoogleMap rendered this.state", this.state);
     if(this.state){
       zoom = 15;
       center = { lat: this.state.userLocation.lat, lng: this.state.userLocation.lng };
