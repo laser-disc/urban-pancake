@@ -99,6 +99,9 @@ li {
 .selected {
   display: table-header-group;
 }
+.not-selected{
+  display: table-row-group;
+}
 
 .truck-view-main-info{
   display: inline-block;
@@ -109,9 +112,6 @@ li {
   background-color: #85b4e3 !important;
 }
 
-.not-selected{
-  display: table-row-group;
-}
 
 .truck-profile-yelp-review {
   height: 10vh;
@@ -212,13 +212,8 @@ li {
 }
 
 .truck-list {
-  overflow: scroll !important;
-  padding: 0px !important;
-  padding-top: 25px !important;
-  margin-bottom: 0px !important; 
-  display: table;
-  height: 30vh !important;
-  table-layout: fixed;
+  height: 77vh !important;
+  overflow: scroll;
 }
 .truck-view-google-map{
   float: right;
