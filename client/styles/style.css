@@ -12,14 +12,15 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px !important;
+  background-image: url('http://i.imgur.com/EY8RiRC.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 #app{
   height: 100%;
 }
 .body-home{
-  background-image: url('http://i.imgur.com/EY8RiRC.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
+
 }
 .body-truck-view{
    background-image:url('http://imgur.com/2nSvMTP.jpg');
@@ -61,7 +62,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 
 /************************** TRUCK ITEM **************************/
 .truck-item {
-  background-color: #e7e9eb !important;
+  background-color: #e7e9eb;
   margin-left: 5%;
   width: 90% !important;
   vertical-align: middle;
@@ -70,9 +71,10 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.75) !important;
   border: 1px solid black !important;
   position: relative !important;
-  /*display: table-row-group !important;*/
 }
-
+.event-item .truck-item{
+  background-color: #81CBD3 !important;
+}
 .cuisine-list {
   list-style-type: none;
 }
@@ -139,6 +141,7 @@ li {
 }
 .truck-item:hover {
   background-color: #85b4e3 !important;
+  cursor:pointer;
 }
 .truck-item-data {
   padding-left: 15px;
@@ -160,7 +163,10 @@ li {
   font-style: italic;
 }
 
-
+.truck-event-photos {
+  width: 40vw;
+  
+}
 /************************** HOVER CSS   **************************/
 .hvr-grow {
     display: inline-block;

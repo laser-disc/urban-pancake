@@ -4,6 +4,8 @@ import { Link } from 'react-router'
 import { bindActionCreators } from 'redux';
 import TruckItem from '../components/TruckItem.jsx';
 import { FetchTrucks } from '../actions/FetchTrucks';
+import TruckItemModal from "../components/TruckItemModal.jsx";
+import {modal} from 'react-redux-modal'; // The modal emitter
 // import { FetchEvents } from '../actions/FetchEvents';
 
 let selectedTruck = "";
@@ -21,15 +23,21 @@ class EventViewTruckList extends Component {
     this.props.FetchTrucks();
   };
 
+ addModal(truck) { 
+  modal.add(TruckItemModal, {
+    size: 'large',
+    closeOnOutsideClick: true, 
+    hideCloseButton: true,
+    truck: truck,
+    })
+  }
+
   renderTrucks(truck) {
-    
     var handle = truck.handle.slice(1, truck.handle.length); 
-    
-   
     if(selectedTruck == truck.name){
-      return  <div className="selected"><Link to={"/truckview/" + handle} key={truck._id} > <TruckItem truck={truck} /></Link></div>
+       return  <div onClick={ this.addModal.bind(this, handle) } className="selected"><TruckItem truck={truck} /></div>
     } else {
-      return  <div className="not-selected"><Link to={"/truckview/" + handle} key={truck._id} > <TruckItem truck={truck} /></Link></div>
+      return  <div onClick={ this.addModal.bind(this, handle) } className="not-selected"><TruckItem truck={truck} /></div>
     }
   };
 
