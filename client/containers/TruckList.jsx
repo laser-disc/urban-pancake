@@ -10,14 +10,12 @@ import TruckItemModal from "../components/TruckItemModal.jsx";
 
 let selectedTruck = "";
 class TruckList extends Component {
-  // Runs FetchTrucks immediately so that the state will be up to date before the content starts to load
-
   constructor(props) {
     super(props);
-
     this.renderFilteredTrucks = this.renderFilteredTrucks.bind(this);
-  }
+  };
 
+// Runs FetchTrucks immediately so that the state will be up to date before the content starts to load
   componentWillReceiveProps(nextProps){
     // console.log("[truck list] nextprops: ", nextProps.currentTruck.currentTruck)
     if (nextProps.currentTruck.currentTruck){
@@ -40,8 +38,8 @@ class TruckList extends Component {
       })
     }
 
+// This function renders the individual truck modal to the list of trucks
   renderTrucks(truck) {
-
       var handle;
       // if the "truck" is the user truck
       if(truck._id==="user"){
@@ -56,11 +54,23 @@ class TruckList extends Component {
       } else {
         return  <div key={truck._id} onClick={ this.addModal.bind(this, handle) } className="not-selected"><TruckItem truck={truck} /></div>
       }
-
-
   };
 
-  // Iterates over each event in the database
+// This function filters the trucks based on user input from the search bar
+  renderFilteredTrucks() {
+    if(this.props.searchTerm !== '') {
+      return this.props.trucks.reduce((accum, truck) => {
+        if(truck.name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) > -1) {
+          accum.push(this.renderTrucks(truck));
+        }
+        return accum;
+      }, []);
+    } else {
+      return this.props.trucks.map(truck => this.renderTrucks(truck));
+    };
+  };
+
+  // This function renders the individual event modal to the list of trucks
   renderEvents(event, i) {
     var handle = event.handle.slice(1, event.handle.length); 
     event.yelpInfo = {name: null, yelpBizID: null, starsRating: null, review_count: null, custReview: null, photo: null,categories: null};
@@ -72,25 +82,25 @@ class TruckList extends Component {
     }
   };
 
-  renderFilteredTrucks() {
+  renderFilteredEvents() {
     if(this.props.searchTerm !== '') {
-      return this.props.trucks.reduce((accum, truck) => {
-        if(truck.name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) > -1) {
-          accum.push(this.renderTrucks(truck));
+      return this.props.events.reduce((accum, event) => {
+        if(event.name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) > -1) {
+          accum.push(this.renderEvents(event));
         }
         return accum;
       }, []);
     } else {
-      return this.props.trucks.map(truck => this.renderTrucks(truck));
-    }
-  }
+      return this.props.events.map(event => this.renderEvents(event));
+    };
+  };
 
   // Maps truck prop to TruckItem
   render() {
     return (
       <div className="truck-list well container-well">
         {this.renderFilteredTrucks()}
-        {this.props.events.map((event, i) => this.renderEvents(event, i))}
+        {this.renderFilteredEvents()}
       </div>
     );
   }
