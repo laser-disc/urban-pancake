@@ -86,7 +86,6 @@ thetwitterHandleAgainForSomeReason: { twitterHandle: '', yelpBizID: '' },
 
 // iterates over an array of food truck event Twitter handles
 foodEvents.forEach(event => {
-  console.log('INSIDE REQUEST-HANLDER',event)
   getEventTwitterInfo(event)
   // from the most recent tweet, we compile the info for our DB record
   .then(eventObj => {

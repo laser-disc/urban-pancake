@@ -23,11 +23,11 @@ class TruckList extends Component {
     this.props.FetchTrucks();
     this.props.FetchEvents();
   };
-  
-  addModal(truck) { 
+
+  addModal(truck) {
     modal.add(TruckItemModal, {
       size: 'large',
-      closeOnOutsideClick: true, 
+      closeOnOutsideClick: true,
       hideCloseButton: true,
       truck: truck,
       })
@@ -38,7 +38,7 @@ class TruckList extends Component {
     if(truck._id==="user"){
       handle = '';
     } else {
-      handle = truck.handle.slice(1, truck.handle.length); 
+      handle = truck.handle.slice(1, truck.handle.length);
     }
     if(selectedTruck == truck.name) {
       return  <div onClick={ this.addModal.bind(this, handle) } className="selected"><TruckItem truck={truck} /></div>
@@ -50,8 +50,6 @@ class TruckList extends Component {
   // Iterates over each event in the database
   renderEvents(event) {
     var handle = event.handle.slice(1, event.handle.length); 
-    event.yelpInfo = {name: null, yelpBizID: null, starsRating: null, review_count: null, custReview: null, photo: null,categories: null};
-
     if(selectedTruck == event.name){
       return  <div className="selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
     } else {

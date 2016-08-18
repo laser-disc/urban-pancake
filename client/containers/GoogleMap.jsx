@@ -90,7 +90,7 @@ class Map extends Component {
     let position = null;
     // GRAB DAY OF TWEET TIMESTAMP FROM DB
     let tweetIndex = dayOfWeek.indexOf(tweetDay);
-    icon = 'http://maps.google.com/mapfiles/ms/micons/red-dot.png';
+    icon =  'https://offthegrid.com/wp-content/themes/offthegrid/images/mapmark-red-sm.png';
 
     if(truck._id==="user"){
       tweetIndex = 1;
@@ -118,7 +118,7 @@ class Map extends Component {
   };
 
   renderEventMarkers(event) {
-
+    console.log('RENDER EVENT MARKERS',event)
     //TODO: when we render the trucks list for the event, we need to make sure idx is the same as the date of the last tweet's timestamp
 
     // if the event is open today, we render it to the map
@@ -129,7 +129,8 @@ class Map extends Component {
       return (
         <Marker
           key={ event._id } position={ position }
-          icon= 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+          onClick={ this.handleClick.bind(this, event) }
+          icon= 'https://offthegrid.com/wp-content/themes/offthegrid/images/mapmark-blue-sm.png'
         />
       );
     };
