@@ -10,6 +10,7 @@ export default function (state = [], action) {
       const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       const todayNum = daysOfWeek.indexOf(today);
       return everyEvent.filter((event) => {
+        // puts trucks on the list based on the schedule, not the most recent tweet
         if (!event.schedule[todayNum].closed) {
           return event;
         };
