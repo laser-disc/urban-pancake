@@ -3,11 +3,13 @@ const Twitter = require('twitter');
 const Yelp = require('yelp');
 const { getTruckTwitterInfo } = require('./updateTruckInfo');
 const { createTruckWithGeoInfo } = require('./updateTruckInfo');
-const { getTenImages } = require('./updateTruckInfo');
-const { createOrUpdateDB } = require('./updateTruckInfo');
+// const { getTenImages } = require('./updateTruckInfo');
+// const { createOrUpdateDB } = require('./updateTruckInfo');
 const { getYelpInfo } = require('./updateTruckInfo');
 const { getFiveTweets } = require('./updateTruckInfo');
 // const { updateDBwithYelpInfo } = require('./updateTruckInfo');
+let Scraper = require ('images-scraper');
+let google = new Scraper.Google();
 
 let secretKeys = null;
 if (!process.env.TWITTERINFO_CONSUMER_KEY) {
@@ -117,6 +119,7 @@ const grabTodaysTrucks = (event) => {
 };
 
 module.exports.createEventRecord = (eventObj) => {
+  console.log('INSIDE CREATE EVENT RECORD');
   return new Promise((resolve, reject) => {
     const tweet = eventObj.fullTweets[0];
     eventObj.info = new Event({
@@ -128,6 +131,7 @@ module.exports.createEventRecord = (eventObj) => {
       imageUrl: tweet.user.profile_image_url,
       location: loc[tweet.user.screen_name],
       schedule: sched[tweet.user.screen_name],
+      photosFromGoogle: [],
       todaysTrucks: grabTodaysTrucks(eventObj),
     });
     resolve(eventObj);
@@ -135,13 +139,21 @@ module.exports.createEventRecord = (eventObj) => {
 };
 
 module.exports.createOrUpdateEvent = (eventObj) => {
+  console.log('INSIDE CREATE or UPDATE EVENT', eventObj.info.name);
+
   const eventName = eventObj.info.name;
   return new Promise((resolve, reject) => {
     // searches for an event record in the database with a matching Twitter handle
     Event.find({ name: eventName }, (err, result) => {
       if (result.length === 0) {
+        getTenImages(eventObj)
+        // .then(eventObj => {
+        //   return getYelpInfo(eventObj)
+        // })
+      .then(eventObj => {
         eventObj.info.save((err, resp) => err ? reject(err) : resolve(resp));
         console.log(`${eventName} event created`);
+      });
       } else {
         Event.findOneAndUpdate(
           { name: eventName },
@@ -154,6 +166,31 @@ module.exports.createOrUpdateEvent = (eventObj) => {
         );
         console.log(`${eventName} event updated`);
       }
+    });
+  });
+};
+
+getTenImages = (eventObj) => {
+  console.log('GET TEN IMAGES', eventObj.info.name);
+
+  return new Promise((resolve, reject) => {
+    google.list({
+      keyword: eventObj.info.name + " sf menu items",
+      num: 10,
+      detail: true,
+      nightmare: {
+        show: true
+      }
+    })
+    .then(function (res) {
+      console.log('GET TEN IMAGES', eventObj.info.name);
+      res.forEach( pic => {
+        eventObj.info.photosFromGoogle.push(pic.url);
+      });
+      resolve(eventObj);
+    }).catch(function(err) {
+      console.log('getTenImages error', err);
+      reject(err);
     });
   });
 };

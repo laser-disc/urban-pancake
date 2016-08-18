@@ -27,7 +27,8 @@ const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf',
   'FiretrailPizza', 'torrakuramen', 'GyrosonWheels1', /* 'HongryKong', */ 'PhatThaiSF', 'KabobTrolley',
   'adamsgrubtruck', 'bowldacai', /* 'seoulonwheels',*/ 'RedRidingTruck', 'odangudon', 'nonoburger',
   /* 'NakedChorizo1', */ 'Mannajpt', 'SunriseDeli', 'bobchasf', /* 'nuchaempanadas', */ 'RockoSez',
-  /* 'gojojosmojo', */ 'sporkandstix', 'LadySaigonSF', 'SaborSM', 'Elcalamarsf', 'Jeepney_Guy'];
+  /* 'gojojosmojo', */ 'sporkandstix', 'LadySaigonSF',/* 'SaborSM',*/ 'Elcalamarsf', 'Jeepney_Guy',
+  '_traderjims_', 'PainaSF', 'MarleysTreats4u', 'BaconBaconSF'];
 
 const foodEvents = ['gloungesf', 'SPARKsocialSF', 'SoMaStrEatFood'];
 // Don't try to get Twitter info from these trucks - you will FAIL
@@ -66,15 +67,20 @@ const foodTrucksObj = {
   // gojojosmojo: { twitterHandle: 'gojojosmojo', yelpBizID: 'go-jojo-mojo-san-francisco' },
   sporkandstix: { twitterHandle: 'sporkandstix', yelpBizID: 'spork-and-stix-south-san-francisco-ca' },
   LadySaigonSF: { twitterHandle: 'LadySaigonSF', yelpBizID: 'lady-saigon-san-francisco' },
-  SaborSM: { twitterHandle: 'SaborSM', yelpBizID: 'sabor-de-san-miguel-san-francisco' },
+  // SaborSM: { twitterHandle: 'SaborSM', yelpBizID: 'sabor-de-san-miguel-san-francisco' },
   Elcalamarsf: { twitterHandle: 'Elcalamarsf', yelpBizID: 'el-calamar-san-francisco-3' },
   Jeepney_Guy: { twitterHandle: 'Jeepney_Guy', yelpBizID: 'jeepney-guy-san-jose' },
+  _traderjims_: { twitterHandle: '_traderjims_', yelpBizID: 'trader-jims-petaluma' },
+  PainaSF: { twitterHandle: 'PainaSF', yelpBizID: 'paina-lounge-and-restaurant-san-francisco' },
+  MarleysTreats4u: { twitterHandle: 'MarleysTreats4u', yelpBizID: 'marleys-treats-oakland-5' },
+  BaconBaconSF: { twitterHandle: 'BaconBaconSF', yelpBizID: 'bacon-bacon-san-francisco-4' },
 
 thetwitterHandleAgainForSomeReason: { twitterHandle: '', yelpBizID: '' },
 };
 
 // iterates over an array of food truck event Twitter handles
 foodEvents.forEach(event => {
+  console.log('INSIDE REQUEST-HANLDER',event)
   getEventTwitterInfo(event)
   // from the most recent tweet, we compile the info for our DB record
   .then(eventObj => createEventRecord(eventObj))
