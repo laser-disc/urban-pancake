@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import { bindActionCreators } from 'redux';
 import Validate from '../../utils/truckSchemaValidation';
 import AddTruckModal from '../components/AddTruckModal.jsx';
+import PassNewTruck from '../actions/PassNewTruck';
 
 class AddTruck extends Component {
   // initial state: empty truck object
@@ -147,4 +148,14 @@ class AddTruck extends Component {
   }
 }
 
-export default AddTruck;
+function mapStateToProps(state) {
+  return {
+    trucks: state.trucks
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ PassNewTruck }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddTruck);
