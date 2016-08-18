@@ -5,7 +5,7 @@ import {Link} from "react-router";
 import {Router, Route, hashHistory} from 'react-router';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
-import SearchBar from './SearchBar.jsx';
+import SearchBar from '../containers/SearchBar.jsx';
 // import ModalInitializer from '../components/ModalInitializer.jsx'
 
 
