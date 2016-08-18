@@ -1,4 +1,4 @@
-import geocoder from 'utils.js';
+import geocoder from './utils.js';
 
 // call with validate.name(value), etc.
 // each method returns a Boolean
@@ -22,7 +22,7 @@ const Validate = {
   },
   location(string) {
     if (typeof string === 'string') {
-      
+
     }
   },
   yelpId(string) {

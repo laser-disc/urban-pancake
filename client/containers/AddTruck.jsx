@@ -62,13 +62,15 @@ class AddTruck extends Component {
 
       },
       valid: false,
-      sunday: '',
-      monday: '',
-      tuesday: '',
-      wednesday: '',
-      thursday: '',
-      friday: '',
-      saturday: '',
+      days: {
+        sunday: '',
+        monday: '',
+        tuesday: '',
+        wednesday: '',
+        thursday: '',
+        friday: '',
+        saturday: '',
+      }
     };
     this.getValue = this.getValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -143,7 +145,7 @@ class AddTruck extends Component {
     // TODO: Add help option to describe Yelp ID
   render() {
     return (
-      <AddTruckModal handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+      <AddTruckModal handleChange={this.handleChange} handleSubmit={this.handleSubmit} truck={this.state.truck} days={this.state.days} />
     )
   }
 }
