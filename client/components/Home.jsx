@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import TruckList from '../containers/TruckList.jsx';
-import EventsList from '../containers/EventsList.jsx';
+// import EventsList from '../containers/EventsList.jsx';
 import GoogleMap from '../containers/GoogleMap.jsx';
 import {Link} from "react-router";
 import {Router, Route, hashHistory} from 'react-router';
-import Header from './Header.jsx'
-import Footer from './Footer.jsx'
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
+import SearchBar from './SearchBar.jsx';
 // import ModalInitializer from '../components/ModalInitializer.jsx'
 
 
@@ -21,6 +22,7 @@ export default () => {
   return (
     <div className="body-home">
     <Header />
+    <SearchBar />
     <div className='mega-container container-fluid'>
       <div className='wrap row'>
         <div className="google-map-container container-well">
@@ -30,7 +32,6 @@ export default () => {
         </div>
        <TruckList />
       </div>
-        <TruckList />
     </div>
     <Footer />
     <link href=" https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
