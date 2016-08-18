@@ -53,9 +53,9 @@ class TruckList extends Component {
     event.yelpInfo = {name: null, yelpBizID: null, starsRating: null, review_count: null, custReview: null, photo: null,categories: null};
 
     if(selectedTruck == event.name){
-      return  <div className="selected"><Link to={"/truckview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+      return  <div className="selected"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
     } else {
-      return  <div className="not-selected"><Link to={"/truckview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+      return  <div className="not-selected"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
     }
   };
 

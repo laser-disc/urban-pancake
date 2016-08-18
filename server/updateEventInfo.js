@@ -7,6 +7,8 @@ const { createTruckWithGeoInfo } = require('./updateTruckInfo');
 // const { createOrUpdateDB } = require('./updateTruckInfo');
 const { getYelpInfo } = require('./updateTruckInfo');
 const { getFiveTweets } = require('./updateTruckInfo');
+let Scraper = require ('images-scraper');
+let google = new Scraper.Google();
 // const { updateDBwithYelpInfo } = require('./updateTruckInfo');
 let Scraper = require ('images-scraper');
 let google = new Scraper.Google();
@@ -41,6 +43,29 @@ const yelpObj = (yelpBizID) => {
     photo: null,
     categories: null,
   };
+};
+
+getYelpInfo = (eventObj) => {
+  return new Promise((resolve, reject) => {
+    let yelp = new Yelp(yelpInfo);
+    let categories = [];
+    yelp.business(eventObj.info.yelpBizID, (err, data) => {
+      if (err) {
+        reject(err);
+      } else {
+        // console.log("getYelpInfo data", data);
+        const eventYelpObj = yelpObj(eventObj.info.yelpBizID);
+        eventYelpObj.name = data.name;
+        // if the image below (data.rating_img_url) is too large, use data.rating_img_url_small instead (or simply data.rating if you just want the number rating 4.5 or 4)
+        eventYelpObj.starsRating = data.rating_img_url_large;
+        eventYelpObj.review_count = data.review_count;
+        eventYelpObj.custReview = data.snippet_text;
+        eventYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
+        eventObj.info.yelpInfo = eventYelpObj;
+        resolve(eventObj);
+      }
+    });
+  });
 };
 
 // Constructs the equivalent of TruckObj, which contains all of the Twitter info for an event
@@ -133,27 +158,28 @@ module.exports.createEventRecord = (eventObj) => {
       schedule: sched[tweet.user.screen_name],
       photosFromGoogle: [],
       todaysTrucks: grabTodaysTrucks(eventObj),
+      yelpBizID: '',
+      photosFromGoogle: [],
     });
     resolve(eventObj);
   });
 };
 
 module.exports.createOrUpdateEvent = (eventObj) => {
-  console.log('INSIDE CREATE or UPDATE EVENT', eventObj.info.name);
-
   const eventName = eventObj.info.name;
+  // console.log("createOrUpdateEvent eventObj.info", eventObj.info)
   return new Promise((resolve, reject) => {
     // searches for an event record in the database with a matching Twitter handle
     Event.find({ name: eventName }, (err, result) => {
       if (result.length === 0) {
         getTenImages(eventObj)
-        // .then(eventObj => {
-        //   return getYelpInfo(eventObj)
-        // })
-      .then(eventObj => {
-        eventObj.info.save((err, resp) => err ? reject(err) : resolve(resp));
-        console.log(`${eventName} event created`);
-      });
+        .then(eventObj => {
+          return getYelpInfo(eventObj)
+        })
+        .then(eventObj => {
+          eventObj.info.save((err, resp) => err ? reject(err) : resolve(resp));
+          console.log(`${eventName} event created`);
+        });
       } else {
         Event.findOneAndUpdate(
           { name: eventName },
@@ -171,8 +197,6 @@ module.exports.createOrUpdateEvent = (eventObj) => {
 };
 
 getTenImages = (eventObj) => {
-  console.log('GET TEN IMAGES', eventObj.info.name);
-
   return new Promise((resolve, reject) => {
     google.list({
       keyword: eventObj.info.name + " sf menu items",
@@ -183,13 +207,12 @@ getTenImages = (eventObj) => {
       }
     })
     .then(function (res) {
-      console.log('GET TEN IMAGES', eventObj.info.name);
       res.forEach( pic => {
         eventObj.info.photosFromGoogle.push(pic.url);
       });
       resolve(eventObj);
     }).catch(function(err) {
-      console.log('getTenImages error', err);
+      console.log('get Ten event Images error', err);
       reject(err);
     });
   });

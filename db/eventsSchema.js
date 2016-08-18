@@ -17,18 +17,18 @@ const eventsSchema = new mongoose.Schema({
     /* friday: */ { closed: Boolean },
     /* saturday: */ { closed: Boolean },
   ],
-  photosFromGoogle: Array,
   todaysTrucks: Array,
-  // yelpId: String,
-  // yelpInfo: {
-  //   name: String,
-  //   yelpBizID: String,
-  //   starsRating: String,
-  //   review_count: Number,
-  //   custReview: String,
-  //   photo: String,
-  //   categories: String,  // aka 'cuisine'
-  // }
+  yelpBizId: String,
+  photosFromGoogle: Array,
+  yelpInfo: {
+    name: String,
+    yelpBizID: String,
+    starsRating: String,
+    review_count: Number,
+    custReview: String,
+    photo: String,
+    categories: [String, String, String, String, String, String, String, String, String, String], // aka 'cuisine'
+  }
 });
 
 const Event = mongoose.model('Food Truck Events', eventsSchema);

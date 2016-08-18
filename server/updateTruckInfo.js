@@ -119,11 +119,13 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
         console.log('error', error);
         reject(error);
       }
-      if(tweets[0]) {
-        newTruckObj.website = tweets[0].user.url;
-        newTruckObj.allTweetObjs = tweets;
-        tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
-      };
+      if(tweets){
+        if(tweets[0]) {
+          newTruckObj.website = tweets[0].user.url;
+          newTruckObj.allTweetObjs = tweets;
+          tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
+        } 
+      }
       resolve(newTruckObj);
     });
   });
@@ -205,7 +207,7 @@ module.exports.getTenImages = (newTruckObj) => {
       });
       resolve(newTruckObj);
     }).catch(function(err) {
-      console.log('getTenImages error', err);
+      console.log('updateTruckInfo.js getTenImages error', err);
       reject(err);
     });
   });
