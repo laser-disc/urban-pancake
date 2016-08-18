@@ -19,7 +19,6 @@ class EventViewTruckList extends Component {
 
   componentWillMount() {
     this.props.FetchTrucks();
-    console.log("EventViewTruckList componentWillMount this.props", this.props);
   };
 
   renderTrucks(truck) {
@@ -35,19 +34,16 @@ class EventViewTruckList extends Component {
   };
 
   render() {
-    // console.log("render EventViewTruckList this.props", this.props);
     let thisEvent = this.props.events.filter( event => event.name===this.props.currentTruck.currentTruck);
     let todaysTrucksArray = thisEvent[0].todaysTrucks;
     let onlyTodaysTrucks = this.props.trucks.filter( truck => {
       if(truck.handle){
         let handle = truck.handle.slice(1, truck.handle.length);
-        // console.log("looking for ", handle, "in", todaysTrucksArray);
         return todaysTrucksArray.includes(handle);
       } else {
         return false;
       }
     })
-    // console.log("onlyTodaysTrucks", onlyTodaysTrucks);
 
     return (
       <div className="truck-list well container-well">

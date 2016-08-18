@@ -23,7 +23,6 @@ class EventView extends Component {
   }
 
   render(){
-    // console.log('[truck profile] props: ', this.props) 
     return (
       <div className="body-truck-view">
         <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
@@ -45,22 +44,3 @@ function mapDispatchToProps(dispatch) {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventView);
-
-// return (
-//   <div className="body-home">
-//     <Header />
-//     <div className='mega-container container-fluid'>
-//       <div className='wrap row'>
-//         <div className="google-map-container container-well">
-//           <div className="google-map">
-//             {googleMap}
-//           </div>
-//         </div>
-//           <TruckList />
-//       </div>
-//     </div>
-//     <Footer />
-//     <link href=" https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-//     <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
-//   </div>
-// )}
