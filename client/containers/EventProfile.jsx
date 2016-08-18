@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import TwitterBox from '../components/TwitterBox.jsx';
+import EventViewTruckList from './EventViewTruckList.jsx';
+
 export default class EventProfile extends Component {
 // ? {this.props.yelpInfo.photosFromGoogle.map(function(image){return <img src={image} alt="googlePhoto" />})} : <h1>loading...</h1>
   renderImages(){
@@ -9,7 +11,8 @@ export default class EventProfile extends Component {
   }
 
   render(){
-    console.log("eventProfile.jsx render()");
+    console.log("eventProfile.jsx render() this.props", this.props);
+
     if(this.props.yelpInfo.yelpInfo){
       var truckProfileImgStyle = {
         backgroundImage : "url(" + this.props.yelpInfo.yelpInfo.photo+")",
@@ -21,9 +24,9 @@ export default class EventProfile extends Component {
       <div className="container">
         <div className="row">
           <div className="truck-profile-img-container container-well well">
-               {this.renderImages()}
+            {this.renderImages()}
           </div>
-          <TwitterBox fiveTweets = {this.props.fiveTweets} />
+          <EventViewTruckList />
         </div>
         <div className="row">
         </div>
@@ -31,3 +34,4 @@ export default class EventProfile extends Component {
     )
   }
 }
+

@@ -14,13 +14,12 @@ import { FetchFiveTweets } from '../actions/FetchFiveTweets';
 class EventView extends Component {
 
   componentWillMount(){
-    console.log("EventView.jsx componentWillMount invoked");
-    // this.props.FetchFiveTweets(this.props.params.truckName);
-    // this.props.FetchYelp(this.props.params.truckName)
+    console.log("EventView.jsx componentWillMount invoked this.props", this.props);
+    this.props.FetchYelp(this.props.params.truckName)
   }
 
-  renderEventView(truck, fiveTweets){
-    return <EventProfile key={ truck.yelpBizID } yelpInfo ={ truck } fiveTweets = { fiveTweets } />
+  renderEventView(event, fiveTweets){
+    return <EventProfile key={ event.yelpBizID } yelpInfo ={ event } fiveTweets = { fiveTweets } />
   }
 
   render(){
