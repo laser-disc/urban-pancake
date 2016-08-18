@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router'
 import { bindActionCreators } from 'redux';
 import Validate from '../../utils/truckSchemaValidation';
-import AddTruckModal from '../components/AddTruckModal.jsx';
+import AddTruckForm from '../components/AddTruckForm.jsx';
+import PassNewTruck from '../actions/PassNewTruck';
 
 class AddTruck extends Component {
   // initial state: empty truck object
@@ -61,13 +62,15 @@ class AddTruck extends Component {
 
       },
       valid: false,
-      sunday: '',
-      monday: '',
-      tuesday: '',
-      wednesday: '',
-      thursday: '',
-      friday: '',
-      saturday: '',
+      days: {
+        sunday: '',
+        monday: '',
+        tuesday: '',
+        wednesday: '',
+        thursday: '',
+        friday: '',
+        saturday: '',
+      }
     };
     this.getValue = this.getValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -142,9 +145,19 @@ class AddTruck extends Component {
     // TODO: Add help option to describe Yelp ID
   render() {
     return (
-      <AddTruckModal handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+      <AddTruckForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} truck={this.state.truck} days={this.state.days} />
     )
   }
 }
 
-export default AddTruck;
+function mapStateToProps(state) {
+  return {
+    trucks: state.trucks
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ PassNewTruck }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddTruck);
