@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'
 import { bindActionCreators } from 'redux';
+import Validate from '../../utils/truckSchemaValidation';
 
 class AddTruck extends Component {
   // initial state: empty truck object
@@ -24,6 +25,8 @@ class AddTruck extends Component {
     // post success message
   constructor(props) {
     super(props);
+
+    // this truck schema is ridiculous.
     this.state = {
       truck: {
         name: '',  // user added
@@ -57,6 +60,13 @@ class AddTruck extends Component {
 
       },
       valid: false,
+      sunday: '',
+      monday: '',
+      tuesday: '',
+      wednesday: '',
+      thursday: '',
+      friday: '',
+      saturday: '',
     };
     this.getValue = this.getValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -68,15 +78,62 @@ class AddTruck extends Component {
   }
   handleChange(event) {
     const value = event.target.value;
+    const inputName = event.target.name;
     const newState = this.state;
-    newState.truck[event.target.name] = event.target.value;
+    newState.truck[inputName] = value;
+
     this.setState(newState, () => {
-      this.validateInput(value);
+      this.validateInput(value, inputName);
     });
     console.log(this.getValue());
   }
-  validateInput(target) {
-    if (target)
+  // validateInput doesn't need to take a target param, it can use the state.
+  // feel free to refactor.
+  validateInput(target, inputName) {
+    if (inputName === 'name') {
+      if (!Validate.name(target)) {
+        // show error message
+        // return false
+      } else {
+        // return true
+      }
+    } else if (inputName === 'handle') {
+      if (!Validate.handle(target)) {
+        // show error message
+        // return false
+      } else {
+        // return true
+      }
+    } else if (inputName === 'description') {
+      if (!Validate.description(target)) {
+        // show error message
+        // return false
+      } else {
+        // return true
+      }
+    } else if (inputName === 'website') {
+      if (!Validate.website(target)) {
+        // show error message
+        // return false
+      } else {
+        // return true
+      }
+    } else if (inputName === 'yelpId') {
+      if (!Validate.yelpId(target)) {
+        // show error message
+        // return false
+      } else {
+        // return true
+      }
+    } else { // inputName must be a location.
+      if (!Validate.location(target)) {
+        // show error message
+        // return false
+      } else {
+        // return true
+      }
+    }
+    return true; // if the code doesn't know what's happening it's probably fine.
   }
   getValue() {
     return this.state.truck;
@@ -123,42 +180,56 @@ class AddTruck extends Component {
                 Sunday<input
                   type="text"
                   name="sunday"
+                  placeholder="e.g. 2nd and Mission"
+                  value={this.state.truck.sunday}
                 />
               </li>
               <li>
                 Monday<input
                   type="text"
                   name="monday"
+                  placeholder="e.g. 2nd and Mission"
+                  value={this.state.truck.monday}
                 />
               </li>
               <li>
                 Tuesday<input
                   type="text"
                   name="tuesday"
+                  placeholder="e.g. 2nd and Mission"
+                  value={this.state.truck.tuesday}
                 />
               </li>
               <li>
                 Wednesday<input
                   type="text"
                   name="wednesday"
+                  placeholder="e.g. 2nd and Mission"
+                  value={this.state.truck.wednesday}
                 />
               </li>
               <li>
                 Thursday<input
                   type="text"
                   name="thursday"
+                  placeholder="e.g. 2nd and Mission"
+                  value={this.state.truck.thursday}
                 />
               </li>
               <li>
                 Friday<input
                   type="text"
                   name="friday"
+                  placeholder="e.g. 2nd and Mission"
+                  value={this.state.truck.friday}
                 />
               </li>
               <li>
                 Saturday<input
                   type="text"
                   name="saturday"
+                  placeholder="e.g. 2nd and Mission"
+                  value={this.state.truck.saturday}
                 />
               </li>
             </ul>
