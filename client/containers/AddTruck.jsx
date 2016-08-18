@@ -26,11 +26,37 @@ class AddTruck extends Component {
     super(props);
     this.state = {
       truck: {
-        name: '',
-        handle: '',
-        description: '',
-        yelpId: '',
-      }
+        name: '',  // user added
+        handle: '', // user added
+        website: '', // user added
+        description: '', // user added
+        message: 'No message yet. Check back tomorrow!',
+        timeStamp: '',
+        imageUrl: 'http://www.gannett-cdn.com/-mm-/7e47370877b354b5fb83086acfb1d60a36b24af8/c=0-50-400-351&r=x404&c=534x401/local/-/media/2015/10/08/Pensacola/Pensacola/635798979592323969-generic-food-truck.jpg',
+        location: { lat: 0, lng: 0, closed: false },
+        schedule: [ // user added
+          /* sunday:*/ { lat: 0, lng: 0, closed: false },
+          /* monday:*/ { lat: 0, lng: 0, closed: false },
+          /* tuesday:*/ { lat: 0, lng: 0, closed: false },
+          /* wednesday:*/ { lat: 0, lng: 0, closed: false },
+          /* thursday:*/ { lat: 0, lng: 0, closed: false },
+          /* friday:*/ { lat: 0, lng: 0, closed: false },
+          /* saturday:*/ { lat: 0, lng: 0, closed: false },
+        ],
+        photosFromGoogle: [],
+        yelpId: '', // user added
+        yelpInfo: {
+          name: null,
+          yelpBizID: null,
+          starsRating: null,
+          review_count: null,
+          custReview: null,
+          photo: null,
+          categories: null,  // aka 'cuisine'
+        }
+
+      },
+      valid: false,
     };
     this.getValue = this.getValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -41,16 +67,16 @@ class AddTruck extends Component {
     console.log('event: ', event, ' target: ', event.target, ' this: ', this)
   }
   handleChange(event) {
-    const target = event.target;
+    const value = event.target.value;
     const newState = this.state;
-    newState.truck[target.name] = target.value;
+    newState.truck[event.target.name] = event.target.value;
     this.setState(newState, () => {
-      this.validateInput(target);
+      this.validateInput(value);
     });
     console.log(this.getValue());
   }
   validateInput(target) {
-    console.log("Validate input called on ", target);
+    if (target)
   }
   getValue() {
     return this.state.truck;
@@ -58,7 +84,7 @@ class AddTruck extends Component {
     // TODO: Add help option to describe Yelp ID
   render() {
     return (
-      <div style={{"color": "white"}}>
+      <div>
         <form
           className="add-truck"
           onChange={this.handleChange}
@@ -69,6 +95,7 @@ class AddTruck extends Component {
               type="text"
               placeholder="name"
               name="name"
+              value={this.state.truck.name}
               />
           </div>
           <div>
@@ -77,6 +104,7 @@ class AddTruck extends Component {
             type="text"
             placeholder="T. Handle"
             name="handle"
+            value={this.state.truck.handle}
             />
           </div>
           <div>
@@ -85,6 +113,7 @@ class AddTruck extends Component {
               type="text"
               placeholder="Yelp ID"
               name="yelpId"
+              value={this.state.truck.yelpId}
               />
           </div>
           <div>
