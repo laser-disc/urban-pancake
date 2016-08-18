@@ -25,9 +25,9 @@ const { getTenImages } = require('./updateTruckInfo');
 const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf', 'KokioRepublic',
   'WannaESF', 'eatmobowl', 'lcfoodtruck', /* 'redsauceballs', */ 'TacosElTuca', 'donpablotruck',
   'FiretrailPizza', 'torrakuramen', 'GyrosonWheels1', /* 'HongryKong', */ 'PhatThaiSF', 'KabobTrolley',
-  'adamsgrubtruck', 'bowldacai', /* 'seoulonwheels',*/ 'RedRidingTruck', 'odangudon', 'nonoburger'
-  'NakedChorizo1', 'Mannajpt', 'SunriseDeli', 'bobchasf', /* 'nuchaempanadas', */ 'RockoSez',
-  'gojojosmojo', 'sporkandstix'];
+  'adamsgrubtruck', 'bowldacai', /* 'seoulonwheels',*/ 'RedRidingTruck', 'odangudon', 'nonoburger',
+  /* 'NakedChorizo1', */ 'Mannajpt', 'SunriseDeli', 'bobchasf', /* 'nuchaempanadas', */ 'RockoSez',
+  /* 'gojojosmojo', */ 'sporkandstix', 'LadySaigonSF', 'SaborSM', 'Elcalamarsf', 'Jeepney_Guy'];
 
 const foodEvents = ['gloungesf', 'SPARKsocialSF', 'SoMaStrEatFood'];
 // Don't try to get Twitter info from these trucks - you will FAIL
@@ -56,15 +56,19 @@ const foodTrucksObj = {
   //  seoulonwheels: { twitterHandle: 'seoulonwheels', yelpBizID: 'seoul-on-wheels-san-francisco-4' },
   RedRidingTruck: { twitterHandle: 'RedRidingTruck', yelpBizID: 'little-red-riding-truck-san-francisco' },
   odangudon: { twitterHandle: 'odangudon', yelpBizID: 'odang-udon-san-francisco-3' },
-  nonoburger: { twitterHandle: 'nonoburger', yelpBizID: 'no-no-burger-san-francisco' }
-  NakedChorizo1: { twitterHandle: 'NakedChorizo1', yelpBizID: 'naked-chorizo-san-francisco' },
+  nonoburger: { twitterHandle: 'nonoburger', yelpBizID: 'no-no-burger-san-francisco' },
+  // NakedChorizo1: { twitterHandle: 'NakedChorizo1', yelpBizID: 'naked-chorizo-san-francisco' },
   Mannajpt: { twitterHandle: 'Mannajpt', yelpBizID: 'manna-south-san-francisco' },
   SunriseDeli: { twitterHandle: 'SunriseDeli', yelpBizID: 'sunrise-deli-mobile-truck-san-francisco' },
   bobchasf: { twitterHandle: 'bobchasf', yelpBizID: 'bobcha-south-san-francisco' },
   // nuchaempanadas: { twitterHandle: 'nuchaempanadas', yelpBizID: 'nucha-empanadas-san-francisco' },
   RockoSez: { twitterHandle: 'RockoSez', yelpBizID: 'rockos-ice-cream-tacos-san-francisco' },
-  gojojosmojo: { twitterHandle: 'gojojosmojo', yelpBizID: 'go-jojo-mojo-san-francisco' },
+  // gojojosmojo: { twitterHandle: 'gojojosmojo', yelpBizID: 'go-jojo-mojo-san-francisco' },
   sporkandstix: { twitterHandle: 'sporkandstix', yelpBizID: 'spork-and-stix-south-san-francisco-ca' },
+  LadySaigonSF: { twitterHandle: 'LadySaigonSF', yelpBizID: 'lady-saigon-san-francisco' },
+  SaborSM: { twitterHandle: 'SaborSM', yelpBizID: 'sabor-de-san-miguel-san-francisco' },
+  Elcalamarsf: { twitterHandle: 'Elcalamarsf', yelpBizID: 'el-calamar-san-francisco-3' },
+  Jeepney_Guy: { twitterHandle: 'Jeepney_Guy', yelpBizID: 'jeepney-guy-san-jose' },
 
 thetwitterHandleAgainForSomeReason: { twitterHandle: '', yelpBizID: '' },
 };
