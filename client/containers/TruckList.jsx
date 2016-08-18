@@ -72,8 +72,7 @@ class TruckList extends Component {
 
   // This function renders the individual event modal to the list of trucks
   renderEvents(event, i) {
-    var handle = event.handle.slice(1, event.handle.length); 
-    event.yelpInfo = {name: null, yelpBizID: null, starsRating: null, review_count: null, custReview: null, photo: null,categories: null};
+    var handle = event.handle.slice(1, event.handle.length);
 
     if(selectedTruck == event.name){
       return  <div className="selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
