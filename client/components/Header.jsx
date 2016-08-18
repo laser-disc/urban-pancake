@@ -4,7 +4,6 @@ import {modal} from 'react-redux-modal';
 import AddTruckModal from '../components/AddTruckModal.jsx'
 
 export default class HomeHeader extends Component {
-
   addModal() {
     modal.add(AddTruckModal, {
       size: 'large',
