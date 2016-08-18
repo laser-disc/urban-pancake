@@ -34,12 +34,8 @@ class TruckList extends Component {
     }
 
   renderTrucks(truck) {
-    var handle;
-    if(truck._id==="user"){
-      handle = '';
-    } else {
-      handle = truck.handle.slice(1, truck.handle.length); 
-    }
+    if(truck._id==="user") return;
+    var handle = truck.handle.slice(1, truck.handle.length);
     if(selectedTruck == truck.name) {
       return  <div onClick={ this.addModal.bind(this, handle) } className="selected"><TruckItem truck={truck} /></div>
     } else {
