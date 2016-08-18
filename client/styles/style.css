@@ -164,8 +164,9 @@ li {
 }
 
 .truck-event-photos {
-  width: 40vw;
-  
+  width: 40vw !important;
+  height: 40vh !important;
+  overflow: hidden;
 }
 /************************** HOVER CSS   **************************/
 .hvr-grow {
@@ -237,7 +238,10 @@ li {
   margin-left: 2% !important;  
   margin-right: 2% !important
 }
-
+.twitter-tweet {
+  height: 20% !important;
+  width: 20% !important;
+}
 .google-map{
   height: 100%;
   width: 100%
@@ -466,4 +470,46 @@ li {
   bottom: 0 !important;
   width: 100% !important;
   height: 60px !important;
-} 
+}
+
+.search-bar {
+  margin-bottom: 10px;
+  float: right;
+  margin-right: 15px;
+  width: 30%;
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+  text-indent: 5px;
+}
+
+::-webkit-input-placeholder { /* Chrome */
+  color: white;
+  transition: opacity 250ms ease-in-out;
+}
+:focus::-webkit-input-placeholder {
+  opacity: 0.5;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+  transition: opacity 250ms ease-in-out;
+}
+:focus:-ms-input-placeholder {
+  opacity: 0.5;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+}
+:focus::-moz-placeholder {
+  opacity: 0.5;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: white;
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+}
+:focus:-moz-placeholder {
+  opacity: 0.5;
+}

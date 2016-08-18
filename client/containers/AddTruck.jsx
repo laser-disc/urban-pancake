@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router'
 import { bindActionCreators } from 'redux';
 import Validate from '../../utils/truckSchemaValidation';
+import AddTruckModal from '../components/AddTruckModal.jsx';
 
 class AddTruck extends Component {
   // initial state: empty truck object
@@ -141,102 +142,7 @@ class AddTruck extends Component {
     // TODO: Add help option to describe Yelp ID
   render() {
     return (
-      <div>
-        <form
-          className="add-truck"
-          onChange={this.handleChange}
-          >
-          <div>
-            <label>Name</label>
-            <input
-              type="text"
-              placeholder="name"
-              name="name"
-              value={this.state.truck.name}
-              />
-          </div>
-          <div>
-            <label>Twitter Handle</label>
-            @<input
-            type="text"
-            placeholder="T. Handle"
-            name="handle"
-            value={this.state.truck.handle}
-            />
-          </div>
-          <div>
-            <label>Yelp ID</label>
-            <input
-              type="text"
-              placeholder="Yelp ID"
-              name="yelpId"
-              value={this.state.truck.yelpId}
-              />
-          </div>
-          <div>
-            <label>Locations</label>
-            <ul>
-              <li>
-                Sunday<input
-                  type="text"
-                  name="sunday"
-                  placeholder="e.g. 2nd and Mission"
-                  value={this.state.truck.sunday}
-                />
-              </li>
-              <li>
-                Monday<input
-                  type="text"
-                  name="monday"
-                  placeholder="e.g. 2nd and Mission"
-                  value={this.state.truck.monday}
-                />
-              </li>
-              <li>
-                Tuesday<input
-                  type="text"
-                  name="tuesday"
-                  placeholder="e.g. 2nd and Mission"
-                  value={this.state.truck.tuesday}
-                />
-              </li>
-              <li>
-                Wednesday<input
-                  type="text"
-                  name="wednesday"
-                  placeholder="e.g. 2nd and Mission"
-                  value={this.state.truck.wednesday}
-                />
-              </li>
-              <li>
-                Thursday<input
-                  type="text"
-                  name="thursday"
-                  placeholder="e.g. 2nd and Mission"
-                  value={this.state.truck.thursday}
-                />
-              </li>
-              <li>
-                Friday<input
-                  type="text"
-                  name="friday"
-                  placeholder="e.g. 2nd and Mission"
-                  value={this.state.truck.friday}
-                />
-              </li>
-              <li>
-                Saturday<input
-                  type="text"
-                  name="saturday"
-                  placeholder="e.g. 2nd and Mission"
-                  value={this.state.truck.saturday}
-                />
-              </li>
-            </ul>
-          </div>
-          <button type="button" onClick={this.handleSubmit.bind(this)}>Submit</button>
-        </form>
-      </div>
+      <AddTruckModal handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
     )
   }
 }

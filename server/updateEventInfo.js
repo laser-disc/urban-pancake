@@ -72,7 +72,6 @@ const EventInfo = () => {
     twitterHandle: null,
     fullTweets: null, // will be the raw data object returned from Twitter
     allMessages: [], // we will create this
-    chosenIndex: null,
     info: null, // will contain all of the schema info
   };
 };
