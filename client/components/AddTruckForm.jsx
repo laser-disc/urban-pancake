@@ -168,6 +168,7 @@ export default class AddTruckForm extends Component {
           <button type="button" onClick={this.props.handleSubmit}>Submit</button>
         </form>
       </div>
+    </div>
     );
   }
 }
