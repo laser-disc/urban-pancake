@@ -35,9 +35,9 @@ const foodEvents = ['gloungesf', 'SPARKsocialSF', 'SoMaStrEatFood'];
 // badFoodTrucks equalz ['senorsisig'];
 
 const allEventsObj = {
-  gloungesf: { twitterHandle: 'gloungesf', yelpBizID: 'g-food-truck-lounge-san-francisco-4'},
-  SPARKsocialSF: { twitterHandle: 'SPARKsocialSF', yelpBizID: 'spark-social-sf-san-francisco'},
-  SoMaStrEatFood: { twitterHandle: 'SoMaStrEatFood', yelpBizID: 'soma-streat-food-park-san-francisco'}
+  gloungesf: { twitterHandle: 'gloungesf', yelpBizID: 'g-food-truck-lounge-san-francisco-4' },
+  SPARKsocialSF: { twitterHandle: 'SPARKsocialSF', yelpBizID: 'spark-social-sf-san-francisco' },
+  SoMaStrEatFood: { twitterHandle: 'SoMaStrEatFood', yelpBizID: 'soma-streat-food-park-san-francisco' }
 };
 
 const foodTrucksObj = {

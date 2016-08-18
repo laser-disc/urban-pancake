@@ -27,7 +27,8 @@ const eventsSchema = new mongoose.Schema({
     review_count: Number,
     custReview: String,
     photo: String,
-    categories: [String, String, String, String, String, String, String, String, String, String], // aka 'cuisine'
+    categories: Array, // aka 'cuisine'
+    phone: String,
   }
 });
 
