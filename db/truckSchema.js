@@ -18,8 +18,7 @@ const truckSchema = new mongoose.Schema({
     /* friday:*/ { lat: Number, lng: Number, closed: Boolean },
     /* saturday:*/ { lat: Number, lng: Number, closed: Boolean },
   ],
-  // photosFromGoogle: Array,
-
+  photosFromGoogle: Array,
   yelpId: String,
   yelpInfo: {
     name: String,
@@ -28,8 +27,8 @@ const truckSchema = new mongoose.Schema({
     review_count: Number,
     custReview: String,
     photo: String,
-    // categories: Array, // aka 'cuisine'
-    // phone: String,
+    categories: Array, // aka 'cuisine'
+    phone: String,
   }
 });
 
