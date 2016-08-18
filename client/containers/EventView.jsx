@@ -37,6 +37,7 @@ class EventView extends Component {
 function mapStateToProps(state) {
   return {
     currentEvent: state.currentEvent,
+    currentTruck: state.currentTruck
   };
 };
 

@@ -33,7 +33,6 @@ class TruckList extends Component {
       truck: truck,
       })
     }
-
   renderTrucks(truck) {
     var handle;
     if(truck._id==="user"){
