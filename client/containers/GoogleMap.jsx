@@ -86,7 +86,7 @@ class Map extends Component {
     let tweetIndex = dayOfWeek.indexOf(tweetDay);
     // icon = 'http://maps.google.com/mapfiles/ms/micons/red-dot.png';
     icon = 'https://offthegrid.com/wp-content/themes/offthegrid/images/mapmark-red-sm.png';
-
+    console.log("renderMarkers truck._id", truck._id);
     if(truck._id==="user"){
       tweetIndex = 1;
       index = 1;
