@@ -15,11 +15,12 @@ class EventView extends Component {
 
   componentWillMount(){
     console.log("EventView.jsx componentWillMount invoked this.props", this.props);
-    this.props.FetchOneEvent(this.props.params.truckName)
+    this.props.FetchOneEvent(this.props.params.eventName)
   }
 
-  renderEventView(event, fiveTweets){
-    return <EventProfile key={ event.yelpBizID } yelpInfo ={ event } fiveTweets = { fiveTweets } />
+  renderEventView(event){
+    console.log('EVENT VIEW RENDER ....', event, this.props);
+    return <EventProfile key={ event.yelpInfo.yelpBizID } yelpInfo ={ event.yelpInfo } fiveTweets = { event.fiveTweetObjs } />
   }
 
   render(){
@@ -27,7 +28,7 @@ class EventView extends Component {
       <div className="body-truck-view">
         <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
         <Header />
-        {this.renderEventView(this.props.currentEvent.yelpInfo, this.props.currentEvent.yelpInfo.fiveTweetObjs)}
+        {this.renderEventView(this.props.currentEvent)}
         <Footer />
       </div>
     )

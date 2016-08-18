@@ -12,7 +12,7 @@ export default () => {
     <Router history={hashHistory} >
       <Route path = "/" component={Home} />
       <Router path ="/truckview/:truckName" component={TruckView} />
-      <Router path ="/eventview/:truckName" component={EventView} />
+      <Router path ="/eventview/:eventName" component={EventView} />
       <Router path = "/add" component={AddTruck} />
     </Router>
   )

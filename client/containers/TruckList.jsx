@@ -20,6 +20,7 @@ class TruckList extends Component {
   };
 
   componentWillMount() {
+    console.log('INSIDE TRUCKTRUCK', this.props);
     this.props.FetchTrucks();
     this.props.FetchEvents();
   };
@@ -49,7 +50,7 @@ class TruckList extends Component {
 
   // Iterates over each event in the database
   renderEvents(event) {
-    var handle = event.handle.slice(1, event.handle.length); 
+    var handle = event.handle.slice(1, event.handle.length);
     if(selectedTruck == event.name){
       return  <div className="selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
     } else {
