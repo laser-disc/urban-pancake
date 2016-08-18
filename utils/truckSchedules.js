@@ -29,7 +29,7 @@ module.exports.truckSchedules = {
     /* friday: */ { lat: 37.767417, lng: -122.390322, closed: false },
     /* saturday: */ { lat: 37.767417, lng: -122.390322, closed: false },
   ],
-  JapaCurry: [
+  'JapaCurry': [
     /* sunday: */ { closed: true },
     /* monday: */ { lat: 37.793079, lng: -122.401164, closed: false },
     /* tuesday: */ { lat: 37.789159, lng: -122.395882, closed: false },
@@ -47,4 +47,17 @@ module.exports.truckSchedules = {
     /* friday: */ { lat: 37.788556, lng: -122.396031, closed: false },
     /* saturday: */ { lat: 37.788556, lng: -122.396031, closed: false },
   ],
+   'bowldacai': [
+    /* sunday: */ { lat: 37.782648, lng: -122.408157, closed: false },
+    /* monday: */ { lat: 37.782648, lng: -122.408157, closed: false },
+    /* tuesday: */  { lat: 37.782648, lng: -122.408157, closed: false },
+    /* wednesday: */  { lat: 37.782648, lng: -122.408157, closed: false },
+    /* thursday: */  { lat: 37.782648, lng: -122.408157, closed: false },
+    /* friday: */  { lat: 37.782648, lng: -122.408157, closed: false },
+    /* saturday: */  { lat: 37.782648, lng: -122.408157, closed: false },
+  ],
 };
+
+
+
+
