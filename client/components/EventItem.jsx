@@ -6,6 +6,7 @@ export default class EventItem extends Component {
     var eventItemThumbNailStyle = {
         backgroundImage : "url(" + this.props.event.imageUrl +")",
       }
+      
     return (
       <div className="event-item test  hvr-grow well">
         <div className="row">
@@ -16,16 +17,16 @@ export default class EventItem extends Component {
               <div className="col-xs-12 col-sm-8">
                 <h4 className="event-item-title">{this.props.event.name}</h4> 
               </div>
-              // <div className="col-xs-12 col-sm-4">
-              //   <img className = "event-item-yelp-score" src={this.props.event.yelpInfo.starsRating} alt=""/>
-              // </div>
+              <div className="col-xs-12 col-sm-4">
+                <img className = "event-item-yelp-score" src={this.props.event.yelpInfo.starsRating} alt=""/>
+              </div>
             </div>
             <div className="row hidden-xs">
               <p className="event-item-description">{this.props.event.description} </p>
             </div>
-            // <div className="row hidden-xs event-item-yelp-review" >
-            //   <p className="">{this.props.event.yelpInfo.custReview} </p>
-            // </div>
+            <div className="row hidden-xs event-item-yelp-review" >
+              <p className="">{this.props.event.yelpInfo.custReview} </p>
+            </div>
           </div> 
         </div>
       </div>

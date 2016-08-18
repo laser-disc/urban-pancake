@@ -9,8 +9,6 @@ export default () => {
   return (
     <Router history={hashHistory} >
       <Route path = "/" component={Home} />
-      <Router path ="/truckview/:truckName" component={TruckView} />
     </Router>
   )
-
 }
