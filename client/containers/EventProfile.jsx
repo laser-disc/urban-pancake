@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import TwitterBox from '../components/TwitterBox.jsx';
 import EventViewTruckList from './EventViewTruckList.jsx';
 import { connect } from 'react-redux';
 
 export default class EventProfile extends Component {
-  
+
   renderImages(){
     let thisEvent = this.props.events.filter( event => event.name===this.props.currentTruck.currentTruck);
     let thisEventsPhotos = thisEvent[0].photosFromGoogle;

@@ -14,5 +14,4 @@ export default () => {
       <Router path ="/eventview/:truckName" component={EventView} />
     </Router>
   )
-
 }
