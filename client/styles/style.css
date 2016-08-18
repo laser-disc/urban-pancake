@@ -164,8 +164,9 @@ li {
 }
 
 .truck-event-photos {
-  width: 40vw;
-  
+  width: 40vw !important;
+  height: 40vh !important;
+  overflow: hidden;
 }
 /************************** HOVER CSS   **************************/
 .hvr-grow {
@@ -237,7 +238,10 @@ li {
   margin-left: 2% !important;  
   margin-right: 2% !important
 }
-
+.twitter-tweet {
+  height: 20% !important;
+  width: 20% !important;
+}
 .google-map{
   height: 100%;
   width: 100%
