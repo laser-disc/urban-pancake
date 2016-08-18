@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router'
 import { bindActionCreators } from 'redux';
 import Validate from '../../utils/truckSchemaValidation';
-import AddTruckModal from '../components/AddTruckModal.jsx';
+import AddTruckForm from '../components/AddTruckForm.jsx';
 import PassNewTruck from '../actions/PassNewTruck';
 
 class AddTruck extends Component {
@@ -145,7 +145,7 @@ class AddTruck extends Component {
     // TODO: Add help option to describe Yelp ID
   render() {
     return (
-      <AddTruckModal handleChange={this.handleChange} handleSubmit={this.handleSubmit} truck={this.state.truck} days={this.state.days} />
+      <AddTruckForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} truck={this.state.truck} days={this.state.days} />
     )
   }
 }

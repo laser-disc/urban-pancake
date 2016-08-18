@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 export default class AddTruckForm extends Component {
   constructor(props) {
     super(props);
-    console.log('add truck form props', props);
+    // console.log('add truck form props', props);
   }
   render(){
     return (
@@ -47,7 +47,7 @@ export default class AddTruckForm extends Component {
                     type="text"
                     name="sunday"
                     placeholder="e.g. 2nd and Mission"
-                    value={this.props.truck.days.sunday}
+                    value={this.props.days.sunday}
                   />
                 </li>
                 <li>
@@ -55,7 +55,7 @@ export default class AddTruckForm extends Component {
                     type="text"
                     name="monday"
                     placeholder="e.g. 2nd and Mission"
-                    value={this.props.truck.days.monday}
+                    value={this.props.days.monday}
                   />
                 </li>
                 <li>
@@ -63,7 +63,7 @@ export default class AddTruckForm extends Component {
                     type="text"
                     name="tuesday"
                     placeholder="e.g. 2nd and Mission"
-                    value={this.props.truck.days.tuesday}
+                    value={this.props.days.tuesday}
                   />
                 </li>
                 <li>
@@ -71,7 +71,7 @@ export default class AddTruckForm extends Component {
                     type="text"
                     name="wednesday"
                     placeholder="e.g. 2nd and Mission"
-                    value={this.props.truck.days.wednesday}
+                    value={this.props.days.wednesday}
                   />
                 </li>
                 <li>
@@ -79,7 +79,7 @@ export default class AddTruckForm extends Component {
                     type="text"
                     name="thursday"
                     placeholder="e.g. 2nd and Mission"
-                    value={this.props.truck.days.thursday}
+                    value={this.props.days.thursday}
                   />
                 </li>
                 <li>
@@ -87,7 +87,7 @@ export default class AddTruckForm extends Component {
                     type="text"
                     name="friday"
                     placeholder="e.g. 2nd and Mission"
-                    value={this.props.truck.days.friday}
+                    value={this.props.days.friday}
                   />
                 </li>
                 <li>
@@ -95,7 +95,7 @@ export default class AddTruckForm extends Component {
                     type="text"
                     name="saturday"
                     placeholder="e.g. 2nd and Mission"
-                    value={this.props.truck.days.saturday}
+                    value={this.props.days.saturday}
                   />
                 </li>
               </ul>
