@@ -6,7 +6,6 @@ import AddTruckModal from '../components/AddTruckModal.jsx'
 export default class HomeHeader extends Component {
   
   addModal() { 
-    console.log("[HEADER] AddTruckModal")
     modal.add(AddTruckModal, {
       size: 'large',
       closeOnOutsideClick: true, 

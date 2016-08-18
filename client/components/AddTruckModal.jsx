@@ -1,103 +1,172 @@
 import React, {Component} from 'react'
 
+
+
 export default class TruckList extends Component {
   render(){
     return (
       <div>
+      <div className="container">
+        <h2 className='add-truck-title'>Add A Truck</h2>
+      </div>
+        <div className='row'>
         <form
-            className="add-truck"
+            className="form-horizontal container"
             onChange={this.handleChange}
             >
-            <div>
-              <label>Name</label>
-              <input
-                type="text"
-                placeholder="name"
-                name="name"
-                value="[CHANGE ME]"
-                />
-            </div>
-            <div>
-              <label>Twitter Handle</label>
-              @<input
+
+              <div className="form-group row">
+                <div className="form-label">
+                  <label className="control-label"><h4>What's the name of the food truck?</h4></label>
+                </div>
+                <div className="col-xs-offset-1 col-xs-10">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="name"
+                    name="name"
+                    value="[CHANGE ME]"
+                    />
+                </div>
+              </div>
+
+              <div className="form-group row">
+                <div className="form-label">
+                  <label className="control-label"><h4>Does the truck have a twitter handle?</h4></label>
+                </div>
+                <div className="col-xs-offset-1 col-xs-10">
+                  <input
+                    className="form-control"
               type="text"
-              placeholder="T. Handle"
+              placeholder="@mobile_munchies"
               name="handle"
-              value="[CHANGE ME]"
-              />
-            </div>
-            <div>
-              <label>Yelp ID</label>
-              <input
+              value=""
+                    />
+                </div>
+              </div>
+            
+              <div className="form-group row">
+                <div className="form-label">
+                  <label className="control-label"><h4>What's the yelpID for this food truck?</h4></label>
+                </div>
+
+                <div className="col-xs-offset-1 col-xs-10">
+                  <input
+                className="form-control"
                 type="text"
                 placeholder="Yelp ID"
                 name="yelpId"
                 value="[CHANGE ME]"
-                />
-            </div>
-            <div>
-              <label>Locations</label>
-              <ul>
-                <li>
-                  Sunday<input
-                    type="text"
-                    name="sunday"
-                    placeholder="e.g. 2nd and Mission"
-                    value="[CHANGE ME]"
-                  />
-                </li>
-                <li>
-                  Monday<input
-                    type="text"
-                    name="monday"
-                    placeholder="e.g. 2nd and Mission"
-                    value="[CHANGE ME]"
-                  />
-                </li>
-                <li>
-                  Tuesday<input
-                    type="text"
-                    name="tuesday"
-                    placeholder="e.g. 2nd and Mission"
-                    value="[CHANGE ME]"
-                  />
-                </li>
-                <li>
-                  Wednesday<input
-                    type="text"
-                    name="wednesday"
-                    placeholder="e.g. 2nd and Mission"
-                    value="[CHANGE ME]"
-                  />
-                </li>
-                <li>
-                  Thursday<input
-                    type="text"
-                    name="thursday"
-                    placeholder="e.g. 2nd and Mission"
-                    value="[CHANGE ME]"
-                  />
-                </li>
-                <li>
-                  Friday<input
-                    type="text"
-                    name="friday"
-                    placeholder="e.g. 2nd and Mission"
-                    value="[CHANGE ME]"
-                  />
-                </li>
-                <li>
-                  Saturday<input
-                    type="text"
-                    name="saturday"
-                    placeholder="e.g. 2nd and Mission"
-                    value="[CHANGE ME]"
-                  />
-                </li>
-              </ul>
+                    />
+                </div>
+              </div>
+            <div className="form-group row">
+                <div className="form-label">
+                  <label className="control-label"><h4>Where can we find this truck?</h4></label>
+                </div>
+
+             <div className="col-xs-offset-1 col-xs-10">
+                   <div className="weekday">
+                      <h4>Monday</h4>
+                   </div>
+                    <div className="weekday-input col-xs-9 col-xs-9">
+                      <input
+                      className="form-control"
+                        type="text"
+                        name="sunday"
+                        placeholder="e.g. 2nd and Mission"
+                        value="[CHANGE ME]"
+                      />
+                    </div>
+              </div>
+              <div className="col-xs-offset-1 col-xs-10">
+                   <div className="weekday">
+                      <h4>Tuesday</h4>
+                   </div>
+                    <div className="weekday-input col-xs-9">
+                      <input
+                      className="form-control"
+                        type="text"
+                        name="sunday"
+                        placeholder="e.g. 2nd and Mission"
+                        value="[CHANGE ME]"
+                      />
+                    </div>
+              </div>
+              <div className="col-xs-offset-1 col-xs-10">
+                   <div className="weekday">
+                      <h4>Wednesday</h4>
+                   </div>
+                    <div className="weekday-input col-xs-9">
+                      <input
+                      className="form-control"
+                        type="text"
+                        name="sunday"
+                        placeholder="e.g. 2nd and Mission"
+                        value="[CHANGE ME]"
+                      />
+                    </div>
+              </div>
+              <div className="col-xs-offset-1 col-xs-10">
+                   <div className="weekday">
+                      <h4>Thursday</h4>
+                   </div>
+                    <div className="weekday-input col-xs-9">
+                      <input
+                      className="form-control"
+                        type="text"
+                        name="sunday"
+                        placeholder="e.g. 2nd and Mission"
+                        value="[CHANGE ME]"
+                      />
+                    </div>
+              </div>
+              <div className="col-xs-offset-1 col-xs-10">
+                   <div className="weekday">
+                      <h4>Friday</h4>
+                   </div>
+                    <div className="weekday-input col-xs-9">
+                      <input
+                      className="form-control"
+                        type="text"
+                        name="sunday"
+                        placeholder="e.g. 2nd and Mission"
+                        value="[CHANGE ME]"
+                      />
+                    </div>
+              </div>
+              <div className="col-xs-offset-1 col-xs-10">
+                   <div className="weekday">
+                      <h4>Saturday</h4>
+                   </div>
+                    <div className="weekday-input col-xs-9">
+                      <input
+                      className="form-control"
+                        type="text"
+                        name="sunday"
+                        placeholder="e.g. 2nd and Mission"
+                        value="[CHANGE ME]"
+                      />
+                    </div>
+              </div>
+              <div className="col-xs-offset-1 col-xs-10">
+                   <div className="weekday">
+                      <h4>Sunday</h4>
+                   </div>
+                    <div className="weekday-input col-xs-9">
+                      <input
+                      className="form-control"
+                        type="text"
+                        name="sunday"
+                        placeholder="e.g. 2nd and Mission"
+                        value="[CHANGE ME]"
+                      />
+                    </div>
+              </div>
             </div>
             <button type="button" onClick={this.props.handleSubmit}>Submit</button>
         </form>
+        </div>
       </div>
     );
   }
