@@ -5,7 +5,7 @@ import Slider from 'react-slick'
 
 
 export default class EventProfile extends Component {
-  
+
   componentDidUpdate() {
     twttr.widgets.load()
   }
@@ -19,9 +19,10 @@ export default class EventProfile extends Component {
   }
 
   render(){
+    console.log(this.props)
     var sliderSettings = {
             adaptiveHeight : false,
-            arrows: false, 
+            arrows: false,
             autoplay: true,
             autoplaySpeed:  4000,
             dots: false,
@@ -43,7 +44,7 @@ export default class EventProfile extends Component {
       <div className='container'>
         <div className="row">
           <div>
-           <h1>TRUCK NAME</h1>
+           <h1>{ truckName }</h1>
            <div>YELP SCORE<img src={yelpScore} alt=""/></div>
           </div>
         </div>

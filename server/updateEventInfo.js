@@ -141,7 +141,6 @@ const grabTodaysTrucks = (event) => {
 };
 
 module.exports.createEventRecord = (eventObj) => {
-  console.log('INSIDE CREATE EVENT RECORD');
   return new Promise((resolve, reject) => {
     const tweet = eventObj.fullTweets[0];
     eventObj.info = new Event({

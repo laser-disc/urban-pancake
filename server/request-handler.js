@@ -124,6 +124,11 @@ module.exports = (app) => {
       res.status(200).send(allEvents);
     });
   });
+  app.get("/API/fetchOneEvent", (req,res) => {
+    let handle = '@' + req.query.name;
+    Event.findOne({ handle }, (err, event) => res.status(200).send(event))
+    .catch( err => res.status(400).send(err))
+  });
 
   app.get('/API/fetch', (req, res) => {
     // handle must be different for test and client

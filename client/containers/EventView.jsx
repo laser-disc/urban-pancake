@@ -8,14 +8,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import EventProfile from './EventProfile.jsx';
 import TruckImageContainer from '../components/TruckImageContainer.jsx';
-import { FetchYelp } from '../actions/FetchYelp';
+import { FetchOneEvent } from '../actions/FetchOneEvent';
 import { FetchFiveTweets } from '../actions/FetchFiveTweets';
 
 class EventView extends Component {
 
   componentWillMount(){
     console.log("EventView.jsx componentWillMount invoked this.props", this.props);
-    this.props.FetchYelp(this.props.params.truckName)
+    this.props.FetchOneEvent(this.props.params.truckName)
   }
 
   renderEventView(event, fiveTweets){
@@ -27,7 +27,7 @@ class EventView extends Component {
       <div className="body-truck-view">
         <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
         <Header />
-        {this.renderEventView(this.props.yelpInfo, this.props.yelpInfo.fiveTweetObjs)}
+        {this.renderEventView(this.props.currentEvent.yelpInfo, this.props.currentEvent.yelpInfo.fiveTweetObjs)}
         <Footer />
       </div>
     )
@@ -35,12 +35,12 @@ class EventView extends Component {
 }
 function mapStateToProps(state) {
   return {
-    yelpInfo: state.yelpInfo,
+    currentEvent: state.currentEvent,
   };
 };
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ FetchYelp, FetchFiveTweets }, dispatch);
+  return bindActionCreators({ FetchOneEvent, FetchFiveTweets }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventView);
