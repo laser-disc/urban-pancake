@@ -9,7 +9,7 @@ export default class HomeHeader extends Component {
           <div className="col-xs-2"><Link to="/"><img className="link-logo truck-logo" src="http://imgur.com/rKaONN6.png" alt="Truck"/><p className="home-text">Add a truck</p></Link></div>
           <div className ="col-xs-7">
             <div className="title">
-              <h1 className='title' >SF CITY FOOD TRUCKS</h1>
+              <h1 className='title' >HUNGER STOP</h1>
             </div>
           </div>
         </div>
