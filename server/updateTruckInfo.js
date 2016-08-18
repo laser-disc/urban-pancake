@@ -64,7 +64,8 @@ module.exports.getYelpInfo = (truck) => {
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
         truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
-
+        truckYelpObj.categories = data.categories;
+        truckYelpObj.phone = data.display_phone;
         // the following six lines update the database with the corrent information, but somehow this breaks the truckView so that the images no longer render to the screen, will come back to it
         // data.categories.forEach( category => {
         //   category.forEach(subCategory => {
@@ -96,7 +97,7 @@ module.exports.getFiveTweets = (newTruckObj, tweetID) => {
       }
       let addClassName = '<blockquote className' + tweet.html.split('<blockquote class')[1];
       let noCharSet = addClassName.split(' charset="utf-8"').join('');
-      newTruckObj.fiveTweetObjs.push(noCharSet);
+      newTruckObj.fiveTweetObjs.push(tweet.url);
       resolve(newTruckObj);
     });
   });
@@ -118,11 +119,13 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
         console.log('error', error);
         reject(error);
       }
-      if(tweets[0]) {
-        newTruckObj.website = tweets[0].user.url;
-        newTruckObj.allTweetObjs = tweets;
-        tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
-      };
+      if(tweets){
+        if(tweets[0]) {
+          newTruckObj.website = tweets[0].user.url;
+          newTruckObj.allTweetObjs = tweets;
+          tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
+        } 
+      }
       resolve(newTruckObj);
     });
   });
@@ -204,7 +207,7 @@ module.exports.getTenImages = (newTruckObj) => {
       });
       resolve(newTruckObj);
     }).catch(function(err) {
-      console.log('getTenImages error', err);
+      console.log('updateTruckInfo.js getTenImages error', err);
       reject(err);
     });
   });

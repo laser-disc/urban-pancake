@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
-import TwitterBox from '../components/TwitterBox.jsx';
 import TruckCategories from '../components/TruckCategories.jsx'
+import Slider from 'react-slick'
+import GoogleMap from '../containers/GoogleMap.jsx';
+
+let googleMap;
+if (process.env.TEST_ENV === 'test') {
+  googleMap = <div />;
+} else {
+  googleMap = <GoogleMap />;
+}
+
 export default class TruckProfile extends Component {
-// ? {this.props.yelpInfo.photosFromGoogle.map(function(image){return <img src={image} alt="googlePhoto" />})} : <h1>loading...</h1>
   renderImages(){
     if(this.props.yelpInfo.photosFromGoogle){
-      return this.props.yelpInfo.photosFromGoogle.map(photo => <img className="goolge-image" src={photo} alt="google photo" />)
+      return this.props.yelpInfo.photosFromGoogle.map(photo => <div><img className="google-image" src={photo} alt="google photo" /></div>)
     }
   }
 
@@ -16,17 +24,59 @@ export default class TruckProfile extends Component {
       }
       var truckName = this.props.yelpInfo.yelpInfo.name
     }
-    // console.log('[truck profile] props.yelpInfo.photos: ', this.props.yelpInfo.photosFromGoogle) 
+
+    var sliderSettings = {
+            adaptiveHeight : false,
+            arrows: false, 
+            autoplay: true,
+            autoplaySpeed:  4000,
+            dots: false,
+            pauseOnHover: true,
+            fade: true,
+            swipe: false,
+            swipeToSlide: false,
+            vertical: true,
+          }
+
+    var yelpScoreUrl = "";
+    if(this.props.yelpInfo.yelpInfo){
+      yelpScoreUrl = this.props.yelpInfo.yelpInfo.starsRating;
+    } 
+    var fiveTweets = [];
+    if(this.props.fiveTweets){
+      fiveTweets = this.props.fiveTweets;
+    }
+    var yelpInfo = {name: "", review_count: 0};
+    if(this.props.yelpInfo.yelpInfo){
+      yelpInfo = this.props.yelpInfo.yelpInfo;
+    }
+
     return (
-      <div className="container">
+      <div>
+        <div className="row truck-view-info">       
+            <div className="truck-view-info-item">
+              <a href={this.props.yelpInfo.website}><img className='truck-view-profile-img' src={this.props.yelpInfo.imageUrl} alt="Truck Profile Image"/></a>
+              <div className="truck-view-main-info">
+                <h1 className="truck-view-title">{yelpInfo.name}</h1>
+                <p>{this.props.yelpInfo.handle}</p>
+                <img src={yelpScoreUrl} alt="yelp score"/>
+                <p>Number of reviews: {yelpInfo.review_count} </p>
+                <p>Phone Number </p>
+                <p>Categories </p>
+              </div>
+            </div>
+            <div className='address-box truck-view-google-map'>
+              {googleMap}
+            </div>
+        </div>
         <div className="row">
-          <div className="truck-profile-img-container container-well well">
-               {this.renderImages()}
+          <div className="truck-profile-img-container well">
+            <Slider {...sliderSettings} >
+              {this.renderImages()}
+            </Slider>
           </div>
-          <TwitterBox fiveTweets = {this.props.fiveTweets} />
         </div>
-        <div className="row">
-        </div>
+        <div className="truck-profile-yelp-review">{yelpInfo.custReview}</div>
       </div>
     )
   }

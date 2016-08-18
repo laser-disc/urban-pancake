@@ -12,11 +12,15 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px !important;
-}
-.body-home{
   background-image: url('http://i.imgur.com/EY8RiRC.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+}
+#app{
+  height: 100%;
+}
+.body-home{
+
 }
 .body-truck-view{
    background-image:url('http://imgur.com/2nSvMTP.jpg');
@@ -45,9 +49,20 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   color: #666;
   font-size: 12px;
 }
+
+.tweet {
+  /*height: 100px !important;*/
+  /*width: 80% !important;*/
+  /*margin-left: 20px;*/
+  /*margin-bottom: 30px;*/
+  /*display: inline-block;*/
+  background-color: white;
+  /*border-radius: 5px*/
+}
+
 /************************** TRUCK ITEM **************************/
 .truck-item {
-  background-color: #e7e9eb !important;
+  background-color: #e7e9eb;
   margin-left: 5%;
   width: 90% !important;
   vertical-align: middle;
@@ -56,20 +71,53 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.75) !important;
   border: 1px solid black !important;
   position: relative !important;
-  /*display: table-row-group !important;*/
 }
-
+.event-item .truck-item{
+  background-color: #81CBD3 !important;
+}
+.cuisine-list {
+  list-style-type: none;
+}
+li {
+    display:inline;
+    margin-left: 10px;
+}
+.address-box { 
+  border: 1px solid black;
+  height: 200px;
+  width: 200px;
+  background-color: grey;
+}
+.truck-view-title {
+  color: white;
+  margin-top: 0px;
+}
+.truck-view-profile-img{
+  height: 200px;
+  width: 200px;
+  background-color: grey;
+  float: left;
+}
 .selected {
   display: table-header-group;
-  
+}
+.not-selected{
+  display: table-row-group;
+}
+
+.truck-view-main-info{
+  display: inline-block;
+  margin-left: 20px;
 }
 
 .selected .truck-item {
   background-color: #85b4e3 !important;
 }
 
-.not-selected{
-  display: table-row-group;
+
+.truck-profile-yelp-review {
+  height: 10vh;
+  background-color: white;
 }
 
 .truck-item-yelp-review {
@@ -93,6 +141,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 }
 .truck-item:hover {
   background-color: #85b4e3 !important;
+  cursor:pointer;
 }
 .truck-item-data {
   padding-left: 15px;
@@ -114,7 +163,11 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   font-style: italic;
 }
 
-
+.truck-event-photos {
+  width: 40vw !important;
+  height: 40vh !important;
+  overflow: hidden;
+}
 /************************** HOVER CSS   **************************/
 .hvr-grow {
     display: inline-block;
@@ -166,30 +219,40 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 }
 
 .truck-list {
-  overflow: scroll !important;
-  padding: 0px !important;
-  padding-top: 25px !important;
-  margin-bottom: 0px !important; 
-  display: table;
-  height: 30vh !important;
-  table-layout: fixed;
+  height: 77vh !important;
+  overflow: scroll;
+}
+.truck-view-google-map{
+  float: right;
+  display: inline-block;
 }
 
+.truck-view-info-item{
+  display: inline-block;
+}
+
+.truck-view-info {
+  margin-bottom: 25px;
+  /*width: 90%;*/
+  padding-top: -2% !important;
+  margin-left: 2% !important;  
+  margin-right: 2% !important
+}
+.twitter-tweet {
+  height: 20% !important;
+  width: 20% !important;
+}
 .google-map{
   height: 100%;
   width: 100%
 }
-.goolge-image {
-  height: 150px;
-  width: 150px;
+.google-image {
+  height: 80%;
+  width: 100%;
   margin-left: auto !important;
   margin-right: auto !important;
   margin-bottom: 10px;
   border-radius: 5px;
-}
-.tweet {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 
@@ -260,16 +323,9 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   margin-bottom: 0px;
   padding-bottom: 0px;
 }
-/*.truck-profile-img{
-  width: 100%;
-  height: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  background-repeat: no-repeat; 
-  background-size: cover;
-}*/
+.rrm-title {
+  height: 0px !important;
+}
 .truck-profile{
   padding: 10px;
   margin-left: 10px;
@@ -278,16 +334,40 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   height: 560px;
   background-color: #16214d;
 }
+.truck-view-secondary-info {
+  margin-left: 60px !important; 
+  margin-right: 60px !important ;
+}
 .truck-profile-img-container {
-  padding: 10 10 0 10;
-  overflow: scroll;
-  align-content: center;
+  padding: 10px;
+  overflow: hidden;
+  box-shadow: inset 4px 4px 1px 0px rgba(0,0,0,0.75) !important;
+  border-top: 3px solid black;
+  border-left: 3px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-radius: 5px;
+  background-color: rgba(231,233,235,0.50) !important;
+  height: 40vh !important;
+  width: 500px !important;
+  margin-right:  auto;
+  margin-left:  auto;
+  
+
 }
 .twitter-box {
-  float: right;
-  margin-right: auto;
-  margin-left: auto;
   overflow: scroll;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  /*width: 53vw !important;*/
+  height: 10vh !important;
+  box-shadow: inset 4px 4px 1px 0px rgba(0,0,0,0.75) !important;
+  border-top: 3px solid black;
+  border-left: 3px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-radius: 5px;
+  background-color: rgba(231,233,235,0.50) !important;
 }
 
 .test{
@@ -310,14 +390,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 .twitter-box-header > h5 {
   margin-left: 15px;
 }
-.tweet {
-  height: 90px;
-  margin: 10px;
-  background-color: #F5F7F9;
-}
-.tweet > p {
-  margin-left: 15px;
-}
+
 .twitter-box-header{
   background-color: #F5F7F9;
   width: 100%;
@@ -387,6 +460,7 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
     float: right;
   }
 }
+
 .footer {
   padding-top: 15px;
   padding-left: 25px;
@@ -396,4 +470,46 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
   bottom: 0 !important;
   width: 100% !important;
   height: 60px !important;
-} 
+}
+
+.search-bar {
+  margin-bottom: 10px;
+  float: right;
+  margin-right: 15px;
+  width: 30%;
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+  text-indent: 5px;
+}
+
+::-webkit-input-placeholder { /* Chrome */
+  color: white;
+  transition: opacity 250ms ease-in-out;
+}
+:focus::-webkit-input-placeholder {
+  opacity: 0.5;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+  transition: opacity 250ms ease-in-out;
+}
+:focus:-ms-input-placeholder {
+  opacity: 0.5;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+}
+:focus::-moz-placeholder {
+  opacity: 0.5;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: white;
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+}
+:focus:-moz-placeholder {
+  opacity: 0.5;
+}

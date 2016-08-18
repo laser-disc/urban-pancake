@@ -31,6 +31,12 @@ const foodEvents = ['gloungesf', 'SPARKsocialSF', 'SoMaStrEatFood'];
 // Don't try to get Twitter info from these trucks - you will FAIL
 // badFoodTrucks equalz ['senorsisig'];
 
+const allEventsObj = {
+  gloungesf: { twitterHandle: 'gloungesf', yelpBizID: 'g-food-truck-lounge-san-francisco-4'},
+  SPARKsocialSF: { twitterHandle: 'SPARKsocialSF', yelpBizID: 'spark-social-sf-san-francisco'},
+  SoMaStrEatFood: { twitterHandle: 'SoMaStrEatFood', yelpBizID: 'soma-streat-food-park-san-francisco'}
+};
+
 const foodTrucksObj = {
  JapaCurry: { twitterHandle: 'JapaCurry', yelpBizID: 'japacurry-truck-san-francisco' },
  CurryUpNow: { twitterHandle: 'CurryUpNow', yelpBizID: 'curry-up-now-san-francisco' },
@@ -63,9 +69,14 @@ const foodTrucksObj = {
 foodEvents.forEach(event => {
   getEventTwitterInfo(event)
   // from the most recent tweet, we compile the info for our DB record
-  .then(eventObj => createEventRecord(eventObj))
+  .then(eventObj => {
+    return createEventRecord(eventObj)
+  })
   // either adds the info from createEventRecord to the DB or updates this existing info
-  .then(eventObj => createOrUpdateEvent(eventObj))
+  .then(eventObj => {
+    eventObj.info.yelpBizID = allEventsObj[event].yelpBizID;
+    createOrUpdateEvent(eventObj)
+  })
   .catch(err => console.log('ERRRR', err));
 });
 
@@ -106,16 +117,15 @@ module.exports = (app) => {
     Truck.findOne({ handle }, (err, truck) => res.status(200).send(truck))
     .catch( err => res.status(400).send(err))
   });
+  app.get("/API/addTruck", (req,res) => {
+    createOrUpdateDB(req.query.newTruck);
+  });
   app.get("/API/fiveTweets", (req,res) => {
    getTruckTwitterInfo(req.query.truckName)
    .then( newTruckObj => {
      newTruckObj.fiveTweetObjs = [];
      return getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[0].id_str)
    })
-   .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[1].id_str))
-   .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[2].id_str))
-   .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[3].id_str))
-   .then( newTruckObj => getFiveTweets(newTruckObj, newTruckObj.allTweetObjs[4].id_str))
    .then(truckInfo => res.status(200).send(truckInfo))
    .catch(err => {
      console.log("request-handler API/fiveTweets unsuccessful");

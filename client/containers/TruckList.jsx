@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import TruckItem from '../components/TruckItem.jsx';
 import { FetchTrucks } from '../actions/FetchTrucks';
 import { FetchEvents } from '../actions/FetchEvents';
+import {modal} from 'react-redux-modal'; // The modal emitter
+import TruckItemModal from "../components/TruckItemModal.jsx";
 
 let selectedTruck = "";
 class TruckList extends Component {
@@ -21,21 +23,27 @@ class TruckList extends Component {
     this.props.FetchTrucks();
     this.props.FetchEvents();
   };
+  
+  addModal(truck) { 
+    modal.add(TruckItemModal, {
+      size: 'large',
+      closeOnOutsideClick: true, 
+      hideCloseButton: true,
+      truck: truck,
+      })
+    }
 
-  // Iterates over each truck in the database
   renderTrucks(truck) {
     var handle;
     if(truck._id==="user"){
       handle = '';
-    }
-    else{
+    } else {
       handle = truck.handle.slice(1, truck.handle.length); 
     }
-   
-    if(selectedTruck == truck.name){
-      return  <div className="selected"><Link to={"/truckview/" + handle} key={truck._id} > <TruckItem truck={truck} /></Link></div>
+    if(selectedTruck == truck.name) {
+      return  <div onClick={ this.addModal.bind(this, handle) } className="selected"><TruckItem truck={truck} /></div>
     } else {
-      return  <div className="not-selected"><Link to={"/truckview/" + handle} key={truck._id} > <TruckItem truck={truck} /></Link></div>
+      return  <div onClick={ this.addModal.bind(this, handle) } className="not-selected"><TruckItem truck={truck} /></div>
     }
   };
 
@@ -45,16 +53,14 @@ class TruckList extends Component {
     event.yelpInfo = {name: null, yelpBizID: null, starsRating: null, review_count: null, custReview: null, photo: null,categories: null};
 
     if(selectedTruck == event.name){
-      return  <div className="selected"><Link to={"/truckview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+      return  <div className="selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
     } else {
-      return  <div className="not-selected"><Link to={"/truckview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+      return  <div className="not-selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
     }
   };
 
   // Maps truck prop to TruckItem
   render() {
-    console.log("render TruckList this.props", this.props);
-
     return (
       <div className="truck-list well container-well">
         {this.props.trucks.map(truck => this.renderTrucks(truck))}
