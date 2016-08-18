@@ -3,6 +3,53 @@ p {
 }
 
 
+.weekDays-selector input {
+  /*display: none !important;*/
+  margin-left: 300px !important;
+}
+.weekday {
+  /*margin-right: 10px!important;*/
+  /*margin-left: 0px!important;*/
+}
+.weekDays-selector input[type=checkbox] + label {
+  /*display: inline-block !important;*/
+  border-radius: 6px !important;
+  background: #dddddd !important;
+  height: 40px!important;
+  width: 30px !important;
+  margin-right: 3px !important;
+  line-height: 40px !important;
+  text-align: center !important;
+  /*cursor: pointer !important;*/
+}
+.add-truck-title {
+  width: 100% !important;
+  margin-left: 35%!important;
+}
+
+.form-label {
+  border-bottom: 3px solid green;
+  margin-bottom: 10px;
+}
+
+.form-label h4 {
+  color: green;
+  font-weight: bold;
+  font-size: 1.4em
+}
+.weekday{
+  display: inline-block;
+  width: 25% !important;
+  float: left;
+}
+.weekday-input {
+  display: inline-block;
+}
+.weekDays-selector input[type=checkbox]:checked + label {
+  background: #2AD705 !important;
+  color: #ffffff !important;
+}
+
 /**************************STICKY FOOTER**************************/
 
 html {
@@ -324,6 +371,9 @@ li {
   padding-bottom: 0px;
 }
 .rrm-title {
+  height: 0px !important;
+}
+.rrm-title h2{
   height: 0px !important;
 }
 .truck-profile{

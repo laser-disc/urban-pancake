@@ -7,16 +7,22 @@ import { FetchTrucks } from '../actions/FetchTrucks';
 import { FetchEvents } from '../actions/FetchEvents';
 import {modal} from 'react-redux-modal'; // The modal emitter
 import TruckItemModal from "../components/TruckItemModal.jsx";
+import { PassCurrTruck } from '../actions/PassCurrTruck';
 
 let selectedTruck = "";
 class TruckList extends Component {
-  // Runs FetchTrucks immediately so that the state will be up to date before the content starts to load
+  constructor(props) {
+    super(props);
+    this.renderFilteredTrucks = this.renderFilteredTrucks.bind(this);
+  };
+
+// Runs FetchTrucks immediately so that the state will be up to date before the content starts to load
   componentWillReceiveProps(nextProps){
     // console.log("[truck list] nextprops: ", nextProps.currentTruck.currentTruck)
-    if(nextProps.currentTruck.currentTruck){
+    if (nextProps.currentTruck.currentTruck){
       selectedTruck = nextProps.currentTruck.currentTruck;
       this.render();
-    }
+    };
   };
 
   componentWillMount() {
@@ -33,34 +39,70 @@ class TruckList extends Component {
       })
     }
 
+// This function renders the individual truck modal to the list of trucks
   renderTrucks(truck) {
     if(truck._id==="user") return;
     var handle = truck.handle.slice(1, truck.handle.length);
     if(selectedTruck == truck.name) {
-      return  <div onClick={ this.addModal.bind(this, handle) } className="selected"><TruckItem truck={truck} /></div>
+      return  <div key={truck._id} onClick={ this.addModal.bind(this, handle) } className="selected"><TruckItem truck={truck} /></div>
     } else {
-      return  <div onClick={ this.addModal.bind(this, handle) } className="not-selected"><TruckItem truck={truck} /></div>
+      return  <div key={truck._id} onClick={ this.addModal.bind(this, handle) } className="not-selected"><TruckItem truck={truck} /></div>
     }
   };
 
-  // Iterates over each event in the database
-  renderEvents(event) {
-    var handle = event.handle.slice(1, event.handle.length); 
-    event.yelpInfo = {name: null, yelpBizID: null, starsRating: null, review_count: null, custReview: null, photo: null,categories: null};
+// This function filters the trucks based on user input from the search bar
+  renderFilteredTrucks() {
+    if(this.props.searchTerm !== '') {
+      return this.props.trucks.reduce((accum, truck) => {
+        if(truck.name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) > -1) {
+          accum.push(this.renderTrucks(truck));
+        }
+        return accum;
+      }, []);
+    } else {
+      return this.props.trucks.map(truck => this.renderTrucks(truck));
+    };
+  };
+
+  handleClick(truck){
+    if(truck._id==="user"){
+      console.log("That ain't no truck.  That's YOU breh...");
+    } else {
+      // console.log("you've selected ", truck.name);
+      this.props.PassCurrTruck(truck);
+    }
+  };
+
+  // This function renders the individual event modal to the list of trucks
+  renderEvents(event, i) {
+    var handle = event.handle.slice(1, event.handle.length);
 
     if(selectedTruck == event.name){
-      return  <div className="selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+      return  <div onClick={ this.handleClick.bind(this, event) } className="selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
     } else {
-      return  <div className="not-selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+      return  <div onClick={ this.handleClick.bind(this, event) } className="not-selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
     }
+  };
+
+  renderFilteredEvents() {
+    if(this.props.searchTerm !== '') {
+      return this.props.events.reduce((accum, event) => {
+        if(event.name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) > -1) {
+          accum.push(this.renderEvents(event));
+        }
+        return accum;
+      }, []);
+    } else {
+      return this.props.events.map(event => this.renderEvents(event));
+    };
   };
 
   // Maps truck prop to TruckItem
   render() {
     return (
       <div className="truck-list well container-well">
-        {this.props.trucks.map(truck => this.renderTrucks(truck))}
-        {this.props.events.map(event => this.renderEvents(event))}
+        {this.renderFilteredTrucks()}
+        {this.renderFilteredEvents()}
       </div>
     );
   }
@@ -68,15 +110,16 @@ class TruckList extends Component {
 
 function mapStateToProps(state) {
   return {
+    searchTerm: state.searchTerm,
     trucks: state.trucks,
     events: state.events,
     yelpInfo: state.yelpInfo,
-    currentTruck: state.currentTruck
+    currentTruck: state.currentTruck,
   };
 };
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ FetchTrucks, FetchEvents }, dispatch);
+  return bindActionCreators({ FetchTrucks, FetchEvents, PassCurrTruck }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TruckList);

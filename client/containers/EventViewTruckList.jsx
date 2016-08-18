@@ -47,7 +47,7 @@ class EventViewTruckList extends Component {
     if(thisEvent.length){
       todaysTrucksArray = thisEvent[0].todaysTrucks;
       onlyTodaysTrucks = this.props.trucks.filter( truck => {
-        if(truck.handle){
+        if(truck.handle && todaysTrucksArray){
           handle = truck.handle.slice(1, truck.handle.length);
           return todaysTrucksArray.includes(handle);
         } else {
