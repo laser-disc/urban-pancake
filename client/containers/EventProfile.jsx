@@ -43,12 +43,12 @@ export default class EventProfile extends Component {
       <div className='container'>
         <div className="row">
           <div>
-           <h1>{truckName}</h1>
-           <div><img src={yelpScore} alt=""/></div>
+           <h1>TRUCK NAME</h1>
+           <div>YELP SCORE<img src={yelpScore} alt=""/></div>
           </div>
         </div>
         <div className="row">
-         <div className="truck-event-photos container well">
+         <div className="truck-event-photos">
             <Slider {...sliderSettings} >
               {this.renderImages()}
             </Slider>
