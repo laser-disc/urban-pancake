@@ -2,6 +2,10 @@
 
 Urban Pancake finds and maps the closest food trucks to your location for a quick and easy way to find a convenient lunch in San Francisco.
 
+## Add User Story here
+
+## Add Data Flow & Other Details Here
+
 ## Installation
 
 For the latest stable release, clone the master branch.
