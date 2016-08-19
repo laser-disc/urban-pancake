@@ -1,3 +1,7 @@
+.error-msg {
+  color: red;
+}
+
 p {
   line-height: 100% !important;
 }
@@ -63,16 +67,19 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
-#app{
+#app {
   height: 100%;
 }
+
 .body-home{
 
 }
 .body-truck-view{
-   background-image:url('http://imgur.com/2nSvMTP.jpg');
+  background-image:url('http://imgur.com/2nSvMTP.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  height: 80vh !important;
+  border-radius: 5px;
 }
 /************************** FROM TWITTER **************************/
 blockquote.twitter-tweet {
@@ -129,15 +136,17 @@ li {
     display:inline;
     margin-left: 10px;
 }
-.address-box { 
+.address-box {
   border: 1px solid black;
   height: 200px;
   width: 200px;
   background-color: grey;
+  float: right;
 }
 .truck-view-title {
   color: white;
   margin-top: 0px;
+  max-width: 300spx;
 }
 .truck-view-profile-img{
   height: 200px;
@@ -155,6 +164,7 @@ li {
 .truck-view-main-info{
   display: inline-block;
   margin-left: 20px;
+  max-width: 300px;
 }
 
 .selected .truck-item {
@@ -182,7 +192,7 @@ li {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   margin-left: 15px;
-  margin-right: -15px; 
+  margin-right: -15px;
   border: 1px solid black;
   box-shadow: 11px 11px 12px 0px rgba(0,0,0,0.75);
 }
@@ -210,11 +220,89 @@ li {
   font-style: italic;
 }
 
-.truck-event-photos {
-  width: 40vw !important;
-  height: 40vh !important;
-  overflow: hidden;
+/*************** TRUCK EVENT PAGE *****************/
+
+.test {
+  background-color: grey;
+  border: 1px solid black;
 }
+.event-view-photos {
+  height: 30vh;
+  margin-bottom: 100px;
+}
+.twitter-tweet {
+
+}
+.truck-view-tweet-container {
+ margin-top: 40px;
+ display: inline-block;
+}
+
+.event-view-truck-list {
+  height: 100%;
+  overflow: scroll;
+}
+
+.event-view-info{
+  margin-bottom: 25px;
+}
+
+#event-view-title{
+  width: 300px;
+}
+
+.event-view-truck-list-container{
+  height: 62vh !important;
+  display: inline-block;
+  float: right !important;
+  box-shadow: inset 4px 4px 1px 0px rgba(0,0,0,0.75) !important;
+  border-top: 3px solid black;
+  border-left: 3px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-radius: 5px;
+  background-color: rgba(231,233,235,0.50) !important;
+}
+
+.event-view-address-box {
+  border: 1px solid black;
+  height: 150px;
+  width: 150px;
+  background-color: grey;
+  float: right;
+  display: inline-block;
+}
+.slider-settings {
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /************************** HOVER CSS   **************************/
 .hvr-grow {
     display: inline-block;
@@ -280,28 +368,22 @@ li {
 
 .truck-view-info {
   margin-bottom: 25px;
-  /*width: 90%;*/
-  padding-top: -2% !important;
-  margin-left: 2% !important;  
+  padding-top: 20px;
+  margin-left: 2% !important;
   margin-right: 2% !important
 }
-.twitter-tweet {
-  height: 20% !important;
-  width: 20% !important;
-}
+
 .google-map{
   height: 100%;
   width: 100%
 }
-.google-image {
-  height: 80%;
+.event-view-google-image {
+  height: 100%;
   width: 100%;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  margin-bottom: 10px;
-  border-radius: 5px;
 }
+.google-image {
 
+}
 
 .page-title{
   width: 400px;
@@ -385,7 +467,7 @@ li {
   background-color: #16214d;
 }
 .truck-view-secondary-info {
-  margin-left: 60px !important; 
+  margin-left: 60px !important;
   margin-right: 60px !important ;
 }
 .truck-profile-img-container {
@@ -402,7 +484,7 @@ li {
   width: 500px !important;
   margin-right:  auto;
   margin-left:  auto;
-  
+
 
 }
 .twitter-box {
@@ -486,7 +568,7 @@ li {
       float: right;
     }
     .truck-item-yelp-review{
-      display: none; 
+      display: none;
     }
 }
 @media (min-width: 1200px) {
@@ -494,7 +576,7 @@ li {
     width: 96%;
   }
   .truck-item-yelp-review{
-      display: block; 
+      display: block;
     }
   .truck-profile-img-container{
     width: 30vw;
