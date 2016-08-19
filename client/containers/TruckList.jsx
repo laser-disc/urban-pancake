@@ -43,6 +43,7 @@ class TruckList extends Component {
   renderTrucks(truck) {
     if(truck._id==="user") return;
     var handle = truck.handle.slice(1, truck.handle.length);
+
     if(selectedTruck == truck.name) {
       return  <div key={truck._id} onClick={ this.addModal.bind(this, handle) } className="selected"><TruckItem truck={truck} /></div>
     } else {
@@ -52,15 +53,28 @@ class TruckList extends Component {
 
 // This function filters the trucks based on user input from the search bar
   renderFilteredTrucks() {
+    const everyTruck = this.props.trucks;;
+    const today = (new Date()).toString().slice(0, 10);
+    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const dayNum = daysOfWeek.indexOf(today.slice(0, 3));
+    let todaysTrucks = everyTruck.filter((truck) => {
+      // checks based on the day of the last tweet and falls back to check the schedule
+      if (truck.schedule.length && !truck.schedule[dayNum].closed) {
+        return truck;
+      }
+    });
+    console.log("today's trucks", todaysTrucks);
+    
+
     if(this.props.searchTerm !== '') {
-      return this.props.trucks.reduce((accum, truck) => {
+      return todaysTrucks.reduce((accum, truck) => {
         if(truck.name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) > -1) {
           accum.push(this.renderTrucks(truck));
         }
         return accum;
       }, []);
     } else {
-      return this.props.trucks.map(truck => this.renderTrucks(truck));
+      return todaysTrucks.map(truck => this.renderTrucks(truck));
     };
   };
 
@@ -85,6 +99,7 @@ class TruckList extends Component {
   };
 
   renderFilteredEvents() {
+
     if(this.props.searchTerm !== '') {
       return this.props.events.reduce((accum, event) => {
         if(event.name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) > -1) {
