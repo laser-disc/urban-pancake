@@ -16,7 +16,6 @@ class TruckList extends Component {
     this.renderFilteredTrucks = this.renderFilteredTrucks.bind(this);
   };
 
-// Runs FetchTrucks immediately so that the state will be up to date before the content starts to load
   componentWillReceiveProps(nextProps){
     // console.log("[truck list] nextprops: ", nextProps.currentTruck.currentTruck)
     if (nextProps.currentTruck.currentTruck){
@@ -25,6 +24,7 @@ class TruckList extends Component {
     };
   };
 
+// Runs FetchTrucks and FetchEvents to populate the page upon load
   componentWillMount() {
     this.props.FetchTrucks();
     this.props.FetchEvents();
