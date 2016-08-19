@@ -50,6 +50,10 @@ const TruckObj = () => {
 
 
 module.exports.getYelpInfo = (truck) => {
+  if(!truck.yelpBizID){
+    truck.yelpBizID = truck.truck.yelpId;
+  }
+  console.log("******************* getYelpInfo truck.yelpBizID ********************", truck.yelpBizID);
   return new Promise((resolve, reject) => {
     let yelp = new Yelp(yelpInfo);
     let categories = [];
@@ -159,6 +163,9 @@ module.exports.createTruckWithGeoInfo = (newTruckObj) => {
 module.exports.createOrUpdateDB = (newTruckObj) => {
   return new Promise((resolve, reject) => {
     // Truck.find will return an array of all the trucks in the db that match the search criteria that is given in the first argument
+    if(newTruckObj.truck.handle[0] !== '@'){
+      newTruckObj.truck.handle = '@' + newTruckObj.truck.handle;
+    }
     Truck.find({ handle: newTruckObj.truck.handle }, (err, trucks) => {
       //  if no matches are found, it will return an empty array
       if (trucks.length === 0) {
@@ -168,7 +175,16 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
           return module.exports.getYelpInfo(newTruckObj)
         })
         .then(newTruckObj => {
-          newTruckObj.truck.save((err, resp) => err ? reject(err) : resolve(resp));
+
+          newTruckObj.truck.save((err, resp) => {
+            if(err){
+              console.log("createOrUpdateDB error", err);
+              reject(err)
+            }
+            else{
+              resolve(resp);
+            }
+          });
           console.log(`${newTruckObj.name} truck created`);
         })
         .catch( error => {
@@ -194,7 +210,7 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
 module.exports.getTenImages = (newTruckObj) => {
   return new Promise((resolve, reject) => {
     google.list({
-      keyword: newTruckObj.name + " sf menu items",
+      keyword: newTruckObj.truck.name + " sf menu items",
       num: 10,
       detail: true,
       nightmare: {

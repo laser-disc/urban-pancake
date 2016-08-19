@@ -118,7 +118,25 @@ module.exports = (app) => {
     .catch( err => res.status(400).send(err))
   });
   app.get("/API/addTruck", (req,res) => {
-    createOrUpdateDB(req.query.newTruck);
+    let newQuery = JSON.parse(req.query.newTruck);
+    console.log("API/addTruck request-handler", newQuery);
+    let newTruckObj = {};
+    newTruckObj.truck = new Truck({
+      name: newQuery.truck.name,
+      handle: `@${newQuery.truck.handle}`,
+      website: '',
+      description: '',
+      message: newQuery.truck.message,
+      timeStamp: '',
+      imageUrl: newQuery.truck.imageUrl,
+      location: { lat: 0, lng: 0, closed: false },
+      schedule: newQuery.truck.schedule,
+      photosFromGoogle: [],
+      yelpId: newQuery.truck.yelpId,
+      yelpInfo: null,
+    });
+    console.log("newTruckObj.truck.schedule[3]", newTruckObj.truck.schedule[3]);
+    createOrUpdateDB(newTruckObj);
   });
   app.get("/API/fiveTweets", (req,res) => {
    getTruckTwitterInfo(req.query.truckName)

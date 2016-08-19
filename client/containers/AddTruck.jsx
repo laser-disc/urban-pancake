@@ -113,6 +113,7 @@ class AddTruck extends Component {
     for (let day in days) {
       arrayOfPromises.push(() => this.geocode(days[day], day));
     }
+    
     Promise.all(arrayOfPromises).then(this.createTruck)
       .catch(() => {
         console.log('Promise.all rejected');
