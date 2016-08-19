@@ -6,9 +6,6 @@ import {Router, Route, hashHistory} from 'react-router';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import SearchBar from '../containers/SearchBar.jsx';
-// import ModalInitializer from '../components/ModalInitializer.jsx'
-
-
 
 let googleMap;
 if (process.env.TEST_ENV === 'test') {
@@ -21,7 +18,7 @@ export default () => {
   return (
     <div className="body-home">
     <Header />
-    <SearchBar />
+
     <div className='mega-container container-fluid'>
       <div className='wrap row'>
         <div className="google-map-container container-well">
