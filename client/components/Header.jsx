@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Link} from "react-router";
 import {modal} from 'react-redux-modal';
 import AddTruckModal from '../components/AddTruckModal.jsx'
-import SearchBar from '../components/SearchBar.jsx'
+import SearchBar from '../containers/SearchBar.jsx'
 export default class HomeHeader extends Component {
   addModal() {
     modal.add(AddTruckModal, {
