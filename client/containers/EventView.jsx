@@ -19,8 +19,10 @@ class EventView extends Component {
   }
 
   renderEventView(event){
-    console.log('EVENT VIEW RENDER ....', event, this.props);
-    return <EventProfile key={ event.yelpInfo.yelpBizID } yelpInfo ={ event.yelpInfo } fiveTweets = { event.fiveTweetObjs } />
+    if(event.yelpInfo) {
+      console.log('EVENT VIEW RENDER ....', event, this.props);
+      return <EventProfile key={ event.yelpInfo.yelpBizID } yelpInfo ={ event.yelpInfo } fiveTweets = { event.fiveTweetObjs } />
+    }
   }
 
   render(){
@@ -37,7 +39,7 @@ class EventView extends Component {
 function mapStateToProps(state) {
   return {
     currentEvent: state.currentEvent,
-    currentTruck: state.currentTruck
+    currentTruck: state.currentTruck,
   };
 };
 

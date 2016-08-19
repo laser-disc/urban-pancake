@@ -28,7 +28,7 @@ const foodTrucks = ['JapaCurry', 'CurryUpNow', 'chairmantruck', 'slidershacksf',
   'adamsgrubtruck', 'bowldacai', /* 'seoulonwheels',*/ 'RedRidingTruck', 'odangudon', 'nonoburger',
   /* 'NakedChorizo1', */ 'Mannajpt', 'SunriseDeli', 'bobchasf', /* 'nuchaempanadas', */ 'RockoSez',
   /* 'gojojosmojo', */ 'sporkandstix', 'LadySaigonSF',/* 'SaborSM',*/ 'Elcalamarsf', 'Jeepney_Guy',
-  '_traderjims_', 'PainaSF', 'MarleysTreats4u', 'BaconBaconSF'];
+  '_traderjims_', 'PainaSF', 'MarleysTreats4u', 'BaconBaconSF', 'WoKitchenFood'];
 
 const foodEvents = ['gloungesf', 'SPARKsocialSF', 'SoMaStrEatFood'];
 // Don't try to get Twitter info from these trucks - you will FAIL
@@ -80,8 +80,9 @@ const foodTrucksObj = {
   PainaSF: { twitterHandle: 'PainaSF', yelpBizID: 'paina-lounge-and-restaurant-san-francisco' },
   MarleysTreats4u: { twitterHandle: 'MarleysTreats4u', yelpBizID: 'marleys-treats-oakland-5' },
   BaconBaconSF: { twitterHandle: 'BaconBaconSF', yelpBizID: 'bacon-bacon-san-francisco-4' },
+  WoKitchenFood: { twitterHandle: 'WoKitchenFood', yelpBizID: 'wokitchen-food-truck-belmont' },
 
-thetwitterHandleAgainForSomeReason: { twitterHandle: '', yelpBizID: '' },
+// thetwitterHandleAgainForSomeReason: { twitterHandle: '', yelpBizID: '' },
 };
 
 // iterates over an array of food truck event Twitter handles
@@ -116,7 +117,7 @@ foodTrucks.forEach(foodTruck => {
 
 
 module.exports = (app) => {
-  
+
   app.get('/API/fetchAll', (req, res) => {
     console.log('INSIDE REQHAN', req)
     Truck.find((err, trucks) => res.status(200).send(trucks));
