@@ -175,7 +175,7 @@ export default class AddTruckForm extends Component {
           </form>
         </div>
       </div>
-    </div>
+
     );
   }
 }
