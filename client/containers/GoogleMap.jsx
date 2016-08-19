@@ -97,11 +97,11 @@ class Map extends Component {
     let tweetIndex = dayOfWeek.indexOf(tweetDay);
     // icon = 'http://maps.google.com/mapfiles/ms/micons/red-dot.png';
     icon = 'https://offthegrid.com/wp-content/themes/offthegrid/images/mapmark-red-sm.png';
-    
+
     if(truckMarker._id==="user"){
       tweetIndex = 1;
       index = 1;
-      icon = 'http://www.google.com/mapfiles/arrow.png';
+      icon = 'https://www.google.com/mapfiles/arrow.png';
     }
     if(!truckMarker.schedule.length) {
       position = {lat: null, lng: null};
@@ -109,7 +109,8 @@ class Map extends Component {
       // IF TWEET IS FROM TODAY, USE LOCATION OBJECT PULLED FROM TWEET,
       // OTHERWISE USE SCHEDULE FOUND IN DATABASE FOR LOCATION,
       // UNLESS THE TRUCK IS CLOSED TODAY. THEN PASS NULL TO MARKER SO IT DOESN'T RENDER
-      position = tweetIndex === index ? truckMarker.location : truckMarker.schedule[index].closed ? {lat: null, lng: null} : truckMarker.schedule[index];
+      position = truckMarker._id === "user" ? truckMarker.location : truckMarker.schedule[index].closed ? {lat: null, lng: null} : truckMarker.schedule[index];
+      // position = tweetIndex === index ? truck.location : truck.schedule[index].closed ? {lat: null, lng: null} : truck.schedule[index];
     }
 
     if (position.lat) {

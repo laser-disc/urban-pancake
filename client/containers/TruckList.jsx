@@ -29,11 +29,11 @@ class TruckList extends Component {
     this.props.FetchTrucks();
     this.props.FetchEvents();
   };
-  
-  addModal(truck) { 
+
+  addModal(truck) {
     modal.add(TruckItemModal, {
       size: 'large',
-      closeOnOutsideClick: true, 
+      closeOnOutsideClick: true,
       hideCloseButton: true,
       truck: truck,
       })
@@ -63,7 +63,7 @@ class TruckList extends Component {
         return truck;
       }
     });
-    
+
     if(this.props.searchTerm !== '') {
       return todaysTrucks.reduce((accum, truck) => {
         const userQuery = this.props.searchTerm.toLowerCase();
