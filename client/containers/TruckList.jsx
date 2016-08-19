@@ -7,6 +7,7 @@ import { FetchTrucks } from '../actions/FetchTrucks';
 import { FetchEvents } from '../actions/FetchEvents';
 import {modal} from 'react-redux-modal'; // The modal emitter
 import TruckItemModal from "../components/TruckItemModal.jsx";
+import { PassCurrTruck } from '../actions/PassCurrTruck';
 
 let selectedTruck = "";
 class TruckList extends Component {
@@ -40,34 +41,49 @@ class TruckList extends Component {
 
 // This function renders the individual truck modal to the list of trucks
   renderTrucks(truck) {
-      var handle;
-      // if the "truck" is the user truck
-      if(truck._id==="user"){
-        handle = '';
-      // if the truck is a real food truck
-      } else {
-        handle = truck.handle.slice(1, truck.handle.length); 
-      }
+    if(truck._id==="user") return;
+    var handle = truck.handle.slice(1, truck.handle.length);
 
-      if(selectedTruck == truck.name) {
-        return  <div key={truck._id} onClick={ this.addModal.bind(this, handle) } className="selected"><TruckItem truck={truck} /></div>
-      } else {
-        return  <div key={truck._id} onClick={ this.addModal.bind(this, handle) } className="not-selected"><TruckItem truck={truck} /></div>
-      }
+    if(selectedTruck == truck.name) {
+      return  <div key={truck._id} onClick={ this.addModal.bind(this, handle) } className="selected"><TruckItem truck={truck} /></div>
+    } else {
+      return  <div key={truck._id} onClick={ this.addModal.bind(this, handle) } className="not-selected"><TruckItem truck={truck} /></div>
+    }
   };
 
 // This function filters the trucks based on user input from the search bar
   renderFilteredTrucks() {
+    const everyTruck = this.props.trucks;
+    const today = (new Date()).toString().slice(0, 10);
+    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const dayNum = daysOfWeek.indexOf(today.slice(0, 3));
+    let todaysTrucks = everyTruck.filter((truck) => {
+      // checks based on the day of the last tweet and falls back to check the schedule
+      if (truck.schedule.length && !truck.schedule[dayNum].closed) {
+        return truck;
+      }
+    });
+    
+
     if(this.props.searchTerm !== '') {
-      return this.props.trucks.reduce((accum, truck) => {
+      return todaysTrucks.reduce((accum, truck) => {
         if(truck.name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) > -1) {
           accum.push(this.renderTrucks(truck));
         }
         return accum;
       }, []);
     } else {
-      return this.props.trucks.map(truck => this.renderTrucks(truck));
+      return todaysTrucks.map(truck => this.renderTrucks(truck));
     };
+  };
+
+  handleClick(truck){
+    if(truck._id==="user"){
+      console.log("That ain't no truck.  That's YOU breh...");
+    } else {
+      // console.log("you've selected ", truck.name);
+      this.props.PassCurrTruck(truck);
+    }
   };
 
   // This function renders the individual event modal to the list of trucks
@@ -75,13 +91,14 @@ class TruckList extends Component {
     var handle = event.handle.slice(1, event.handle.length);
 
     if(selectedTruck == event.name){
-      return  <div className="selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+      return  <div onClick={ this.handleClick.bind(this, event) } className="selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
     } else {
-      return  <div className="not-selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+      return  <div onClick={ this.handleClick.bind(this, event) } className="not-selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
     }
   };
 
   renderFilteredEvents() {
+
     if(this.props.searchTerm !== '') {
       return this.props.events.reduce((accum, event) => {
         if(event.name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) > -1) {
@@ -116,7 +133,7 @@ function mapStateToProps(state) {
 };
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ FetchTrucks, FetchEvents }, dispatch);
+  return bindActionCreators({ FetchTrucks, FetchEvents, PassCurrTruck }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TruckList);
