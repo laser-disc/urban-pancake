@@ -19,7 +19,6 @@ class EventView extends Component {
 
   renderEventView(event){
     if(event.yelpInfo) {
-      console.log('EVENT VIEW RENDER ....', event, this.props);
       return <EventProfile key={ event.yelpInfo.yelpBizID } yelpInfo ={ event.yelpInfo } />
     }
   }

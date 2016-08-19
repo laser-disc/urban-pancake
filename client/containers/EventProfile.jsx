@@ -21,7 +21,6 @@ export default class EventProfile extends Component {
   }
 
   render(){
-    console.log(this.props)
     var sliderSettings = {
       adaptiveHeight : false,
       arrows: false,
