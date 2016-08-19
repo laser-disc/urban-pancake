@@ -7,7 +7,6 @@ import Footer from '../components/Footer.jsx';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import EventProfile from './EventProfile.jsx';
-import TruckImageContainer from '../components/TruckImageContainer.jsx';
 import { FetchOneEvent } from '../actions/FetchOneEvent';
 import { FetchFiveTweets } from '../actions/FetchFiveTweets';
 
