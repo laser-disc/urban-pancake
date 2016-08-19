@@ -5,7 +5,6 @@ import {Link} from "react-router";
 import {Router, Route, hashHistory} from 'react-router';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
-import SearchBar from './SearchBar.jsx';
 // import ModalInitializer from '../components/ModalInitializer.jsx'
 
 
@@ -21,7 +20,7 @@ export default () => {
   return (
     <div className="body-home">
     <Header />
-    <SearchBar />
+
     <div className='mega-container container-fluid'>
       <div className='wrap row'>
         <div className="google-map-container container-well">

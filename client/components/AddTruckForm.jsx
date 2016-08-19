@@ -6,7 +6,7 @@ export default class AddTruckForm extends Component {
   }
   render(){
     return (
-          <div>
+    <div>
       <div className="container">
         <h2 className='add-truck-title'>Add A Truck</h2>
       </div>
@@ -167,6 +167,7 @@ export default class AddTruckForm extends Component {
             </div>
             <button type="button" onClick={this.props.handleSubmit}>Submit</button>
         </form>
+        </div>
         </div>
     );
   }
