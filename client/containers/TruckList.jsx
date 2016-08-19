@@ -65,10 +65,20 @@ class TruckList extends Component {
       }
     });
 
-
     if(this.props.searchTerm !== '') {
       return todaysTrucks.reduce((accum, truck) => {
-        if(truck.name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) > -1) {
+        const userQuery = this.props.searchTerm.toLowerCase();
+        const searchName = truck.name.toLowerCase().indexOf(userQuery) > -1;
+        const searchCategories = truck.yelpInfo.categories.some(function(arr){
+          const first = arr[0].toLowerCase();
+          const second = arr[1].toLowerCase();
+          if (first.indexOf(userQuery) > -1 || second.indexOf(userQuery) > -1) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        if(searchName || searchCategories) {
           accum.push(this.renderTrucks(truck));
         }
         return accum;
@@ -85,21 +95,19 @@ class TruckList extends Component {
       // console.log("you've selected ", truck.name);
       this.props.PassCurrTruck(truck);
     }
-  };
+  }
 
   // This function renders the individual event modal to the list of trucks
   renderEvents(event, i) {
     var handle = event.handle.slice(1, event.handle.length);
-
     if(selectedTruck == event.name){
       return  <div onClick={ this.handleClick.bind(this, event) } className="selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
     } else {
       return  <div onClick={ this.handleClick.bind(this, event) } className="not-selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
     }
-  };
+  }
 
   renderFilteredEvents() {
-
     if(this.props.searchTerm !== '') {
       return this.props.events.reduce((accum, event) => {
         if(event.name.toLowerCase().indexOf(this.props.searchTerm.toLowerCase()) > -1) {
@@ -110,7 +118,7 @@ class TruckList extends Component {
     } else {
       return this.props.events.map(event => this.renderEvents(event));
     };
-  };
+  }
 
   // Maps truck prop to TruckItem
   render() {

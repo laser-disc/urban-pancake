@@ -1,5 +1,3 @@
-import geocoder from './utils.js';
-
 // call with validate.name(value), etc.
 // each method returns a Boolean
 
@@ -21,9 +19,7 @@ const Validate = {
     return typeof string === 'string';
   },
   location(string) {
-    if (typeof string === 'string') {
-
-    }
+    return typeof string === 'string';
   },
   yelpId(string) {
     return typeof string === 'string';
