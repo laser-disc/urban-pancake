@@ -53,7 +53,7 @@ class TruckList extends Component {
 
 // This function filters the trucks based on user input from the search bar
   renderFilteredTrucks() {
-    const everyTruck = this.props.trucks;;
+    const everyTruck = this.props.trucks;
     const today = (new Date()).toString().slice(0, 10);
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const dayNum = daysOfWeek.indexOf(today.slice(0, 3));
