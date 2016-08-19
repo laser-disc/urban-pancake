@@ -119,7 +119,6 @@ foodTrucks.forEach(foodTruck => {
 module.exports = (app) => {
 
   app.get('/API/fetchAll', (req, res) => {
-    console.log('INSIDE REQHAN', req)
     Truck.find((err, trucks) => res.status(200).send(trucks));
   });
   app.get('/API/fetchEvents', (req, res) => {

@@ -103,7 +103,8 @@ class Map extends Component {
       // IF TWEET IS FROM TODAY, USE LOCATION OBJECT PULLED FROM TWEET,
       // OTHERWISE USE SCHEDULE FOUND IN DATABASE FOR LOCATION,
       // UNLESS THE TRUCK IS CLOSED TODAY. THEN PASS NULL TO MARKER SO IT DOESN'T RENDER
-      position = tweetIndex === index ? truck.location : truck.schedule[index].closed ? {lat: null, lng: null} : truck.schedule[index];
+      position = truck.schedule[index].closed ? {lat: null, lng: null} : truck.schedule[index];
+      // position = tweetIndex === index ? truck.location : truck.schedule[index].closed ? {lat: null, lng: null} : truck.schedule[index];
     }
 
     if (position.lat) {

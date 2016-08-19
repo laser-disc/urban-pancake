@@ -59,6 +59,7 @@ const getYelpInfo = (eventObj) => {
         eventYelpObj.review_count = data.review_count;
         eventYelpObj.custReview = data.snippet_text;
         eventYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
+        eventYelpObj.categories = data.categories;
         eventObj.info.yelpInfo = eventYelpObj;
         resolve(eventObj);
       }
