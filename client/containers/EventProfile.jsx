@@ -12,26 +12,28 @@ export default class EventProfile extends Component {
 
   renderImages(){
     let thisEvent = this.props.events.filter( event => event.name === this.props.currentTruck.currentTruck);
-    let thisEventsPhotos = thisEvent[0].photosFromGoogle;
-    if(thisEventsPhotos.length){
-      return thisEventsPhotos.map(photo => <img className="google-image" src={photo} alt="google photo" />)
+    if(thisEvent.length){
+      let thisEventsPhotos = thisEvent[0].photosFromGoogle;
+      if(thisEventsPhotos.length){
+        return thisEventsPhotos.map(photo => <img className="google-image" src={photo} alt="google photo" />)
+      }
     }
   }
 
   render(){
     console.log(this.props)
     var sliderSettings = {
-            adaptiveHeight : false,
-            arrows: false,
-            autoplay: true,
-            autoplaySpeed:  4000,
-            dots: false,
-            pauseOnHover: true,
-            fade: true,
-            swipe: false,
-            swipeToSlide: false,
-            vertical: true,
-          }
+      adaptiveHeight : false,
+      arrows: false,
+      autoplay: true,
+      autoplaySpeed:  4000,
+      dots: false,
+      pauseOnHover: true,
+      fade: true,
+      swipe: false,
+      swipeToSlide: false,
+      vertical: true,
+    }
 
     if(this.props.yelpInfo.yelpInfo){
       var truckProfileImgStyle = {

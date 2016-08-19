@@ -14,7 +14,6 @@ import { FetchFiveTweets } from '../actions/FetchFiveTweets';
 class EventView extends Component {
 
   componentWillMount(){
-    console.log("EventView.jsx componentWillMount invoked this.props", this.props);
     this.props.FetchOneEvent(this.props.params.eventName)
   }
 
