@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 import { bindActionCreators } from 'redux';
 import Validate from '../../utils/truckSchemaValidation';
 import AddTruckForm from '../components/AddTruckForm.jsx';
-import PassNewTruck from '../actions/PassNewTruck';
+import {PassNewTruck} from '../actions/PassNewTruck';
 const geoCoder = require('../../utils/utils').geoCoder;
 
 class AddTruck extends Component {
@@ -71,6 +71,12 @@ class AddTruck extends Component {
         thursday: '',
         friday: '',
         saturday: '',
+      },
+      err: {
+        name: '',
+        handle: '',
+        yelp: '',
+        loc: '',
       }
     };
     this.getValue = this.getValue.bind(this);
@@ -80,16 +86,25 @@ class AddTruck extends Component {
     this.geocode = this.geocode.bind(this);
     this.setLocation = this.setLocation.bind(this);
     this.createTruck = this.createTruck.bind(this);
+    this.setError = this.setError.bind(this);
   }
 
   createTruck() {
+    console.log('creating a truck');
     if (this.state.truck.name && this.state.truck.handle && this.state.truck.yelpId) {
-      let truckObj = this.state.truck;
+      let truckObj = {};
+      truckObj.truck = this.state.truck;
       this.props.PassNewTruck(truckObj);
     } else {
-      // display error message
+      this.setError('name');
       console.error('You need a name, handle, and yelp ID to add a truck!');
     }
+  }
+
+  setError(field) {
+    let newState = this.state;
+    newState.err[field] = 'Invalid input';
+    this.setState(newState);
   }
 
   handleSubmit(event) {
@@ -98,7 +113,10 @@ class AddTruck extends Component {
     for (let day in days) {
       arrayOfPromises.push(() => this.geocode(days[day], day));
     }
-    Promise.all(arrayOfPromises).then(this.createTruck);
+    Promise.all(arrayOfPromises).then(this.createTruck)
+      .catch(() => {
+        console.log('Promise.all rejected');
+      });
 
     console.log(this.state.valid);
     console.log('event: ', event, ' target: ', event.target, ' this: ', this)
@@ -175,42 +193,42 @@ class AddTruck extends Component {
   validateInput(target, inputName) {
     if (inputName === 'name') {
       if (!Validate.name(target)) {
-        // show error message
+        this.setError(inputName);
         return this.state.valid = false;
       } else {
         return this.state.valid = true;
       }
     } else if (inputName === 'handle') {
       if (!Validate.handle(target)) {
-        // show error message
+        this.setError(inputName);
         return this.state.valid = false;
       } else {
         return this.state.valid = true;
       }
     } else if (inputName === 'description') {
       if (!Validate.description(target)) {
-        // show error message
+        this.setError(inputName);
         return this.state.valid = false;
       } else {
         return this.state.valid = true;
       }
     } else if (inputName === 'website') {
       if (!Validate.website(target)) {
-        // show error message
+        this.setError(inputName);
         return this.state.valid = false;
       } else {
         return this.state.valid = true;
       }
     } else if (inputName === 'yelpId') {
       if (!Validate.yelpId(target)) {
-        // show error message
+        this.setError('yelp');
         return this.state.valid = false;
       } else {
         return this.state.valid = true;
       }
     } else { // inputName must be a location.
       if (!Validate.location(target)) {
-        // show error message
+        this.setError('loc');
         return this.state.valid = false;
       } else {
         return this.state.valid = true;
