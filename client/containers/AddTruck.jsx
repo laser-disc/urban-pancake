@@ -240,7 +240,7 @@ class AddTruck extends Component {
     // TODO: Add help option to describe Yelp ID
   render() {
     return (
-      <AddTruckForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} truck={this.state.truck} days={this.state.days} />
+      <AddTruckForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} truck={this.state.truck} days={this.state.days} err={this.state.err} />
     )
   }
 }
