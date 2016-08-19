@@ -4,6 +4,6 @@ import React from 'react';
 
 export default (props) => {
   return(
-    <div>{props.name}, {props.msg}</div>
+    <div className="error-msg">{props.msg}</div>
   )
 }
