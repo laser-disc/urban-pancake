@@ -61,7 +61,7 @@ class EventViewTruckList extends Component {
       })
     }
     return (
-      <div className="truck-list well container-well">
+      <div className="event-view-truck-list">
         {onlyTodaysTrucks.map(truck => this.renderTrucks(truck))}
       </div>
     );

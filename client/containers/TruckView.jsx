@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Header from '../components/Header.jsx';
 import TruckProfile from '../containers/TruckProfile.jsx';
-import TruckImageContainer from '../components/TruckImageContainer.jsx';
 import { FetchYelp } from '../actions/FetchYelp';
 import { FetchFiveTweets } from '../actions/FetchFiveTweets';
 import { modal } from 'react-redux-modal'; // The modal emitter

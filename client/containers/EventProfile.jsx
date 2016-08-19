@@ -3,7 +3,6 @@ import EventViewTruckList from './EventViewTruckList.jsx';
 import { connect } from 'react-redux';
 import Slider from 'react-slick'
 
-
 export default class EventProfile extends Component {
 
   componentDidUpdate() {
@@ -15,7 +14,7 @@ export default class EventProfile extends Component {
     if(thisEvent.length){
       let thisEventsPhotos = thisEvent[0].photosFromGoogle;
       if(thisEventsPhotos.length){
-        return thisEventsPhotos.map(photo => <img className="google-image" src={photo} alt="google photo" />)
+        return thisEventsPhotos.map(photo => <img className="event-view-google-image" src={photo} alt="google photo" />)
       }
     }
   }
@@ -42,25 +41,37 @@ export default class EventProfile extends Component {
       var yelpScore = this.props.yelpInfo.starsRating
     }
     return (
-      <div className='container'>
-        <div className="row">
-          <div>
-           <h1>{ truckName }</h1>
-           <div>YELP SCORE<img src={yelpScore} alt=""/></div>
+      <div className="container">
+
+        <div className="row event-view-info">
+        <div className='col-xs-3'>
+           <h1> {truckName} </h1>
+          <img src={yelpScore} alt="yelp score"/>
+        </div>
+          <div className="event-view-address-box">
           </div>
         </div>
+
         <div className="row">
-         <div className="truck-event-photos">
-            <Slider {...sliderSettings} >
-              {this.renderImages()}
-            </Slider>
+          <div className="col-xs-4">
+          <div className="row">
+            <div className ='event-view-photos'>
+              <Slider {...sliderSettings} className="slider-images" >
+                {this.renderImages()}
+              </Slider>
+            </div> 
           </div>
-          <div>
-           <blockquote className="twitter-tweet">
-            <a href="https://twitter.com/blakecontreras/status/757736890468491264" />
-           </blockquote>
+          <div className="row">
+          <blockquote className="twitter-tweet">
+            <a href="https://twitter.com/SPARKsocialSF/status/764477819699113986" />
+          </blockquote>
           </div>
-          <EventViewTruckList />
+        </div>
+          
+          <div className="event-view-truck-list-container well col-xs-7">
+            <EventViewTruckList />
+          </div>
+
         </div>
       </div>
     )
