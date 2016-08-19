@@ -97,12 +97,12 @@ class TruckList extends Component {
   }
 
   // This function renders the individual event modal to the list of trucks
-  renderEvents(event, i) {
+  renderEvents(event) {
     var handle = event.handle.slice(1, event.handle.length);
     if(selectedTruck == event.name){
       return  <div onClick={ this.handleClick.bind(this, event) } className="selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
     } else {
-      return  <div onClick={ this.handleClick.bind(this, event) } className="not-selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+      return  <div key={event._id} onClick={ this.handleClick.bind(this, event) } className="not-selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
     }
   }
 
