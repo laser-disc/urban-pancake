@@ -149,7 +149,7 @@ module.exports.createEventRecord = (eventObj) => {
       description: tweet.user.description,
       message: tweet.text,
       timeStamp: tweet.created_at,
-      imageUrl: tweet.user.profile_image_url,
+      imageUrl: tweet.user.profile_image_url.split('_normal').join(''),
       location: loc[tweet.user.screen_name],
       schedule: sched[tweet.user.screen_name],
       todaysTrucks: grabTodaysTrucks(eventObj),
