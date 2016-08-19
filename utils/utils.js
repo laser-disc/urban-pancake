@@ -2,7 +2,7 @@ const axios = require('axios');
 
 
 let secretKeys = null;
-if(!process.env['MONGOOSE_URI']) {
+if(!process.env.MONGOOSE_URI) {
   secretKeys = require('../env/config');
 }
 const GMAP_API_KEY = secretKeys ? secretKeys.GMAP_API_KEY : process.env['GMAP_API_KEY'];
