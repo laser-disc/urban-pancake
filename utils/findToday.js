@@ -13,7 +13,7 @@ module.exports.findToday = function(){
 
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const dayNum = daysOfWeek.indexOf(today.slice(0, 3));
-  result.dayNum = dayNum;
+  result.dayIdx = dayNum;
 
   return result;
 };
