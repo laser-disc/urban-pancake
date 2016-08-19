@@ -18,8 +18,8 @@ const { getYelpInfo } = require('./updateTruckInfo');
 const { getFiveTweets } = require('./updateTruckInfo');
 const { updateDBwithYelpInfo } = require('./updateTruckInfo');
 const { getTenImages } = require('./updateTruckInfo');
-const { foodTrucks, foodTrucksObj } = require('../utils/foodTrucksDefaultObjs');
-const { foodEvents, allEventsObj } = require('../utils/foodEventsDefaultObjs');
+const { foodTrucks, foodTrucksObj } = require('../utils/trucksDefaultObjs');
+const { foodEvents, allEventsObj } = require('../utils/eventsDefaultObjs');
 
 // iterates over an array of food truck event Twitter handles
 foodEvents.forEach(event => {
