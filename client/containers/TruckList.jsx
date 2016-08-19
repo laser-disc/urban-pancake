@@ -26,7 +26,6 @@ class TruckList extends Component {
   };
 
   componentWillMount() {
-    console.log('INSIDE TRUCKTRUCK', this.props);
     this.props.FetchTrucks();
     this.props.FetchEvents();
   };
