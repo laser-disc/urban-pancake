@@ -63,10 +63,21 @@ class Map extends Component {
         user.location = {lat: userPosition.coords.latitude, lng: userPosition.coords.longitude};
         user.schedule = [{ closed: false },{ closed: false },{ closed: false },{ closed: false },{ closed: false },{ closed: false },{ closed: false }];
         user.yelpInfo = {name: null, yelpBizID: null, starsRating: null, review_count: null, custReview: null, photo: null,categories: null};
-        // push the user truck to this.props.trucks
-        this.props.trucks.push(user);
-        // and force a re-render by changing the state
-        this.setState({userLocationFound: true, userLocation: user.location});
+        // check to see if there is already a user truck in this.props.trucks
+        let userTrucks = this.props.trucks.filter( truck => {
+          return truck._id==='user';
+        });
+        // if there is already a user truck
+        if(userTrucks.length){
+          // then return and do not add another user truck
+          return;
+        }
+        else{
+          // otherwise, push the user truck to this.props.trucks
+          this.props.trucks.push(user);
+          // and force a re-render by changing the state
+          this.setState({userLocationFound: true, userLocation: user.location});
+        }
       };
     })
     .catch( err => {
@@ -86,7 +97,6 @@ class Map extends Component {
     let tweetIndex = dayOfWeek.indexOf(tweetDay);
     // icon = 'http://maps.google.com/mapfiles/ms/micons/red-dot.png';
     icon = 'https://offthegrid.com/wp-content/themes/offthegrid/images/mapmark-red-sm.png';
-
     if(truck._id==="user"){
       tweetIndex = 1;
       index = 1;
