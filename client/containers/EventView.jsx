@@ -20,7 +20,7 @@ class EventView extends Component {
   renderEventView(event){
     if(event.yelpInfo) {
       console.log('EVENT VIEW RENDER ....', event, this.props);
-      return <EventProfile key={ event.yelpInfo.yelpBizID } yelpInfo ={ event.yelpInfo } fiveTweets = { event.fiveTweetObjs } />
+      return <EventProfile key={ event.yelpInfo.yelpBizID } yelpInfo ={ event.yelpInfo } />
     }
   }
 
@@ -29,7 +29,7 @@ class EventView extends Component {
       <div className="body-truck-view">
         <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
         <Header />
-        {this.renderEventView(this.props.currentEvent)}
+        { this.props.currentEvent ? this.renderEventView(this.props.currentEvent) : 'Loading...' }
         <Footer />
       </div>
     )

@@ -101,7 +101,7 @@ class Map extends Component {
     if(truckMarker._id==="user"){
       tweetIndex = 1;
       index = 1;
-      icon = 'http://www.google.com/mapfiles/arrow.png';
+      icon = 'https://www.google.com/mapfiles/arrow.png';
     }
     if(!truckMarker.schedule.length) {
       position = {lat: null, lng: null};

@@ -35,12 +35,12 @@ export default class EventProfile extends Component {
       vertical: true,
     }
 
-    if(this.props.yelpInfo.yelpInfo){
+    if(this.props.yelpInfo){
       var truckProfileImgStyle = {
-        backgroundImage : "url(" + this.props.yelpInfo.yelpInfo.photo+")",
+        backgroundImage : "url(" + this.props.yelpInfo.photo+")",
       }
-      var truckName = this.props.yelpInfo.yelpInfo.name
-      var yelpScore = this.props.yelpInfo.yelpInfo.starsRating
+      var truckName = this.props.yelpInfo.name
+      var yelpScore = this.props.yelpInfo.starsRating
     }
     return (
       <div className='container'>
@@ -72,7 +72,6 @@ function mapStateToProps(state) {
   return {
     trucks: state.trucks,
     events: state.events,
-    yelpInfo: state.yelpInfo,
     currentTruck: state.currentTruck
   };
 };
