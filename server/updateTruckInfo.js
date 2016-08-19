@@ -53,7 +53,6 @@ module.exports.getYelpInfo = (truck) => {
   if(!truck.yelpBizID){
     truck.yelpBizID = truck.truck.yelpId;
   }
-  console.log("******************* getYelpInfo truck.yelpBizID ********************", truck.yelpBizID);
   return new Promise((resolve, reject) => {
     let yelp = new Yelp(yelpInfo);
     let categories = [];
@@ -88,7 +87,6 @@ module.exports.getYelpInfo = (truck) => {
 };
 
 module.exports.getFiveTweets = (newTruckObj, tweetID) => {
-  console.log("getFiveTweets just received ", newTruckObj.name, tweetID);
   return new Promise ((resolve, reject) => {
     let searchParams = {
       url: 'https://twitter.com/' + newTruckObj.name + '/status/' + tweetID,

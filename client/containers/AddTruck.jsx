@@ -84,11 +84,23 @@ class AddTruck extends Component {
   createTruck() {
     console.log('creating a truck');
     if (this.state.truck.name && this.state.truck.handle && this.state.truck.yelpId) {
+
       let truckObj = {};
       truckObj.truck = this.state.truck;
+      truckObj.days = [];
+      for(var key in this.state.days){
+        if(this.state.days[key]){
+          truckObj.days.push(this.state.days[key]);
+        }
+        else{
+          truckObj.days.push('closed');
+        }
+      }
+
       this.props.PassNewTruck(truckObj);
       alert('Truck successfully created!');
       this.props.removeModal();
+      
     } else {
       this.setError('name');
       console.error('You need a name, handle, and yelp ID to add a truck!');

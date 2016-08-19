@@ -15,6 +15,8 @@ const { getTruckTwitterInfo } = require('./updateTruckInfo');
 const { createEventRecord, getEventTwitterInfo, createOrUpdateEvent } = require('./updateEventInfo');
 const { createOrUpdateDB } = require('./updateTruckInfo');
 const { geoCoder } = require('../utils/utils');
+const { newTruckGeoCoder } = require('../utils/utils');
+
 const { getYelpInfo } = require('./updateTruckInfo');
 const { getFiveTweets } = require('./updateTruckInfo');
 const { updateDBwithYelpInfo } = require('./updateTruckInfo');
@@ -145,7 +147,8 @@ module.exports = (app) => {
   });
   app.get("/API/addTruck", (req,res) => {
     let newQuery = JSON.parse(req.query.newTruck);
-    console.log("API/addTruck request-handler", newQuery);
+    // console.log("API/addTruck request-handler", newQuery);
+    // console.log("newQuery.days before creating newTruckObj ", Array.isArray(newQuery.days));
     let newTruckObj = {};
     newTruckObj.truck = new Truck({
       name: newQuery.truck.name,
@@ -155,14 +158,23 @@ module.exports = (app) => {
       message: newQuery.truck.message,
       timeStamp: '',
       imageUrl: newQuery.truck.imageUrl,
-      location: { lat: 0, lng: 0, closed: false },
-      schedule: newQuery.truck.schedule,
+      location: { lat: 0, lng: 0, closed: true },
+      schedule: [],
       photosFromGoogle: [],
       yelpId: newQuery.truck.yelpId,
       yelpInfo: null,
     });
-    console.log("newTruckObj.truck.schedule[3]", newTruckObj.truck.schedule[3]);
-    createOrUpdateDB(newTruckObj);
+    newTruckGeoCoder(newTruckObj, newQuery.days[0])
+    .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[1]))
+    .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[2]))
+    .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[3]))
+    .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[4]))
+    .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[5]))
+    .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[6]))
+    .then(newTruckObj => createOrUpdateDB(newTruckObj))
+    .catch( err => {
+      console.log("request-handler API/addTruck unsuccessful", err);
+    })
   });
   app.get("/API/fiveTweets", (req,res) => {
    getTruckTwitterInfo(req.query.truckName)
