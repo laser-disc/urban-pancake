@@ -13,7 +13,7 @@ export default class AddTruckModal extends Component {
   render() {
     return (
       <div>
-        <AddTruck />
+        <AddTruck removeModal={this.removeThisModal.bind(this)}/>
       </div>
     );
   }
