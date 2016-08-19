@@ -78,11 +78,33 @@ class AddTruck extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validateInput = this.validateInput.bind(this);
     this.geocode = this.geocode.bind(this);
+    this.setLocation = this.setLocation.bind(this);
+    this.createTruck = this.createTruck.bind(this);
   }
+
+  createTruck() {
+    if (this.state.truck.name && this.state.truck.handle && this.state.truck.yelpId) {
+      let truckObj = this.state.truck;
+      this.props.PassNewTruck(truckObj);
+    } else {
+      // display error message
+      console.error('You need a name, handle, and yelp ID to add a truck!');
+    }
+  }
+
   handleSubmit(event) {
+    let days = this.state.days;
+    let arrayOfPromises = [];
+    for (let day in days) {
+      arrayOfPromises.push(() => this.geocode(days[day], day));
+    }
+    Promise.all(arrayOfPromises).then(this.createTruck);
+
+    console.log(this.state.valid);
     console.log('event: ', event, ' target: ', event.target, ' this: ', this)
     console.log('days ', this.state.days)
   }
+
   handleChange(event) {
     const value = event.target.value;
     const inputName = event.target.name;
@@ -128,15 +150,23 @@ class AddTruck extends Component {
   }
 
   geocode(target, inputName) {
-    let newTruckObj = {
-      getLocationResults: {
-        address: target,
-        poi: null,
-      }
-    };
-    geoCoder(newTruckObj).then(truckObj => this.setLocation(truckObj.geoInfo, inputName))
-    .catch(error => {
-      if (error) console.error(error);
+    return new Promise((resolve, reject) => {
+      let newTruckObj = {
+        getLocationResults: {
+          address: target,
+          poi: null,
+        }
+      };
+      geoCoder(newTruckObj).then(truckObj => {
+        this.setLocation(truckObj.geoInfo, inputName);
+        resolve(truckObj.geoInfo);
+      })
+      .catch(error => {
+        if (error) {
+          console.error(error);
+          reject('add a truck geocoder error');
+        }
+      });
     });
   }
 
