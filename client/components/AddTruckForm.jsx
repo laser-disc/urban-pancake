@@ -46,7 +46,7 @@ export default class AddTruckForm extends Component {
                     name="handle"
                     value={this.props.truck.handle}
                   />
-                  <ErrorMsg name="name" msg={this.props.err.handle} />
+                <ErrorMsg name="handle" msg={this.props.err.handle} />
                 </div>
               </div>
 
@@ -63,7 +63,7 @@ export default class AddTruckForm extends Component {
                     name="yelpId"
                     value={this.props.truck.yelpId}
                   />
-                  <ErrorMsg name="name" msg={this.props.err.yelp} />
+                <ErrorMsg name="yelp" msg={this.props.err.yelp} />
                 </div>
               </div>
             <div className="form-group row">
@@ -83,7 +83,7 @@ export default class AddTruckForm extends Component {
                     placeholder="e.g. 2nd and Mission"
                     value={this.props.days.monday}
                   />
-                <ErrorMsg name="name" msg={this.props.err.loc} />
+                <ErrorMsg name="loc" msg={this.props.err.loc} />
                 </div>
               </div>
               <div className="col-xs-offset-1 col-xs-10">
