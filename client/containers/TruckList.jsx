@@ -61,11 +61,7 @@ class TruckList extends Component {
     const dayNum = daysOfWeek.indexOf(today.slice(0, 3));
     let todaysTrucks = everyTruck.filter((truck) => {
       // checks based on the day of the last tweet and falls back to check the schedule
-<<<<<<< 65746300ec96b756318eedac04cbdb6eda6e0ed7
-      if (truck.schedule.length && !truck.schedule[dayNum].closed) {
-=======
-      if (truck.schedule.length && !truck.schedule[findToday().dayIdx].closed) {
->>>>>>> refactor[GoogleMaps] Factor out use of "today" and "idx" variables
+      if (truck.schedule.length && !truck.schedule[findToday().dayIdx].closed && truck._id!=='user'){
         return truck;
       }
     });
