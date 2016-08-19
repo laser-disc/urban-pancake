@@ -42,19 +42,15 @@ class EventViewTruckList extends Component {
   };
 
   render() {
-    console.log("eventViewTruckList render() this.props", this.props);
     let onlyTodaysTrucks=[], todaysTrucksArray=[], handle;
     let thisEvent = this.props.events.filter( event => {
       // console.log("comparing ", event.name, " to ", this.props.currentTruck.currentTruck);
       return event.name===this.props.currentTruck.currentTruck
     });
-    console.log("thisEvent", thisEvent);
     if(thisEvent.length){
       todaysTrucksArray = thisEvent[0].todaysTrucks;
-      console.log("todaysTrucksArray", todaysTrucksArray);
-      console.log("this.props.trucks", this.props.trucks);
+
       onlyTodaysTrucks = this.props.trucks.filter( truck => {
-        console.log("filtering truck.handle", truck.handle)
         if(truck.handle && todaysTrucksArray){
           handle = truck.handle.slice(1, truck.handle.length);
           return todaysTrucksArray.includes(handle);
@@ -63,7 +59,6 @@ class EventViewTruckList extends Component {
         }
       })
     }
-    console.log("onlyTodaysTrucks", onlyTodaysTrucks);
     return (
       <div className="truck-list well container-well">
         {onlyTodaysTrucks.map(truck => this.renderTrucks(truck))}

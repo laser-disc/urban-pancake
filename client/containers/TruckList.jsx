@@ -63,7 +63,6 @@ class TruckList extends Component {
         return truck;
       }
     });
-    console.log("today's trucks", todaysTrucks);
     
 
     if(this.props.searchTerm !== '') {
