@@ -3,24 +3,20 @@ const Twitter = require('twitter');
 const Yelp = require('yelp');
 const { getTruckTwitterInfo } = require('./updateTruckInfo');
 const { createTruckWithGeoInfo } = require('./updateTruckInfo');
-const { getTenImages } = require('./updateTruckInfo');
-const { createOrUpdateDB } = require('./updateTruckInfo');
-const { getYelpInfo } = require('./updateTruckInfo');
+// const { getTenImages } = require('./updateTruckInfo');
+// const { createOrUpdateDB } = require('./updateTruckInfo');
+// const { getYelpInfo } = require('./updateTruckInfo');
 const { getFiveTweets } = require('./updateTruckInfo');
 let Scraper = require ('images-scraper');
 let google = new Scraper.Google();
 // const { updateDBwithYelpInfo } = require('./updateTruckInfo');
 
-let secretKeys = null;
-if (!process.env.TWITTERINFO_CONSUMER_KEY) {
-  secretKeys = require('../env/config');  // DO NOT LINT
-}
-const twitterInfo = secretKeys ? secretKeys.twitterInfo : {
+const twitterInfo = {
   consumer_key: process.env.TWITTERINFO_CONSUMER_KEY,
   consumer_secret: process.env.TWITTERINFO_CONSUMER_SECRET,
   bearer_token: process.env.TWITTERINFO_BEARER_TOKEN,
 };
-const yelpInfo = secretKeys ? secretKeys.yelpInfo : {
+const yelpInfo = {
   consumer_key: process.env.YELPINFO_CONSUMER_KEY,
   consumer_secret: process.env.YELPINFO_CONSUMER_SECRET,
   token: process.env.YELPINFO_TOKEN,
@@ -43,7 +39,7 @@ const yelpObj = (yelpBizID) => {
   };
 };
 
-module.exports.getYelpInfo = (eventObj) => {
+const getYelpInfo = (eventObj) => {
   return new Promise((resolve, reject) => {
     let yelp = new Yelp(yelpInfo);
     let categories = [];
@@ -59,6 +55,7 @@ module.exports.getYelpInfo = (eventObj) => {
         eventYelpObj.review_count = data.review_count;
         eventYelpObj.custReview = data.snippet_text;
         eventYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
+        eventYelpObj.categories = data.categories;
         eventObj.info.yelpInfo = eventYelpObj;
         resolve(eventObj);
       }
@@ -166,17 +163,14 @@ module.exports.createOrUpdateEvent = (eventObj) => {
     // searches for an event record in the database with a matching Twitter handle
     Event.find({ name: eventName }, (err, result) => {
       if (result.length === 0) {
-        module.exports.getTenImages(eventObj)
+        getTenImages(eventObj)
         .then(eventObj => {
-          return module.exports.getYelpInfo(eventObj)
+          return getYelpInfo(eventObj)
         })
         .then(eventObj => {
           eventObj.info.save((err, resp) => err ? reject(err) : resolve(resp));
-          console.log(`${eventName} event created`);        
-        })
-        .catch( error => {
-          console.log("createOrUpdateDB promise chain error", error);
-        })        
+          console.log(`${eventName} event created`);
+        });
       } else {
         Event.findOneAndUpdate(
           { name: eventName },
@@ -193,7 +187,7 @@ module.exports.createOrUpdateEvent = (eventObj) => {
   });
 };
 
-module.exports.getTenImages = (eventObj) => {
+const getTenImages = (eventObj) => {
   return new Promise((resolve, reject) => {
     google.list({
       keyword: eventObj.info.name + " sf",
@@ -209,7 +203,7 @@ module.exports.getTenImages = (eventObj) => {
       });
       resolve(eventObj);
     }).catch(function(err) {
-      console.log('updateEventInfo.js getTenImages error', err);
+      console.log('get Ten event Images error', err);
       reject(err);
     });
   });

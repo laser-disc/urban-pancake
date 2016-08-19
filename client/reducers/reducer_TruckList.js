@@ -5,7 +5,7 @@ export default function (state = [], action) {
   switch (action.type) {
     case FETCH_TRUCKS:
     // only adds to the state trucks that are open today
-      // const everyTruck = action.payload.data;
+      const everyTruck = action.payload.data;
       // const today = (new Date()).toString().slice(0, 10);
       // const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       // const dayNum = daysOfWeek.indexOf(today.slice(0, 3));
@@ -15,7 +15,7 @@ export default function (state = [], action) {
       //     return truck;
       //   }
       // });
-      return action.payload.data;
+      return everyTruck;
     default:
       return state;
   }

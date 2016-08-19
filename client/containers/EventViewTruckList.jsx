@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import { bindActionCreators } from 'redux';
 import TruckItem from '../components/TruckItem.jsx';
 import { FetchTrucks } from '../actions/FetchTrucks';
+import { FetchOneEvent } from '../actions/FetchOneEvent';
 import TruckItemModal from "../components/TruckItemModal.jsx";
 import {modal} from 'react-redux-modal'; // The modal emitter
 // import { FetchEvents } from '../actions/FetchEvents';
@@ -23,17 +24,17 @@ class EventViewTruckList extends Component {
     this.props.FetchTrucks();
   };
 
- addModal(truck) { 
+ addModal(truck) {
   modal.add(TruckItemModal, {
     size: 'large',
-    closeOnOutsideClick: true, 
+    closeOnOutsideClick: true,
     hideCloseButton: true,
     truck: truck,
     })
   }
 
   renderTrucks(truck) {
-    var handle = truck.handle.slice(1, truck.handle.length); 
+    var handle = truck.handle.slice(1, truck.handle.length);
     if(selectedTruck == truck.name){
        return  <div onClick={ this.addModal.bind(this, handle) } className="selected"><TruckItem truck={truck} /></div>
     } else {
@@ -72,7 +73,8 @@ function mapStateToProps(state) {
     trucks: state.trucks,
     events: state.events,
     yelpInfo: state.yelpInfo,
-    currentTruck: state.currentTruck
+    currentTruck: state.currentTruck,
+    currentEvent: state.currentEvent,
   };
 };
 
