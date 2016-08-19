@@ -9,6 +9,7 @@ import { FetchEvents } from '../actions/FetchEvents';
 import {modal} from 'react-redux-modal'; // The modal emitter
 import TruckItemModal from "../components/TruckItemModal.jsx";
 import { PassCurrTruck } from '../actions/PassCurrTruck';
+import { findToday } from '../../utils/findToday';
 
 let selectedTruck = "";
 class TruckList extends Component {
@@ -60,7 +61,7 @@ class TruckList extends Component {
     const dayNum = daysOfWeek.indexOf(today.slice(0, 3));
     let todaysTrucks = everyTruck.filter((truck) => {
       // checks based on the day of the last tweet and falls back to check the schedule
-      if (truck.schedule.length && !truck.schedule[dayNum].closed && truck._id!=='user'){
+      if (truck.schedule.length && !truck.schedule[dayNum].closed) {
         return truck;
       }
     });
