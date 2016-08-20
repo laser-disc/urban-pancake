@@ -57,7 +57,7 @@ export default class AddTruckForm extends Component {
                   <input
                     className="form-control"
                     type="text"
-                    placeholder="Yelp ID"
+                    placeholder="Yelp URL"
                     name="yelpId"
                     value={this.props.truck.yelpId}
                   />
