@@ -25,26 +25,6 @@ module.exports.geoCoder = (newTruckObj) => {
   });
 };
 
-// module.exports.geoCoder = (newTruckObj) => {
-//   return new Promise(function(resolve, reject) {
-//     let query = newTruckObj.getLocationResults.address || newTruckObj.getLocationResults.poi;
-//     let gMapUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${query}&key=${GMAP_API_KEY}`;
-//     axios.get(gMapUrl)
-//     .then(function(response) {
-//       newTruckObj.geoInfo = response.data.results[0].geometry.location;
-//       resolve(newTruckObj);
-//     })
-//     .catch(function(error) {
-//       if(error){
-//         reject(error);
-//       }
-//     });
-//   });
-// };
-
-
-
-
 module.exports.newTruckGeoCoder = (newTruckObj, dayLocation) => {
   return new Promise(function(resolve, reject) {
     if(dayLocation==="closed"){
