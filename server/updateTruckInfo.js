@@ -60,6 +60,7 @@ module.exports.getYelpInfo = (truck) => {
       if (err) {
         reject(err);
       } else {
+        // console.log('*****************yelp data*********** \n', typeof data.phone);
         const truckYelpObj = yelpObj(truck.yelpBizID);
         truckYelpObj.name = data.name;
         truckYelpObj.phone = data.phone;
