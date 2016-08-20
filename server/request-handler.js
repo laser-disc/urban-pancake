@@ -9,7 +9,7 @@ const https = require('https');
 const Truck = require('../db/truckSchema');
 const Event = require('../db/eventsSchema');
 const { getLocation } = require('../utils/getLocationFromTweets');
-const { getTruckTwitterInfo, createTruckWithGeoInfo, createOrUpdateDB, getYelpInfo, getFiveTweets, updateDBwithYelpInfo, getTenImages } = require('../utils/updateTruckInfo');
+const { getTruckTwitterInfo, createTruckWithGeoInfo, createOrUpdateDB, getYelpInfo, getFiveTweets, updateDBwithYelpInfo, getTenImages, getUserEnteredTruckTwitterInfo } = require('../utils/updateTruckInfo');
 const { createEventRecord, getEventTwitterInfo, createOrUpdateEvent } = require('../utils/updateEventInfo');
 const { geoCoder, newTruckGeoCoder } = require('../utils/utils');
 const { foodTrucks, foodTrucksObj } = require('../utils/trucksDefaultObjs');
@@ -98,6 +98,7 @@ module.exports = (app) => {
     .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[4]))
     .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[5]))
     .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[6]))
+    .then(newTruckObj => getUserEnteredTruckTwitterInfo(newTruckObj))
     .then(newTruckObj => createOrUpdateDB(newTruckObj))
     .catch( err => {
       console.log("request-handler API/addTruck unsuccessful", err);
