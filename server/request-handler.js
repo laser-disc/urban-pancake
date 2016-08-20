@@ -1,7 +1,4 @@
 'use strict';
-// LOCATIONS ARE NOTED TRUCKSCHEDULES.JS IN UTILS
-
-// ---------------------- EXTREME CAUTION IF LINTING THIS PAGE. APP WILL BREAK --------------------
 
 const db = require('../db/config');
 const mongoose = require('mongoose');
@@ -9,7 +6,7 @@ const https = require('https');
 const Truck = require('../db/truckSchema');
 const Event = require('../db/eventsSchema');
 const { getLocation } = require('../utils/getLocationFromTweets');
-const { getTruckTwitterInfo, createTruckWithGeoInfo, createOrUpdateDB, getYelpInfo, getFiveTweets, updateDBwithYelpInfo, getTenImages, getUserEnteredTruckTwitterInfo } = require('../utils/updateTruckInfo');
+const { getTruckTwitterInfo, createTruckWithGeoInfo, createOrUpdateDB, getYelpInfo, getFiveTweets, updateDBwithYelpInfo, getTenImages } = require('../utils/updateTruckInfo');
 const { createEventRecord, getEventTwitterInfo, createOrUpdateEvent } = require('../utils/updateEventInfo');
 const { geoCoder, newTruckGeoCoder } = require('../utils/utils');
 const { foodTrucks, foodTrucksObj } = require('../utils/trucksDefaultObjs');
@@ -74,8 +71,6 @@ module.exports = (app) => {
   });
   app.get("/API/addTruck", (req,res) => {
     let newQuery = JSON.parse(req.query.newTruck);
-    // console.log("API/addTruck request-handler", newQuery);
-    // console.log("newQuery.days before creating newTruckObj ", Array.isArray(newQuery.days));
     let newTruckObj = {};
     newTruckObj.truck = new Truck({
       name: newQuery.truck.name,
@@ -98,7 +93,6 @@ module.exports = (app) => {
     .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[4]))
     .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[5]))
     .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[6]))
-    .then(newTruckObj => getUserEnteredTruckTwitterInfo(newTruckObj))
     .then(newTruckObj => createOrUpdateDB(newTruckObj))
     .catch( err => {
       console.log("request-handler API/addTruck unsuccessful", err);
