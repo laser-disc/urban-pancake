@@ -9,15 +9,10 @@ var userLng;
 let center = {lat: 37.7678011, lng: -122.4443519};  // default
 let zoom = 12;  // default
 let icon;
-
-// Marker position needs to be broken up to the individual lat, lng props
-// use new Date.now().getDay() for day of week index
-// GRAB CURRENT DAY OF WEEK
 const today = new Date;
 const index = today.getDay();
 
 class Map extends Component {
-
   componentWillMount(){
     this.renderUserLocation();
   };
@@ -32,7 +27,6 @@ class Map extends Component {
   };
 
   renderUserLocation(){
-
     return new Promise((resolve, reject) => {
       var options = {
         enableHighAccuracy: true,

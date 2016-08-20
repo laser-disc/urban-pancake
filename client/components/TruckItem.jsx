@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 
 
 export default class TruckItem extends Component {
-
-
   render() {
     var truckItemThumbNailStyle = {
       backgroundImage : "url(" + this.props.truck.imageUrl +")",
@@ -44,10 +42,6 @@ function mapStateToProps(state) {
     currentTruck: state.currentTruck
   };
 };
-
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ FetchTrucks }, dispatch);
-// };
 
 export default connect(mapStateToProps)(TruckItem);
 
