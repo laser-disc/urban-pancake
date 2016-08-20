@@ -1,7 +1,4 @@
 'use strict';
-// LOCATIONS ARE NOTED TRUCKSCHEDULES.JS IN UTILS
-
-// ---------------------- EXTREME CAUTION IF LINTING THIS PAGE. APP WILL BREAK --------------------
 
 const db = require('../db/config');
 const mongoose = require('mongoose');
@@ -74,8 +71,6 @@ module.exports = (app) => {
   });
   app.get("/API/addTruck", (req,res) => {
     let newQuery = JSON.parse(req.query.newTruck);
-    // console.log("API/addTruck request-handler", newQuery);
-    // console.log("newQuery.days before creating newTruckObj ", Array.isArray(newQuery.days));
     let newTruckObj = {};
     newTruckObj.truck = new Truck({
       name: newQuery.truck.name,

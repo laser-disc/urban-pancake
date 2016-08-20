@@ -8,14 +8,12 @@ import Button from 'muicss/lib/react/button';
 export default class AddTruckForm extends Component {
   constructor(props) {
     super(props);
-    // console.log('add truck form props', props);
   }
   render(){
     return (
 <div className='container'>
   <Form onChange={this.props.handleChange}>
     <legend>Add A Food Truck</legend>
-
     <Input label="What's the name of the truck?" name="name" floatingLabel={true} required={true} value={this.props.truck.name}/>
     <ErrorMsg name="name" msg={this.props.err.name} />
     <Input label="Does the truck have a twitter handle?" name="handle" floatingLabel={true} required={true} value={this.props.truck.handle}/>

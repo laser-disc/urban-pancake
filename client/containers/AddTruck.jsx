@@ -8,7 +8,6 @@ import {PassNewTruck} from '../actions/PassNewTruck';
 const geoCoder = require('../../utils/utils').geoCoder;
 
 class AddTruck extends Component {
-
   constructor(props) {
     super(props);
 
