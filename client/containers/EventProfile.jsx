@@ -44,16 +44,13 @@ export default class EventProfile extends Component {
 
     return (
       <div>
-      <div className="container">
+      
         <div className="row event-view-info">
-        <div className='col-xs-3'>
-           <h1> {eventName} </h1>
-          <img src={yelpScore} alt="yelp score"/>
-        </div>
-          <div className="event-view-address-box">
+          <div className='col-xs-3'>
+            <h1> {eventName} </h1>
+            <img src={yelpScore} alt="yelp score"/>
           </div>
         </div>
-      </div>
 
       <div className="event-view-secondary-info">
         <div className="row">
