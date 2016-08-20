@@ -1,6 +1,3 @@
-// LIST OF FOOD TRUCKS & EVENTS IN REQUEST-HANDLER
-// const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF', 'somastreatfoodpark', 'truckstopSF'];
-
 module.exports.truckSchedules = {
   'Curry Up Now': [
     /* sunday: */ { closed: true },
@@ -56,8 +53,22 @@ module.exports.truckSchedules = {
     /* friday: */  { lat: 37.782648, lng: -122.408157, closed: false },
     /* saturday: */  { lat: 37.782648, lng: -122.408157, closed: false },
   ],
+  'Twirl and Dip': [
+    /* sunday: */ { lat: 37.768761, lng: -122.467979, closed: false },
+    /* monday: */ { lat: 37.768761, lng: -122.467979, closed: true },
+    /* tuesday: */  { lat: 37.768761, lng: -122.467979, closed: false },
+    /* wednesday: */  { lat: 37.768761, lng: -122.467979, closed: false },
+    /* thursday: */  { lat: 37.768761, lng: -122.467979, closed: false },
+    /* friday: */  { lat: 37.768761, lng: -122.467979, closed: false },
+    /* saturday: */  { lat: 37.768761, lng: -122.467979, closed: false },
+  ],
+  'Countrygrillsf': [
+    /* sunday: */ { closed: true },
+    /* monday: */ { lat: 37.798742, lng: -122.399879, closed: true },
+    /* tuesday: */  { closed: true },
+    /* wednesday: */  { lat: 37.798742, lng: -122.399879, closed: true },
+    /* thursday: */  { closed: true },
+    /* friday: */  { lat: 37.798742, lng: -122.399879, closed: true },
+    /* saturday: */  { closed: true },
+  ],
 };
-
-
-
-

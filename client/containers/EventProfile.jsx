@@ -41,8 +41,8 @@ export default class EventProfile extends Component {
       var yelpScore = this.props.yelpInfo.starsRating
     }
     return (
+      <div>
       <div className="container">
-
         <div className="row event-view-info">
         <div className='col-xs-3'>
            <h1> {truckName} </h1>
@@ -51,15 +51,18 @@ export default class EventProfile extends Component {
           <div className="event-view-address-box">
           </div>
         </div>
+      </div>
 
+      <div className="event-view-secondary-info">
         <div className="row">
           <div className="col-xs-4">
           <div className="row">
             <div className ='event-view-photos'>
               <Slider {...sliderSettings} className="slider-images" >
+                <img src="https://d13yacurqjgara.cloudfront.net/users/208061/screenshots/1950119/eatstreet-loading.gif" />
                 {this.renderImages()}
               </Slider>
-            </div> 
+            </div>
           </div>
           <div className="row">
           <blockquote className="twitter-tweet">
@@ -67,12 +70,12 @@ export default class EventProfile extends Component {
           </blockquote>
           </div>
         </div>
-          
+
           <div className="event-view-truck-list-container well col-xs-7">
             <EventViewTruckList />
           </div>
-
         </div>
+      </div>
       </div>
     )
   }

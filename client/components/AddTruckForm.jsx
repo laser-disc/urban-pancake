@@ -4,7 +4,6 @@ import ErrorMsg from './ErrorMsg.jsx';
 export default class AddTruckForm extends Component {
   constructor(props) {
     super(props);
-    // console.log('add truck form props', props);
   }
   render(){
     return (
@@ -51,7 +50,7 @@ export default class AddTruckForm extends Component {
 
               <div className="form-group row">
                 <div className="form-label">
-                  <label className="control-label"><h4>What's the yelpID for this food truck?</h4></label>
+                  <label className="control-label"><h4>What's the Yelp URL for this food truck?</h4></label>
                 </div>
 
                 <div className="col-xs-offset-1 col-xs-10">
@@ -174,7 +173,6 @@ export default class AddTruckForm extends Component {
           </form>
         </div>
       </div>
-
     );
   }
 }

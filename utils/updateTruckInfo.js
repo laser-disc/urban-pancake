@@ -1,4 +1,3 @@
-// const getLocationFromTweets = require('./getLocationFromTweets');
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
 const Yelp = require('yelp');
@@ -56,6 +55,13 @@ module.exports.getYelpInfo = (truck) => {
       if (err) {
         reject(err);
       } else {
+        let categories = [];
+        if(data.categories) {
+          data.categories.forEach(function(cat) {
+            return categories.push(cat[0]);
+          })
+        }
+
         const truckYelpObj = yelpObj(truck.yelpBizID);
         truckYelpObj.name = data.name;
         // if the image below (data.rating_img_url) is too large, use data.rating_img_url_small instead (or simply data.rating if you just want the number rating 4.5 or 4)
@@ -63,15 +69,8 @@ module.exports.getYelpInfo = (truck) => {
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
         truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
-        truckYelpObj.categories = data.categories;
+        truckYelpObj.categories = categories;
         truckYelpObj.phone = data.display_phone;
-        // the following six lines update the database with the corrent information, but somehow this breaks the truckView so that the images no longer render to the screen, will come back to it
-        // data.categories.forEach( category => {
-        //   category.forEach(subCategory => {
-        //     categories.push(subCategory);
-        //   })
-        // });
-        // truckYelpObj.categories = categories;
 
         // TODO: turn this array into a string
         truckYelpObj.twitterHandle = truck.truckName;
@@ -122,6 +121,30 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
           newTruckObj.website = tweets[0].user.url;
           newTruckObj.allTweetObjs = tweets;
           tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
+        }
+      }
+      resolve(newTruckObj);
+    });
+  });
+};
+
+module.exports.getUserEnteredTruckTwitterInfo = (newTruckObj) => {
+  return new Promise((resolve, reject) => {
+    const searchParams = {
+      screen_name: newTruckObj.truck.handle.slice(1, newTruckObj.truck.handle.length),
+      exclude_replies: true,
+      include_rts: true,
+    };
+    // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
+    twitterClient.get('statuses/user_timeline', searchParams, (error, tweets) => {
+      if (error) {
+        console.log('error', error);
+        reject(error);
+      }
+
+      if(tweets){
+        if(tweets[0]) {
+          newTruckObj.truck.imageUrl = tweets[0].user.profile_image_url.split('_normal').join('');
         }
       }
       resolve(newTruckObj);
@@ -221,4 +244,10 @@ module.exports.getTenImages = (newTruckObj) => {
       reject(err);
     });
   });
+};
+
+module.exports.getYelpMap = (newTruckObj) => {
+  return new Promise((resolve, reject) => {
+
+  })
 };

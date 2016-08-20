@@ -1,16 +1,8 @@
-// let removePunctuation = (strTweet) => {
-//   // Removes the punctuation from the current tweet so that it's easier to parse
-//   let removePunc = currentTweet.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
-//   let noPuncTweet = removePunc.replace(/\s{2,}/g," ");
-//   return noPuncTweet;
-// }
-
 // list of street types according to https://data.sfgov.org/Geographic-Locations-and-Boundaries/Street-Names/6d9h-4u5v/data#column-menu
 
 const streetTypes = ['aly', 'ave', 'blvd', 'blvd north', 'blvd south', 'cir',
   'ct', 'dr', 'expy', 'hl', 'hwy', 'ln', 'loop', 'park', 'path', 'pl', 'plz', 'ramp',
  'rd', 'row', 'st', 'stps', 'stwy', 'ter', 'tunl', 'walk', 'way'];
-
 
 // sample output: "1st st and Howard st"
 const atFromSubroutine = (strTweet) => {

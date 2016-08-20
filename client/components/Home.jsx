@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import TruckList from '../containers/TruckList.jsx';
 import GoogleMap from '../containers/GoogleMap.jsx';
-import {Link} from "react-router";
-import {Router, Route, hashHistory} from 'react-router';
+import { Router, Route, hashHistory, Link } from 'react-router';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import SearchBar from '../containers/SearchBar.jsx';
@@ -35,4 +34,3 @@ export default () => {
     </div>
   )
 }
-

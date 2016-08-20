@@ -8,7 +8,6 @@ import {PassNewTruck} from '../actions/PassNewTruck';
 const geoCoder = require('../../utils/utils').geoCoder;
 
 class AddTruck extends Component {
-
   constructor(props) {
     super(props);
 
@@ -96,6 +95,8 @@ class AddTruck extends Component {
           truckObj.days.push('closed');
         }
       }
+
+      truckObj.truck.yelpId = this.state.truck.yelpId.split('/biz/')[1];
 
       this.props.PassNewTruck(truckObj);
       alert('Truck successfully created!');
