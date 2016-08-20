@@ -6,7 +6,8 @@
 const db = require('../db/config');
 const mongoose = require('mongoose');
 const https = require('https');
-const { Truck, Event } = require('../db/truckSchema');
+const Truck = require('../db/truckSchema');
+const Event = require('../db/eventsSchema');
 const { getLocation } = require('../utils/getLocationFromTweets');
 const { getTruckTwitterInfo, createTruckWithGeoInfo, createOrUpdateDB, getYelpInfo, getFiveTweets, updateDBwithYelpInfo, getTenImages } = require('../utils/updateTruckInfo');
 const { createEventRecord, getEventTwitterInfo, createOrUpdateEvent } = require('../utils/updateEventInfo');
