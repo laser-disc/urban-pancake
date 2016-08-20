@@ -106,7 +106,9 @@
 /*  ---------------------------------------------------
                ======= ADD TRUCK FORM ========
 -------------------------------------------------------*/
-
+.form-schedule{
+  margin-left: 15%;
+}
 .add-truck-title {
   width: 100% !important;
   margin-left: 35%!important;
