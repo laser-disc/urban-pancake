@@ -22,6 +22,7 @@ const truckSchema = new mongoose.Schema({
   yelpId: String,
   yelpInfo: {
     name: String,
+    phone: String,
     yelpBizID: String,
     starsRating: String,
     review_count: Number,

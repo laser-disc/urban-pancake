@@ -61,8 +61,8 @@ export default class TruckProfile extends Component {
                 <p>{this.props.yelpInfo.handle}</p>
                 <img src={yelpScoreUrl} alt="yelp score"/>
                 <p>Number of reviews: {yelpInfo.review_count} </p>
-                <p>Phone Number </p>
-                <p>Categories </p>
+                <p>Phone Number {yelpInfo.phone}</p>
+                <p>Categories {yelpInfo.categories}</p>
               </div>
             </div>
             <div className='mini-google-map'>
