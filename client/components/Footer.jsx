@@ -5,7 +5,7 @@ export default class Footer extends Component {
     return(
     <footer className="footer">
       <div className="container">
-        <p>This site displays information for lunch time only</p>
+        <p id="lunch-message">This site displays information for lunch time only</p>
       </div>
     </footer>
     )

@@ -386,6 +386,7 @@ float: right;
 }
 .event-view-info{
   margin-bottom: 25px;
+  padding-left: 5%;
 }
 #event-view-title{
   width: 300px;
