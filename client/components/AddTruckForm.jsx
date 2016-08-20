@@ -88,6 +88,10 @@ export default class AddTruckForm extends Component {
     value={this.props.days.sunday}
     />
 </div>
+
+    <Button variant="raised" onClick={this.props.handleSubmit}>Submit</Button>
+  </Form>
+</div>
     );
   }
 }
