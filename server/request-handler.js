@@ -93,6 +93,7 @@ module.exports = (app) => {
     .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[4]))
     .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[5]))
     .then(newTruckObj => newTruckGeoCoder(newTruckObj, newQuery.days[6]))
+    .then(newTruckObj => getUserEnteredTruckTwitterInfo(newTruckObj))
     .then(newTruckObj => createOrUpdateDB(newTruckObj))
     .catch( err => {
       console.log("request-handler API/addTruck unsuccessful", err);
