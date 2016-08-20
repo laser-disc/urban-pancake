@@ -60,6 +60,12 @@ module.exports.getYelpInfo = (truck) => {
       if (err) {
         reject(err);
       } else {
+        let categories = [];
+        if(data.categories) {
+          data.categories.forEach(function(cat) {
+            return categories.push(cat[0]);
+          })
+        }
         // console.log('*****************yelp data*********** \n', typeof data.phone);
         const truckYelpObj = yelpObj(truck.yelpBizID);
         truckYelpObj.name = data.name;
@@ -68,7 +74,7 @@ module.exports.getYelpInfo = (truck) => {
         truckYelpObj.review_count = data.review_count;
         truckYelpObj.custReview = data.snippet_text;
         truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
-        truckYelpObj.categories = data.categories;
+        truckYelpObj.categories = categories;
         truckYelpObj.phone = data.display_phone;
 
         // TODO: turn this array into a string
@@ -120,7 +126,7 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
           newTruckObj.website = tweets[0].user.url;
           newTruckObj.allTweetObjs = tweets;
           tweets.forEach(tweet => newTruckObj.allTweetMessages.push(tweet.text));
-        } 
+        }
       }
       resolve(newTruckObj);
     });
