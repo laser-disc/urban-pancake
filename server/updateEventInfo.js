@@ -149,7 +149,7 @@ module.exports.createEventRecord = (eventObj) => {
       description: tweet.user.description,
       message: tweet.text,
       timeStamp: tweet.created_at,
-      imageUrl: tweet.user.profile_image_url,
+      imageUrl: tweet.user.profile_image_url.split('_normal').join(''),
       location: loc[tweet.user.screen_name],
       schedule: sched[tweet.user.screen_name],
       todaysTrucks: grabTodaysTrucks(eventObj),
@@ -194,7 +194,7 @@ module.exports.createOrUpdateEvent = (eventObj) => {
 const getTenImages = (eventObj) => {
   return new Promise((resolve, reject) => {
     google.list({
-      keyword: eventObj.info.name,
+      keyword: eventObj.info.name + ' sf',
       num: 10,
       detail: true,
       nightmare: {

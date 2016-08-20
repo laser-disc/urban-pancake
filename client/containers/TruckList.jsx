@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router'
 import { bindActionCreators } from 'redux';
 import TruckItem from '../components/TruckItem.jsx';
+import EventItem from '../components/EventItem.jsx';
 import { FetchTrucks } from '../actions/FetchTrucks';
 import { FetchEvents } from '../actions/FetchEvents';
 import {modal} from 'react-redux-modal'; // The modal emitter
@@ -100,9 +101,9 @@ class TruckList extends Component {
   renderEvents(event) {
     var handle = event.handle.slice(1, event.handle.length);
     if(selectedTruck == event.name){
-      return  <div onClick={ this.handleClick.bind(this, event) } className="selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+      return  <div onClick={ this.handleClick.bind(this, event) } className="selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <EventItem event={event} /></Link></div>
     } else {
-      return  <div key={event._id} onClick={ this.handleClick.bind(this, event) } className="not-selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+      return  <div key={event._id} onClick={ this.handleClick.bind(this, event) } className="not-selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <EventItem event={event} /></Link></div>
     }
   }
 
