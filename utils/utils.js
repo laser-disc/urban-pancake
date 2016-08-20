@@ -43,7 +43,7 @@ module.exports.newTruckGeoCoder = (newTruckObj, dayLocation) => {
     })
     .catch(function(error) {
       if(error){
-        console.log("newTruckGeoCoder error ", error);
+        res.status(400).send(err)
         reject(error);
       }
     });

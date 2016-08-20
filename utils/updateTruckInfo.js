@@ -93,7 +93,6 @@ module.exports.getFiveTweets = (newTruckObj, tweetID) => {
     // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/oembed
     twitterClient.get('statuses/oembed', searchParams, (error, tweet, response) => {
       if (error) {
-        console.log("getFive Tweets error", error);
         reject(error);
       }
       let addClassName = '<blockquote className' + tweet.html.split('<blockquote class')[1];
@@ -203,7 +202,6 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
 
           newTruckObj.truck.save((err, resp) => {
             if(err){
-              console.log("createOrUpdateDB error", err);
               reject(err)
             }
             else{
@@ -213,7 +211,7 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
           console.log(`${newTruckObj.name} truck created`);
         })
         .catch( error => {
-          console.log("createOrUpdateDB promise chain error", error);
+          res.status(400).send(err);
         })
       } else {
         // otherwise update existing document
@@ -248,7 +246,6 @@ module.exports.getTenImages = (newTruckObj) => {
       });
       resolve(newTruckObj);
     }).catch(function(err) {
-      console.log('updateTruckInfo.js getTenImages error', err);
       reject(err);
     });
   });

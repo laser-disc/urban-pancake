@@ -140,7 +140,6 @@ module.exports.createEventRecord = (eventObj) => {
 
 module.exports.createOrUpdateEvent = (eventObj) => {
   const eventName = eventObj.info.name;
-  // console.log("createOrUpdateEvent eventObj.info", eventObj.info)
   return new Promise((resolve, reject) => {
     // searches for an event record in the database with a matching Twitter handle
     Event.find({ name: eventName }, (err, result) => {
