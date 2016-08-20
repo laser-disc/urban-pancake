@@ -64,16 +64,9 @@
     height: 80px;
     color: white;
 }
-/*.overlay-title{
-  position: relative;
+#lunch-message{
+  margin-left:30%;
 }
-.overlay-title h1 {
-  position: absolute;
-  width: 100%;
-  top: 0px;
-  left: 10%;
-  color: white;
-}*/
 .hungerstop-logo {
   height: 70px;
   width: 90px;
