@@ -56,6 +56,15 @@ module.exports.truckSchedules = {
     /* friday: */  { lat: 37.782648, lng: -122.408157, closed: false },
     /* saturday: */  { lat: 37.782648, lng: -122.408157, closed: false },
   ],
+  'Twirl and Dip': [
+    /* sunday: */ { lat: 37.768761, lng: -122.467979, closed: false },
+    /* monday: */ { lat: 37.768761, lng: -122.467979, closed: true },
+    /* tuesday: */  { lat: 37.768761, lng: -122.467979, closed: false },
+    /* wednesday: */  { lat: 37.768761, lng: -122.467979, closed: false },
+    /* thursday: */  { lat: 37.768761, lng: -122.467979, closed: false },
+    /* friday: */  { lat: 37.768761, lng: -122.467979, closed: false },
+    /* saturday: */  { lat: 37.768761, lng: -122.467979, closed: false },
+  ],
 };
 
 
