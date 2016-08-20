@@ -18,16 +18,29 @@ export default class TruckProfile extends Component {
   }
 
   render(){
+    let fiveTweets = [];
+    let yelpInfo = {name: '', review_count: 0};
+    let yelpScoreUrl = '';
+    let categories = '';
     if(this.props.yelpInfo.yelpInfo){
-      var truckProfileImgStyle = {
-        backgroundImage : "url(" + this.props.yelpInfo.yelpInfo.photo+")",
+      yelpInfo = this.props.yelpInfo.yelpInfo;
+      let truckProfileImgStyle = {
+        backgroundImage : 'url(' + yelpInfo.photo + ')',
       }
-      var truckName = this.props.yelpInfo.yelpInfo.name
+      yelpScoreUrl = this.props.yelpInfo.yelpInfo.starsRating;
+    }
+    if(this.props.fiveTweets){
+      fiveTweets = this.props.fiveTweets;
+    }
+    if(yelpInfo.categories) {
+      yelpInfo.categories.forEach(function(cat) {
+        return categories += cat + ' ';
+      })
     }
 
-    var sliderSettings = {
+    const sliderSettings = {
             adaptiveHeight : false,
-            arrows: false, 
+            arrows: false,
             autoplay: true,
             autoplaySpeed:  4000,
             dots: false,
@@ -38,22 +51,11 @@ export default class TruckProfile extends Component {
             vertical: true,
           }
 
-    var yelpScoreUrl = "";
-    if(this.props.yelpInfo.yelpInfo){
-      yelpScoreUrl = this.props.yelpInfo.yelpInfo.starsRating;
-    } 
-    var fiveTweets = [];
-    if(this.props.fiveTweets){
-      fiveTweets = this.props.fiveTweets;
-    }
-    var yelpInfo = {name: "", review_count: 0};
-    if(this.props.yelpInfo.yelpInfo){
-      yelpInfo = this.props.yelpInfo.yelpInfo;
-    }
+
 
     return (
       <div>
-        <div className="row truck-view-info">       
+        <div className="row truck-view-info">
             <div className="truck-view-info-item">
               <a href={this.props.yelpInfo.website}><img className='truck-view-profile-img' src={this.props.yelpInfo.imageUrl} alt="Truck Profile Image"/></a>
               <div className="truck-view-main-info">
@@ -62,7 +64,7 @@ export default class TruckProfile extends Component {
                 <img src={yelpScoreUrl} alt="yelp score"/>
                 <p>Number of reviews: {yelpInfo.review_count} </p>
                 <p>Phone Number: {yelpInfo.phone}</p>
-                <p>Categories {yelpInfo.categories[0][0]}</p>
+                <p>Categories: { categories }</p>
               </div>
             </div>
             <div className='mini-google-map'>
