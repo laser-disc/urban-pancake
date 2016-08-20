@@ -60,6 +60,7 @@ module.exports.getYelpInfo = (truck) => {
       if (err) {
         reject(err);
       } else {
+        // console.log('*****************yelp data*********** \n', typeof data.phone);
         const truckYelpObj = yelpObj(truck.yelpBizID);
         truckYelpObj.name = data.name;
         // if the image below (data.rating_img_url) is too large, use data.rating_img_url_small instead (or simply data.rating if you just want the number rating 4.5 or 4)
@@ -69,13 +70,6 @@ module.exports.getYelpInfo = (truck) => {
         truckYelpObj.photo = data.image_url.substr(0, data.image_url.length-6) + 'o.jpg';
         truckYelpObj.categories = data.categories;
         truckYelpObj.phone = data.display_phone;
-        // the following six lines update the database with the corrent information, but somehow this breaks the truckView so that the images no longer render to the screen, will come back to it
-        // data.categories.forEach( category => {
-        //   category.forEach(subCategory => {
-        //     categories.push(subCategory);
-        //   })
-        // });
-        // truckYelpObj.categories = categories;
 
         // TODO: turn this array into a string
         truckYelpObj.twitterHandle = truck.truckName;
@@ -225,4 +219,10 @@ module.exports.getTenImages = (newTruckObj) => {
       reject(err);
     });
   });
+};
+
+module.exports.getYelpMap = (newTruckObj) => {
+  return new Promise((resolve, reject) => {
+
+  })
 };
