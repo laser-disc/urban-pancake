@@ -149,6 +149,10 @@ module.exports.getUserEnteredTruckTwitterInfo = (newTruckObj) => {
       if(tweets){
         if(tweets[0]) {
           newTruckObj.truck.imageUrl = tweets[0].user.profile_image_url.split('_normal').join('');
+          let description = tweets[0].user.description
+          description = description.length <= 120 ? description : description.substring(0, 117) + '...';
+          newTruckObj.truck.description = description; 
+          newTruckObj.truck.website = tweets[0].user.url
         }
       }
       resolve(newTruckObj);
