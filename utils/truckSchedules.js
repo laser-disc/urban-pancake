@@ -1,6 +1,3 @@
-// LIST OF FOOD TRUCKS & EVENTS IN REQUEST-HANDLER
-// const foodEvents = ['gloungesf', 'otgsf', 'SPARKsocialSF', 'somastreatfoodpark', 'truckstopSF'];
-
 module.exports.truckSchedules = {
   'Curry Up Now': [
     /* sunday: */ { closed: true },
