@@ -33,6 +33,7 @@ module.exports.foodTrucks = [
   'wingwingssf',
   'Twirlanddip',
   'jshacksf', //so-so on twitter, weekly schedule on site
+  'Countrygrillsf',
 ];
 
 //  thetwitterHandleAgainForSomeReason: { twitterHandle: '', yelpBizID: '' },
@@ -160,10 +161,10 @@ module.exports.foodTrucksObj = {
     twitterHandle: 'jshacksf',
     yelpBizID: 'j-shack-san-francisco',
   },
-  // thetwitterHandleAgainForSomeReason: {
-  //   twitterHandle: '',
-  //   yelpBizID: '',
-  // },
+  Countrygrillsf: {
+    twitterHandle: 'Countrygrillsf',
+    yelpBizID: 'country-grill-san-francisco',
+  },
   // thetwitterHandleAgainForSomeReason: {
   //   twitterHandle: '',
   //   yelpBizID: '',

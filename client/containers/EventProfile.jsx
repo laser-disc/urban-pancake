@@ -59,9 +59,10 @@ export default class EventProfile extends Component {
           <div className="row">
             <div className ='event-view-photos'>
               <Slider {...sliderSettings} className="slider-images" >
+                <img src="https://d13yacurqjgara.cloudfront.net/users/208061/screenshots/1950119/eatstreet-loading.gif" />
                 {this.renderImages()}
               </Slider>
-            </div> 
+            </div>
           </div>
           <div className="row">
           <blockquote className="twitter-tweet">
@@ -69,7 +70,7 @@ export default class EventProfile extends Component {
           </blockquote>
           </div>
         </div>
-          
+
           <div className="event-view-truck-list-container well col-xs-7">
             <EventViewTruckList />
           </div>
