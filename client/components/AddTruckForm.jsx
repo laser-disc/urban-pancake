@@ -4,7 +4,6 @@ import ErrorMsg from './ErrorMsg.jsx';
 export default class AddTruckForm extends Component {
   constructor(props) {
     super(props);
-    // console.log('add truck form props', props);
   }
   render(){
     return (
@@ -174,7 +173,6 @@ export default class AddTruckForm extends Component {
           </form>
         </div>
       </div>
-
     );
   }
 }
