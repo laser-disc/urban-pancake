@@ -13,7 +13,6 @@ let selectedTruck = "";
 class EventViewTruckList extends Component {
   // Runs FetchTrucks immediately so that the state will be up to date before the content starts to load
   componentWillReceiveProps(nextProps){
-    // console.log("[truck list] nextprops: ", nextProps.currentTruck.currentTruck)
     if(nextProps.currentTruck.currentTruck){
       selectedTruck = nextProps.currentTruck.currentTruck;
       this.render();
@@ -45,7 +44,6 @@ class EventViewTruckList extends Component {
   render() {
     let onlyTodaysTrucks=[], todaysTrucksArray=[], handle;
     let thisEvent = this.props.events.filter( event => {
-      // console.log("comparing ", event.name, " to ", this.props.currentTruck.currentTruck);
       return event.name===this.props.currentTruck.currentTruck
     });
     if(thisEvent.length){

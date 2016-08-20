@@ -24,7 +24,7 @@ foodEvents.forEach(event => {
     eventObj.info.yelpBizID = allEventsObj[event].yelpBizID;
     createOrUpdateEvent(eventObj)
   })
-  .catch(err => console.log('ERRRR', err));
+  .catch(err => res.status(400).send(err));
 });
 
 foodTrucks.forEach(foodTruck => {
@@ -37,7 +37,6 @@ foodTrucks.forEach(foodTruck => {
     return createOrUpdateDB(newTruckObj);
   })
   .catch(err => {
-    console.log("Food truck promise chain error", err);
     res.status(400).send(err)
   });
 });
@@ -96,7 +95,7 @@ module.exports = (app) => {
     .then(newTruckObj => getUserEnteredTruckTwitterInfo(newTruckObj))
     .then(newTruckObj => createOrUpdateDB(newTruckObj))
     .catch( err => {
-      console.log("request-handler API/addTruck unsuccessful", err);
+      res.status(400).send(err)
     })
   });
   app.get("/API/fiveTweets", (req,res) => {

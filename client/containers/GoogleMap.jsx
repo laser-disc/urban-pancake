@@ -75,7 +75,7 @@ class Map extends Component {
       };
     })
     .catch( err => {
-      console.log("GoogleMap renderUserLocation error", err);
+      res.status(400).send(err)
     })
   };
 
