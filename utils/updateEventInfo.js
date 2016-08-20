@@ -1,7 +1,7 @@
 const Event = require('../db/eventsSchema');
 const Twitter = require('twitter');
 const Yelp = require('yelp');
-const { getTruckTwitterInfo, createTruckWithGeoInfo, getFiveTweets  } = require('./updateTruckInfo');
+const { getTruckTwitterInfo, createTruckWithGeoInfo, getFiveTweets, yelpObj  } = require('./updateTruckInfo');
 let Scraper = require ('images-scraper');
 let google = new Scraper.Google();
 
@@ -23,20 +23,6 @@ const yelpInfo = secretKeys ? secretKeys.yelpInfo : {
 const twitterClient = new Twitter(twitterInfo);
 const { sched, loc } = require('../utils/eventsSchedules');
 
-// This yelp obj is the same as the one in updateTruckInfo, so we don't need this here;
-// we can just import it or figure out some adjustment when we merge the files
-const yelpObj = (yelpBizID) => {
-  return {
-    name: null,
-    yelpBizID,
-    starsRating: null,
-    review_count: null,
-    custReview: null,
-    photo: null,
-    categories: null,
-  };
-};
-
 const getYelpInfo = (eventObj) => {
   return new Promise((resolve, reject) => {
     let yelp = new Yelp(yelpInfo);
@@ -45,7 +31,6 @@ const getYelpInfo = (eventObj) => {
       if (err) {
         reject(err);
       } else {
-        // console.log("getYelpInfo data", data);
         const eventYelpObj = yelpObj(eventObj.info.yelpBizID);
         eventYelpObj.name = data.name;
         // if the image below (data.rating_img_url) is too large, use data.rating_img_url_small instead (or simply data.rating if you just want the number rating 4.5 or 4)
@@ -70,7 +55,6 @@ const EventInfo = () => {
     info: null, // will contain all of the schema info
   };
 };
-
 
 // Calls the Twitter API to retrieve the last 20 tweets based on the event name
 module.exports.getEventTwitterInfo = (event) => {
@@ -126,7 +110,7 @@ const grabTodaysTrucks = (event) => {
   const lastTweetDay = metaInfo.created_at.slice(0, 3);
   // checks to see if the date of the last tweet is the same as today's date
   if (today === lastTweetDay) {
-    if (event.twitterHandle === 'gloungesf' || event.allMessages[0].split(' ').indexOf( /* '#dinner' */ ) === -1) {
+    if (event.twitterHandle === 'gloungesf' || event.allMessages[0].split(' ').indexOf( '#dinner' ) === -1) {
       return grabHandles(event.allMessages[0]);
     }
   } else {

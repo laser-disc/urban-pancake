@@ -8,7 +8,7 @@ module.exports.foodTrucks = [
   'WannaESF', // events exclusive (otg / g lounge) -- locations also tweeted and posted on FB
   'eatmobowl', // weekly schedule on their site, daily on twitter
   'lcfoodtruck', // twitter only
-  /* 'redsauceballs', */ 
+  /* 'redsauceballs', */
   'TacosElTuca', // their twitter has been dead for a year; only at SoMa apparently
   'donpablotruck', // tweet weekly schedule as photo, mostly events
   'FiretrailPizza', //?
@@ -30,11 +30,13 @@ module.exports.foodTrucks = [
   'frozenkuhsterd', // calendar on site, daily on twitter
   'ElNortenoTruck',
   'KoJaKitchen', // relies on twitter
+  'wingwingssf',
   'Twirlanddip',
   'jshacksf', //so-so on twitter, weekly schedule on site
+  'Countrygrillsf',
 ];
 
- // thetwitterHandleAgainForSomeReason: { twitterHandle: '', yelpBizID: '' },
+//  thetwitterHandleAgainForSomeReason: { twitterHandle: '', yelpBizID: '' },
 module.exports.foodTrucksObj = {
   JapaCurry: {
     twitterHandle: 'JapaCurry',
@@ -68,11 +70,7 @@ module.exports.foodTrucksObj = {
     twitterHandle: 'lcfoodtruck',
     yelpBizID: 'liberty-cheesesteak-san-francisco'
   },
-  ElNortenoTruck: {
-    twitterHandle: 'ElNortenoTruck',
-    yelpBizID: 'el-norteno-taco-truck-san-francisco'
-  },
- // redsauceballs: { twitterHandle: 'redsauceballs', yelpBizID: 'red-sauce-meatballs-san-francisco-2' },
+  // redsauceballs: { twitterHandle: 'redsauceballs', yelpBizID: 'red-sauce-meatballs-san-francisco-2' },
   TacosElTuca: {
     twitterHandle: 'TacosElTuca',
     yelpBizID: 'tacos-el-tuca-san-francisco'
@@ -102,6 +100,10 @@ module.exports.foodTrucksObj = {
     twitterHandle: 'KabobTrolley',
     yelpBizID: 'kaböb-trölley-san-francisco-4'
   },
+  pizzadelpopolo: {
+    twitterHandle: 'pizzadelpopolo',
+    yelpBizID: 'del-popolo-san-francisco-3',
+  },
   adamsgrubtruck: {
     twitterHandle: 'adamsgrubtruck',
     yelpBizID: 'adams-grub-truck-san-francisco-2'
@@ -123,6 +125,26 @@ module.exports.foodTrucksObj = {
     twitterHandle: 'nonoburger',
     yelpBizID: 'no-no-burger-san-francisco'
   },
+  lilgreencyclo: {
+    twitterHandle: 'lilgreencyclo',
+    yelpBizID: 'little-green-cyclo-south-san-francisco',
+  },
+  LobstaTruckSF: {
+    twitterHandle: 'LobstaTruckSF',
+    yelpBizID: 'lobsta-truck-san-francisco',
+  },
+  BoneyardTruck: {
+    twitterHandle: 'BoneyardTruck',
+    yelpBizID: 'the-boneyard-san-francisco',
+  },
+  frozenkuhsterd: {
+    twitterHandle: 'frozenkuhsterd',
+    yelpBizID: 'frozen-kuhsterd-san-francisco-3',
+  },
+  ElNortenoTruck: {
+    twitterHandle: 'ElNortenoTruck',
+    yelpBizID: 'el-norteno-taco-truck-san-francisco'
+  },
   KoJaKitchen: {
     twitterHandle: 'KoJaKitchen',
     yelpBizID: 'koja-kitchen-truck-emeryville',
@@ -139,14 +161,10 @@ module.exports.foodTrucksObj = {
     twitterHandle: 'jshacksf',
     yelpBizID: 'j-shack-san-francisco',
   },
-  // thetwitterHandleAgainForSomeReason: {
-  //   twitterHandle: '',
-  //   yelpBizID: '',
-  // },
-  // thetwitterHandleAgainForSomeReason: {
-  //   twitterHandle: '',
-  //   yelpBizID: '',
-  // },
+  Countrygrillsf: {
+    twitterHandle: 'Countrygrillsf',
+    yelpBizID: 'country-grill-san-francisco',
+  },
   // thetwitterHandleAgainForSomeReason: {
   //   twitterHandle: '',
   //   yelpBizID: '',

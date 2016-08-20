@@ -1,3 +1,5 @@
+// If the database ever gets wiped, these events will come back as soon as the server runs
+
 module.exports.foodEvents = [
   'gloungesf',
   'SPARKsocialSF',

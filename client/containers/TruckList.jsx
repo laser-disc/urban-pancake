@@ -20,7 +20,6 @@ class TruckList extends Component {
   };
 
   componentWillReceiveProps(nextProps){
-    // console.log("[truck list] nextprops: ", nextProps.currentTruck.currentTruck)
     if (nextProps.currentTruck.currentTruck){
       selectedTruck = nextProps.currentTruck.currentTruck;
       this.render();
@@ -62,9 +61,6 @@ class TruckList extends Component {
         everyTruck.push(truck);
       }
     })
-    // const today = (new Date()).toString().slice(0, 10);
-    // const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    // const dayNum = daysOfWeek.indexOf(today.slice(0, 3));
     let todaysTrucks = everyTruck.filter((truck) => {
       // checks based on the day of the last tweet and falls back to check the schedule
       if (truck.schedule.length && !truck.schedule[findToday().dayIdx].closed) {
@@ -94,10 +90,7 @@ class TruckList extends Component {
   }
 
   handleClick(truck){
-    if(truck._id === "user"){
-      console.log("That ain't no truck.  That's YOU breh...");
-    } else {
-      // console.log("you've selected ", truck.name);
+    if(truck._id !== "user"){
       this.props.PassCurrTruck(truck);
     }
   }
