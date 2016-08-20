@@ -64,6 +64,20 @@
     height: 80px;
     color: white;
 }
+#lunch-message{
+  margin-left:30%;
+}
+.hungerstop-logo {
+  height: 70px;
+  width: 90px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.title h1 {
+  color: white;
+  margin-top: 10px;
+}
+
 .nav-bar {
   margin-left: 50px;
   margin-right: 50px;
@@ -78,10 +92,6 @@
   margin-top: 5px;
   color: white;
 }
-.title {
-  padding-left: 3% !important;
-  color: white;
-}
 .truck-logo{
   margin-left: 20px;
 }
@@ -89,35 +99,14 @@
 /*  ---------------------------------------------------
                ======= ADD TRUCK FORM ========
 -------------------------------------------------------*/
-
-.add-truck-title {
-  width: 100% !important;
-  margin-left: 35%!important;
-}
-.form-label {
-  border-bottom: 3px solid green;
-  margin-bottom: 10px;
-}
-.form-label h4 {
-  color: green;
-  font-weight: bold;
-  font-size: 1.4em
+.form-schedule{
+  margin-left: 15%;
 }
 .rrm-title {
   height: 0px !important;
 }
 .rrm-title h2{
   height: 0px !important;
-}
-.weekday{
-  margin-right: 10px!important;
-  margin-left: 0px!important;
-  display: inline-block;
-  width: 25% !important;
-  float: left;
-}
-.weekday-input {
-  display: inline-block;
 }
 .error-msg  {
   color: red;
@@ -140,8 +129,7 @@ body {
   background-image:url('http://imgur.com/2nSvMTP.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  height: 80vh !important;
-  border-radius: 5px;
+  height: 94vh;
 }
 html {
   position: relative !important;
@@ -180,7 +168,12 @@ blockquote.twitter-tweet a[href^="https://twitter.com"] {
 /*  ---------------------------------------------------
           ======= TRUCK PROFILE/MODAL ========
 -------------------------------------------------------*/
-
+.truck-modal-body {
+ border-radius: 5px;
+ background-image:url('http://imgur.com/2nSvMTP.jpg') !important;
+ background-repeat: no-repeat;
+ background-size: cover;
+ }
 .cuisine-list {
   list-style-type: none;
 }
@@ -212,7 +205,7 @@ li {
   margin-left:  auto;
 }
 .google-image {
-  height: 300px;
+  height: 250px;
   width: 400px;
   border-radius: 5px;
 }
@@ -230,6 +223,8 @@ li {
   margin-right: 50px;
   padding: 10px; 
   border-radius: 5px;
+  margin-bottom: 25px;
+  background-color: rgba(255,255,255,0.75) !important;
 }
 .truck-view-tweet-container {
  margin-top: 40px;
@@ -246,6 +241,7 @@ li {
   margin-left: 20px;
   width: 500px;
   padding: 20px;
+  background-color: rgba(255,255,255,0.75) !important;
 }
 .truck-view-info {
   margin-bottom: 15px;
@@ -383,6 +379,7 @@ float: right;
 }
 .event-view-info{
   margin-bottom: 25px;
+  padding-left: 5%;
 }
 #event-view-title{
   width: 300px;
@@ -413,10 +410,13 @@ float: right;
   margin-left: auto;
 }
 .event-view-google-image {
-  height: 100%;
-  width: 100%;
+  height: 300px;
+  width: 400px;
+  border-radius: 5px;
 }
-
+.event-view-tweet-container {
+  margin-left:5%;
+}
 /*  ---------------------------------------------------
                   ======= MEDIA WITDTHS ========
 -------------------------------------------------------*/
@@ -482,7 +482,7 @@ float: right;
   margin-bottom: 10px;
   float: right;
   margin-right: 15px;
-  width: 70%;
+  width: 75%;
   background-color: transparent;
   color: white;
   font-weight: bold;
