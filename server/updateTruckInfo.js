@@ -63,7 +63,6 @@ module.exports.getYelpInfo = (truck) => {
         // console.log('*****************yelp data*********** \n', typeof data.phone);
         const truckYelpObj = yelpObj(truck.yelpBizID);
         truckYelpObj.name = data.name;
-        truckYelpObj.phone = data.phone;
         // if the image below (data.rating_img_url) is too large, use data.rating_img_url_small instead (or simply data.rating if you just want the number rating 4.5 or 4)
         truckYelpObj.starsRating = data.rating_img_url_large;
         truckYelpObj.review_count = data.review_count;
