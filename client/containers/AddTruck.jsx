@@ -97,6 +97,8 @@ class AddTruck extends Component {
         }
       }
 
+      truckObj.truck.yelpId = this.state.truck.yelpId.split('/biz/')[1];
+
       this.props.PassNewTruck(truckObj);
       alert('Truck successfully created!');
       this.props.removeModal();

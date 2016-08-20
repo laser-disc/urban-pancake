@@ -13,9 +13,8 @@ module.exports.geoCoder = (newTruckObj) => {
     let gMapUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${query}&key=${GMAP_API_KEY}`;
     axios.get(gMapUrl)
     .then(function(response) {
-      if(response.data.results.length){
-        newTruckObj.geoInfo = response.data.results[0].geometry.location;
-      }
+      console.log(response.data);
+      newTruckObj.geoInfo = response.data.results[0].geometry.location;
       resolve(newTruckObj);
     })
     .catch(function(error) {
@@ -44,7 +43,7 @@ module.exports.newTruckGeoCoder = (newTruckObj, dayLocation) => {
     .catch(function(error) {
       if(error){
         console.log("newTruckGeoCoder error ", error);
-        reject(error); 
+        reject(error);
       }
     });
   });
