@@ -1,15 +1,9 @@
 const Event = require('../db/eventsSchema');
 const Twitter = require('twitter');
 const Yelp = require('yelp');
-const { getTruckTwitterInfo } = require('./updateTruckInfo');
-const { createTruckWithGeoInfo } = require('./updateTruckInfo');
-// const { getTenImages } = require('./updateTruckInfo');
-// const { createOrUpdateDB } = require('./updateTruckInfo');
-// const { getYelpInfo } = require('./updateTruckInfo');
-const { getFiveTweets } = require('./updateTruckInfo');
+const { getTruckTwitterInfo, createTruckWithGeoInfo, getFiveTweets  } = require('./updateTruckInfo');
 let Scraper = require ('images-scraper');
 let google = new Scraper.Google();
-// const { updateDBwithYelpInfo } = require('./updateTruckInfo');
 
 let secretKeys = null;
 if (!process.env.TWITTERINFO_CONSUMER_KEY) {

@@ -6,20 +6,11 @@
 const db = require('../db/config');
 const mongoose = require('mongoose');
 const https = require('https');
-const Truck = require('../db/truckSchema');
-const Event = require('../db/eventsSchema');
+const { Truck, Event } = require('../db/truckSchema');
 const { getLocation } = require('./getLocationFromTweets');
-const { createTruckWithGeoInfo } = require('./updateTruckInfo');
-const { getTruckTwitterInfo } = require('./updateTruckInfo');
-const { createEventRecord, getEventTwitterInfo, createOrUpdateEvent } = require('./updateEventInfo');
-const { createOrUpdateDB } = require('./updateTruckInfo');
-const { geoCoder } = require('../utils/utils');
-const { newTruckGeoCoder } = require('../utils/utils');
-
-const { getYelpInfo } = require('./updateTruckInfo');
-const { getFiveTweets } = require('./updateTruckInfo');
-const { updateDBwithYelpInfo } = require('./updateTruckInfo');
-const { getTenImages } = require('./updateTruckInfo');
+const { getTruckTwitterInfo, createTruckWithGeoInfo, createOrUpdateDB, getYelpInfo, getFiveTweets, updateDBwithYelpInfo, getTenImages } = require('../utils/updateTruckInfo');
+const { createEventRecord, getEventTwitterInfo, createOrUpdateEvent } = require('../utils/updateEventInfo');
+const { geoCoder, newTruckGeoCoder } = require('../utils/utils');
 const { foodTrucks, foodTrucksObj } = require('../utils/trucksDefaultObjs');
 const { foodEvents, allEventsObj } = require('../utils/eventsDefaultObjs');
 
