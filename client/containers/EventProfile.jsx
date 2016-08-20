@@ -67,7 +67,7 @@ export default class EventProfile extends Component {
             </div> 
           </div>
 
-          <div className="MOVE">
+          <div className="event-view-tweet-container">
           <blockquote className="twitter-tweet" data-cards="hidden">
             <a href="https://twitter.com/SPARKsocialSF/status/766651266613202944" />
           </blockquote>
