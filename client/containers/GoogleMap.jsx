@@ -111,7 +111,6 @@ class Map extends Component {
     }
 
     if (position.lat) {
-      console.log('GOOGLE MAPS MARKER', truckMarker)
       return (
         <Marker
           key={ truckMarker._id }
