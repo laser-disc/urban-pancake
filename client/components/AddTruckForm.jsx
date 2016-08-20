@@ -12,12 +12,11 @@ export default class AddTruckForm extends Component {
         <div className="container">
           <h2 className='add-truck-title'>Add A Truck</h2>
         </div>
-          <div className='row'>
+        <div className='row'>
             <form
               className="form-horizontal container"
               onChange={this.props.handleChange}
             >
-
               <div className="form-group row">
                 <div className="form-label">
                   <label className="control-label"><h4>What's the name of the food truck?</h4></label>

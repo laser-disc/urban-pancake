@@ -16,11 +16,11 @@ export default class HomeHeader extends Component {
     return (
         <div className="header">
           
-          <div className="col-xs-offset-1 col-xs-1"><Link to="/"><img className="link-logo burrito"src="http://image.flaticon.com/icons/svg/184/184534.svg" alt="Home"/><p className="home-text ">Home</p></Link>
+          <div className="col-xs-offset-1 col-xs-1"><Link to="/"><img className="nav-btn"src="http://image.flaticon.com/icons/svg/184/184534.svg" alt="Home"/><p className="nav-btn-text ">Home</p></Link>
           </div>
 
           <div className="col-xs-2">
-            <img onClick={ this.addModal.bind(this) } className="link-logo truck-logo" src="http://imgur.com/rKaONN6.png" alt="Truck"/><p className="home-text">Add a truck</p>
+            <img onClick={ this.addModal.bind(this) } className="nav-btn truck-logo" src="http://imgur.com/rKaONN6.png" alt="Truck"/><p className="nav-btn-text">Add a truck</p>
           </div>
 
           <div className ="col-xs-4">
