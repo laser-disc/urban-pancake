@@ -86,7 +86,6 @@ class Map extends Component {
   };
 
   renderTruckMarkers(truckMarker) {
-    // this.renderUserLocation();
     // GRAB CURRENT DAY OF WEEK
     const date = new Date;
     let index = date.getDay();
@@ -96,7 +95,11 @@ class Map extends Component {
     // GRAB DAY OF TWEET TIMESTAMP FROM DB
     let tweetIndex = dayOfWeek.indexOf(tweetDay);
     // icon = 'http://maps.google.com/mapfiles/ms/micons/red-dot.png';
-    icon = 'https://offthegrid.com/wp-content/themes/offthegrid/images/mapmark-red-sm.png';
+    
+    var icon = {
+      url: truckMarker.imageUrl,
+      scaledSize: new google.maps.Size(40, 40), // scaled size
+    };
 
     if(truckMarker._id==="user"){
       tweetIndex = 1;
