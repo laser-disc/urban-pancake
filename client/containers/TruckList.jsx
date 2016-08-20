@@ -107,6 +107,7 @@ class TruckList extends Component {
     }
   }
 
+
   renderFilteredEvents() {
     if(this.props.searchTerm !== '') {
       return this.props.events.reduce((accum, event) => {
