@@ -29,7 +29,7 @@ const truckSchema = new mongoose.Schema({
     photo: String,
     categories: Array, // aka 'cuisine'
     phone: String,
-  }
+  },
 });
 
 const Truck = mongoose.model('Truck', truckSchema);

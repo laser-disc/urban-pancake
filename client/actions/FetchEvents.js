@@ -8,5 +8,5 @@ export function FetchEvents() {
   return {
     type: FETCH_EVENTS,
     payload: request,
-  }
-};
+  };
+}
