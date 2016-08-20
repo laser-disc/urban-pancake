@@ -18,7 +18,7 @@ class TruckView extends Component {
   }
   render(){
     return (
-      <div className="body-truck-view">
+      <div className="truck-modal-body">
         <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
         {this.renderTruckView(this.props.yelpInfo, this.props.yelpInfo.fiveTweetObjs)}
       </div>

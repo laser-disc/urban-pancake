@@ -39,6 +39,7 @@
     "images-scraper": "^2.0.10",
     "mongodb": "^2.2.5",
     "mongoose": "^4.5.7",
+    "muicss": "^0.7.0",
     "promise": "^7.1.1",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
