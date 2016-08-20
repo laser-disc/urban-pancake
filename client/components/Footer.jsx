@@ -5,7 +5,9 @@ export default class Footer extends Component {
     return(
     <footer className="footer">
       <div className="container">
-        <p id="lunch-message">This site displays information for lunch time only</p>
+        <p>This site displays information for lunch time only
+        <span style={{float: "right"}}>An Urban Pancake App -
+          <a href="https://github.com/urban-pancake/hunger-stop"> Source Code on Github</a></span></p>
       </div>
     </footer>
     )
