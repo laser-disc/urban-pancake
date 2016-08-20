@@ -65,7 +65,7 @@ export default class TruckProfile extends Component {
                 <p>Categories </p>
               </div>
             </div>
-            <div className='address-box truck-view-google-map'>
+            <div className='mini-google-map'>
               {googleMap}
             </div>
         </div>

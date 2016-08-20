@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router'
 import { bindActionCreators } from 'redux';
 import TruckItem from '../components/TruckItem.jsx';
+import EventItem from '../components/EventItem.jsx';
 import { FetchTrucks } from '../actions/FetchTrucks';
 import { FetchEvents } from '../actions/FetchEvents';
 import {modal} from 'react-redux-modal'; // The modal emitter
@@ -16,7 +17,6 @@ class TruckList extends Component {
     this.renderFilteredTrucks = this.renderFilteredTrucks.bind(this);
   };
 
-// Runs FetchTrucks immediately so that the state will be up to date before the content starts to load
   componentWillReceiveProps(nextProps){
     // console.log("[truck list] nextprops: ", nextProps.currentTruck.currentTruck)
     if (nextProps.currentTruck.currentTruck){
@@ -25,6 +25,7 @@ class TruckList extends Component {
     };
   };
 
+// Runs FetchTrucks and FetchEvents to populate the page upon load
   componentWillMount() {
     this.props.FetchTrucks();
     this.props.FetchEvents();
@@ -97,14 +98,15 @@ class TruckList extends Component {
   }
 
   // This function renders the individual event modal to the list of trucks
-  renderEvents(event, i) {
+  renderEvents(event) {
     var handle = event.handle.slice(1, event.handle.length);
     if(selectedTruck == event.name){
-      return  <div onClick={ this.handleClick.bind(this, event) } className="selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+      return  <div onClick={ this.handleClick.bind(this, event) } className="selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <EventItem event={event} /></Link></div>
     } else {
-      return  <div onClick={ this.handleClick.bind(this, event) } className="not-selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <TruckItem truck={event} /></Link></div>
+      return  <div key={event._id} onClick={ this.handleClick.bind(this, event) } className="not-selected event-item"><Link to={"/eventview/" + handle} key={event._id} > <EventItem event={event} /></Link></div>
     }
   }
+
 
   renderFilteredEvents() {
     if(this.props.searchTerm !== '') {
