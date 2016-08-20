@@ -1,6 +1,6 @@
 const chai = require('chai');
 const expect = chai.expect;
-const atFromSubroutine = require('../../server/getLocationFromTweets');
+const atFromSubroutine = require('../../utils/getLocationFromTweets');
 
 describe('atFromSubroutine', function() {
   it('should be a function', function() {
