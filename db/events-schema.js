@@ -28,7 +28,7 @@ const eventsSchema = new mongoose.Schema({
     custReview: String,
     photo: String,
     categories: Array, // aka 'cuisine'
-  }
+  },
 });
 
 const Event = mongoose.model('Food Truck Events', eventsSchema);
