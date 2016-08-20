@@ -132,6 +132,30 @@ module.exports.getTruckTwitterInfo = (foodTruck) => {
   });
 };
 
+module.exports.getUserEnteredTruckTwitterInfo = (newTruckObj) => {
+  return new Promise((resolve, reject) => {
+    const searchParams = {
+      screen_name: newTruckObj.truck.handle.slice(1, newTruckObj.truck.handle.length),
+      exclude_replies: true,
+      include_rts: true,
+    };
+    // search parameters according to https://dev.twitter.com/rest/reference/get/statuses/user_timeline
+    twitterClient.get('statuses/user_timeline', searchParams, (error, tweets) => {
+      if (error) {
+        console.log('error', error);
+        reject(error);
+      }
+
+      if(tweets){
+        if(tweets[0]) {
+          newTruckObj.truck.imageUrl = tweets[0].user.profile_image_url.split('_normal').join('');
+        }
+      }
+      resolve(newTruckObj);
+    });
+  });
+};
+
 module.exports.createTruckWithGeoInfo = (newTruckObj) => {
   return new Promise((resolve) => {
     // send all tweet messages to getLocationFromTweets
