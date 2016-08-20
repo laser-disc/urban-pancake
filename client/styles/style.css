@@ -115,6 +115,9 @@
 .weekday-input {
   display: inline-block;
 }
+.error-msg  {
+  color: RebeccaPurple;
+}
 
 /*  ---------------------------------------------------
                ======= STICKY FOOTER ========
