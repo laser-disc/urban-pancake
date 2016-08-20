@@ -37,15 +37,17 @@ export default class EventProfile extends Component {
       var truckProfileImgStyle = {
         backgroundImage : "url(" + this.props.yelpInfo.photo+")",
       }
-      var truckName = this.props.yelpInfo.name
+      var eventName = this.props.yelpInfo.name
       var yelpScore = this.props.yelpInfo.starsRating
+      var description = this.props.yelpInfo.description
     }
+
     return (
       <div>
       <div className="container">
         <div className="row event-view-info">
         <div className='col-xs-3'>
-           <h1> {truckName} </h1>
+           <h1> {eventName} </h1>
           <img src={yelpScore} alt="yelp score"/>
         </div>
           <div className="event-view-address-box">
@@ -56,18 +58,21 @@ export default class EventProfile extends Component {
       <div className="event-view-secondary-info">
         <div className="row">
           <div className="col-xs-4">
-          <div className="row">
+          
+          <div>
             <div className ='event-view-photos'>
               <Slider {...sliderSettings} className="slider-images" >
                 {this.renderImages()}
               </Slider>
             </div> 
           </div>
-          <div className="row">
-          <blockquote className="twitter-tweet">
-            <a href="https://twitter.com/SPARKsocialSF/status/764477819699113986" />
+
+          <div className="MOVE">
+          <blockquote className="twitter-tweet" data-cards="hidden">
+            <a href="https://twitter.com/SPARKsocialSF/status/766651266613202944" />
           </blockquote>
           </div>
+
         </div>
           
           <div className="event-view-truck-list-container well col-xs-7">

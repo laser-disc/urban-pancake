@@ -25,8 +25,13 @@ export default class HomeHeader extends Component {
 
           <div className ="col-xs-4">
             <div className="title">
-              <h1 className='title' >HUNGER STOP</h1>
+               <h1>
+                HUNGER 
+                <img className="hungerstop-logo" src="http://i.imgur.com/Q4N9zNA.png"/> 
+                STOP
+              </h1>
             </div>
+
           </div>
           <div className="col-xs-4">
             <SearchBar />

@@ -24,7 +24,7 @@ class EventView extends Component {
 
   render(){
     return (
-      <div className="body-truck-view">
+      <div className="truck-modal-body">
         <link href="https://cdn.auth0.com/styleguide/4.8.6/index.min.css" rel="stylesheet" />
         <Header />
         { this.props.currentEvent ? this.renderEventView(this.props.currentEvent) : 'Loading...' }
