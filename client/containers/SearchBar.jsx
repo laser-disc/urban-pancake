@@ -13,7 +13,7 @@ class SearchBar extends Component {
     return (
       <input
         className="search-bar"
-        placeholder="Search for your favorite truck or food here!"
+        placeholder="Search for your favorite truck or food!"
         onChange={event => {
           updateSearchTerm(event.target.value, trucks)}
         }
@@ -23,7 +23,7 @@ class SearchBar extends Component {
 };
 
 function mapStateToProps(state) {
-   return { 
+   return {
      trucks: state.trucks
    };
 }
