@@ -194,7 +194,7 @@ module.exports.createOrUpdateEvent = (eventObj) => {
 const getTenImages = (eventObj) => {
   return new Promise((resolve, reject) => {
     google.list({
-      keyword: eventObj.info.name,
+      keyword: eventObj.info.name + ' sf',
       num: 10,
       detail: true,
       nightmare: {
