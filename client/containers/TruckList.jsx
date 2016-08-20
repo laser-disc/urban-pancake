@@ -6,11 +6,13 @@ import TruckItem from '../components/TruckItem.jsx';
 import EventItem from '../components/EventItem.jsx';
 import { FetchTrucks } from '../actions/FetchTrucks';
 import { FetchEvents } from '../actions/FetchEvents';
-import {modal} from 'react-redux-modal'; // The modal emitter
+import { modal } from 'react-redux-modal'; // The modal emitter
 import TruckItemModal from "../components/TruckItemModal.jsx";
 import { PassCurrTruck } from '../actions/PassCurrTruck';
+import { findToday } from '../../utils/findToday';
 
 let selectedTruck = "";
+
 class TruckList extends Component {
   constructor(props) {
     super(props);
@@ -50,17 +52,22 @@ class TruckList extends Component {
     } else {
       return  <div key={truck._id} onClick={ this.addModal.bind(this, handle) } className="not-selected"><TruckItem truck={truck} /></div>
     }
-  };
+  }
 
 // This function filters the trucks based on user input from the search bar
   renderFilteredTrucks() {
-    const everyTruck = this.props.trucks;
-    const today = (new Date()).toString().slice(0, 10);
-    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const dayNum = daysOfWeek.indexOf(today.slice(0, 3));
+    const everyTruck = [];
+    (this.props.trucks).forEach(function(truck){
+      if (truck._id !== 'user'){
+        everyTruck.push(truck);
+      }
+    })
+    // const today = (new Date()).toString().slice(0, 10);
+    // const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    // const dayNum = daysOfWeek.indexOf(today.slice(0, 3));
     let todaysTrucks = everyTruck.filter((truck) => {
       // checks based on the day of the last tweet and falls back to check the schedule
-      if (truck.schedule.length && !truck.schedule[dayNum].closed && truck._id!=='user'){
+      if (truck.schedule.length && !truck.schedule[findToday().dayIdx].closed) {
         return truck;
       }
     });
@@ -69,10 +76,8 @@ class TruckList extends Component {
       return todaysTrucks.reduce((accum, truck) => {
         const userQuery = this.props.searchTerm.toLowerCase();
         const searchName = truck.name.toLowerCase().indexOf(userQuery) > -1;
-        const searchCategories = truck.yelpInfo.categories.some(function(arr){
-          const first = arr[0].toLowerCase();
-          const second = arr[1].toLowerCase();
-          if (first.indexOf(userQuery) > -1 || second.indexOf(userQuery) > -1) {
+        const searchCategories = truck.yelpInfo.categories.some(function(keyword){
+          if (keyword.toLowerCase().indexOf(userQuery) > -1) {
             return true;
           } else {
             return false;
@@ -86,10 +91,10 @@ class TruckList extends Component {
     } else {
       return todaysTrucks.map(truck => this.renderTrucks(truck));
     };
-  };
+  }
 
   handleClick(truck){
-    if(truck._id==="user"){
+    if(truck._id === "user"){
       console.log("That ain't no truck.  That's YOU breh...");
     } else {
       // console.log("you've selected ", truck.name);
