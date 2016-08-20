@@ -132,7 +132,7 @@ const grabTodaysTrucks = (event) => {
   const lastTweetDay = metaInfo.created_at.slice(0, 3);
   // checks to see if the date of the last tweet is the same as today's date
   if (today === lastTweetDay) {
-    if (event.twitterHandle === 'gloungesf' || event.allMessages[0].split(' ').indexOf( /* '#dinner' */ ) === -1) {
+    if (event.twitterHandle === 'gloungesf' || event.allMessages[0].split(' ').indexOf( '#dinner' ) === -1) {
       return grabHandles(event.allMessages[0]);
     }
   } else {
