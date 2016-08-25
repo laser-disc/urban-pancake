@@ -1,8 +1,8 @@
 const Truck = require('../db/truckSchema');
 const Twitter = require('twitter');
 const Yelp = require('yelp');
-let Scraper = require ('images-scraper');
-let google = new Scraper.Google();
+// let Scraper = require ('images-scraper');
+// let google = new Scraper.Google();  // removed for Heroku deployment - exceeded RAM limit
 
 let secretKeys = null;
 if (!process.env.TWITTERINFO_CONSUMER_KEY) {
@@ -194,10 +194,11 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
       //  if no matches are found, it will return an empty array
       if (trucks.length === 0) {
         // and then we create a new document in the db for that truck
-        module.exports.getTenImages(newTruckObj)
-        .then(newTruckObj => {
-          return module.exports.getYelpInfo(newTruckObj)
-        })
+
+        // removed for Heroku deployment
+        // module.exports.getTenImages(newTruckObj)
+        // .then(newTruckObj => {
+        module.exports.getYelpInfo(newTruckObj)
         .then(newTruckObj => {
 
           newTruckObj.truck.save((err, resp) => {
@@ -230,29 +231,26 @@ module.exports.createOrUpdateDB = (newTruckObj) => {
   });
 };
 
-module.exports.getTenImages = (newTruckObj) => {
-  return new Promise((resolve, reject) => {
-    google.list({
-      keyword: newTruckObj.truck.name + " sf menu items",
-      num: 10,
-      detail: true,
-      nightmare: {
-        show: true
-      }
-    })
-    .then(function (res) {
-      res.forEach( pic => {
-        newTruckObj.truck.photosFromGoogle.push(pic.url);
-      });
-      resolve(newTruckObj);
-    }).catch(function(err) {
-      reject(err);
-    });
-  });
-};
 
-module.exports.getYelpMap = (newTruckObj) => {
-  return new Promise((resolve, reject) => {
+//// removed for heroku deployment
+// module.exports.getTenImages = (newTruckObj) => {
+//   return new Promise((resolve, reject) => {
+//     google.list({
+//       keyword: newTruckObj.truck.name + " sf menu items",
+//       num: 10,
+//       detail: true,
+//       nightmare: {
+//         show: true
+//       }
+//     })
+//     .then(function (res) {
+//       res.forEach( pic => {
+//         newTruckObj.truck.photosFromGoogle.push(pic.url);
+//       });
+//       resolve(newTruckObj);
+//     }).catch(function(err) {
+//       reject(err);
+//     });
+//   });
+// };
 
-  })
-};

@@ -2,8 +2,8 @@ const Event = require('../db/eventsSchema');
 const Twitter = require('twitter');
 const Yelp = require('yelp');
 const { getTruckTwitterInfo, createTruckWithGeoInfo, getFiveTweets, yelpObj  } = require('./updateTruckInfo');
-let Scraper = require ('images-scraper');
-let google = new Scraper.Google();
+// let Scraper = require ('images-scraper');
+// let google = new Scraper.Google();  // removed for Heroku deployment
 
 let secretKeys = null;
 if (!process.env.TWITTERINFO_CONSUMER_KEY) {
@@ -144,10 +144,8 @@ module.exports.createOrUpdateEvent = (eventObj) => {
     // searches for an event record in the database with a matching Twitter handle
     Event.find({ name: eventName }, (err, result) => {
       if (result.length === 0) {
-        getTenImages(eventObj)
-        .then(eventObj => {
-          return getYelpInfo(eventObj)
-        })
+        // getTenImages(eventObj)  // removed for Heroku deployment
+        getYelpInfo(eventObj)
         .then(eventObj => {
           eventObj.info.save((err, resp) => err ? reject(err) : resolve(resp));
           console.log(`${eventName} event created`);
@@ -167,25 +165,25 @@ module.exports.createOrUpdateEvent = (eventObj) => {
     });
   });
 };
-
-const getTenImages = (eventObj) => {
-  return new Promise((resolve, reject) => {
-    google.list({
-      keyword: eventObj.info.name + ' sf',
-      num: 10,
-      detail: true,
-      nightmare: {
-        show: true
-      }
-    })
-    .then(function (res) {
-      res.forEach( pic => {
-        eventObj.info.photosFromGoogle.push(pic.url);
-      });
-      resolve(eventObj);
-    }).catch(function(err) {
-      console.log('get Ten event Images error', err);
-      reject(err);
-    });
-  });
-};
+// // removed for Heroku deployment
+// const getTenImages = (eventObj) => {
+//   return new Promise((resolve, reject) => {
+//     google.list({
+//       keyword: eventObj.info.name + ' sf',
+//       num: 10,
+//       detail: true,
+//       nightmare: {
+//         show: true
+//       }
+//     })
+//     .then(function (res) {
+//       res.forEach( pic => {
+//         eventObj.info.photosFromGoogle.push(pic.url);
+//       });
+//       resolve(eventObj);
+//     }).catch(function(err) {
+//       console.log('get Ten event Images error', err);
+//       reject(err);
+//     });
+//   });
+// };
