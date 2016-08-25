@@ -1,4 +1,4 @@
-const Event = require('../db/eventsSchema');
+const Event = require('../db/events-schema');
 const Twitter = require('twitter');
 const Yelp = require('yelp');
 const { getTruckTwitterInfo, createTruckWithGeoInfo, getFiveTweets, yelpObj  } = require('./updateTruckInfo');

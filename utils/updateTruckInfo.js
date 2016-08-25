@@ -1,4 +1,4 @@
-const Truck = require('../db/truckSchema');
+const Truck = require('../db/truck-schema');
 const Twitter = require('twitter');
 const Yelp = require('yelp');
 // let Scraper = require ('images-scraper');
