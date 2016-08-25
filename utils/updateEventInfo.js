@@ -5,16 +5,12 @@ const { getTruckTwitterInfo, createTruckWithGeoInfo, getFiveTweets, yelpObj  } =
 // let Scraper = require ('images-scraper');
 // let google = new Scraper.Google();  // removed for Heroku deployment
 
-let secretKeys = null;
-if (!process.env.TWITTERINFO_CONSUMER_KEY) {
-  secretKeys = require('../env/config');  // DO NOT LINT
-}
-const twitterInfo = secretKeys ? secretKeys.twitterInfo : {
+const twitterInfo = {
   consumer_key: process.env.TWITTERINFO_CONSUMER_KEY,
   consumer_secret: process.env.TWITTERINFO_CONSUMER_SECRET,
   bearer_token: process.env.TWITTERINFO_BEARER_TOKEN,
 };
-const yelpInfo = secretKeys ? secretKeys.yelpInfo : {
+const yelpInfo = {
   consumer_key: process.env.YELPINFO_CONSUMER_KEY,
   consumer_secret: process.env.YELPINFO_CONSUMER_SECRET,
   token: process.env.YELPINFO_TOKEN,

@@ -4,16 +4,12 @@ const Yelp = require('yelp');
 // let Scraper = require ('images-scraper');
 // let google = new Scraper.Google();  // removed for Heroku deployment - exceeded RAM limit
 
-let secretKeys = null;
-if (!process.env.TWITTERINFO_CONSUMER_KEY) {
-  secretKeys = require('../env/config');  // DO NOT LINT
-}
-const twitterInfo = secretKeys ? secretKeys.twitterInfo : {
+const twitterInfo = {
   consumer_key: process.env.TWITTERINFO_CONSUMER_KEY,
   consumer_secret: process.env.TWITTERINFO_CONSUMER_SECRET,
   bearer_token: process.env.TWITTERINFO_BEARER_TOKEN,
 };
-const yelpInfo = secretKeys ? secretKeys.yelpInfo : {
+const yelpInfo = {
   consumer_key: process.env.YELPINFO_CONSUMER_KEY,
   consumer_secret: process.env.YELPINFO_CONSUMER_SECRET,
   token: process.env.YELPINFO_TOKEN,
@@ -65,7 +61,7 @@ module.exports.getYelpInfo = (truck) => {
             return categories.push(cat[0]);
           })
         }
-        
+
         const truckYelpObj = yelpObj(truck.yelpBizID);
         truckYelpObj.name = data.name;
         // if the image below (data.rating_img_url) is too large, use data.rating_img_url_small instead (or simply data.rating if you just want the number rating 4.5 or 4)
