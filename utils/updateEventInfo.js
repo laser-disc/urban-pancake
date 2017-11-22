@@ -71,11 +71,11 @@ module.exports.getEventTwitterInfo = (event) => {
         reject(error);
       }
       // set the property of fullTweets to the data returned from the server
-      newEvent.fullTweets = tweets;
-      // allTweetMessages should only contain message strings
-      (newEvent.fullTweets).forEach((tweet) => {
-        newEvent.allMessages.push(tweet.text);
-      });
+      // newEvent.fullTweets = tweets;
+      // // allTweetMessages should only contain message strings
+      // (newEvent.fullTweets).forEach((tweet) => {
+      //   newEvent.allMessages.push(tweet.text);
+      // });
       resolve(newEvent);
     });
   });
