@@ -1,6 +1,6 @@
 # Hunger Stop
 
-[Hunger Stop](https://hungerstop.herokuapp.com) locates and maps the closest food trucks to you for a quick and easy way to find a convenient lunch in San Francisco.
+[Hunger Stop](https://hungerstop.herokuapp.com) locates and maps the closest food trucks to you for a quick and easy way to find a convenient lunch in downtown San Francisco.
 
 ## About the App
 
